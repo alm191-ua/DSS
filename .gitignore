@@ -23,4 +23,4 @@ Homestead.json
 .phpunit.result.
 
 # VS Code workspace
-.code-workspace
+*.code-workspace
