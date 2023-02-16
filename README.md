@@ -64,3 +64,8 @@ El apartado de gestión interna está dirigido a los empleados, encargados de a�
 #### Diagrama de casos de uso
 
 ![Diagrama de casos de uso](https://i.imgur.com/0Z7ZQ9M.png)
+
+
+### Publico Objetivo
+
+
