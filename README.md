@@ -55,7 +55,8 @@ Además, si el usuario se registra e inica sesión, dispondrá de un nuevo porta
 * Trending: aquellos documentos que más han sido marcados como favoritos por otros usuarios
 
 ### Público objetivo
-Esta página web está dirgida a todo aquel que disfrute la lectura o que necesite consultar cualquier tipo de texto.
+Esta página web pública está dirgida a todo aquel que disfrute la lectura o que necesite consultar cualquier tipo de texto.
+El apartado de gestión interna está dirigido a los empleados, encargados de añadir y gestionar los materiales disponibles.
 
 
 ### Planificación UML
