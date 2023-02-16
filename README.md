@@ -54,6 +54,10 @@ Además, si el usuario se registra e inica sesión, dispondrá de un nuevo porta
 * Pendientes: aquellos documentos que el usario ha empezado a leer
 * Trending: aquellos documentos que más han sido marcados como favoritos por otros usuarios
 
+### Público objetivo
+Esta página web está dirgida a todo aquel que disfrute la lectura o que necesite consultar cualquier tipo de texto.
+
+
 ### Planificación UML
 
 #### Diagrama de casos de uso
