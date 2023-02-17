@@ -28,6 +28,7 @@ La funcionalidades básicas que incluirá nuestra aplicación se clasificarán e
 | ------------- | ----------- |
 | Visualizar el catálogo (Búsqueda, filtrado, guardado) | El usuario podrá visualizar el catálogo completo de libros |
 | Crear "estanterías" | Lista de libros creados por el usuario |
+| Añadir reseñas | El usuario podrá añadir reseñas a los libros que haya leido |
 
 * Vista de Usuario invitado
 
