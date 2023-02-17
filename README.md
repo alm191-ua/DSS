@@ -1,5 +1,13 @@
 # Proyecto DSS:
 
+## Integrantes del grupo
+
+Miembros:
+* Akira Llorens Montero
+* Alejando Molines Molina
+* Segismundo Ferrairó García
+* Ilyas Bsadou
+
 ## Especificación inicial del proyecto
 
 ### Objetivos
