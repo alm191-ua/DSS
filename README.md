@@ -63,7 +63,7 @@ El apartado de gestión interna está dirigido a los empleados, encargados de a�
 
 ### Planificación UML
 
-#### Diagrama de casos de uso
+#### Diagrama de base de datos
 
-![Diagrama de casos de uso](https://i.imgur.com/0Z7ZQ9M.png)
+![Diagrama de base de datos](dbdiagram.png)
 
