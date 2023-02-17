@@ -28,7 +28,6 @@ La funcionalidades básicas que incluirá nuestra aplicación se clasificarán e
 | ------------- | ----------- |
 | Visualizar el catálogo (Búsqueda, filtrado, guardado) | El usuario podrá visualizar el catálogo completo de libros |
 | Crear "estanterías" | Lista de libros creados por el usuario |
-| Añadir reseñas | El usuario podrá añadir reseñas a los libros que haya leido |
 
 * Vista de Usuario invitado
 
@@ -47,6 +46,8 @@ Además están pensadas las siguientes funcionalidades opcionales:
 | Comentar documentos | El usuario podrá comentar documentos |
 | Valorar documentos | El usuario podrá valorar documentos |
 | Descargar documentos | El usuario podrá descargar documentos |
+| Añadir a favoritos | El usuario podrá añadir a favoritos los libros que quiera para acceder más fácilmente |
+    
 
 ### Descripción 
 Como se ha mencionado anteriormente, la web dispondrá de una vista principal mostrando el catálogo completo de documentos almacenados.
