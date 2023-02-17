@@ -1,7 +1,5 @@
 # Proyecto DSS:
 
-https://dbdiagram.io/d/63ec92f1296d97641d811432
-
 ## Especificación inicial del proyecto
 
 ### Objetivos
