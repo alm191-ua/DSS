@@ -27,14 +27,14 @@ La funcionalidades básicas que incluirá nuestra aplicación se clasificarán e
 | Visualizar el catálogo (Búsqueda, filtrado, guardado) | El usuario podrá visualizar el catálogo completo de libros |
 | Crear "estanterías" | Lista de libros creados por el usuario |
 
+<div class="page">
+
 * Vista de Usuario invitado
 
 | Funcionalidad | Descripción |
 | ------------- | ----------- |
 | Visualizar el catálogo (Búsqueda, filtrado) | El usuario podrá visualizar el catálogo completo de libros |
 | Acceso a la biblioteca | El usuario invitado podrá acceder a la página de registro o login |
-
-<div class="page">
 
 Además están pensadas las siguientes funcionalidades opcionales:
 
@@ -58,6 +58,8 @@ Además, si el usuario se registra e inica sesión, dispondrá de un nuevo porta
 Esta página web pública está dirgida a todo aquel que disfrute la lectura o que necesite consultar cualquier tipo de texto.
 El apartado de gestión interna está dirigido a los empleados, encargados de añadir y gestionar los materiales disponibles.
 
+
+<div class="page">
 
 ### Planificación UML
 
