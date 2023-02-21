@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('books_in_bookshelf', function (Blueprint $table) {
+        Schema::create('book_bookshelf', function (Blueprint $table) {
             $table->id();
-            //$table->unsignedBigInteger('book_id');
-            //$table->unsignedBigInteger('bookshelf_id');
             $table->foreignId('book_id') -> references('id') -> on('books') -> onDelete('cascade');
             $table->foreignId('bookshelf_id') -> references('id') -> on('bookshelves') -> onDelete('cascade');
             $table->timestamps();
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('books_in_bookshelf');
+        Schema::dropIfExists('book_bookshelf');
     }
 };
