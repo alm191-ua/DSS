@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('book_bookshelf', function (Blueprint $table) {
             $table->id();
-            $table->string('username')->unique() -> nullable(false);
-            $table->boolean('is_admin');
-            $table->string('email')->unique() -> nullable(false);
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->foreignId('book_id') -> constrained() -> onDelete('cascade');
+            $table->foreignId('bookshelf_id') -> constrained() -> onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('book_bookshelf');
     }
 };
