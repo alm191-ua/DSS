@@ -50,7 +50,7 @@ class Book extends Model
         $this->description = $description;
         $this->author_id = $author_id;
         $this->category_id = $category_id;
-        $this->image = $image; //Añadir a la base de datos
+        $this->image = $image;
         $this->isbn = $isbn;
     }
 
