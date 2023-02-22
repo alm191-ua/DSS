@@ -2,8 +2,11 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use App\Models\Book;
+
+use App\Models\Author;
+use App\Models\Category;
 
 class BookTest extends TestCase
 {
@@ -12,9 +15,16 @@ class BookTest extends TestCase
      *
      * @return void
      */
-    public function test_book_constructor()
+    public function test_book_example()
     {
-        $book = new Book("The Hobbit", "J.R.R. Tolkien", 1, 1, "https://m.media-amazon.com/images/I/71jLBXtWJWL.jpg", "9780544003415");
+        $book = new Book();
+        $book->title = "The Hobbit";
+        $book->description = "J.R.R. Tolkien";
+        $book->author_id = 1;
+        $book->category_id = 1;
+        $book->image = "https://m.media-amazon.com/images/I/71jLBXtWJWL.jpg";
+        $book->isbn = "9780544003415";
+
         $this->assertEquals("The Hobbit", $book->title);
         $this->assertEquals("J.R.R. Tolkien", $book->description);
         $this->assertEquals(1, $book->author_id);
@@ -23,18 +33,31 @@ class BookTest extends TestCase
         $this->assertEquals("9780544003415", $book->isbn);
     }
 
-    public function test_book_save()
+    // test save book
+    public function test_save_book()
     {
-        $book = new Book("The Hobbit", "J.R.R. Tolkien", 1, 1, "https://m.media-amazon.com/images/I/71jLBXtWJWL.jpg", "9780544003415");
+        $author = Author::where('name', 'default')->first();
+        $category = Category::where('tag', 'fantasy')->first();
+        
+        $book = new Book();
+        $book->title = "Example Book";
+        $book->description = "This is an example description";
+        $book->image = "default";
+        $book->isbn = "9780544003415";
+        $book->author()->associate($author);
+        $book->category()->associate($category);
         $book->save();
+
         $this->assertDatabaseHas('books', [
-            'title' => 'The Hobbit',
-            'description' => 'J.R.R. Tolkien',
-            'author_id' => 1,
-            'category_id' => 1,
-            'image' => 'https://m.media-amazon.com/images/I/71jLBXtWJWL.jpg',
-            'isbn' => '9780544003415',
+            'title' => 'Example Book',
         ]);
+
+        $book->delete();
+
+        $this->assertDatabaseMissing('books', [
+            'title' => 'Example Book',
+        ]);
+        
     }
     
 }

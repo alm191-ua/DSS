@@ -35,7 +35,6 @@ class UsersTableSeeder extends Seeder
         ]);
         */
 
-        //same with eloquent
         $user = new User();
         $user->username = 'anonymous';
         $user->is_admin = false;

@@ -10,16 +10,6 @@ class Book extends Model
 {
     use HasFactory;
 
-    //Atributes
-    protected $fillable = [
-        'title',
-        'description',
-        'author_id',
-        'category_id',
-        'image',
-        'isbn',
-    ];
-
     //Eloquent Relationships
 
     public function reviews()
@@ -44,14 +34,14 @@ class Book extends Model
 
 
     //Constructor
-    public function __construct($title, $description, $author_id, $category_id, $image, $isbn)
+    public function __construct()
     {
-        $this->title = $title;
-        $this->description = $description;
-        $this->author_id = $author_id;
-        $this->category_id = $category_id;
-        $this->image = $image;
-        $this->isbn = $isbn;
+        $this->title = "";
+        $this->description = "";
+        $this->author_id = 0;
+        $this->category_id = 0;
+        $this->image = "";
+        $this->isbn = "";
     }
 
     //Getters
