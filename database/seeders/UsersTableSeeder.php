@@ -49,5 +49,6 @@ class UsersTableSeeder extends Seeder
         $user2->password = Hash::make('password');
         $user2->save();
 
+        User::factory()->count(10)->create();  
     }
 }
