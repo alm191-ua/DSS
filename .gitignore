@@ -22,4 +22,7 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 
-DSS-Prac01.code-workspace
+.phpunit.result.
+
+# VS Code workspace
+*.code-workspace
