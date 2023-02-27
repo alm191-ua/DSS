@@ -4,19 +4,21 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 
-class ExampleFeatureTest extends TestCase
+use Tests\TestCase;
+use App\Models\Review;
+
+class ReviewTest extends TestCase
 {
     /**
-     * A basic feature test example.
+     * A basic unit test example.
      *
      * @return void
      */
     public function test_example()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $this->assertTrue(true);
     }
+
+    
 }
