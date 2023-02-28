@@ -51,7 +51,7 @@
         	<div class="container">
             	<div class="site-info">
                     <ul>
-                        <li><a href="mailto:Info@bookguide.com"><i class="fa fa-envelope-o"></i>Info@bookguide.com</a></li>
+                        <li><a href="mailto:word_waves@gmail.com"><i class="fa fa-envelope-o"></i>word_waves@gmail.com</a></li>
                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                         <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                         <li><a id="search-box" href="#"><i class="fa fa-search"></i></a></li>
@@ -171,7 +171,7 @@
                         {{ __('master.about_us') }}
                         </p>
                         <ul>
-                        	<li><i class="fa fa-tags"></i><p>Carr. de San Vicente del Raspeig, s/n, 03690 San Vicente del Raspeig, Alicante</p></li>
+                        	<li><i class="fa fa-tags"></i><p> {{ __('master.localization') }} </p></li>
                             <li><i class="fa fa-phone"></i><p>(+34) 555 555 555</p></li>
                             <li><i class="fa fa-envelope-o"></i><p><a href="mailto:word_waves@gmail.com">word_waves@gmail.com</a></p></li>
                         </ul>
