@@ -7,7 +7,7 @@
     <div class="kode-banner">
     	<ul class="bxslider">
         	<li>
-            	<img src="images/banner-1.png" alt="">
+            	<img src="images/banner-1.png" alt=""> 
                 <div class="kode-caption">
                 	<h2>book guide</h2>
                     <h5>online books store</h5>
