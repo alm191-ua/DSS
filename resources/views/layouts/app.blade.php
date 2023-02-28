@@ -49,11 +49,16 @@
 	<header>
     	<div class="top-strip">
         	<div class="container">
-            	<div class="site-info">
+            	<div class="kode-navigation" style="height: 35px;"> <!-- site-info -->
                     <ul>
                         <li><a href="mailto:word_waves@gmail.com"><i class="fa fa-envelope-o"></i>word_waves@gmail.com</a></li>
-                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        <!-- <li><a href="#"><i class="fa fa-heart"></i></a></li> -->
+                        <li><a href="#"><i class="fa fa-language"></i></a>
+                            <ul>
+                                <li><a href="{{ route('cambiar-idioma', 'en') }}">English</a></li>
+                                <li><a href="{{ route('cambiar-idioma', 'es') }}">Español</a></li>
+                            </ul>
+                        </li>
                         <li><a id="search-box" href="#"><i class="fa fa-search"></i></a></li>
                     </ul>
                 </div>
@@ -148,8 +153,8 @@
         <div class="container">
             <!--SECTION CONTENT START-->
             <div class="section-content white">
-                <h2>Subscribe to our Newsletter for the latest news.</h2>
-                <p>Update your-self right now! By filling the form below, the lastest information about a thousand books will be sent directly to your email weekly.</p>
+                <h2> {{ __('master.newsletter_title') }} </h2>
+                <p> {{ __('master.newsletter_text') }} </p>
             </div>
             <!--SECTION CONTENT END-->
             <div class="input-container">
@@ -212,7 +217,7 @@
                 <div class="col-md-3">
                 	<div class="widget widget-newletter">
                     	<h2>Newsletter</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                        <p> {{ __('master.newsletter_text') }} </p>
                         <input type="text" placeholder="E-mail ID">
                         <button>Subscribe</button>
                     </div>
