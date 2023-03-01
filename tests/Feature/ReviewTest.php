@@ -36,17 +36,17 @@ class ReviewTest extends TestCase
 
         $review->user_id = User::where('username', 'anonymous')->first()->id;
         $review->book_id = Book::where('title', 'The Hobbit')->first()->id;
-        $review->comment = "This is an example description";
+        $review->comment = "I love this book!";
         $review->save();
 
         $this->assertDatabaseHas('reviews', [
-            'comment' => 'This is an example description',
+            'comment' => 'I love this book!',
         ]);
 
         $review->delete();
 
         $this->assertDatabaseMissing('reviews', [
-            'comment' => 'This is an example description',
+            'comment' => 'I love this book!',
         ]);
     }
     
