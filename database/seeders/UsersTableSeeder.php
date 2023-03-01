@@ -38,7 +38,7 @@ class UsersTableSeeder extends Seeder
         $user = new User();
         $user->username = 'anonymous';
         $user->is_admin = false;
-        $user->email = '';
+        $user->email = 'anonymous@localhost';
         $user->password = Hash::make('password');
         $user->save();
 
