@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Tests\TestCase;
 use App\Models\Bookshelf;
 
-use App\Models\Author;
+use App\Models\User;
 use App\Models\Book;
 
 class BookshelfTest extends TestCase
@@ -56,6 +56,8 @@ class BookshelfTest extends TestCase
     // test bookshelf relationship
     public function test_bookshelf_relationship()
     {
+        $user = User::where('username', 'anonymous')->first();
+        
         $bookshelf = new Bookshelf();
         $bookshelf->id = 1;
         $bookshelf->user_id = 1;

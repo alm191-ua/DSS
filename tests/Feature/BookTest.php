@@ -18,7 +18,7 @@ class BookTest extends TestCase
      *
      * @return void
      */
-    public function test_book_example()
+    public function test_create_book()
     {
         $book = new Book();
         $book->title = "The Hobbit";
