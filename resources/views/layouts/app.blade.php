@@ -51,15 +51,15 @@
         	<div class="container">
             	<div class="kode-navigation" style="height: 35px;"> <!-- site-info -->
                     <ul>
-                        <li><a href="mailto:word_waves@gmail.com"><i class="fa fa-envelope-o"></i>word_waves@gmail.com</a></li>
+                        <li><a href="mailto:contact.wordwaves@gmail.com"><i class="fa fa-envelope-o"></i>contact.wordwaves@gmail.com</a></li>
                         <!-- <li><a href="#"><i class="fa fa-heart"></i></a></li> -->
                         <li><a href="#"><i class="fa fa-language"></i></a>
                             <ul>
                                 <li><a href="{{ route('locale', ['locale' => 'es']) }}">
-                                <img src="https://upload.wikimedia.org/wikipedia/en/9/9a/Flag_of_Spain.svg" alt="Bandera de España" width="25" height="16">
+                                <img src="{{ asset('images/flags/es_flag.png') }}" alt="Spain flag" width="25" height="12">
                                 </a></li>
                                 <li><a href="{{ route('locale', ['locale' => 'en']) }}">
-                                <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" alt="Bandera de Reino Unido" width="25" height="12">
+                                <img src="{{ asset('images/flags/en_flag.png') }}" alt="UK flag" width="25" height="12">
                                 </a></li>
                             </ul>
                         </li>
@@ -182,7 +182,7 @@
                         <ul>
                         	<li><i class="fa fa-tags"></i><p> {{ __('master.localization') }} </p></li>
                             <li><i class="fa fa-phone"></i><p>(+34) 555 555 555</p></li>
-                            <li><i class="fa fa-envelope-o"></i><p><a href="mailto:word_waves@gmail.com">word_waves@gmail.com</a></p></li>
+                            <li><i class="fa fa-envelope-o"></i><p><a href="mailto:contact.wordwaves@gmail.com">contact.wordwaves@gmail.com</a></p></li>
                         </ul>
                     </div>
                 </div>
