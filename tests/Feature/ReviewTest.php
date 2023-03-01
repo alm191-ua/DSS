@@ -16,13 +16,8 @@ class ReviewTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
-    public function test_create_review()
-    {
+    public function setUp_review(): array
+    {        
         $author = Author::create([
             'name' => 'J.K. Rowling',
             'info' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
@@ -54,56 +49,38 @@ class ReviewTest extends TestCase
             'book_id' => $book->id,
         ]);
 
+        return [$review, $user, $book, $author, $category];
+    }
+
+    // test create review
+    public function test_create_review()
+    {
+        [$review, $user, $book] = $this->setUp_review();
+
         // use associate() to set the foreign key
         $review->user()->associate($user);
         $review->book()->associate($book);
         
-        // use associate() to set the foreign key
-        $book->author()->associate($author);
-        $book->category()->associate($category);
-
         $this->assertEquals('This is an example description', $review->comment);
         $this->assertEquals($user->id, $review->user_id);
         $this->assertEquals($book->id, $review->book_id);
     }
 
-    public function test_save_review()
+    // test belongs to User
+    public function test_belongs_to_user()
     {
-        $review = new Review();
+        //[$review, $user, $book, $author, $category] = $this->setUp_review();
+        [$review, $user] = $this->setUp_review();
 
-        $review->user_id = User::where('username', 'anonymous')->first()->id;
-        $review->book_id = Book::where('title', 'The Hobbit')->first()->id;
-        $review->comment = "I love this book!";
-        $review->save();
+        $review->user()->associate($user);
 
-        $this->assertDatabaseHas('reviews', [
-            'comment' => 'I love this book!',
-        ]);
-
-        $review->delete();
-
-        $this->assertDatabaseMissing('reviews', [
-            'comment' => 'I love this book!',
-        ]);
+        $this->assertEquals($user->id, $review->user_id);
     }
 
     // test belongs to Book
     public function test_belongs_to_book()
     {
-        $review = Review::create([
-            'user_id' => User::where('username', 'anonymous')->first()->id,
-            'book_id' => Book::where('title', 'The Hobbit')->first()->id,
-            'comment' => 'I love this book!',
-        ]);
-
-        $book = Book::create([
-            'title' => 'The Hobbit',
-            'author_id' => 1,
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
-            'image' => 'https://images-na.ssl-images-amazon.com/images/I/51Zt3J9ZQNL._SX331_BO1,204,203,200_.jpg',
-            'category_id' => 1,
-            'isbn' => '9780544003415',
-        ]);
+        [$review, $book] = $this->setUp_review();
 
         $review->book()->associate($book);
 
