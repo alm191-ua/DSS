@@ -10,13 +10,52 @@ use App\Models\User;
 
 class UserTest extends TestCase
 {
+    use RefreshDatabase; // Utiliza esta trait para asegurarte de que se vacíe la base de datos antes de cada prueba
+
     /**
-     * A basic unit test example.
+     * Prueba la creación de un usuario
      *
      * @return void
      */
-    public function test_example()
+    public function test_can_create_user()
     {
-        $this->assertTrue(true);
+        // Crea un usuario utilizando los datos de prueba
+        $user = User::create([
+            'id' => 1,
+            'is_admin' => false,
+            'username' => 'testuser',
+            // bycrypt() es una función de Laravel que encripta la contraseña
+            'password' => bcrypt('testpassword'),
+            'email' => 'testuser@example.com',
+        ]);
+
+        // Verifica que el usuario se haya creado correctamente
+        $this->assertEquals(1, $user->id);
+        $this->assertEquals('testuser', $user->username);
+        $this->assertTrue($user->is_admin === false);
+    }
+
+    /**
+     * Prueba que un usuario se haya creado correctamente
+     *
+     * @return void
+     */
+    public function test_user_exists()
+    {
+        // Crea un usuario utilizando los datos de prueba
+        $user = User::create([
+            'id' => 1,
+            'is_admin' => false,
+            'username' => 'testuser',
+            'password' => bcrypt('testpassword'),
+            'email' => 'testuser@example.com',
+        ]);
+
+        // Verifica que el usuario se haya creado correctamente
+        $this->assertDatabaseHas('users', [
+            'id' => 1,
+            'username' => 'testuser',
+            'email' => 'testuser@example.com',
+        ]);
     }
 }
