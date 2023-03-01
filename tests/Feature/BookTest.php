@@ -10,9 +10,14 @@ use App\Models\Book;
 
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\Bookshelf;
+use App\Models\User;
 
 class BookTest extends TestCase
 {
+
+    use RefreshDatabase;
+
     /**
      * A basic unit test example.
      *
@@ -36,31 +41,67 @@ class BookTest extends TestCase
         $this->assertEquals("9780544003415", $book->isbn);
     }
 
-    // test save book
-    public function test_save_book()
+    public function test_belongs_to_author()
     {
-        $author = Author::where('name', 'default')->first();
-        $category = Category::where('tag', 'fantasy')->first();
-        
-        $book = new Book();
-        $book->title = "Example Book";
-        $book->description = "This is an example description";
-        $book->image = "default";
-        $book->isbn = "9780544003415";
+        $author = Author::create([
+            'name' => 'J.K. Rowling',
+            'info' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
+        ]);
+
+        $category = Category::create([
+            'tag' => 'fantasy'
+        ]);
+
+        $book = Book::create([
+            'title' => 'Harry Potter',
+            'author_id' => $author->id,
+            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
+            'image' => 'https://images-na.ssl-images-amazon.com/images/I/51Zt3J9ZQNL._SX331_BO1,204,203,200_.jpg',
+            'category_id' => $category->id,
+            'isbn' => '978-3-16-148410-0',
+        ]);
+
         $book->author()->associate($author);
-        $book->category()->associate($category);
-        $book->save();
 
-        $this->assertDatabaseHas('books', [
-            'title' => 'Example Book',
+        $this->assertEquals($author->id, $book->author->id);
+    }
+
+    public function test_belongs_to_many_bookshelves()
+    {
+        $author = Author::create([
+            'name' => 'J.K. Rowling',
+            'info' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
         ]);
 
-        $book->delete();
-
-        $this->assertDatabaseMissing('books', [
-            'title' => 'Example Book',
+        $category = Category::create([
+            'tag' => 'fantasy'
         ]);
-        
+
+        $book = Book::create([
+            'title' => 'Harry Potter',
+            'author_id' => $author->id,
+            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
+            'image' => 'https://images-na.ssl-images-amazon.com/images/I/51Zt3J9ZQNL._SX331_BO1,204,203,200_.jpg',
+            'category_id' => $category->id,
+            'isbn' => '978-3-16-148410-0',
+        ]);
+
+        $user = User::create([
+            'username' => 'John Doe',
+            'password' => 'password',
+            'email' => 'a@test.com',
+            'is_admin' => false,
+        ]);
+
+
+        $bookshelf = Bookshelf::create([
+            'name' => 'My Bookshelf',
+            'user_id' => $user->id,
+        ]);
+
+        $book->bookshelves()->attach($bookshelf);
+
+        $this->assertEquals(1, $book->bookshelves->count());
     }
     
 }

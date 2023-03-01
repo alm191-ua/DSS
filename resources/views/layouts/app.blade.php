@@ -55,8 +55,12 @@
                         <!-- <li><a href="#"><i class="fa fa-heart"></i></a></li> -->
                         <li><a href="#"><i class="fa fa-language"></i></a>
                             <ul>
-                                <li><a href="{{ route('cambiar-idioma', 'en') }}">English</a></li>
-                                <li><a href="{{ route('cambiar-idioma', 'es') }}">Español</a></li>
+                                <li><a href="{{ route('locale', ['locale' => 'es']) }}">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/9/9a/Flag_of_Spain.svg" alt="Bandera de España" width="25" height="16">
+                                </a></li>
+                                <li><a href="{{ route('locale', ['locale' => 'en']) }}">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" alt="Bandera de Reino Unido" width="25" height="12">
+                                </a></li>
                             </ul>
                         </li>
                         <li><a id="search-box" href="#"><i class="fa fa-search"></i></a></li>
@@ -77,13 +81,13 @@
         	<div class="container">
             	<!--LOGO START-->
             	<div class="logo">
-                    <a href="#"><img src="images/logo.png" alt=""></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset('images/logo.png') }}" alt=""></a>
                 </div>
                 <!--LOGO END-->
                 <div class="kode-navigation">
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="about-us.html">About Us</a></li>
+                        <li><a href="/aboutus">About Us</a></li>
                         <li><a href="blog.html">Our Blog</a>
                             <ul>
 								<li><a href="blog.html">Blog</a></li>
@@ -107,7 +111,7 @@
 								<li><a href="book-detail.html">Product Detail</a></li>
                             </ul>
                         </li>
-                        <li class="last"><a href="contact-us.html">Contact Us</a></li>
+                        <li class="last"><a href="{{ route('contactus') }}">Contact Us</a></li>
                     </ul>
                 </div>
 				<div id="kode-responsive-navigation" class="dl-menuwrapper">

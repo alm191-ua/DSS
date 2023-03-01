@@ -15,8 +15,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('language')->name('home');
 
+Route::view('/aboutus', 'aboutus');
 
-Route::get('cambiar-idioma/{idioma}', [App\Http\Controllers\LanguageController::class, 'cambiarIdioma'])->name('cambiar-idioma');
+Route::get('/contactus', [App\Http\Controllers\ContactusController::class, 'index'])->name('contactus');
+Route::post('/contactus', [App\Http\Controllers\ContactusController::class, 'store'])->name('contactus.store');
 
+Route::get('/lang/{locale}', function ($locale) {
+    if (session('lang', config('app.locale')) != $locale) {
+        session()->put('lang', $locale);
+    }
+    return back();
+})->name('locale');
+
+// // route about us
