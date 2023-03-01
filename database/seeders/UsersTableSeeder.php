@@ -35,7 +35,6 @@ class UsersTableSeeder extends Seeder
         ]);
         */
 
-        //same with eloquent
         $user = new User();
         $user->username = 'anonymous';
         $user->is_admin = false;
@@ -50,5 +49,6 @@ class UsersTableSeeder extends Seeder
         $user2->password = Hash::make('password');
         $user2->save();
 
+        User::factory()->count(10)->create();  
     }
 }

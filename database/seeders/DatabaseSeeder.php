@@ -17,6 +17,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             CategoriesTableSeeder::class,
+            AuthorsTableSeeder::class,
+            BooksTableSeeder::class,
+            ReviewsTableSeeder::class,
+            BookshelvesTableSeeder::class,
+            SuggestionsTableSeeder::class,
         ]);
         $this->command->info('Database seeded!');
         // \App\Models\User::factory(10)->create();
