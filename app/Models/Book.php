@@ -47,35 +47,4 @@ class Book extends Model
         $this->isbn = "";
     }
 
-    //Getters
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    public function getAuthorId()
-    {
-        return $this->author_id;
-    }
-
-    public function getCategoryId()
-    {
-        return $this->category_id;
-    }
-
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    public function getIsbn()
-    {
-        return $this->isbn;
-    }
-
 }
