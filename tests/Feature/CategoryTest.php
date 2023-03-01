@@ -19,9 +19,12 @@ class CategoryTest extends TestCase
 
     // test relation with books
     public function test_relation_with_books()
-    {
+    {    
         $category = Category::where('tag', 'fantasy')->first();
-        $this->assertEquals(1, $category->books->count());
+
+        $title = $category->books()->first()->title;
+        $this->assertEquals("The Hobbit", $title);
+    
     }   
     
 }
