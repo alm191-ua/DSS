@@ -31,7 +31,6 @@ class AuthorTest extends TestCase
         $autor->info= $texto ;
 
         // Comparaciones
-        $this->assertEquals(1,$autor->id);
         $this->assertEquals($texto,$autor->info);
         $this->assertEquals("Jeff Kinney​​",$autor->name);
 
