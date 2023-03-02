@@ -10,6 +10,14 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    
+    protected $fillable = [
+        'id',
+        'is_admin',
+        'username',
+        'password',
+        'email',
+    ];
 
     
     public function reviews()
@@ -26,14 +34,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bookshelf::class);
     }
-
-    protected $fillable = [
-        'id',
-        'is_admin',
-        'username',
-        'password',
-        'email',
-    ];
 
     /**
      * The attributes that should be hidden for serialization.

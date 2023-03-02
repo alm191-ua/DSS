@@ -20,8 +20,8 @@ class BookshelfFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'user_id' => User::factory(),
+            // 'name' => $this->faker->name(),
+            // 'user_id' => User::factory(),
         ];
     }
 }
