@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('email') -> nullable(false);
             $table->string('phone');
             $table->string('message');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id') -> constrained() -> onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -33,5 +32,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('suggestions');
+        //$table->dropForeign(['user_id']);
     }
 };
