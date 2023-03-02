@@ -13,82 +13,78 @@ use App\Models\Bookshelf;
 
 use App\Models\User;
 use App\Models\Book;
+use App\Models\Author;
+use App\Models\Category;
 
 class BookshelfTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
-    public function test_example_bookshelf()
+    use RefreshDatabase;
+
+
+    public function test_create_bookshelf()
     {
         $bookshelf = new Bookshelf();
-        $bookshelf->id = 1;
+        $bookshelf->name = "Test";
         $bookshelf->user_id = 1;
-        $bookshelf->name = "Example Bookshelf";
 
-        $this->assertEquals(1, $bookshelf->id);
+        $this->assertEquals("Test", $bookshelf->name);
         $this->assertEquals(1, $bookshelf->user_id);
-        $this->assertEquals("Example Bookshelf", $bookshelf->name);
     }
 
-    // test save bookshelf
-    public function test_save_bookshelf()
+    public function test_belongs_to_user()
     {
-        $bookshelf = new Bookshelf();
-        $bookshelf->id = 1;
-        $bookshelf->user_id = 1;
-        $bookshelf->name = "Example Bookshelf";
-        $bookshelf->save();
-
-        $this->assertDatabaseHas('bookshelves', [
-            'name' => 'Example Bookshelf',
+        $user = User::create([
+            'username' => 'John Doe',
+            'password' => 'password',
+            'email' => 'a@test.com',
+            'is_admin' => false,
         ]);
 
-        $bookshelf->delete();
-
-        $this->assertDatabaseMissing('bookshelves', [
-            'name' => 'Example Bookshelf',
+        $bookshelf = Bookshelf::create([
+            'name' => 'Test',
+            'user_id' => $user->id,
         ]);
-    }
 
-    // test bookshelf relationship
-    public function test_bookshelf_relationship()
-    {
-        $user = User::where('username', 'anonymous')->first();
-        
-        $bookshelf = new Bookshelf();
-        $bookshelf->id = 1;
-        $bookshelf->user_id = 1;
-        $bookshelf->name = "Example Bookshelf";
-        // relationship
         $bookshelf->user()->associate($user);
-        $bookshelf->save();
 
-        $book = new Book();
-        $book->title = "Example Book";
-        $book->description = "This is an example description";
-        $book->image = "default";
-        $book->isbn = "9780544003415";
-        $book->author_id = 1;
-        $book->category_id = 1;
-        $book->save();
-        
-        // Relationship
-        $bookshelf->books()->attach($book->id);
+        $this->assertEquals($user->id, $bookshelf->user->id);
+    }
 
-        $this->assertDatabaseHas('book_bookshelf', [
-            'book_id' => $book->id,
-            'bookshelf_id' => $bookshelf->id,
+    public function test_belongs_to_many_books()
+    {
+        $author = Author::create([
+            'name' => 'J.K. Rowling',
+            'info' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
         ]);
 
-        $bookshelf->delete();
-        $book->delete();
-
-        $this->assertDatabaseMissing('book_bookshelf', [
-            'book_id' => $book->id,
-            'bookshelf_id' => $bookshelf->id,
+        $category = Category::create([
+            'tag' => 'fantasy'
         ]);
+
+        $book = Book::create([
+            'title' => 'Harry Potter',
+            'author_id' => $author->id,
+            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
+            'image' => 'https://images-na.ssl-images-amazon.com/images/I/51Zt3J9ZQNL._SX331_BO1,204,203,200_.jpg',
+            'category_id' => $category->id,
+            'isbn' => '978-3-16-148410-0',
+        ]);
+
+        $user = User::create([
+            'username' => 'John Doe',
+            'password' => 'password',
+            'email' => 'a@test.com',
+            'is_admin' => false,
+        ]);
+
+
+        $bookshelf = Bookshelf::create([
+            'name' => 'My Bookshelf',
+            'user_id' => $user->id,
+        ]);
+
+        $bookshelf->books()->attach($book);
+
+        $this->assertEquals(1, $bookshelf->books->count());
     }
 }
