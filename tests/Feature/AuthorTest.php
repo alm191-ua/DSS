@@ -29,17 +29,12 @@ class AuthorTest extends TestCase
         $autor = new Author();
         $autor->id = 1 ; 
         $autor->name = "Jeff Kinney​​" ;
-        $autor->birthdate = "​19/2/1971​" ;
-        $autor->isDeath = false ;
-        $autor->deathdate = "-1" ;
         $autor->info= $texto ;
 
         // Comparaciones
         $this->assertEquals(1,$autor->id);
-        $this->assertEquals("​19/2/1971​",$autor->birthdate);
-        $this->assertFalse($autor->isDeath);
-        $this->assertEquals("-1",$autor->deathdate);
         $this->assertEquals($texto,$autor->info);
+        $this->assertEquals("Jeff Kinney​​",$autor->name);
 
 
         
@@ -53,9 +48,6 @@ class AuthorTest extends TestCase
         $autor = new Author();
         $autor->id = $idRandom ; 
         $autor->name = "Jeff Kinney​​" ;
-        $autor->birthdate = "​19/2/1971​" ;
-        $autor->isDeath = false ;
-        $autor->deathdate = "-1" ;
         $autor->info= $texto ;
         $autor->save();
 
@@ -90,9 +82,6 @@ class AuthorTest extends TestCase
         $autor = new Author();
         $autor->id = $idRandom ; 
         $autor->name = "Jeff Kinney​​" ;
-        $autor->birthdate = "​19/2/1971​" ;
-        $autor->isDeath = false ;
-        $autor->deathdate = "-1" ;
         $autor->info= $texto ;
         $autor->save();
 

@@ -20,19 +20,10 @@ class AuthorFactory extends Factory
     public function definition()
     {
         
-        $estaMuerto = (bool)rand(0,1);
-        if (estaMuerto){
-            $fechaMuerte = $faker->dateTimeBetween('1990-01-01', '2012-12-31')->format('d/m/Y');
-        }else{
-            $fechaMuerte = "-1";
-        }
 
         return [
             // Añaade los campos que necesites
             'name' => $faker->name,
-            'bithdate' => $faker->dateTimeBetween('1990-01-01', '2012-12-31')->format('d/m/Y'),
-            'isDeath' => $estaMuerto ,
-            'deathdate' => $fechaMuerte ,
             'info' => $faker()->paragraph(),
 
 

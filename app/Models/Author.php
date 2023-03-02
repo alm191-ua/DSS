@@ -20,9 +20,6 @@ class Author extends Model
     public function __construct(){
         $this->id = 0;
         $this->name = "";
-        $this->birthdate = "";
-        $this->isDeath = false ; 
-        $this->deathdate = "";
         $this->info= "";
 
     } 
