@@ -15,6 +15,8 @@ class Suggestion extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->nullable();
+        
     }
 
     //Constructor
@@ -25,7 +27,7 @@ class Suggestion extends Model
         $this->email = "";
         $this->phone = "";
         $this->message = "";
-        $this->user_id = 0;
+        $this->user_id = -1;
     } 
 }
 

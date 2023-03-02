@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email') -> nullable(false);
             $table->string('phone');
             $table->string('message');
-            $table->foreignId('user_id') -> constrained() -> onDelete('cascade');
+            $table->integer('user_id') -> nulleable(false);
             $table->timestamps();
         });
     }

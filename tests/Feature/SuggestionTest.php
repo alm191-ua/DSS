@@ -99,7 +99,49 @@ class SuggestionTest extends TestCase
         ]);
     }
 
-    // Funcion de comporbacion de relacion 1 a muchos (Usuario /Sugerencias  )
+    // Funcion de comprobacion de una Sugerencia sin necesidad de ser un usuario loggeado 
+
+    public function test_suggestion_non_registred (){
+        
+        $idRandom = rand(0,1000);
+        $texto = "Añadir un modo oscuro " ;
+        $sugerencia = new Suggestion();
+
+
+        $sugerencia->id = $idRandom; 
+        $sugerencia->name = "Raul Hernandez"; 
+        $sugerencia->phone = "678430102"; 
+        $sugerencia->message = $texto; 
+
+
+        $sugerencia->save();
+        //Comparaciones 
+        $this->assertDatabaseHas('suggestions', [
+            'name' => "Raul Hernandez",
+        ]);
+
+        $this->assertDatabaseHas('suggestions', [
+            'message' => $texto,
+        ]);
+
+
+
+        $sugerencia->delete();
+
+
+
+        // Comprobacion de que se ha eliminado correctamente 
+        $this->assertDatabaseMissing('suggestions', [
+            'name' => "Raul Hernandez",
+        ]);
+
+        $this->assertDatabaseMissing('suggestions', [
+            'message' => $texto,
+        ]);
+
+    }
+
+    // Funcion de comprobacion de relacion 1 a muchos (Usuario /Sugerencias  )
    public function test_relation_users_suggestions(){
         $idRandom = rand(0,1000);
         $usuario = User::create([
