@@ -23,8 +23,8 @@ class SuggestionFactory extends Factory
         return [
             'name' => $faker->name(),
             'email' => $faker->unique()->safeEmail(),
-            'phone' => $$faker->phoneNumber(),
-            'message' => $$faker->text(200),
+            'phone' => $faker->phoneNumber(),
+            'message' => $faker->text(200),
         ];
     }
 }
