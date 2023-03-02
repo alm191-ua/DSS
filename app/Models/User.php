@@ -24,7 +24,7 @@ class User extends Authenticatable
 
     public function bookshelves()
     {
-        return $this->belongsToMany(Bookshelf::class);
+        return $this->hasMany(Bookshelf::class);
     }
 
     protected $fillable = [
