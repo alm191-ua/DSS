@@ -12,6 +12,7 @@ use App\Models\Author;
 use App\Models\Category;
 use App\Models\Bookshelf;
 use App\Models\User;
+use App\Models\Review;
 
 class BookTest extends TestCase
 {
@@ -103,5 +104,74 @@ class BookTest extends TestCase
 
         $this->assertEquals(1, $book->bookshelves->count());
     }
+
+    // public function test_has_many_reviews(){
+    //     $user = User::create([
+    //         'username' => 'John Doe',
+    //         'password' => 'password',
+    //         'email' => 'a@test.com',
+    //         'is_admin' => false,
+    //     ]);
+        
+    //     $author = Author::create([
+    //         'name' => 'J.K. Rowling',
+    //         'info' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
+    //     ]);
+
+    //     $category = Category::create([
+    //         'tag' => 'fantasy'
+    //     ]);
+        
+    //     $book = Book::create([
+    //         'title' => 'Harry Potter',
+    //         'author_id' => $author->id,
+    //         'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
+    //         'image' => 'https://images-na.ssl-images-amazon.com/images/I/51Zt3J9ZQNL._SX331_BO1,204,203,200_.jpg',
+    //         'category_id' => $category->id,
+    //         'isbn' => '978-3-16-148410-0',
+    //     ]);
+
+    //     $reviews = [
+    //         new Review([
+    //             'user_id' => $user->id,
+    //             'book_id' => $book->id,
+    //             'comment' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
+    //         ]),
+    //         new Review([
+    //             'user_id' => $user->id,
+    //             'book_id' => $book->id,
+    //             'comment' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
+    //         ]),
+    //     ];
+
+    //     $book->reviews->saveMany($reviews);
+
+    //     $this->assertEquals(2, $book->reviews->count());
+    // }
     
+    public function test_belongs_to_category()
+    {
+        $author = Author::create([
+            'name' => 'J.K. Rowling',
+            'info' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
+        ]);
+
+        $category = Category::create([
+            'tag' => 'fantasy'
+        ]);
+
+        $book = Book::create([
+            'title' => 'Harry Potter',
+            'author_id' => $author->id,
+            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
+            'image' => 'https://images-na.ssl-images-amazon.com/images/I/51Zt3J9ZQNL._SX331_BO1,204,203,200_.jpg',
+            'category_id' => $category->id,
+            'isbn' => '978-3-16-148410-0',
+        ]);
+
+        $book->category()->associate($category);
+
+        $this->assertEquals($category->tag, $book->category->tag);
+    }
+
 }
