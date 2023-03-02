@@ -19,7 +19,6 @@ class SuggestionTest extends TestCase
      */
     public function test_example_suggestion()
     {
-        $idRandom = rand(0,1000);
         $usuario = User::create([
             "is_admin" => false,
             'username' => "Raul Hernandez",
@@ -33,7 +32,6 @@ class SuggestionTest extends TestCase
         $sugerencia = new Suggestion();
 
 
-        $sugerencia->id = $idRandom; 
         $sugerencia->name = $usuario->username; 
         $sugerencia->email = $usuario->email; 
         $sugerencia->phone = "678430102"; 
@@ -41,7 +39,6 @@ class SuggestionTest extends TestCase
         $sugerencia->user_id = $usuario->id; 
 
         // Comparaciones
-        $this->assertEquals($idRandom,$sugerencia->id);
         $this->assertEquals("Raul Hernandez",$sugerencia->name);
         $this->assertEquals("RaulHernandez@ua.es" ,$sugerencia->email);
         $this->assertEquals("678430102",$sugerencia->phone);
@@ -52,7 +49,6 @@ class SuggestionTest extends TestCase
     }
     // Funcion de comprobacion de guardado y eliminacion en la base de datos 
     public function test_save_delete_suggestion(){
-        $idRandom = rand(0,1000);
         $usuario = User::create([
             "is_admin" => false,
             'username' => "Raul Hernandez",
@@ -66,7 +62,6 @@ class SuggestionTest extends TestCase
         $sugerencia = new Suggestion();
 
 
-        $sugerencia->id = $idRandom; 
         $sugerencia->name = $usuario->username; 
         $sugerencia->email = $usuario->email; 
         $sugerencia->phone = "678430102"; 
@@ -103,12 +98,11 @@ class SuggestionTest extends TestCase
 
     public function test_suggestion_non_registred (){
         
-        $idRandom = rand(0,1000);
+
         $texto = "Añadir un modo oscuro " ;
         $sugerencia = new Suggestion();
 
 
-        $sugerencia->id = $idRandom; 
         $sugerencia->name = "Raul Hernandez"; 
         $sugerencia->email = "Raul@ua.es"; 
         $sugerencia->message = $texto; 
@@ -144,7 +138,6 @@ class SuggestionTest extends TestCase
 
     // Funcion de comprobacion de relacion 1 a muchos (Usuario /Sugerencias  )
    public function test_relation_users_suggestions(){
-        $idRandom = rand(0,1000);
         $usuario = User::create([
             "is_admin" => false,
             'username' => "Raul Hernandez",
@@ -158,7 +151,6 @@ class SuggestionTest extends TestCase
         $sugerencia = new Suggestion();
 
 
-        $sugerencia->id = $idRandom; 
         $sugerencia->name = $usuario->username; 
         $sugerencia->email = $usuario->email; 
         $sugerencia->phone = "678430102"; 

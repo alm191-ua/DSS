@@ -27,7 +27,6 @@ class AuthorTest extends TestCase
         $texto = "J​eff Kinney, es el creador de la serie El diario de Greg. También creó la página web Poptropica.​";
 
         $autor = new Author();
-        $autor->id = 1 ; 
         $autor->name = "Jeff Kinney​​" ;
         $autor->info= $texto ;
 
@@ -44,9 +43,8 @@ class AuthorTest extends TestCase
 
     public function test_save_delete_author(){
         $texto = "J​eff Kinney, es el creador de la serie El diario de Greg. También creó la página web Poptropica.​";
-        $idRandom = rand(0,1000);
+
         $autor = new Author();
-        $autor->id = $idRandom ; 
         $autor->name = "Jeff Kinney​​" ;
         $autor->info= $texto ;
         $autor->save();
@@ -78,9 +76,7 @@ class AuthorTest extends TestCase
     public function test_relation_authors_books(){
 
         $texto = "J​eff Kinney, es el creador de la serie El diario de Greg. También creó la página web Poptropica.​";
-        $idRandom = rand(0,1000);
         $autor = new Author();
-        $autor->id = $idRandom ; 
         $autor->name = "Jeff Kinney​​" ;
         $autor->info= $texto ;
         $autor->save();

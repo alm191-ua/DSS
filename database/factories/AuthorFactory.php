@@ -23,8 +23,8 @@ class AuthorFactory extends Factory
 
         return [
             // Añaade los campos que necesites
-            'name' => $faker->name,
-            'info' => $faker()->paragraph(),
+            'name' => $this->faker->name,
+            'info' => $this->faker->paragraph(),
 
 
         ];
