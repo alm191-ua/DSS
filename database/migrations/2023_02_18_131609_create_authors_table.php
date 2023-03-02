@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('isDeath');
+            $table->string('birthdate');
+            $table->string('deathdate');
             $table->text('info');
             $table->timestamps();
         });

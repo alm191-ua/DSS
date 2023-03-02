@@ -9,13 +9,27 @@ class Suggestion extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'book_id',
-    ];
+    protected $fillable = ['name','email','phone','message','user_id'];
 
+    // Realcion Sugerencia pertenece a Usuario (1 a muchos )
     public function user()
     {
-        return $this->belongsTo(User::class) -> nullable();
+        return $this->belongsTo(User::class);
     }
+
+    //Constructor
+
+    public function __construct(){
+        $this->id = 0;
+        $this->name = "";
+        $this->email = "";
+        $this->phone = "";
+        $this->message = "";
+        $this->user_id = 0;
+    } 
 }
+
+
+
+
+

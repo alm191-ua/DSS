@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email') -> nullable(false);
             $table->string('phone');
             $table->string('message');
+            $table->foreignId('user_id') -> constrained() -> onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,5 +32,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('suggestions');
+        //$table->dropForeign(['user_id']);
     }
 };
