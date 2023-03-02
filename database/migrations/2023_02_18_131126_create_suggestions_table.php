@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email') -> nullable(false);
-            $table->string('phone');
+            $table->string('phone') -> nullable();
             $table->string('message');
-            $table->integer('user_id') -> nulleable(false);
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

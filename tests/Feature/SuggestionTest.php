@@ -110,8 +110,9 @@ class SuggestionTest extends TestCase
 
         $sugerencia->id = $idRandom; 
         $sugerencia->name = "Raul Hernandez"; 
-        $sugerencia->phone = "678430102"; 
+        $sugerencia->email = "Raul@ua.es"; 
         $sugerencia->message = $texto; 
+
 
 
         $sugerencia->save();
