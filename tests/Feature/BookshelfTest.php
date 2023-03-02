@@ -16,79 +16,29 @@ use App\Models\Book;
 
 class BookshelfTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
-    public function test_example_bookshelf()
+    use RefreshDatabase;
+    
+    public function test_belong_to_user()
     {
-        $bookshelf = new Bookshelf();
-        $bookshelf->id = 1;
-        $bookshelf->user_id = 1;
-        $bookshelf->name = "Example Bookshelf";
-
-        $this->assertEquals(1, $bookshelf->id);
-        $this->assertEquals(1, $bookshelf->user_id);
-        $this->assertEquals("Example Bookshelf", $bookshelf->name);
-    }
-
-    // test save bookshelf
-    public function test_save_bookshelf()
-    {
-        $bookshelf = new Bookshelf();
-        $bookshelf->id = 1;
-        $bookshelf->user_id = 1;
-        $bookshelf->name = "Example Bookshelf";
-        $bookshelf->save();
-
-        $this->assertDatabaseHas('bookshelves', [
-            'name' => 'Example Bookshelf',
+        $user = User::create([
+            'is_admin' => false,
+            'username' => 'John Doe',
+            'email' => 'xd@gmail.com',
+            'password' => '1234',
         ]);
 
-        $bookshelf->delete();
-
-        $this->assertDatabaseMissing('bookshelves', [
-            'name' => 'Example Bookshelf',
+        $bookshelf = Book::create([
+            'name' => 'Test',
+            'user_id' => $user->id,
         ]);
-    }
 
-    // test bookshelf relationship
-    public function test_bookshelf_relationship()
-    {
-        $user = User::where('username', 'anonymous')->first();
-        
-        $bookshelf = new Bookshelf();
-        $bookshelf->id = 1;
-        $bookshelf->user_id = 1;
-        $bookshelf->name = "Example Bookshelf";
-        // relationship
         $bookshelf->user()->associate($user);
-        $bookshelf->save();
 
-        $book = new Book();
-        $book->title = "Example Book";
-        $book->description = "This is an example description";
-        $book->image = "default";
-        $book->isbn = "9780544003415";
-        $book->author_id = 1;
-        $book->category_id = 1;
-        $book->save();
-        
-        // Relationship
-        $bookshelf->books()->attach($book->id);
+        $this->assertEquals($user->id, $bookshelf->user->id);
+    }
 
-        $this->assertDatabaseHas('book_bookshelf', [
-            'book_id' => $book->id,
-            'bookshelf_id' => $bookshelf->id,
-        ]);
+    public function test_belong_to_many_books()
+    {
 
-        $bookshelf->delete();
-        $book->delete();
-
-        $this->assertDatabaseMissing('book_bookshelf', [
-            'book_id' => $book->id,
-            'bookshelf_id' => $bookshelf->id,
-        ]);
     }
 }

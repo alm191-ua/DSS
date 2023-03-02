@@ -11,12 +11,24 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function suggestions()
+    {
+        return $this->hasMany(Suggestion::class);
+    }
+
+    public function bookshelves()
+    {
+        return $this->belongsToMany(Bookshelf::class);
+    }
+
     protected $fillable = [
+        'id',
         'is_admin',
         'username',
         'password',
