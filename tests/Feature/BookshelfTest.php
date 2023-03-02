@@ -18,27 +18,33 @@ class BookshelfTest extends TestCase
 {
     use RefreshDatabase;
     
-    public function test_belong_to_user()
+    
+    public function test_create_bookshelf()
     {
-        $user = User::create([
-            'is_admin' => false,
-            'username' => 'John Doe',
-            'email' => 'xd@gmail.com',
-            'password' => '1234',
-        ]);
+        $bookshelf = new Bookshelf();
+        $bookshelf->name = "Test";
+        $bookshelf->user_id = 1;
 
-        $bookshelf = Book::create([
-            'name' => 'Test',
-            'user_id' => $user->id,
-        ]);
-
-        $bookshelf->user()->associate($user);
-
-        $this->assertEquals($user->id, $bookshelf->user->id);
+        $this->assertEquals("Test", $bookshelf->name);
+        $this->assertEquals(1, $bookshelf->user_id);
     }
 
-    public function test_belong_to_many_books()
+    public function test_save_bookshelf()
     {
+        $bookshelf = new Bookshelf();
 
+        $bookshelf->user_id = User::where('username', 'anonymous')->first()->id;
+        $bookshelf->name = "Test";
+        $bookshelf->save();
+
+        $this->assertDatabaseHas('bookshelf', [
+            'name' => 'Test',
+        ]);
+
+        $bookshelf->delete();
+
+        $this->assertDatabaseMissing('bookshelf', [
+            'name' => 'Test',
+        ]);
     }
 }

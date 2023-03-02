@@ -12,11 +12,25 @@ class UserTest extends TestCase
 {
     use RefreshDatabase; // Utiliza esta trait para asegurarte de que se vacíe la base de datos antes de cada prueba
 
-    /**
-     * Prueba la creación de un usuario
-     *
-     * @return void
-     */
+    
+    public function test_create_user(){
+        $user = new User();
+        $user->is_admin = false;
+        $user->username = "testuser";
+        $user->password = "testpassword";
+        $user->email = "algo@gmail.com";
+
+        $this->assertEquals("testuser", $user->username);
+        $this->assertEquals("testpassword", $user->password);
+        $this->assertEquals("algo@gmail.com", $user->email);
+        $this->assertTrue($user->is_admin === false);
+
+        $user->delete();
+
+    }
+
+
+
     public function test_can_create_user()
     {
         // Crea un usuario utilizando los datos de prueba
