@@ -75,3 +75,5 @@ El apartado de gestión interna está dirigido a los empleados, encargados de a�
 
 ![Diagrama de base de datos](dbdiagram.png)
 
+#### Diagrama de clases
+<img src="./classdiagramPlus.png" width="600">
