@@ -213,7 +213,7 @@
         <section class="kode-video-section">
         	<div class="container">
             	<h2>Play a video on Parallax</h2>
-                <a class="fa fa-play play" href="#"></a>
+                <a class="fa fa-play play" href="https://www.youtube.com/watch?v=DFIJ6AUOY9c"></a>
                 <h4>Title: Book Store</h4>
                 <p>Source: Youtube, Vimeo</p>
             </div>

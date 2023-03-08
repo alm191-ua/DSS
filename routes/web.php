@@ -19,8 +19,12 @@ Route::get('/', function () {
 
 Route::view('/aboutus', 'aboutus');
 
+Route::get('/author', [App\Http\Controllers\AuthorController::class, 'index'])->name('author');
+
+Route::get('/authors', [App\Http\Controllers\AuthorsController::class, 'index'])->name('authors');
+
 Route::get('/contactus', [App\Http\Controllers\ContactusController::class, 'index'])->name('contactus');
-Route::post('/contactus', [App\Http\Controllers\ContactusController::class, 'store'])->name('contactus.store');
+// Route::post('/contactus', [App\Http\Controllers\ContactusController::class, 'store'])->name('contactus.store');
 
 Route::get('/lang/{locale}', function ($locale) {
     if (session('lang', config('app.locale')) != $locale) {

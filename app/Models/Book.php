@@ -36,15 +36,4 @@ class Book extends Model
     }
 
 
-    //Constructor
-    public function __construct()
-    {
-        $this->title = "";
-        $this->description = "";
-        $this->author_id = 0;
-        $this->category_id = 0;
-        $this->image = "";
-        $this->isbn = "";
-    }
-
 }

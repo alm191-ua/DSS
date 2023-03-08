@@ -18,16 +18,6 @@ class Suggestion extends Model
         
     }
 
-    //Constructor
-
-    public function __construct(){
-        $this->id = 0;
-        $this->name = "";
-        $this->email = "";
-        $this->phone = "";
-        $this->message = "";
-        $this->user_id = null;
-    } 
 }
 
 

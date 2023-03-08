@@ -5,12 +5,12 @@
 @section('content')
 
     <!--BANNER START-->
-    <div class="kode-inner-banner">
+    <div class="kode-inner-banner" style="background-color: #054a83">
     	<div class="kode-page-heading">
         	<h2>Author</h2>
             <ol class="breadcrumb">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Books Guide</a></li>
+              <li><a href="{{ route('home') }}">Home</a></li>
+              {{-- <li><a href="#">Books Guide</a></li> --}}
               <li class="active">Author</li>
             </ol>
         </div>

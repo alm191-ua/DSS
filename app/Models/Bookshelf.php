@@ -22,12 +22,4 @@ class Bookshelf extends Model
         return $this->belongsToMany(Book::class);
     }
 
-
-    public function __construct()
-    {
-        $this->id = 0;
-        $this->name = "";
-        $this->user_id = 0;
-        
-    }
 }

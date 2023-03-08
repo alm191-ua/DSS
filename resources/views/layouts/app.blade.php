@@ -95,10 +95,10 @@
 								<li><a href="blog-detail.html">Blog Detail</a></li>
                             </ul>
                         </li>
-                        <li class="last"><a href="authors.html">Teams</a>
+                        <li class="last"><a href="{{ route('authors') }}">Teams</a>
 							<ul>
-								<li><a href="authors.html">Author</a></li>
-								<li><a href="author-detail.html">Author Detail</a></li>								
+								<li><a href="{{ route('authors') }}">Authors</a></li>
+								<li><a href="{{ route('author') }}">Author Detail</a></li>								
                             </ul>
 						</li>
 						<li><a href="book-listing.html">Products</a>
