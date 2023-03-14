@@ -103,12 +103,8 @@
 						</li>
 						<li><a href="book-listing.html">Products</a>
                             <ul>
-								<li><a href="book-listing.html">Products Style 1</a></li>
-								<li><a href="book-listing-1.html">Products Style 2</a></li>
-								<li><a href="book-listing-2.html">Products Style 3</a></li>
-                                <li><a href="book-listing-1-w-sidebar.html">Product 2 W/S</a></li>
-								<li><a href="book-listing-2-w-sidebar.html">Product 3 W/S</a></li>								
-								<li><a href="book-detail.html">Product Detail</a></li>
+								<li><a href="{{ route('books-list') }}">Books List</a></li>							
+								<li><a href="{{ route('book', ['id' => 3]) }}">Book Detail</a></li> {{-- only for testing --}}
                             </ul>
                         </li>
                         <li class="last"><a href="{{ route('contactus') }}">Contact Us</a></li>

@@ -1,39 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.style1')
 
 @section('title', 'Book Detail')
 
-@section('content')
-
-    <!--BANNER START-->
-    <div class="kode-inner-banner">
-    	<div class="kode-page-heading">
-        	<h2>Book Detail</h2>
-            <ol class="breadcrumb">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Books Guide</a></li>
-              <li class="active">Book Detail</li>
-            </ol>
-        </div>
-        <div class="container">
-        	<div class="banner-search">
-            	<div class="row">
-                	<div class="col-md-2">
-                    	<h2>Search<br> Your Books</h2>
-                    </div>
-                    <div class="col-md-6">
-                    	<input type="text" placeholder="Enter Your Title">
-                    </div>
-                    <div class="col-md-2">
-                    	<select></select>
-                    </div>
-                    <div class="col-md-2">
-                    	<button>Search</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--BANNER END-->
+@section('style1.content')
     <!--CONTENT START-->
     <div class="kode-content padding-tb-50">
     	<div class="container">
@@ -64,7 +33,7 @@
                         	<li>
                             	<div class="new-arrival">
                                     <div class="kode-thumb">
-                                        <a href="#"><img src="images/new-arrival1.png" alt=""></a>
+                                        <a href="#"><img src="{{ asset('images/new-arrival1.png') }}" alt=""></a>
                                     </div>
                                     <div class="kode-text">
                                         <h3>consetetur sadip scing</h3>
@@ -75,7 +44,7 @@
                             <li>
                             	<div class="new-arrival">
                                     <div class="kode-thumb">
-                                        <a href="#"><img src="images/new-arrival2.png" alt=""></a>
+                                        <a href="#"><img src="{{ asset('images/new-arrival2.png') }}" alt=""></a>
                                     </div>
                                     <div class="kode-text">
                                         <h3>consetetur sadip scing</h3>
@@ -86,7 +55,7 @@
                             <li>
                             	<div class="new-arrival">
                                     <div class="kode-thumb">
-                                        <a href="#"><img src="images/new-arrival3.png" alt=""></a>
+                                        <a href="#"><img src="{{ asset('images/new-arrival3.png') }}" alt=""></a>
                                     </div>
                                     <div class="kode-text">
                                         <h3>consetetur sadip scing</h3>
@@ -119,7 +88,7 @@
                             <li>
                             	<div class="new-arrival">
                                     <div class="kode-thumb">
-                                        <a href="#"><img src="images/new-arrival2.png" alt=""></a>
+                                        <a href="#"><img src="{{ asset('images/new-arrival2.png') }}" alt=""></a>
                                     </div>
                                     <div class="kode-text">
                                         <h3>consetetur sadip scing</h3>
@@ -128,7 +97,7 @@
                                 </div>
                                 <div class="new-arrival">
                                     <div class="kode-thumb">
-                                        <a href="#"><img src="images/new-arrival1.png" alt=""></a>
+                                        <a href="#"><img src="{{ asset('images/new-arrival1.png') }}" alt=""></a>
                                     </div>
                                     <div class="kode-text">
                                         <h3>consetetur sadip scing</h3>
@@ -137,7 +106,7 @@
                                 </div>
                                 <div class="new-arrival">
                                     <div class="kode-thumb">
-                                        <a href="#"><img src="images/new-arrival3.png" alt=""></a>
+                                        <a href="#"><img src="{{ asset('images/new-arrival3.png') }}" alt=""></a>
                                     </div>
                                     <div class="kode-text">
                                         <h3>consetetur sadip scing</h3>
@@ -148,7 +117,7 @@
                             <li>
                             	<div class="new-arrival">
                                     <div class="kode-thumb">
-                                        <a href="#"><img src="images/new-arrival3.png" alt=""></a>
+                                        <a href="#"><img src="{{ asset('images/new-arrival3.png') }}" alt=""></a>
                                     </div>
                                     <div class="kode-text">
                                         <h3>consetetur sadip scing</h3>
@@ -157,7 +126,7 @@
                                 </div>
                                 <div class="new-arrival">
                                     <div class="kode-thumb">
-                                        <a href="#"><img src="images/new-arrival2.png" alt=""></a>
+                                        <a href="#"><img src="{{ asset('images/new-arrival2.png') }}" alt=""></a>
                                     </div>
                                     <div class="kode-text">
                                         <h3>consetetur sadip scing</h3>
@@ -166,7 +135,7 @@
                                 </div>
                                 <div class="new-arrival">
                                     <div class="kode-thumb">
-                                        <a href="#"><img src="images/new-arrival1.png" alt=""></a>
+                                        <a href="#"><img src="{{ asset('images/new-arrival1.png') }}" alt=""></a>
                                     </div>
                                     <div class="kode-text">
                                         <h3>consetetur sadip scing</h3>
@@ -184,7 +153,7 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="kode-thumb">
-                                    <img src="images/book-detail.jpg" alt="">
+                                    <img src="{{ asset('images/book-detail.jpg') }}" alt="">
                                 </div>
                             </div>
                             <div class="col-md-7">
@@ -240,7 +209,7 @@
                                     <ul>
                                         <li>
                                             <div class="kode-thumb">
-                                                <a href="#"><img alt="" src="images/author14.png"></a>
+                                                <a href="#"><img alt="" src="{{ asset('images/author14.png') }}"></a>
                                             </div>
                                             <div class="kode-text">
                                                 <h4>Saul Bellow</h4>
@@ -251,7 +220,7 @@
                                         </li>
                                         <li>
                                             <div class="kode-thumb">
-                                                <a href="#"><img alt="" src="images/author14.png"></a>
+                                                <a href="#"><img alt="" src="{{ asset('images/author14.png') }}"></a>
                                             </div>
                                             <div class="kode-text">
                                                 <h4>Saul Bellow</h4>
@@ -320,20 +289,20 @@
                             <!--PRODUCT GRID START-->
                             <div class="col-md-4">
                                 <div class="best-seller-pro">
-                                     <figure>
-                            	<img src="images/book7.png" alt="">
-                            </figure>
-                            <div class="kode-text">
-                            	<h3><a href="#">Burnt Siena</a></h3>
-                            </div>
-                            <div class="kode-caption">
-                            	<h3>Art History Mystery</h3>
-                                <div class="rating">
-<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-</div>
-                                <p>Sara Wisseman</p>
-                                <p class="price">$334.50</p>
-                                <a href="#" class="add-to-cart">Add To Cart</a>
+                                    <figure>
+                                        <img src="{{ asset('images/book7.png') }}" alt="">
+                                    </figure>
+                                    <div class="kode-text">
+                                        <h3><a href="#">Burnt Siena</a></h3>
+                                    </div>
+                                    <div class="kode-caption">
+                                        <h3>Art History Mystery</h3>
+                                        <div class="rating">
+                                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                        </div>
+                                        <p>Sara Wisseman</p>
+                                        <p class="price">$334.50</p>
+                                        <a href="#" class="add-to-cart">Add To Cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -342,7 +311,7 @@
                             <div class="col-md-4">
                                 <div class="best-seller-pro">
                                     <figure>
-                            	<img src="images/book8.png" alt="">
+                            	<img src="{{ asset('images/book8.png') }}" alt="">
                             </figure>
                             <div class="kode-text">
                             	<h3><a href="#">Chrysalis</a></h3>
@@ -363,7 +332,7 @@
                             <div class="col-md-4">
                                 <div class="best-seller-pro">
                                     <figure>
-                            	<img alt="" src="images/book12.png">
+                            	<img alt="" src="{{ asset('images/book12.png') }}">
                             </figure>
                             <div class="kode-text">
                             	<h3><a href="#">Dead Water</a></h3>

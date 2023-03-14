@@ -780,7 +780,7 @@ header{
 .kode-video-section{
 	float:left;
 	width:100%;
-	background-image:url(images/video-bg.png);
+	background-image:url('/images/video-bg.png');
 	background-position:center;
 	background-size:cover;
 	background-repeat:no-repeat;
@@ -796,7 +796,7 @@ header{
 	top:0px;
 	height:100%;
 	width:100%;
-	background-image:url(images/video-bg-pettern.png);
+	background-image:url(/images/video-bg-pettern.png);
 	
 }
 .kode-video-section .container{
@@ -971,7 +971,7 @@ header{
 .testimonial-section{
 	float:left;
 	width:100%;
-	background-image:url(images/testimonials-bg.jpg);
+	background-image:url(/images/testimonials-bg.jpg);
 	background-repeat:no-repeat;
 	background-size:cover;
 	position:relative;
@@ -1238,7 +1238,7 @@ section.kode-blog-section{
 	height:470px;
 	position:absolute;
 	left:50%;
-	background-image:url(images/laptop.png);
+	background-image:url(/images/laptop.png);
 	background-repeat:no-repeat;
 	background-position:center;
 	bottom:-25px;
@@ -1461,7 +1461,7 @@ section.kode-blog-section{
 =============================================
 */
 .kode-newsletters{
-	background-image:url(images/newsletter-bg.png);
+	background-image:url(/images/newsletter-bg.png);
 	background-position:bottom center;
 	background-repeat:no-repeat;
 	float: left;
@@ -1535,7 +1535,7 @@ footer{
 .kode-inner-banner{
 	float:left;
 	width:100%;
-	background-image:url(images/inner-banner.png);
+	background-image:url(/images/inner-banner.png);
 	background-size:cover;
 
 }
@@ -2536,7 +2536,7 @@ blockquote{
 }
 
 .kode-map .map-canvas{
-	float:left;
+	margin: auto;
 	width:100%;
 	height:400px;
 	border:none;
@@ -2627,7 +2627,7 @@ blockquote{
 	width:100%;
 	background-color:#151515;
 	padding:0px;
-	background-image: url("images/pettern.png");
+	background-image: url("/images/pettern.png");
 	position: relative;
 }
 .kode-service-section:before{
@@ -2717,7 +2717,7 @@ blockquote{
 	margin-bottom:20px;
 }
 .kode-video-section-2{
-	background-image:url(images/testimonials-bg.jpg);
+	background-image:url(/images/testimonials-bg.jpg);
 	background-size:cover;
 	position:relative;
 }
@@ -3282,7 +3282,7 @@ blockquote{
 */
 
 .lib-categories-section{
-	background-image:url(images/top-categories-bg.png);
+	background-image:url(/images/top-categories-bg.png);
 	background-size:cover;
 	position:relative;
 }
@@ -3386,7 +3386,7 @@ section.lib-call-to-action:before{
 	top:0px;
 	width: 100%;
 	height: 100%;
-	background-image: url("images/pettern.png");
+	background-image: url("/images/pettern.png");
 }
 section.lib-call-to-action .container{
 	position: relative;
@@ -3519,7 +3519,7 @@ section.lib-call-to-action .container{
 */
 
 .lib-video-section{
-	background-image:url(images/video-bg3.png);
+	background-image:url(/images/video-bg3.png);
 	background-size:cover;
 	position:relative;
 	text-align:center;
@@ -3534,7 +3534,7 @@ section.lib-call-to-action .container{
 	width:100%;
 	height:100%;
 	background-color:rgba(0,0,0,0.4);
-	background-image:url(images/video-bg-pettern.png);
+	background-image:url(/images/video-bg-pettern.png);
 }
 .lib-video-section .container{
 	position:relative;
@@ -3793,7 +3793,7 @@ section.lib-call-to-action .container{
 	padding:70px 0px 0px;
 }
 .lib-textimonials{
-	background-image:url(images/testimonials-bg2.jpg);
+	background-image:url(/images/testimonials-bg2.jpg);
 	background-size:cover;
 	background-position:center;
 	position:relative;
@@ -4143,7 +4143,7 @@ section.lib-call-to-action .container{
 	left:0px;
 	top:0px;
 	height:100%;
-	background-image:url(images/location-image.jpg);
+	background-image:url(/images/location-image.jpg);
 	background-position:center;
 	background-size:cover;
 	width:50%;
@@ -5297,7 +5297,7 @@ section.lib-call-to-action .container{
 }
 
 .footer-3{
-	background-image:url(images/footer-bg.png);
+	background-image:url(/images/footer-bg.png);
 	position:relative;
 }
 .footer-3:before{
@@ -5453,7 +5453,7 @@ nav{
 	transition:all 0.3s ease-out 0.5s;
 	-moz-transition:all 0.3s ease-out 0.5s;
 	-webkit-transition:all 0.3s ease-out 0.5s;
-	background-image:url(images/menu-pett.jpg);
+	background-image:url(/images/menu-pett.jpg);
 	background-position:bottom;
 	background-repeat:repeat-x;
 	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3)
@@ -5498,7 +5498,7 @@ nav{
 	width:100%;
 	background-color:#fff;
 	padding:20px 20px 20px 20px;
-	background-image:url(images/menu-bg.png);
+	background-image:url(/images/menu-bg.png);
 	background-repeat:no-repeat;
 	background-position:top right;
 	min-height:322px;
@@ -5749,7 +5749,7 @@ nav{
 	position:absolute;
 	height:100%;
 	width:100%;
-	background-image:url(images/zoomer.png);
+	background-image:url(/images/zoomer.png);
 	background-position:center;
 	background-repeat:no-repeat;
 	background-color:rgba(0,0,0,0);
@@ -6426,12 +6426,12 @@ section .kd-tab-2{margin-bottom:30px;float:left;width:100%;}
 	float:left;
 	width:100%;
 	padding:180px 0px 100px 0px;
-	background-image:url(images/library-bg.jpg);
+	background-image:url(/images/library-bg.jpg);
 	background-size:cover;
 	position:relative;
 }
 .call-to-action-right{
-	background-image:url(images/library-bg-2.jpg);
+	background-image:url(/images/library-bg-2.jpg);
 	padding:100px 0px 100px 0px;
 }
 .book-cover-detail.call-to-action-right .kode-thumb{
