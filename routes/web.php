@@ -18,6 +18,7 @@ Route::get('/', function () {
 })->middleware('language')->name('home');
 
 Route::view('/aboutus', 'aboutus');
+// Route::view('/book-detail', 'book-detail');
 
 Route::get('/author', [App\Http\Controllers\AuthorController::class, 'index'])->name('author');
 
