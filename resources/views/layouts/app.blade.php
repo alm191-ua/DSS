@@ -86,15 +86,8 @@
                         <!--LOGO END-->
                         <div class="kode-navigation">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="/aboutus">About Us</a></li>
-                                <li><a href="blog.html">Our Blog</a>
-                                    <ul>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="blog-full.html">Blog Full</a></li>
-                                        <li><a href="blog-detail.html">Blog Detail</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="{{ route('home') }}">Home</a></li>
+                                <li><a href="{{ route('aboutus') }}">About Us</a></li>
                                 <li class="last"><a href="{{ route('authors') }}">Teams</a>
                                     <ul>
                                         <li><a href="{{ route('authors') }}">Authors</a></li>
