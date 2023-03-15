@@ -14,14 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => 'language'], function () {
-
-    //------- temporales para probar las vistas, hay que crear los controladores
-    Route::get('/', function () { 
-        return view('welcome');
-    })->name('home');
-
-    //----------------
     
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/book-detail/{id}', [App\Http\Controllers\BookController::class, 'index', 'id'])->name('book');
     Route::get('/books-list', [App\Http\Controllers\BookslistController::class, 'index'])->name('books-list');
     Route::get('/aboutus', [App\Http\Controllers\AboutusController::class, 'index'])->name('aboutus');
