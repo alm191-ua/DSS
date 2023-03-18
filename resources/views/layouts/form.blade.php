@@ -10,8 +10,24 @@
     .row {
         display: -ms-flexbox;
         display: flex;
+        float: none;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+        padding: 0 15px;
+    }
+
+    textarea {
+        resize: vertical; 
+        min-height: 35px;
+    }
+
+    .custom-col {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
         margin-right: -15px;
         margin-left: -15px;
         padding: 0 15px;
@@ -42,7 +58,7 @@
         color: #212529;
         text-align: left;
         background-color: #fff;
-        background-image: url('/images/inner-banner.png');
+        background-image: url('/images/cool-bg3.png');
     }
     :root {
         --blue: #673ab7;
@@ -110,6 +126,18 @@
         padding-left: 15px;
     }
 
+    .custom-row {
+        display: flex;
+    }
+
+    .custom-row .custom-col { 
+        display: inline-block;
+        float: left;
+        font-size: inherit;
+        line-height: 1.5;
+        width: 100%;
+    }
+
     .radius-15 {
         border-radius: 15px;
     }
@@ -118,9 +146,8 @@
         border: 1px solid rgba(0, 0, 0, 0);
         margin-bottom: 30px;
         background-color: rgb(0 0 0 / 0.24);
-        /* set left and right margin to 13% */
-        margin-left: 13%;
-        margin-right: 13%;
+        margin-left: @yield('margin', "22%");
+        margin-right: @yield('margin', "22%");
     }
     .card {
         position: relative;
@@ -267,7 +294,30 @@
                 </div>
                 <hr>
                 <div class="form-body">
-                    @yield('fields')
+                    <form action=@yield('form-action') method="POST">
+                        @csrf
+                        @yield('fields')
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck2">
+                                    <label class="form-check-label" for="gridCheck2">I agree <a target="_blank" href="{{ route('terms') }}">terms &amp; conditions</a></label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                <button type="button" class="btn btn-light px-4">Confirm</button>
+                            </div>
+                        </div>
+                    
+                    </form>
+
                 </div>
             </div>
         </div>
