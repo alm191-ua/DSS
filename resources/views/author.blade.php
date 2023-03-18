@@ -2,7 +2,9 @@
 
 @section('title', 'Author Detail')
 
-@section('style1.content')
+@section('content')
+    @parent
+
     <!--CONTENT START-->
     <div class="kode-content">
         <!--AUTHOR DETAIL SECTION START-->

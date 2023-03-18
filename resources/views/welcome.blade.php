@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('title', 'Home')
 
 @section('content')
+    @parent
+
     <!--BANNER START-->
     <div class="kode-banner">
     	<ul class="bxslider">
