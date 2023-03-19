@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title')
+{{-- @section('title')
     @yield('title')
-@endsection
+@endsection --}}
 
-@section('content')
+{{-- @section('content')
     @parent    
     @yield('content')
-@endsection
+@endsection --}}
 
 @section('footer')
     <!--NEWSLETTER START-->

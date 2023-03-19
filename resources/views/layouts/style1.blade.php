@@ -1,19 +1,18 @@
 @extends('layouts.base')
 
-@section('title')
+{{-- @section('title')
     @yield('title')
-@endsection
+@endsection --}}
 
 @section('content')
-    @parent
+    {{-- @parent --}}
 
     <!--BANNER START-->
     <div class="kode-inner-banner" style="background-image: url('/images/inner-banner.png')"> {{-- <img src="{{ asset('images/inner-banner.png') }}" alt=""> --}}
         <div class="kode-page-heading">
             <h2>@yield('title')</h2>
             <ol class="breadcrumb">
-            <li><a href="{{ route('home') }}">Home</a></li>
-            {{-- <li><a href="#">Books Guide</a></li> --}}
+            <li><a href="{{ route('home') }}">{{ __('master.menu.home') }}</a></li>
             <li class="active">@yield('title')</li>
             </ol>
         </div>
@@ -38,6 +37,6 @@
     </div>
     <!--BANNER END-->
 
-    @yield('content')
+    {{-- @yield('content') --}}
 
 @endsection

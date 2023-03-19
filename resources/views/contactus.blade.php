@@ -1,6 +1,8 @@
 @extends('layouts.style1')
 
-@section('title', 'Contact Us')
+@section('title')
+    {{ __('master.menu.contactus') }}
+@endsection
 
 @section('content')
     @parent

@@ -15,5 +15,12 @@ return [
     'contact_us' => 'Contáctanos',
     'newsletter_text' => '¡Actualízate ahora mismo! Rellenando el formulario de abajo, la última información sobre mil libros será enviada directamente a tu correo electrónico semanalmente.',
     'newsletter_title' => 'Suscríbete a nuestro boletín para recibir las últimas noticias.',
+    'menu.open' => 'Abrir menú',
+    'menu.home' => 'Inicio',
+    'menu.books' => 'Libros',
+    'menu.authors' => 'Autores',
+    'menu.aboutus' => 'Sobre Nosotros',
+    'menu.contactus' => 'Contáctanos',
+    'menu.terms' => 'Términos',
 
 ];

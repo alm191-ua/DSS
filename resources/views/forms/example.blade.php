@@ -5,6 +5,7 @@
 {{-- aqui iría la ruta de la acción del formulario --}}
 {{-- es la ruta post definida en web.php y que se ejecuta en el controlador --}}
 {{-- por ejemplo: route('books.store') --}}
+{{-- tiene que ser una ruta post, esta de ejemplo es get, por lo que no hace nada --}}
 @section('form-action', route('terms')) 
 
 {{-- margin guidelines:

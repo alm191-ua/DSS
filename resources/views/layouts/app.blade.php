@@ -55,12 +55,18 @@
                                 <!-- <li><a href="#"><i class="fa fa-heart"></i></a></li> -->
                                 <li><a href="#"><i class="fa fa-language"></i></a>
                                     <ul>
-                                        <li><a href="{{ route('locale', ['locale' => 'es']) }}">
-                                        <img src="{{ asset('images/flags/es_flag.png') }}" alt="Spain flag" width="25" height="12">
-                                        </a></li>
-                                        <li><a href="{{ route('locale', ['locale' => 'en']) }}">
-                                        <img src="{{ asset('images/flags/en_flag.png') }}" alt="UK flag" width="25" height="12">
-                                        </a></li>
+                                        <li>
+                                            <a href="{{ route('locale', ['locale' => 'es']) }}">
+                                                <img src="{{ asset('images/flags/es_flag.png') }}" alt="Spain flag" width="25" height="12">
+                                                <div style="display: inline-flex">Español</div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('locale', ['locale' => 'en']) }}">
+                                                <img src="{{ asset('images/flags/en_flag.png') }}" alt="UK flag" width="25" height="12">
+                                                <div style="display: inline-flex">English</div>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li><a id="search-box" href="#"><i class="fa fa-search"></i></a></li>
@@ -86,52 +92,41 @@
                         <!--LOGO END-->
                         <div class="kode-navigation">
                             <ul>
-                                <li><a href="{{ route('home') }}">Home</a></li>
-                                <li><a href="{{ route('aboutus') }}">About Us</a></li>
+                                <li><a href="{{ route('home') }}">{{ __('master.menu.home') }}</a></li>
+                                <li><a href="{{ route('aboutus') }}">{{ __('master.menu.aboutus') }}</a></li>
                                 <li class="last"><a href="{{ route('authors') }}">Teams</a>
                                     <ul>
-                                        <li><a href="{{ route('authors') }}">Authors</a></li>
+                                        <li><a href="{{ route('authors') }}">{{ __('master.menu.authors') }}</a></li>
                                         <li><a href="{{ route('author') }}">Author Detail</a></li>								
                                     </ul>
                                 </li>
                                 <li><a href="book-listing.html">Products</a>
                                     <ul>
-                                        <li><a href="{{ route('books-list') }}">Books List</a></li>							
+                                        <li><a href="{{ route('books-list') }}">{{ __('master.menu.books') }}</a></li>						
                                         <li><a href="{{ route('book', ['id' => 3]) }}">Book Detail</a></li> {{-- only for testing --}}
                                     </ul>
                                 </li>
-                                <li class="last"><a href="{{ route('contactus') }}">Contact Us</a></li>
+                                <li class="last"><a href="{{ route('contactus') }}">{{ __('master.menu.contactus') }}</a></li>
                             </ul>
                         </div>
                         <div id="kode-responsive-navigation" class="dl-menuwrapper">
-                            <button class="dl-trigger">Open Menu</button>
+                            <button class="dl-trigger">{{ __('master.menu.open') }}</button>
                             <ul class="dl-menu">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="about-us.html">About Us</a></li>
-                                <li class="menu-item kode-parent-menu"><a href="blog.html">Our Blog</a>
-                                    <ul class="dl-submenu">
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="blog-full.html">Blog Full</a></li>
-                                        <li><a href="blog-detail.html">Blog Detail</a></li>
+                                <li><a href="{{ route('home') }}">{{ __('master.menu.home') }}</a></li>
+                                <li><a href="{{ route('aboutus') }}">{{ __('master.menu.aboutus') }}</a></li>
+                                <li class="last"><a href="{{ route('authors') }}">Teams</a>
+                                    <ul>
+                                        <li><a href="{{ route('authors') }}">{{ __('master.menu.authors') }}</a></li>
+                                        <li><a href="{{ route('author') }}">Author Detail</a></li>								
                                     </ul>
                                 </li>
-                                <li class="menu-item kode-parent-menu last"><a href="authors.html">Teams</a>
-                                    <ul class="dl-submenu">
-                                        <li><a href="authors.html">Author</a></li>
-                                        <li><a href="author-detail.html">Author Detail</a></li>								
+                                <li><a href="book-listing.html">Products</a>
+                                    <ul>
+                                        <li><a href="{{ route('books-list') }}">{{ __('master.menu.books') }}</a></li>	
+                                        <li><a href="{{ route('book', ['id' => 3]) }}">Book Detail</a></li> {{-- only for testing --}}
                                     </ul>
                                 </li>
-                                <li class="menu-item kode-parent-menu last"><a href="book-listing.html">Products</a>
-                                    <ul class="dl-submenu">
-                                        <li><a href="book-listing.html">Products Style 1</a></li>
-                                        <li><a href="book-listing-1.html">Products Style 2</a></li>
-                                        <li><a href="book-listing-2.html">Products Style 3</a></li>
-                                        <li><a href="book-listing-1-w-sidebar.html">Product 2 W/S</a></li>
-                                        <li><a href="book-listing-2-w-sidebar.html">Product 3 W/S</a></li>								
-                                        <li><a href="book-detail.html">Product Detail</a></li>
-                                    </ul>
-                                </li>
-                                <li class="last"><a href="contact-us.html">Contact Us</a></li>
+                                <li class="last"><a href="{{ route('contactus') }}">{{ __('master.menu.contactus') }}</a></li>
                             </ul>
                         </div>
                     </div>
