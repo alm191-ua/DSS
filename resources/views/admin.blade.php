@@ -73,7 +73,115 @@
         .sidenav a {font-size: 18px;}
     }
 
+    tr:nth-child(even){
+        background-color: #394756;
+    }
+
+    tr:nth-child(odd){
+        /* background-color: red; */
+    }
+
+    .btn-order {
+        background-color: #394756;
+        color: white;
+        border: none;
+        padding: 2px;
+        padding-left: 4px;
+        padding-right: 4px;
+        margin: 2px;
+        margin-left: 15px;
+    }
+
+    .btn {
+        height: 25px;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .filter-bar {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        color : black;
+    }
+
 </style>
+
+<script language="javascript">
+    document.onload = initOrderButtons();
+
+
+    function changeTable() {
+        document.getElementById('table1').hidden = !document.getElementById('table1').hidden
+        document.getElementById('table2').hidden = !document.getElementById('table2').hidden
+    }
+
+    function initOrderButtons() {
+        const buttons = document.getElementsByClassName("btn-order");
+        for (let button of buttons) {
+            button.addEventListener("click", orderTable);
+        }
+    }
+
+    function orderTable(col) {
+        let table, rows, switching, i, x, y, shouldSwitch;
+        // get the table to order from the button pressed, target id 
+        // table = document.getElementById(this.id.slice(0, -1));
+        table = document.getElementById("table2"); //TODO: change to the table id generic
+        switching = true;
+        /* Make a loop that will continue until
+        no switching has been done: */
+        while (switching) {
+            // Start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /* Loop through all table rows (except the
+            first, which contains table headers): */
+            for (i = 1; i < (rows.length - 1); i++) {
+                // Start by saying there should be no switching:
+                shouldSwitch = false;
+                /* Get the two elements you want to compare,
+                one from current row and one from the next: */
+                // console.log(id);
+                x = rows[i].getElementsByTagName("TD")[col];
+                y = rows[i + 1].getElementsByTagName("TD")[col];
+                // Check if the two rows should switch place:
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                /* If a switch has been marked, make the switch
+                and mark that a switch has been done: */
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+    }
+
+    // sync the searcg bar with the table
+    function searchTable() {
+        // get the value of the search bar
+        let input = document.getElementById("searchBar").value;
+        input = input.toLowerCase();
+        let table = document.getElementById("table2"); //TODO: change to the table id generic
+        let tr = table.getElementsByTagName("tr");
+        for (let i = 0; i < tr.length; i++) {
+            let td = tr[i].getElementsByTagName("td");
+            for (let j = 0; j < td.length; j++) {
+                let txtValue = td[j].textContent || td[j].innerText;
+                if (txtValue.toLowerCase().indexOf(input) > -1) {
+                    tr[i].style.display = "";
+                    break;
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+            
+        }
+    }
+</script>
 
 <div class="header-space">
     <h1 class="void-space"></h1>
@@ -81,15 +189,122 @@
 </div>
 
 <div class="sidenav">
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
-  </div>
+    <a href="#" onclick="changeTable()">Dashboard</a>
+    <a href="#">Statistics</a>
+    <a href="#">Books</a>
+    <a href="#">Authors</a>
+    <a href="#">Suggestions</a>
+    <a href="#">Users</a>
+    <a href="#">Categories</a>
+    <a href="#">Settings</a>
+</div>
   
-  <div class="main">
+<div class="main">
     <h2 style="color: white;">Admin Page</h2>
-    <p>This is the admin page.</p>
-  </div>
+    <p>This is a test for the admin page.</p>
+    
+    {{-- bar with multiple filter options --}}
+    <div class="btn-group filter-bar" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary">All</button>
+        <button type="button" class="btn btn-secondary">Active</button>
+        <button type="button" class="btn btn-secondary">Inactive</button>
+        <button type="button" class="btn btn-secondary">Banned</button>
+    </div>
+
+    {{-- search bar to filter the table --}}
+    <div class="input-group mb-3 filter-bar">
+        <div class="input-group-prepend">
+            <span class="input-group-text" style="color: white;" id="basic-addon1">Search</span>
+        </div>
+        <input type="text" id="searchBar" class="form-control" onchange="searchTable()" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+        {{-- <button type="button" class="btn btn-secondary" onclick="searchTable()">Search</button> --}}
+    </div>
+
+    <table class="table table-striped table-dark" id="table1" hidden>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+    </table>
+  
+    <table class="table table-striped table-dark" id="table2">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">
+                hello
+                <button type="button" class="fa fa-sort btn-order" id="btn1" onclick="orderTable(0)"></button>
+            </th>
+            <th scope="col">
+                Last
+                <button type="button" class="fa fa-sort btn-order" id="btn2" onclick="orderTable(1)"></button>
+            </th>
+            <th scope="col">
+                Handle
+                <button type="button" class="fa fa-sort btn-order" id="btn3" onclick="orderTable(2)"></button>
+            </th>
+            <th scope="col">Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Uwu</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            {{-- create 2 buttons to edit and delete --}}
+            <td>
+                <button type="button" class="btn btn-primary">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>
+                <button type="button" class="btn btn-primary">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+            <td>
+                <button type="button" class="btn btn-primary">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+
+</div>
 
 @endsection
