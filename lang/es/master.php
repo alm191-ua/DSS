@@ -22,5 +22,6 @@ return [
     'menu.aboutus' => 'Sobre Nosotros',
     'menu.contactus' => 'Contáctanos',
     'menu.terms' => 'Términos',
+    'copy' => 'Derechos de autor © 2022-23 WordWaves. Todos los derechos reservados.',
 
 ];

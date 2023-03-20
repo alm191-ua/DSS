@@ -1,14 +1,5 @@
 @extends('layouts.app')
 
-{{-- @section('title')
-    @yield('title')
-@endsection --}}
-
-{{-- @section('content')
-    @parent    
-    @yield('content')
-@endsection --}}
-
 @section('footer')
     <!--NEWSLETTER START-->
     <section class="kode-newsletters">

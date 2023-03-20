@@ -86,7 +86,7 @@
                 <div class="logo-container">
                     <div class="container">
                         <!--LOGO START-->
-                        <div class="logo">
+                        <div class="logo" style="margin: -1.6em;">
                             <a href="{{ route('home') }}"><img src="{{ asset('images/logo.png') }}" alt=""></a>
                         </div>
                         <!--LOGO END-->
@@ -140,7 +140,7 @@
             
             <div class="copyrights">
                 <div class="container">
-                    <p>Copyrights © 2022-23 WordWaves. All rights reserved</p>
+                    <p>{{ __('master.copy') }}</p>
                     <!-- <div class="cards"><img src="images/cards.png" alt=""></div> -->
                 </div>
             </div>

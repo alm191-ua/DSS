@@ -23,6 +23,7 @@ return [
     'menu.aboutus' => 'About Us',
     'menu.contactus' => 'Contact Us',
     'menu.terms' => 'Terms',
+    'copy' => 'Copyrights © 2022-23 WordWaves. All rights reserved.',
 
 
 ];

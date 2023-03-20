@@ -24,6 +24,7 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/terms', function () {
         return view('terms');
     })->name('terms');
+    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
     Route::get('/books', [App\Http\Controllers\BookslistController::class, 'index'])->name('books-list');
     Route::get('/aboutus', [App\Http\Controllers\AboutusController::class, 'index'])->name('aboutus');
     Route::get('/author', [App\Http\Controllers\AuthorController::class, 'index'])->name('author');
