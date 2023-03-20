@@ -42,7 +42,7 @@
                             	<input type="text" placeholder="Phone">
                             </div>
                             <div class="col-md-12">
-                            	<textarea></textarea>
+                            	<textarea style="resize: vertical; min-height: 40px;"></textarea>
                             </div>
                             <div class="col-md-12">
                             	<button>Send Message</button>
