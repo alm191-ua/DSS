@@ -1,6 +1,6 @@
 @extends('layouts.form')
 
-@section('title', 'Create Book')
+@section('title', 'Example Form')
 
 {{-- aqui iría la ruta de la acción del formulario --}}
 {{-- es la ruta post definida en web.php y que se ejecuta en el controlador --}}
@@ -15,6 +15,8 @@
 
 
 @section('fields')
+    {{-- para usar el método put --}}
+    {{-- @method('PUT') --}}
 
     <div class="form-group custom-row">  
         <div class="custom-col">
