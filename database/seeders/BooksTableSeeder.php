@@ -39,13 +39,13 @@ class BooksTableSeeder extends Seeder
         // $book->isbn = "9780547928227";
         // $book->save();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $book = new Book();
-            $book->title = "The Hobbit";
-            $book->description = "The Hobbit, or There and Back Again is a children's fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in children's literature.";
+            $book->title = fake()->sentence();
+            $book->description = fake()->paragraph();
             $book->author_id = Author::all()->random()->id;
-            $book->category_id = Category::where('tag', 'fantasy')->first()->id;
-            $book->image = "https://images-na.ssl-images-amazon.com/images/I/51Z9%2BZQZQlL._SX331_BO1,204,203,200_.jpg";
+            $book->category_id = Category::all()->random()->id;
+            $book->image = fake()->imageUrl(200, 300);
             $book->isbn = "9780547928227";
             $book->save();
         }

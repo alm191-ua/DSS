@@ -125,6 +125,10 @@
         border-collapse: collapse;
     }
 
+    h2 {
+        color: white;
+    }
+
     /* @media (max-width: 800px) {
         th, td {
             display: block;
@@ -134,10 +138,25 @@
 
 </style>
 
-<script language="javascript">
-    // document.onload = initOrderButtons();
-    var view = 0;
+@php
+    // $page_num = $_GET['page_num'] ?? 0;
+    $_SESSION['page_num'] = $_GET['page_num'] ?? 0;
+@endphp
 
+<form name="form" method="get" action="">
+    <input type="hidden" id="page_num" name="page_num" value="{{ $_SESSION['page_num'] }}">
+</form>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script language="javascript">
+    document.onload = console.log('loaded');
+    var view;
+
+    function firstPage(view) {
+        view = document.getElementById('page_num').value;
+        console.log(view);
+        changeMain(view);
+    }
 
     function changeTable() {
         $('#table1').toggle();
@@ -148,7 +167,10 @@
         let mains = $('.main');
         for (let i = 0; i < mains.length; i++) {
             $(mains[i]).hide();
+            console.log(mains[i]);
             view = main_num;
+            $('#page_num').val(main_num);
+
         }
         $(mains[main_num]).show();
     }
@@ -160,23 +182,28 @@
     //     }
     // }
 
-    function orderTable(table_num, col) {
+    function orderTable(table_num, col, are_numbers = false) {
+        console.log(table_num, col);
         let table, rows, switching, i, x, y, shouldSwitch;
         // get the table to order from the button pressed, target id 
         // table = document.getElementById(this.id.slice(0, -1));
         let main = $('.main')[view];
-        let tables = $(main).find('.table');
-        table = tables[table_num]; //TODO: change to the table id generic
+        let tables = $(main).find('table');
+        // console.log(tables);
+        table = tables; //$(tables[table_num]);
+        // console.log(table);
         switching = true;
         /* Make a loop that will continue until
         no switching has been done: */
         while (switching) {
             // Start by saying: no switching is done:
             switching = false;
-            rows = table.rows;
+            // rows = table.rows;
+            rows = $(table).find('tbody tr');
+            // console.log(table.rows);
             /* Loop through all table rows (except the
             first, which contains table headers): */
-            for (i = 1; i < (rows.length - 1); i++) {
+            for (i = 0; i < (rows.length - 1); i++) {
                 // Start by saying there should be no switching:
                 shouldSwitch = false;
                 /* Get the two elements you want to compare,
@@ -185,7 +212,13 @@
                 x = $(rows[i]).find('td')[col];
                 y = $(rows[i + 1]).find('td')[col];
                 // Check if the two rows should switch place:
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                if (are_numbers) {
+                    if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                     // If so, mark as a switch and break the loop:
                     shouldSwitch = true;
                     break;
@@ -234,17 +267,21 @@
     }
 </script>
 
+{{-- @php
+    echo '<script>changeMain(' . $page_num . ');</script>';
+@endphp --}}
+
 <div class="header-space">
     <h1 class="void-space"></h1>
 </div>
 
 <div class="sidenav">
-    <a href="#" onclick="
-        if (document.getElementsByClassName('main')[0].hidden){
+    {{-- <a href="#" onclick="
+        if ($('#test-main').hidden){
             changeMain(0);
         }else{
             changeTable();
-        }">Test Boards</a>
+        }">Test Boards</a> --}}
     <a href="#" onclick="changeMain(1)">Statistics</a>
     <a href="#" onclick="changeMain(2)">Books</a>
     <a href="#" onclick="changeMain(3)">Authors</a>
@@ -254,7 +291,7 @@
     <a href="#" onclick="changeMain(7)">Settings</a>
 </div>
   
-<div class="main" id="test">
+<div class="main" id="test-main" hidden>
     <h2 style="color: white;">Admin Page</h2>
     <p>This is a test for the admin page.</p>
     
@@ -362,19 +399,22 @@
 
 </div>
 
-<div class="main" name="statistics" hidden>
-    <p>This is a statistics test :D.</p>
+<div class="main" name="statistics">
+    <h2>Statistics</h2>
 </div>
 
 <div class="main" name="books" hidden>
-    <p>This is a books test :D.</p>
-    <table class="table table-striped table-dark" id="table2">
+    <h2>Books Admin</h2>
+    <table class="table table-striped table-dark">
         <thead>
           <tr>
             <th scope="col">#</th>
+            @php 
+                $i = 0;
+            @endphp
             @if (count($books) > 0)
                 @foreach ($books[0]->getAttributes() as $key => $value)
-                    @if ($key == 'id' || $key == 'created_at' || $key == 'updated_at' || $key == 'deleted_at' || $key == 'isbn')
+                    @if ($key == 'id') 
                         @continue
                     @endif
                     {{-- if ends with _id erase _id --}}
@@ -385,7 +425,11 @@
                     @endif
                     <th scope="col">
                         {{ $key }}
-                        <button type="button" class="fa fa-sort btn-order" id="btn1" onclick="orderTable(1, {{ $value }})"></button>
+                        {{-- get number of column --}}
+                        <button type="button" class="fa fa-sort btn-order" onclick="orderTable(1, {{ $i }})"></button>
+                        @php
+                            $i++;
+                        @endphp
                     </th>
                 @endforeach
             
@@ -400,6 +444,7 @@
                     <th scope="row">{{ $book->id }}</th>
                     <td>{{ $book->title }}</td>
                     <td>{{ substr($book->description, 0, 50) . "..." }}</td>
+                    {{-- <td class="description-cell">{{ $book->description }}</td> --}}
                     <td>{{ $book->author->name }}</td>
                     <td>{{ $book->category->tag }}</td>
                     <td>{{ $book->image }}</td>
@@ -409,41 +454,258 @@
                     </td>
                 </tr>
             @endforeach
-
-          {{-- <tr>
-            <th scope="row">1</th>
-            <td>Uwu</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>
-                <button type="button" class="btn btn-primary">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </td>
-          </tr> --}}
           
         </tbody>
     </table>
+    {{-- {{echo: $_GET['page_num'];}}  --}}
+    {{         
+        $books->appends(array('page_num' => 2, request()->except('page_num', 'books')))->links()
+    }}
 </div>
 
 <div class="main" name="authors" hidden>
-    <p>This is a authors test :D.</p>
+    <h2>Authors Admin</h2>
+    <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            @php 
+                $i = 0;
+            @endphp
+            @if (count($authors) > 0)
+                @foreach ($authors[0]->getAttributes() as $key => $value)
+                    @if ($key == 'id') 
+                        @continue
+                    @endif
+                    {{-- if ends with _id erase _id --}}
+                    @if (substr($key, -3) == '_id')
+                        @php
+                            $key = substr($key, 0, -3);
+                        @endphp
+                    @endif
+                    <th scope="col">
+                        {{ $key }}
+                        {{-- get number of column --}}
+                        <button type="button" class="fa fa-sort btn-order" onclick="orderTable(2, {{ $i }})"></button>
+                        @php
+                            $i++;
+                        @endphp
+                    </th>
+                @endforeach
+            
+            @endif
+            <th scope="col">Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            @foreach ($authors as $author)
+                <tr>
+                    <th scope="row">{{ $author->id }}</th>
+                    <td>{{ $author->name }}</td>
+                    <td>{{ substr($author->info, 0, 50) . "..." }}</td>
+                    {{-- <td>{{ $book->image }}</td> --}}
+                    <td>
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            @endforeach
+          
+        </tbody>
+    </table>
+    {{         
+        $authors->appends(array('page_num' => 3, request()->except('page_num', 'authors')))->links()
+    }}
 </div>
 
 <div class="main" name="suggestions" hidden>
-    <p>This is a suggestions test :D.</p>
+    <h2>Suggestions Admin</h2>
+    <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            @php 
+                $i = 0;
+                // dd($suggestions);
+            @endphp
+            @if (count($suggestions) > 0)
+                @foreach ($suggestions[0]->getAttributes() as $key => $value)
+                    @if ($key == 'id') 
+                        @continue
+                    @endif
+                    {{-- if ends with _id erase _id --}}
+                    @if (substr($key, -3) == '_id')
+                        @php
+                            $key = substr($key, 0, -3);
+                        @endphp
+                    @endif
+                    <th scope="col">
+                        {{ $key }}
+                        {{-- get number of column --}}
+                        <button type="button" class="fa fa-sort btn-order" onclick="orderTable(3, {{ $i }})"></button>
+                        @php
+                            $i++;
+                        @endphp
+                    </th>
+                @endforeach
+            
+            @endif
+            <th scope="col">Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            @foreach ($suggestions as $suggestion)
+                <tr>
+                    <th scope="row">{{ $suggestion->id }}</th>
+                    <td>{{ $suggestion->email }}</td>
+                    <td>{{ $suggestion->phone }}</td>
+                    <td>{{ substr($suggestion->message, 0, 50) . "..." }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            @endforeach
+          
+        </tbody>
+    </table>
+    {{         
+        $suggestions->appends(array('page_num' => 4, request()->except('page_num', 'suggestions')))->links()
+    }}
 </div>
 
 <div class="main" name="users" hidden>
-    <p>This is a users test :D.</p>
+    <h2>Users Admin</h2>
+    <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            @php 
+                $i = 0;
+            @endphp
+            @if (count($users) > 0)
+                @foreach ($users[0]->getAttributes() as $key => $value)
+                    @if ($key == 'id') 
+                        @continue
+                    @endif
+                    {{-- if ends with _id erase _id --}}
+                    @if (substr($key, -3) == '_id')
+                        @php
+                            $key = substr($key, 0, -3);
+                        @endphp
+                    @endif
+                    <th scope="col">
+                        {{ $key }}
+                        {{-- get number of column --}}
+                        <button type="button" class="fa fa-sort btn-order" onclick="orderTable(4, {{ $i }})"></button>
+                        @php
+                            $i++;
+                        @endphp
+                    </th>
+                @endforeach
+            
+            @endif
+            <th scope="col">Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            @foreach ($users as $user)
+                <tr>
+                    <th scope="row">{{ $user->id }}</th>
+                    <td>{{ $user->username }}</td>
+                    <td>{{ $user->email }}</td>
+                    {{-- <td class="description-cell">{{ $book->description }}</td> --}}
+                    <td>{{ 
+                        $user->is_admin == 1 ? "Admin" : "User" 
+                    }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            @endforeach
+          
+        </tbody>
+    </table>
+    {{         
+        $users->appends(array('page_num' => 5, request()->except('page_num', 'users')))->links()
+    }}
 </div>
 
 <div class="main" name="categories" hidden>
-    <p>This is a categories test :D.</p>
+    <h2>Categories Admin</h2>
+    <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            {{-- <th scope="col">#</th> --}}
+            @php 
+                $i = 0;
+            @endphp
+            @if (count($categories) > 0)
+                @foreach ($categories[0]->getAttributes() as $key => $value)
+                    @if ($key == 'id') 
+                        <th scope="col" style="max-width: 30px;">
+                            {{ $key }}
+                            {{-- get number of column --}}
+                            <button type="button" class="fa fa-sort btn-order" onclick="orderTable(5, {{ $i }}, true)"></button>
+                            @php
+                                $i++;
+                            @endphp
+                        </th>
+                        @continue
+                    @endif
+                    <th scope="col">
+                        {{ $key }}
+                        {{-- get number of column --}}
+                        <button type="button" class="fa fa-sort btn-order" onclick="orderTable(5, {{ $i }})"></button>
+                        @php
+                            $i++;
+                        @endphp
+                    </th>
+                @endforeach
+            
+            @endif
+            <th scope="col">Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            @foreach ($categories as $category)
+                <tr>
+                    <td scope="row">{{ $category->id }}</td>
+                    <td>{{ $category->tag }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            @endforeach
+          
+        </tbody>
+    </table>
+    {{-- <script>
+        console.log("{{ Request::capture()->except('page') }}");
+        
+    </script> --}}
+    {{
+        // $my_dict = array('page_num' => 6);
+        // foreach (Request::capture()->except('page') as $key => $value) {
+        //     $my_dict[$key] = $value;
+        // }
+        // $categories->appends(my_dict)->links()
+        $categories->appends(array('page_num' => 6, request()->except('page_num', 'categories')))->links()
+    }}
 </div>
 
 <div class="main" name="settings" hidden>
-    <p>This is a settings test :D.</p>
+    <h2>Settings</h2>
 </div>
 
+<script type="text/javascript">
+    document.onload = firstPage(view);
+</script>
 
 @endsection
