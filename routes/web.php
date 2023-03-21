@@ -25,12 +25,12 @@ Route::group(['middleware' => 'language'], function () {
         return view('terms');
     })->name('terms');
     Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
-    Route::get('/books', [App\Http\Controllers\BookslistController::class, 'index'])->name('books-list');
+    Route::get('/books', [App\Http\Controllers\BooksController::class, 'list'])->name('books-list');
     Route::get('/aboutus', [App\Http\Controllers\AboutusController::class, 'index'])->name('aboutus');
-    Route::get('/author', [App\Http\Controllers\AuthorController::class, 'index'])->name('author');
+    Route::get('/author/{id}', [App\Http\Controllers\AuthorsController::class, 'show', 'id'])->name('author');
     Route::get('/authors', [App\Http\Controllers\AuthorsController::class, 'index'])->name('authors');
     Route::get('/contactus', [App\Http\Controllers\ContactusController::class, 'index'])->name('contactus');
-    Route::get('/book/{id}', [App\Http\Controllers\BookController::class, 'index', 'id'])->name('book');
+    Route::get('/book/{id}', [App\Http\Controllers\BooksController::class, 'index', 'id'])->name('book');
     // Route::post('/contactus', [App\Http\Controllers\ContactusController::class, 'store'])->name('contactus.store');
     
     

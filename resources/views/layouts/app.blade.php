@@ -97,7 +97,7 @@
                                 <li class="last"><a href="{{ route('authors') }}">Teams</a>
                                     <ul>
                                         <li><a href="{{ route('authors') }}">{{ __('master.menu.authors') }}</a></li>
-                                        <li><a href="{{ route('author') }}">Author Detail</a></li>								
+                                        <li><a href="{{ route('author', ['id'=>3]) }}">Author Detail</a></li>								
                                     </ul>
                                 </li>
                                 <li><a href="book-listing.html">Products</a>
@@ -117,7 +117,7 @@
                                 <li class="last"><a href="{{ route('authors') }}">Teams</a>
                                     <ul>
                                         <li><a href="{{ route('authors') }}">{{ __('master.menu.authors') }}</a></li>
-                                        <li><a href="{{ route('author') }}">Author Detail</a></li>								
+                                        <li><a href="{{ route('author', ['id'=>3]) }}">Author Detail</a></li>								
                                     </ul>
                                 </li>
                                 <li><a href="book-listing.html">Products</a>

@@ -27,9 +27,12 @@
     }
 
     .copyrights {
-        position: absolute;
+        position: sticky;
         z-index: 3;
-        margin-right: 0%;
+        margin: 0;
+        /* margin-top: 2.5em; */
+        padding-left: 2%;
+        /* margin-top: auto; */
     }
 
     body {
@@ -64,6 +67,7 @@
     }
 
     .main {
+        min-height: 29.8em;
         color: white;
         margin-left: 5%; /* Same as the width of the sidenav */
     }
@@ -107,7 +111,7 @@
 </style>
 
 <script language="javascript">
-    document.onload = initOrderButtons();
+    // document.onload = initOrderButtons();
 
 
     function changeTable() {
@@ -115,18 +119,27 @@
         document.getElementById('table2').hidden = !document.getElementById('table2').hidden
     }
 
-    function initOrderButtons() {
-        const buttons = document.getElementsByClassName("btn-order");
-        for (let button of buttons) {
-            button.addEventListener("click", orderTable);
+    function changeMain(main_num) {
+        let mains = document.getElementsByClassName("main");
+        for (let i = 0; i < mains.length; i++) {
+            mains[i].hidden = true;
         }
+        mains[main_num].hidden = false;
     }
 
-    function orderTable(col) {
+    // function initOrderButtons() {
+    //     const buttons = document.getElementsByClassName("btn-order");
+    //     for (let button of buttons) {
+    //         button.addEventListener("click", orderTable);
+    //     }
+    // }
+
+    function orderTable(table_num, col) {
         let table, rows, switching, i, x, y, shouldSwitch;
         // get the table to order from the button pressed, target id 
         // table = document.getElementById(this.id.slice(0, -1));
-        table = document.getElementById("table2"); //TODO: change to the table id generic
+        let tables = document.getElementsByClassName("table");
+        table = tables[table_num]; //TODO: change to the table id generic
         switching = true;
         /* Make a loop that will continue until
         no switching has been done: */
@@ -165,7 +178,16 @@
         // get the value of the search bar
         let input = document.getElementById("searchBar").value;
         input = input.toLowerCase();
-        let table = document.getElementById("table2"); //TODO: change to the table id generic
+        // get table not hidden
+        let tables = document.getElementsByClassName("table");
+        let table;
+        for (let i = 0; i < tables.length; i++) {
+            if (!tables[i].hidden) {
+                table = tables[i];
+                break;
+            }
+        }
+        // let table = document.getElementsByClassName("table")[table_num];
         let tr = table.getElementsByTagName("tr");
         for (let i = 0; i < tr.length; i++) {
             let td = tr[i].getElementsByTagName("td");
@@ -185,27 +207,31 @@
 
 <div class="header-space">
     <h1 class="void-space"></h1>
-
 </div>
 
 <div class="sidenav">
-    <a href="#" onclick="changeTable()">Dashboard</a>
-    <a href="#">Statistics</a>
-    <a href="#">Books</a>
-    <a href="#">Authors</a>
-    <a href="#">Suggestions</a>
-    <a href="#">Users</a>
-    <a href="#">Categories</a>
-    <a href="#">Settings</a>
+    <a href="#" onclick="
+        if (document.getElementsByClassName('main')[0].hidden){
+            changeMain(0);
+        }else{
+            changeTable();
+        }">Test Boards</a>
+    <a href="#" onclick="changeMain(1)">Statistics</a>
+    <a href="#" onclick="changeMain(2)">Books</a>
+    <a href="#" onclick="changeMain(3)">Authors</a>
+    <a href="#" onclick="changeMain(4)">Suggestions</a>
+    <a href="#" onclick="changeMain(5)">Users</a>
+    <a href="#" onclick="changeMain(6)">Categories</a>
+    <a href="#" onclick="changeMain(7)">Settings</a>
 </div>
   
-<div class="main">
+<div class="main" id="test">
     <h2 style="color: white;">Admin Page</h2>
     <p>This is a test for the admin page.</p>
     
     {{-- bar with multiple filter options --}}
     <div class="btn-group filter-bar" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary">All</button>
+        <button type="button" class="btn btn-secondary" data-selected="true">All</button>
         <button type="button" class="btn btn-secondary">Active</button>
         <button type="button" class="btn btn-secondary">Inactive</button>
         <button type="button" class="btn btn-secondary">Banned</button>
@@ -216,7 +242,7 @@
         <div class="input-group-prepend">
             <span class="input-group-text" style="color: white;" id="basic-addon1">Search</span>
         </div>
-        <input type="text" id="searchBar" class="form-control" onchange="searchTable()" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+        <input type="text" id="searchBar" class="form-control" onkeyup="searchTable()" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
         {{-- <button type="button" class="btn btn-secondary" onclick="searchTable()">Search</button> --}}
     </div>
 
@@ -257,15 +283,15 @@
             <th scope="col">#</th>
             <th scope="col">
                 hello
-                <button type="button" class="fa fa-sort btn-order" id="btn1" onclick="orderTable(0)"></button>
+                <button type="button" class="fa fa-sort btn-order" id="btn1" onclick="orderTable(1, 0)"></button>
             </th>
             <th scope="col">
                 Last
-                <button type="button" class="fa fa-sort btn-order" id="btn2" onclick="orderTable(1)"></button>
+                <button type="button" class="fa fa-sort btn-order" id="btn2" onclick="orderTable(1, 1)"></button>
             </th>
             <th scope="col">
                 Handle
-                <button type="button" class="fa fa-sort btn-order" id="btn3" onclick="orderTable(2)"></button>
+                <button type="button" class="fa fa-sort btn-order" id="btn3" onclick="orderTable(1, 2)"></button>
             </th>
             <th scope="col">Manage</th>
           </tr>
@@ -306,5 +332,34 @@
     </table>
 
 </div>
+
+<div class="main" id="statistics" hidden>
+    <p>This is a statistics test :D.</p>
+</div>
+
+<div class="main" id="books" hidden>
+    <p>This is a books test :D.</p>
+</div>
+
+<div class="main" id="authors" hidden>
+    <p>This is a authors test :D.</p>
+</div>
+
+<div class="main" id="suggestions" hidden>
+    <p>This is a suggestions test :D.</p>
+</div>
+
+<div class="main" id="users" hidden>
+    <p>This is a users test :D.</p>
+</div>
+
+<div class="main" id="categories" hidden>
+    <p>This is a categories test :D.</p>
+</div>
+
+<div class="main" id="settings" hidden>
+    <p>This is a settings test :D.</p>
+</div>
+
 
 @endsection

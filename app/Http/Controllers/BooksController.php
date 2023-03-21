@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 
-class BookController extends Controller
+class BooksController extends Controller
 {
     //index function to show the book with the id passed as parameter
     public function index($id)
@@ -19,6 +19,11 @@ class BookController extends Controller
         // }catch(\Exception $e){
         //     return redirect()->route('home');
         // }
+    }
+
+    public function list()
+    {
+        return view('books-list');
     }
 
     //create function to show the form to create a new book
