@@ -108,23 +108,49 @@
         color : black;
     }
 
+    th {
+        /* min-width: 10em; */
+        white-space: nowrap;
+    }
+
+    td {
+        max-width: 15em;
+        word-wrap: break-word;
+    }
+
+    table {
+        width: 100%;
+        max-width: 800px;
+        overflow-x: auto;
+        border-collapse: collapse;
+    }
+
+    /* @media (max-width: 800px) {
+        th, td {
+            display: block;
+            width: 100%;
+        }
+    } */
+
 </style>
 
 <script language="javascript">
     // document.onload = initOrderButtons();
+    var view = 0;
 
 
     function changeTable() {
-        document.getElementById('table1').hidden = !document.getElementById('table1').hidden
-        document.getElementById('table2').hidden = !document.getElementById('table2').hidden
+        $('#table1').toggle();
+        $('#table2').toggle();
     }
 
     function changeMain(main_num) {
-        let mains = document.getElementsByClassName("main");
+        let mains = $('.main');
         for (let i = 0; i < mains.length; i++) {
-            mains[i].hidden = true;
+            $(mains[i]).hide();
+            view = main_num;
         }
-        mains[main_num].hidden = false;
+        $(mains[main_num]).show();
     }
 
     // function initOrderButtons() {
@@ -138,7 +164,8 @@
         let table, rows, switching, i, x, y, shouldSwitch;
         // get the table to order from the button pressed, target id 
         // table = document.getElementById(this.id.slice(0, -1));
-        let tables = document.getElementsByClassName("table");
+        let main = $('.main')[view];
+        let tables = $(main).find('.table');
         table = tables[table_num]; //TODO: change to the table id generic
         switching = true;
         /* Make a loop that will continue until
@@ -155,8 +182,8 @@
                 /* Get the two elements you want to compare,
                 one from current row and one from the next: */
                 // console.log(id);
-                x = rows[i].getElementsByTagName("TD")[col];
-                y = rows[i + 1].getElementsByTagName("TD")[col];
+                x = $(rows[i]).find('td')[col];
+                y = $(rows[i + 1]).find('td')[col];
                 // Check if the two rows should switch place:
                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                     // If so, mark as a switch and break the loop:
@@ -176,10 +203,11 @@
     // sync the searcg bar with the table
     function searchTable() {
         // get the value of the search bar
-        let input = document.getElementById("searchBar").value;
+        let input = $('#searchBar').val();
         input = input.toLowerCase();
         // get table not hidden
-        let tables = document.getElementsByClassName("table");
+        let main = $('.main')[view];
+        let tables = $(main).find('.table');
         let table;
         for (let i = 0; i < tables.length; i++) {
             if (!tables[i].hidden) {
@@ -188,16 +216,17 @@
             }
         }
         // let table = document.getElementsByClassName("table")[table_num];
-        let tr = table.getElementsByTagName("tr");
+        // use jquery to get the table
+        let tr = $(table).find('tr');
         for (let i = 0; i < tr.length; i++) {
-            let td = tr[i].getElementsByTagName("td");
+            let td = $(tr[i]).find('td');
             for (let j = 0; j < td.length; j++) {
                 let txtValue = td[j].textContent || td[j].innerText;
                 if (txtValue.toLowerCase().indexOf(input) > -1) {
-                    tr[i].style.display = "";
+                    $(tr[i]).show();
                     break;
                 } else {
-                    tr[i].style.display = "none";
+                    $(tr[i]).hide();
                 }
             }
             
@@ -333,31 +362,86 @@
 
 </div>
 
-<div class="main" id="statistics" hidden>
+<div class="main" name="statistics" hidden>
     <p>This is a statistics test :D.</p>
 </div>
 
-<div class="main" id="books" hidden>
+<div class="main" name="books" hidden>
     <p>This is a books test :D.</p>
+    <table class="table table-striped table-dark" id="table2">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            @if (count($books) > 0)
+                @foreach ($books[0]->getAttributes() as $key => $value)
+                    @if ($key == 'id' || $key == 'created_at' || $key == 'updated_at' || $key == 'deleted_at' || $key == 'isbn')
+                        @continue
+                    @endif
+                    {{-- if ends with _id erase _id --}}
+                    @if (substr($key, -3) == '_id')
+                        @php
+                            $key = substr($key, 0, -3);
+                        @endphp
+                    @endif
+                    <th scope="col">
+                        {{ $key }}
+                        <button type="button" class="fa fa-sort btn-order" id="btn1" onclick="orderTable(1, {{ $value }})"></button>
+                    </th>
+                @endforeach
+            
+            @endif
+            <th scope="col">Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            @foreach ($books as $book)
+                <tr>
+                    <th scope="row">{{ $book->id }}</th>
+                    <td>{{ $book->title }}</td>
+                    <td>{{ substr($book->description, 0, 50) . "..." }}</td>
+                    <td>{{ $book->author->name }}</td>
+                    <td>{{ $book->category->tag }}</td>
+                    <td>{{ $book->image }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            @endforeach
+
+          {{-- <tr>
+            <th scope="row">1</th>
+            <td>Uwu</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>
+                <button type="button" class="btn btn-primary">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </td>
+          </tr> --}}
+          
+        </tbody>
+    </table>
 </div>
 
-<div class="main" id="authors" hidden>
+<div class="main" name="authors" hidden>
     <p>This is a authors test :D.</p>
 </div>
 
-<div class="main" id="suggestions" hidden>
+<div class="main" name="suggestions" hidden>
     <p>This is a suggestions test :D.</p>
 </div>
 
-<div class="main" id="users" hidden>
+<div class="main" name="users" hidden>
     <p>This is a users test :D.</p>
 </div>
 
-<div class="main" id="categories" hidden>
+<div class="main" name="categories" hidden>
     <p>This is a categories test :D.</p>
 </div>
 
-<div class="main" id="settings" hidden>
+<div class="main" name="settings" hidden>
     <p>This is a settings test :D.</p>
 </div>
 
