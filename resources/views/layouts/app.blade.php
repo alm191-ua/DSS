@@ -69,7 +69,12 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a id="search-box" href="#"><i class="fa fa-search"></i></a></li>
+                                <!-- <li><a id="search-box" href="#"><i class="fa fa-search"></i></a></li> -->
+                                <li><a href="{{ route('login') }}"><i class="fa fa-user"></i></a>
+                                    <ul>
+                                        <li><a href="{{ route('login') }}">{{ __('master.menu.login') }}</a></li>
+                                        <li><a href="{{ route('register') }}">{{ __('master.menu.register') }}</a></li>
+                                    </ul>
                             </ul>
                         </div>
                     </div>
