@@ -32,6 +32,21 @@ class BooksController extends Controller
         return view('forms.book-create');
     }
 
+    public function delete(Request $request, $id)
+    {
+        $book = Book::findOrFail($id);
+        $book->delete();
+    }
+
+    public function update(Request $request, $id)
+    {
+        // $book = Book::findOrFail($id);
+        // $book->title = $request->title;
+        // $book->author = $request->author;
+        // $book->description = $request->description;
+        // $book->save();
+    }
+
     /******* ESTO ES UN EJEMPLO DE COPILOT, NO FUNCIONA :) */
     // //store function to save the new book in the database
     // public function store(Request $request)

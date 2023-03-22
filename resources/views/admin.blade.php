@@ -265,6 +265,21 @@
             
         }
     }
+
+    function deleteRow(table_num, id){
+        let main = $('.main')[view];
+        let tables = $(main).find('.table');
+        let table = tables[table_num];
+        let tr = $(table).find('tr');
+        for (let i = 0; i < tr.length; i++) {
+            let td = $(tr[i]).find('td');
+            let txtValue = td[0].textContent || td[0].innerText;
+            if (txtValue == id) {
+                $(tr[i]).remove();
+                break;
+            }
+        }
+    }
 </script>
 
 {{-- @php
@@ -371,7 +386,7 @@
             {{-- create 2 buttons to edit and delete --}}
             <td>
                 <button type="button" class="btn btn-primary">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
             </td>
           </tr>
           <tr>
@@ -381,7 +396,7 @@
             <td>@fat</td>
             <td>
                 <button type="button" class="btn btn-primary">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
             </td>
           </tr>
           <tr>
@@ -391,7 +406,7 @@
             <td>@twitter</td>
             <td>
                 <button type="button" class="btn btn-primary">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -450,7 +465,9 @@
                     <td>{{ $book->image }}</td>
                     <td>
                         <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-danger" 
+                            {{-- onclick="deleteRow(1, {{$book->id}}), {{ action('BooksController@delete', $book->id) }} --}}
+                            >Delete</button>
                     </td>
                 </tr>
             @endforeach
@@ -507,7 +524,7 @@
                     {{-- <td>{{ $book->image }}</td> --}}
                     <td>
                         <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
                     </td>
                 </tr>
             @endforeach
@@ -564,7 +581,7 @@
                     <td>{{ substr($suggestion->message, 0, 50) . "..." }}</td>
                     <td>
                         <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
                     </td>
                 </tr>
             @endforeach
@@ -623,7 +640,7 @@
                     }}</td>
                     <td>
                         <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
                     </td>
                 </tr>
             @endforeach
@@ -679,7 +696,7 @@
                     <td>{{ $category->tag }}</td>
                     <td>
                         <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
                     </td>
                 </tr>
             @endforeach

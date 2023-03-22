@@ -13,7 +13,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $PER_PAGE = 5;
+        $PER_PAGE = 10;
 
         $books = Book::paginate(
             $perPage = $PER_PAGE,
