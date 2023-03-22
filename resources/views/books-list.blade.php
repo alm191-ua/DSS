@@ -2,7 +2,8 @@
 
 @section('title', 'Books List')
 
-@section('style1.content')
+@section('content')
+    @parent
 
     <!--CONTENT START-->
 	

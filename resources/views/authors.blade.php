@@ -2,7 +2,8 @@
 
 @section('title', 'Authors')
 
-@section('style1.content')
+@section('content')
+    @parent
 
     <!--CONTENT START-->
     <div class="kode-content padding-tb-50">

@@ -1,8 +1,12 @@
 @extends('layouts.style1')
 
-@section('title', 'Contact Us')
+@section('title')
+    {{ __('master.menu.contactus') }}
+@endsection
 
-@section('style1.content')
+@section('content')
+    @parent
+
     <div class="kode-map">
     	<div class="map-canvas" id="map-canvas">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6626.882783308994!2d-0.5164888569658425!3d38.3843297884377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6236ba2a07b50f%3A0x161c6e192605005b!2sEdificio%2016%20-%20Escuela%20Politecnica%20Superior%201%2C%2003690%20San%20Vicente%20del%20Raspeig%2C%20Alicante!5e0!3m2!1ses!2ses!4v1678821115849!5m2!1ses!2ses" 
@@ -38,7 +42,7 @@
                             	<input type="text" placeholder="Phone">
                             </div>
                             <div class="col-md-12">
-                            	<textarea></textarea>
+                            	<textarea style="resize: vertical; min-height: 40px;"></textarea>
                             </div>
                             <div class="col-md-12">
                             	<button>Send Message</button>

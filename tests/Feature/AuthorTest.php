@@ -80,16 +80,16 @@ class AuthorTest extends TestCase
         $autor->info= $texto ;
         $autor->save();
 
-        $categoria = Category::create([
-            'tag' => 'Comedy'
-        ]);
+        // $categoria = Category::create([
+        //     'tag' => 'Comedy'
+        // ]);
 
         $libro= Book::create([
             'title' => 'EL Diario de Greg ',
             'author_id' => $autor->id,
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
             'image' => 'https://images-na.ssl-images-amazon.com/images/I/51Zt3J9ZQNL._SX331_BO1,204,203,200_.jpg',
-            'category_id' => $categoria->id,
+            'category_id' => Category::all()->random()->id,
             'isbn' => '978-3-16-148410-0',
         ]);
         
@@ -98,7 +98,7 @@ class AuthorTest extends TestCase
             'author_id' => $autor->id,
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
             'image' => 'https://images-na.ssl-images-amazon.com/images/I/51Zt3J9ZQNL._SX331_BO1,204,203,200_.jpg',
-            'category_id' => $categoria->id,
+            'category_id' => Category::all()->random()->id,
             'isbn' => '978-3-16-148410-1',
         ]);
 
@@ -108,10 +108,10 @@ class AuthorTest extends TestCase
         $this->assertEquals($autor->id, $libro2->author->id);
         $this->assertEquals($libro->author->id, $libro2->author->id);
 
-        $autor->delete();
-        $categoria-> delete();
-        $libro->delete();
-        $libro2->delete();
+        // $autor->delete();
+        // $categoria-> delete();
+        // $libro->delete();
+        // $libro2->delete();
 
     } 
 

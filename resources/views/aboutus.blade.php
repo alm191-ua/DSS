@@ -2,8 +2,8 @@
 
 @section('title', 'About Us')
 
-@section('style1.content')
-
+@section('content')
+    @parent
     <!--CONTENT START-->
     <div class="kode-content">
     	<!--BOOK GUIDE SECTION START-->
