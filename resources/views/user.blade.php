@@ -51,21 +51,21 @@
         <div class="custom-col">
                 <label for="username" class="col-sm-2 col-form-label">Username</label>
                 <div class="col-sm-10">
-                    <input type="text" name="username" id="username" class="form-control" value="{{ old('username') }}">
+                    <input type="text" name="username" id="username" class="form-control" value="{{ old('username') }}" required>
                 </div>
             </div>
         
         <div class="custom-col">
             <label for="email" class="col-sm-2 col-form-label">Email Address</label>
             <div class="col-sm-10">
-                <input type="text" name="email" id="email" class="form-control" value="{{ old('email') }}">
+                <input type="text" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
             </div>
         </div>
     </div>
     <div class="form-group row">
         <label for="password" class="col-sm-2 col-form-label">Choose Password</label>
         <div class="col-sm-10">
-            <input type="password" name="password" id="password" class="form-control" value="{{ old('password') }}">
+            <input type="password" name="password" id="password" class="form-control" value="{{ old('password') }}" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
             <i class="fa fa-eye-slash" id="togglePassword" onmousedown="seePassword()" onmouseup="hidePassword()" onmouseout="hidePassword()"></i>
         </div>
         <div class="col-sm-10">
@@ -75,7 +75,7 @@
     <div class="form-group row">
         <label for="password-2" class="col-sm-2 col-form-label">Confirm Password</label>
         <div class="col-sm-10">
-            <input type="password" name="password-2" id="password-2" class="form-control" value="{{ old('password-2') }}">
+            <input type="password" name="password-2" id="password-2" class="form-control" value="{{ old('password-2') }}" required>
             <i class="fa fa-eye-slash" id="toggleConfirmPassword" onmousedown="seePassword()" onmouseup="hidePassword()" onmouseout="hidePassword()" ></i>
         </div>
     </div>
@@ -145,7 +145,7 @@
 
         function checkStrengthPassword(password) {
             let strength = 0;
-            if (password.length < 6) {
+            if (password.length < 8) {
                 $('#progress-bar').val(0);
                 return 'Too short';
             }
