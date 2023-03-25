@@ -24,6 +24,9 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/terms', function () {
         return view('terms');
     })->name('terms');
+    Route::get('/books/create', [App\Http\Controllers\BooksController::class, 'create'])->name('book-create');
+    Route::get('/books/delete/{id}', [App\Http\Controllers\BooksController::class, 'delete', 'id'])->name('book-delete');
+    Route::get('/books/update/{id}', [App\Http\Controllers\BooksController::class, 'update', 'id'])->name('book-edit');
     Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
     Route::get('/books', [App\Http\Controllers\BooksController::class, 'list'])->name('books-list');
     Route::get('/aboutus', [App\Http\Controllers\AboutusController::class, 'index'])->name('aboutus');

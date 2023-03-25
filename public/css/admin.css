@@ -1,0 +1,150 @@
+
+    .void-space {
+        text-align: center;
+        height: 3em;
+        opacity: 0;
+    }
+    
+
+    .logo {
+        position: fixed;
+    }
+
+    .copyrights {
+        position: sticky;
+        z-index: 3;
+        margin: 0;
+        /* margin-top: 2.5em; */
+        padding-left: 2%;
+        /* margin-top: auto; */
+    }
+
+    body {
+        background-color: #253341;
+        margin-left: 15%;
+    }
+
+    /* ---------- */
+    .sidenav {
+        /* margin-top: 10%; */
+        height: 100%;
+        width: 17%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        padding-top: 10%;
+    }
+
+    .sidenav a {
+        padding: 6px 6px 6px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+    }
+
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+
+    .main {
+        min-height: 29.8em;
+        color: white;
+        margin-left: 5%; /* Same as the width of the sidenav */
+    }
+
+    @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+    }
+
+    tr:nth-child(even){
+        background-color: #394756;
+    }
+
+    /* tr:nth-child(odd){
+        background-color: red;
+    } */
+
+    .btn-order {
+        background-color: #394756;
+        color: white;
+        border: none;
+        padding: 2px;
+        padding-left: 4px;
+        padding-right: 4px;
+        margin: 2px;
+        margin-left: 15px;
+    }
+
+    .btn {
+        height: 25px;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .filter-bar {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        color : black;
+    }
+
+    th {
+        /* min-width: 10em; */
+        white-space: nowrap;
+    }
+
+    td {
+        max-width: 15em;
+        word-wrap: break-word;
+    }
+
+    table {
+        width: 100%;
+        max-width: 800px;
+        overflow-x: auto;
+        border-collapse: collapse;
+    }
+
+    h2 {
+        color: white;
+    }
+
+    .editable-form {
+        font-weight: normal;
+    }
+
+    .label-cell {
+        font-weight: normal;
+    }
+
+    input {
+        color: black;
+    }
+
+    select {
+        color: black;
+        /* height: 7vh; */
+        /* height: 100%;
+        max-height: 100%;
+        overflow-y: auto; */
+    }
+
+    .button {
+        padding: 0.8em;
+        border-radius: 5%;
+    }
+
+    .button:hover {
+        opacity: 95%;
+    }
+
+    /* @media (max-width: 800px) {
+        th, td {
+            display: block;
+            width: 100%;
+        }
+    } */
