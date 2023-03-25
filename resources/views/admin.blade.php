@@ -423,9 +423,9 @@
                     <td>{{ $user->username }}</td>
                     <td>{{ $user->email }}</td>
                     {{-- <td class="description-cell">{{ $book->description }}</td> --}}
-                    <td>{{ 
-                        $user->is_admin == 1 ? "Admin" : "User" 
-                    }}</td>
+                    <td>
+                        <i class='fa fa-{{ $user->is_admin === true ? "unlock" : "lock" }}'></i>
+                    </td>
                     <td>
                         <button type="button" class="btn btn-primary">Edit</button>
                         <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
