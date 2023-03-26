@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
-// use File
+use App\Models\Category;
+use App\Models\Author;
+
 use Illuminate\Support\Facades\File;
 
 
@@ -47,11 +49,13 @@ class BooksController extends Controller
 
     public function update(Request $request, $id)
     {
-        // $book = Book::findOrFail($id);
-        // $book->title = $request->title;
-        // $book->author = $request->author;
-        // $book->description = $request->description;
-        // $book->save();
+        $book = Book::findOrFail($id);
+        $book->title = $request->title;
+        $book->description = $request->description;
+        $book->author()->associate(Author::where('name', $request->author)->first());
+        $book->category()->associate(Category::where('tag', $request->category)->first());
+        $book->save();
+        return redirect()->back()->withInput($request->page_num);
     }
 
     /******* ESTO ES UN EJEMPLO DE COPILOT, NO FUNCIONA :) */

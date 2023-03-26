@@ -233,29 +233,32 @@
                         {{-- <input type="text" hidden class="editable-form" id="image{{ $book->id }}" value="{{ $book->image }}"> --}}
                     </td>
                     <td>
-                        {{-- <a class="btn btn-primary" href="{{route('book-edit', ['id'=>$book->id, 'page_num'=>2, ])}}"><i class="fa fa-edit"></i></a> --}}
-                        <button type="button" class="btn btn-primary" onclick="editMode({{ $book->id }})"><i class="fa fa-edit"></i></button>
-                        <a class="btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
-                            href="{{route('book-delete', $book->id)}}"><i class="fa fa-trash"></i></a>
+                        <div style="display: flex">
+                            <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $book->id }})"><i class="fa fa-edit"></i></button>
+                            <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
+                                href="{{route('book-delete', $book->id)}}"><i class="fa fa-trash"></i></a>
+                        </div>
+
                         {{-- confirm edit buttons --}}
-                        {{-- <form action={{ route('book-edit', $book->id) }} 
+                        <form action={{ route('book-edit', $book->id) }} 
                             method="POST" id="form{{ $book->id }}" enctype="multipart/form-data">
                             @csrf
-                            {{ method_field('PUT') }}
+                            @method('PUT')
                             <input type="text" hidden name="id" value="{{ $book->id }}">
                             <input type="text" hidden name="title" id="title{{ $book->id }}-form">
                             <input type="text" hidden name="description" id="description{{ $book->id }}-form">
-                            <input type="text" hidden name="author_id" id="author{{ $book->id }}-form">
-                            <input type="text" hidden name="category_id" id="category{{ $book->id }}-form">
+                            <input type="text" hidden name="author" id="author{{ $book->id }}-form">
+                            <input type="text" hidden name="category" id="category{{ $book->id }}-form">
                             <input type="text" hidden name="image" id="image{{ $book->id }}-form">
-                            <input type="submit" hidden id="submit{{ $book->id }}">
+
+                            <div style="display: inline-flex">
+                                <button type="submit" class="editable-form btn btn-success" onmouseup="sendForm({{ $book->id }})">
+                                    <i class="fa fa-check"></i>
+                                <button type="button" class="editable-form btn btn-danger" onclick="editMode({{ $book->id }})">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
                         </form>
-                        <button type="button" hidden class="btn btn-success" onclick="sendForm({{ $book->id }})">
-                            <i class="fa fa-check"></i>
-                        </button>
-                        <button type="button" hidden class="btn btn-danger" onclick="editMode({{ $book->id }})">
-                            <i class="fa fa-times"></i>
-                        </button> --}}
                     </td>
                 </tr>
             @endforeach
@@ -553,7 +556,7 @@
 </div>
 
 <script type="text/javascript">
-    document.onload = firstPage(view);
+    document.onload = init(view);
 </script>
 
 @endsection

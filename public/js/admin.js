@@ -1,6 +1,27 @@
     document.onload = console.log('loaded');
     var view;
 
+    function init(view) {
+        firstPage(view);
+
+        let main = $('.main');
+        for (let i = 0; i < main.length; i++) {
+            let tables = $(main[i]).find('table');
+            for (let j = 0; j < tables.length; j++) {
+                let table = tables[j];
+                let body = $(table).find('tbody')[0];
+                let rows = $(body).find('tr');
+                for (let k = 0; k < rows.length; k++) {
+                    let cols = $(rows[k]).find('td');
+                    let buttons = $(cols[cols.length - 1]).find('.editable-form');
+                    for (let l = 0; l < buttons.length; l++) {
+                        $(buttons[l]).hide();
+                    }
+                }
+            }
+        }
+    }
+
     function firstPage(view) {
         view = document.getElementById('page_num').value;
         console.log("view: " + view);
@@ -37,6 +58,45 @@
         // change the save button to edit button
         // and change the text to non editable
         editMode(elem_id);
+
+        // set form inputs to inputs values
+        let main = $('.main')[view];
+        let table = $(main).find('table');
+        console.log("tables: " + tables.length);
+        let body = $(table).find('tbody')[0];
+        // console.log("body: " + body);
+
+        let rows = $(body).find('tr');
+        console.log("rows: " + rows.length);
+        for (let i = 0; i < rows.length; i++) {
+            let cols = $(rows[i]).find('td');
+            console.log("cols: " + cols.length);
+            // console.log(cols[0].innerText);
+            let id = cols[0].innerText;
+            console.log("id: " + id);
+            if (id == elem_id) {
+                console.log("found id: " + id);
+                // console.log("cols: " + cols.length);
+                // i = 1 to skip the id
+                // length -1 to avoid the manage col
+                for (let i = 1; i < cols.length - 1; i++) {
+                    let editable = $(cols[i]).find('.editable-form');
+                    // recorre los inputs del form en manage y cambia el valor del que tenga el nombre igual al editable
+                    let form_inputs = $(cols[cols.length - 1]).find('input');
+                    for (let j = 1; j < form_inputs.length; j++) {
+                        let input = form_inputs[j];
+                        let name = $(input).attr('name');
+                        let value = $(input).val();
+                        console.log("name: " + name + " value: " + value);
+                        if (name == editable.value) {
+                            $(input).val(editable.value);
+                        }
+                    }
+
+                }
+                break;
+            }
+        }
     }
 
 
@@ -61,34 +121,27 @@
             console.log("id: " + id);
             if (id == elem_id) {
                 console.log("found id: " + id);
-                let cols = $(rows[i]).find('td');
                 // console.log("cols: " + cols.length);
                 // i = 1 to skip the id
                 // length -1 to avoid the manage col
                 for (let i = 1; i < cols.length - 1; i++) {
                     // console.log("col: " + i);
                     // make label hidden and input editable shown
-                    let label = $(cols[i]).find('label');
+                    let label = $(cols[i]).find('.label-cell');
                     let editable = $(cols[i]).find('.editable-form');
                     $(label).toggle();
                     $(editable).toggle();
                 }
+                let labels = $(cols[cols.length - 1]).find('.label-cell');
+                let editables = $(cols[cols.length - 1]).find('.editable-form');
+                // console.log("buttons: " + buttons.length);
+                for (let i = 0; i < labels.length; i++) {
+                    $(labels[i]).toggle();
+                    $(editables[i]).toggle();
+                }
                 break;
             }
         }
-        // find row with col 0 = id
-        // let rows = $(body).find('tr');
-        // let cols = $(rows).find('td');
-        // console.log(cols)[0].find('input')[0].val();
-        // // i = 1 to skip the id
-        // for (let i = 1; i < cols.length; i++) {
-        //     console.log("col: " + i);
-        //     // make label hidden and input editable shown
-        //     let label = $(cols[i]).find('label');
-        //     let input = $(cols[i]).find('input');
-        //     $(label).toggle();
-        //     $(input).toggle();
-        // }
     
     }
     
