@@ -4,22 +4,32 @@
     function init(view) {
         firstPage(view);
 
-        let main = $('.main');
-        for (let i = 0; i < main.length; i++) {
-            let tables = $(main[i]).find('table');
-            for (let j = 0; j < tables.length; j++) {
-                let table = tables[j];
-                let body = $(table).find('tbody')[0];
-                let rows = $(body).find('tr');
-                for (let k = 0; k < rows.length; k++) {
-                    let cols = $(rows[k]).find('td');
-                    let buttons = $(cols[cols.length - 1]).find('.editable-form');
-                    for (let l = 0; l < buttons.length; l++) {
-                        $(buttons[l]).hide();
-                    }
-                }
-            }
+        let editables = $('.editable-form');
+        for (let i = 0; i < editables.length; i++) {
+            $(editables[i]).hide();
         }
+
+        let hide = $('.hide');
+        for (let i = 0; i < hide.length; i++) {
+            $(hide[i]).hide();
+        }
+
+        // let main = $('.main');
+        // for (let i = 0; i < main.length; i++) {
+        //     let tables = $(main[i]).find('table');
+        //     for (let j = 0; j < tables.length; j++) {
+        //         let table = tables[j];
+        //         let body = $(table).find('tbody')[0];
+        //         let rows = $(body).find('tr');
+        //         for (let k = 0; k < rows.length; k++) {
+        //             let cols = $(rows[k]).find('td');
+        //             let buttons = $(cols[cols.length - 1]).find('.editable-form');
+        //             for (let l = 0; l < buttons.length; l++) {
+        //                 $(buttons[l]).hide();
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     function firstPage(view) {
@@ -52,9 +62,31 @@
     //     }
     // }
 
+    function readImage(input, elem_id) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+        
+            reader.onload = function (e) {
+            let dst = $('.img_editable');
+            // console.log("dst: " + dst.length);
+            for (let i = 0; i < dst.length; i++) {
+                if ($(dst[i]).attr('id') == "img_edit" + elem_id) {
+                    // console.log("IMG: " + $(dst[i]) + " id: " + $(dst[i]).attr('id'));
+                    $(dst[i]).attr('src', e.target.result);
+                    break;
+                }
+            }
+            // .attr('src', e.target.result);
+            };
+        
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
     function sendForm(elem_id){
         // TODO: send the form to the server
-        console.log("send form: " + elem_id);
+        console.log("FORM-> send form: " + elem_id);
         // change the save button to edit button
         // and change the text to non editable
         editMode(elem_id);
@@ -62,38 +94,51 @@
         // set form inputs to inputs values
         let main = $('.main')[view];
         let table = $(main).find('table');
-        console.log("tables: " + tables.length);
+        console.log("FORM-> table: " + table.length);
         let body = $(table).find('tbody')[0];
         // console.log("body: " + body);
 
         let rows = $(body).find('tr');
-        console.log("rows: " + rows.length);
+        console.log("FORM-> rows: " + rows.length);
         for (let i = 0; i < rows.length; i++) {
             let cols = $(rows[i]).find('td');
-            console.log("cols: " + cols.length);
+            console.log("FORM-> cols: " + cols.length);
             // console.log(cols[0].innerText);
             let id = cols[0].innerText;
-            console.log("id: " + id);
+            console.log("FORM-> id: " + id);
             if (id == elem_id) {
-                console.log("found id: " + id);
+                console.log("FORM-> found id: " + id);
                 // console.log("cols: " + cols.length);
                 // i = 1 to skip the id
                 // length -1 to avoid the manage col
+                let form_inputs = $(cols[cols.length - 1]).find('input');
                 for (let i = 1; i < cols.length - 1; i++) {
-                    let editable = $(cols[i]).find('.editable-form');
-                    // recorre los inputs del form en manage y cambia el valor del que tenga el nombre igual al editable
-                    let form_inputs = $(cols[cols.length - 1]).find('input');
-                    for (let j = 1; j < form_inputs.length; j++) {
-                        let input = form_inputs[j];
-                        let name = $(input).attr('name');
-                        let value = $(input).val();
-                        console.log("name: " + name + " value: " + value);
-                        if (name == editable.value) {
-                            $(input).val(editable.value);
-                        }
-                    }
-
+                    console.log("FORM-> input: " + $(form_inputs[i+2]).attr('name') + "----------------");
+                    console.log("FORM-> old input: " + $(form_inputs[i+2]).val());
+                    console.log("FORM-> editable: " + $(cols[i]).find('.editable-form').val());
+                    $(form_inputs[i+2]).val($(cols[i]).find('.editable-form').val());
+                    console.log("FORM-> new input: " + $(form_inputs[i+2]).val());
+                    console.log("FORM-> ----------------");
                 }
+                
+                // let form_inputs = $(cols[cols.length - 1]).find('input');
+                // for (let i = 1; i < cols.length - 1; i++) {
+                //     let editable = $(cols[i]).find('.editable-form')[0];
+                //     // recorre los inputs del form en manage y cambia el valor del que tenga el nombre igual al editable
+                //     for (let j = 1; j < form_inputs.length; j++) {
+                //         let input = form_inputs[j];
+                //         let name = $(input).attr('name');
+                //         let value = $(input).val();
+                //         console.log("FORM-> name: " + name + " value: " + value);
+                //         console.log("FORM-> name: " + name + " editable: " + $(editable).val());
+                //         if (name == $(editable).attr('name')) {
+                //             let a = $(input).val($(editable).val());
+                //             // console.log("FORM-> input_test: " + a);
+                //         }
+                //         console.log("FORM-> new input: " + $(cols[cols.length - 1]).find('input')[j].value);
+                //     }
+
+                // }
                 break;
             }
         }
@@ -121,6 +166,7 @@
             console.log("id: " + id);
             if (id == elem_id) {
                 console.log("found id: " + id);
+                // console.log("cols: " + cols.length);
                 // console.log("cols: " + cols.length);
                 // i = 1 to skip the id
                 // length -1 to avoid the manage col

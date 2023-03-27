@@ -227,9 +227,10 @@
                         </select>    
                     </td>
                     <td>
-                        <img src="{{ asset('storage_images/books/' . $book->image) }}" alt="book image" width="100px" height="100px">
-                        {{-- <input type="file"  hidden class="editable-form" id="image{{ $book->id }}" 
-                            value="{{ $book->image }}" accept="image/*"> --}}
+                        <img class="label-cell" src="{{ asset('storage_images/books/' . $book->image) }}" alt="book image" width="100px" height="100px">
+                        <img class="editable-form img_editable" hidden id="img_edit{{ $book->id }}" class="img_editable" src="{{ asset('storage_images/books/' . $book->image) }}" alt="book image" width="100px" height="100px">
+                        <input type="file" hidden onchange="readImage(this, {{ $book->id }})" class="editable-form" id="image{{ $book->id }}" 
+                        value="{{ $book->image }}" accept="image/*">
                         {{-- <input type="text" hidden class="editable-form" id="image{{ $book->id }}" value="{{ $book->image }}"> --}}
                     </td>
                     <td>
@@ -249,7 +250,7 @@
                             <input type="text" hidden name="description" id="description{{ $book->id }}-form">
                             <input type="text" hidden name="author" id="author{{ $book->id }}-form">
                             <input type="text" hidden name="category" id="category{{ $book->id }}-form">
-                            <input type="text" hidden name="image" id="image{{ $book->id }}-form">
+                            <input type="file" class="hide" hidden name="image" id="image{{ $book->id }}-form">
 
                             <div style="display: inline-flex">
                                 <button type="submit" class="editable-form btn btn-success" onmouseup="sendForm({{ $book->id }})">

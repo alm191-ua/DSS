@@ -52,8 +52,23 @@ class BooksController extends Controller
         $book = Book::findOrFail($id);
         $book->title = $request->title;
         $book->description = $request->description;
-        $book->author()->associate(Author::where('name', $request->author)->first());
-        $book->category()->associate(Category::where('tag', $request->category)->first());
+        $book->author()->associate(Author::find($request->author));
+        $book->category()->associate(Category::find($request->category));
+        // dd($request->image);
+
+        if ($request->hasFile('image')) {
+            // delete old image with try
+            try {
+                File::delete(storage_path('app/images/'.$book->image));
+            } catch (\Exception $e) {
+                // do nothing
+            }
+            // save new image
+            $image = $request->file('image');
+            $imageName = time().'.'.$image->extension();
+            $image->move(storage_path('app/images'), $imageName);
+            $book->image = $imageName;
+        }
         $book->save();
         return redirect()->back()->withInput($request->page_num);
     }
