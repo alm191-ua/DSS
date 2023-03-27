@@ -33,6 +33,27 @@
     <a href="#" onclick="changeMain(6)">Categories</a>
     <a href="#" onclick="changeMain(7)">Settings</a>
 </div>
+
+<div id="responsive-sidenav" class="responsive-sidenav">
+    <div class="dropdown">
+        <button class="dropbtn" onclick="togglePagesLinks()">Pages</button>
+        <div hidden class="dropdown-content">
+            {{-- <a href="#" onclick="
+                if ($('#test-main').hidden){
+                    changeMain(0);
+                }else{
+                    changeTable();
+                }">Test Boards</a> --}}
+            <a href="#" onclick="changeMain(1)">Statistics</a>
+            <a href="#" onclick="changeMain(2)">Books</a>
+            <a href="#" onclick="changeMain(3)">Authors</a>
+            <a href="#" onclick="changeMain(4)">Suggestions</a>
+            <a href="#" onclick="changeMain(5)">Users</a>
+            <a href="#" onclick="changeMain(6)">Categories</a>
+            <a href="#" onclick="changeMain(7)">Settings</a>
+        </div>
+    </div>
+</div>
   
 <div class="main" id="test-main" hidden>
     <h2 style="color: white;">Admin Page</h2>
@@ -150,8 +171,20 @@
     <h2>Books Admin</h2>
 
     {{-- create book button --}}
-    <a type="button" class="button btn-primary" href="{{ route('book-create') }}" ><i class="fa fa-plus"></i> {{ __('admin.create-book') }}</a> 
-    <br>
+    <a id="create_button" type="button" class="button btn-primary" href="{{ route('book-create') }}" ><i class="fa fa-plus"></i> {{ __('admin.create-book') }}</a> 
+    
+    {{-- Error messages --}}
+    @if ($errors->any())
+        <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    @endif
+    
+    <div class="responsive-pagination">
+        {{ $books->appends(array('page_num' => 2, ))->links() }}
+    </div>
     <table class="table table-striped table-dark">
         <thead>
           <tr>
@@ -188,16 +221,21 @@
             
             @foreach ($books as $book)
                 <tr>
+                <form action={{ route('book-edit', $book->id) }} 
+                    method="POST" id="form{{ $book->id }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
                     <td scope="row">{{ $book->id }}</td>
                     <td>
                         {{-- label --}}
                         <label for="title{{ $book->id }}" id="label{{ $book->id }}" class="label-cell">{{ $book->title }}</label>
                         {{-- editable --}}
-                        <input type="text" hidden class="editable-form" id="title{{ $book->id }}" value="{{ $book->title }}">
+                        <input name="title" type="text" hidden class="editable-form" id="title{{ $book->id }}" value="{{ $book->title }}">
                     </td>
                     <td>
                         <label for="description{{ $book->id }}" id="label{{ $book->id }}" class="label-cell">{{ substr($book->description, 0, 50) . "..." }}</label>
-                        <input type="text" hidden class="editable-form" id="description{{ $book->id }}" value="{{ $book->description }}">
+                        <input name="description" type="text" hidden class="editable-form" id="description{{ $book->id }}" value="{{ $book->description }}">
                     </td>
                     <td>
                         <label for="author{{ $book->id }}" id="label{{ $book->id }}" class="label-cell">{{ $book->author->name }}</label>
@@ -229,7 +267,7 @@
                     <td>
                         <img class="label-cell" src="{{ asset('storage_images/books/' . $book->image) }}" alt="book image" width="100px" height="100px">
                         <img class="editable-form img_editable" hidden id="img_edit{{ $book->id }}" class="img_editable" src="{{ asset('storage_images/books/' . $book->image) }}" alt="book image" width="100px" height="100px">
-                        <input type="file" hidden onchange="readImage(this, {{ $book->id }})" class="editable-form" id="image{{ $book->id }}" 
+                        <input name="image" type="file" hidden onchange="readImage(this, {{ $book->id }})" class="editable-form" id="image{{ $book->id }}" 
                         value="{{ $book->image }}" accept="image/*">
                         {{-- <input type="text" hidden class="editable-form" id="image{{ $book->id }}" value="{{ $book->image }}"> --}}
                     </td>
@@ -240,36 +278,22 @@
                                 href="{{route('book-delete', $book->id)}}"><i class="fa fa-trash"></i></a>
                         </div>
 
-                        {{-- confirm edit buttons --}}
-                        <form action={{ route('book-edit', $book->id) }} 
-                            method="POST" id="form{{ $book->id }}" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
-                            <input type="text" hidden name="id" value="{{ $book->id }}">
-                            <input type="text" hidden name="title" id="title{{ $book->id }}-form">
-                            <input type="text" hidden name="description" id="description{{ $book->id }}-form">
-                            <input type="text" hidden name="author" id="author{{ $book->id }}-form">
-                            <input type="text" hidden name="category" id="category{{ $book->id }}-form">
-                            <input type="file" class="hide" hidden name="image" id="image{{ $book->id }}-form">
-
-                            <div style="display: inline-flex">
-                                <button type="submit" class="editable-form btn btn-success" onmouseup="sendForm({{ $book->id }})">
-                                    <i class="fa fa-check"></i>
-                                <button type="button" class="editable-form btn btn-danger" onclick="editMode({{ $book->id }})">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </div>
-                        </form>
+                        <div style="display: inline-flex">
+                            <button type="submit" class="editable-form btn btn-success" onmouseup="editMode({{ $book->id }})">
+                                <i class="fa fa-check"></i>
+                            <button type="button" class="editable-form btn btn-danger" onclick="editMode({{ $book->id }})">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
                     </td>
+                </form>
                 </tr>
             @endforeach
           
         </tbody>
     </table>
     
-    {{         
-        $books->appends(array('page_num' => 2, ))->links()
-    }}
+    {{ $books->appends(array('page_num' => 2, ))->links() }}
 </div>
 
 <div class="main" name="authors" hidden>

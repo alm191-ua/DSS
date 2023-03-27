@@ -54,6 +54,7 @@
         min-height: 29.8em;
         color: white;
         margin-left: 5%; /* Same as the width of the sidenav */
+        overflow-x: scroll;
     }
 
     @media screen and (max-height: 450px) {
@@ -102,11 +103,103 @@
         word-wrap: break-word;
     }
 
+    #create_button {
+        margin-left: 1.5em;
+    }
+
     table {
+        margin-top: 1.5em;
         width: 100%;
         max-width: 800px;
-        overflow-x: auto;
-        border-collapse: collapse;
+        overflow-x: scroll;
+        /* border-collapse: separate; */
+        /* border-width: 20px; */
+        /* border-color: black; */
+    }
+
+    .responsive-sidenav {
+        margin: 5%;
+        display: none;
+        z-index: 200;
+    }
+
+    .responsive-sidenav .dropbtn {
+        background-color: #111;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .responsive-sidenav .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .responsive-sidenav .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #111;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .responsive-sidenav .dropdown-content a {
+        position: relative;
+        display: block;
+        columns: 1;
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+    }
+
+    .responsive-sidenav .dropbtn:hover, .dropdown-content a:hover {
+        background-color: #394756;
+    }
+
+    .pagination {
+        padding-bottom: 5%;
+    }
+
+    .responsive-pagination {
+        display: none;
+    }
+
+    @media screen and (max-width: 1000px) {
+        .responsive-sidenav {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .sidenav {
+            display: none;
+        } 
+
+        .logo {
+            display: none;
+        }
+
+        .main {
+            margin-left: 0;
+            padding-left: 5%;
+        }
+
+        body {
+            margin-left: 0;
+        }
+
+        .pagination {
+            padding-top: 10%;
+        }
+
+        .responsive-pagination {
+            display: block;
+        }
+
     }
 
     h2 {

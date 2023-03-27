@@ -84,65 +84,65 @@
     }
 
 
-    function sendForm(elem_id){
-        // TODO: send the form to the server
-        console.log("FORM-> send form: " + elem_id);
-        // change the save button to edit button
-        // and change the text to non editable
-        editMode(elem_id);
+    // function sendForm(elem_id){
+    //     // TODO: send the form to the server
+    //     console.log("FORM-> send form: " + elem_id);
+    //     // change the save button to edit button
+    //     // and change the text to non editable
+    //     editMode(elem_id);
 
-        // set form inputs to inputs values
-        let main = $('.main')[view];
-        let table = $(main).find('table');
-        console.log("FORM-> table: " + table.length);
-        let body = $(table).find('tbody')[0];
-        // console.log("body: " + body);
+    //     // set form inputs to inputs values
+    //     let main = $('.main')[view];
+    //     let table = $(main).find('table');
+    //     console.log("FORM-> table: " + table.length);
+    //     let body = $(table).find('tbody')[0];
+    //     // console.log("body: " + body);
 
-        let rows = $(body).find('tr');
-        console.log("FORM-> rows: " + rows.length);
-        for (let i = 0; i < rows.length; i++) {
-            let cols = $(rows[i]).find('td');
-            console.log("FORM-> cols: " + cols.length);
-            // console.log(cols[0].innerText);
-            let id = cols[0].innerText;
-            console.log("FORM-> id: " + id);
-            if (id == elem_id) {
-                console.log("FORM-> found id: " + id);
-                // console.log("cols: " + cols.length);
-                // i = 1 to skip the id
-                // length -1 to avoid the manage col
-                let form_inputs = $(cols[cols.length - 1]).find('input');
-                for (let i = 1; i < cols.length - 1; i++) {
-                    console.log("FORM-> input: " + $(form_inputs[i+2]).attr('name') + "----------------");
-                    console.log("FORM-> old input: " + $(form_inputs[i+2]).val());
-                    console.log("FORM-> editable: " + $(cols[i]).find('.editable-form').val());
-                    $(form_inputs[i+2]).val($(cols[i]).find('.editable-form').val());
-                    console.log("FORM-> new input: " + $(form_inputs[i+2]).val());
-                    console.log("FORM-> ----------------");
-                }
+    //     let rows = $(body).find('tr');
+    //     console.log("FORM-> rows: " + rows.length);
+    //     for (let i = 0; i < rows.length; i++) {
+    //         let cols = $(rows[i]).find('td');
+    //         console.log("FORM-> cols: " + cols.length);
+    //         // console.log(cols[0].innerText);
+    //         let id = cols[0].innerText;
+    //         console.log("FORM-> id: " + id);
+    //         if (id == elem_id) {
+    //             console.log("FORM-> found id: " + id);
+    //             // console.log("cols: " + cols.length);
+    //             // i = 1 to skip the id
+    //             // length -1 to avoid the manage col
+    //             let form_inputs = $(cols[cols.length - 1]).find('input');
+    //             for (let i = 1; i < cols.length - 1; i++) {
+    //                 console.log("FORM-> input: " + $(form_inputs[i+2]).attr('name') + "----------------");
+    //                 console.log("FORM-> old input: " + $(form_inputs[i+2]).val());
+    //                 console.log("FORM-> editable: " + $(cols[i]).find('.editable-form').val());
+    //                 $(form_inputs[i+2]).val($(cols[i]).find('.editable-form').val());
+    //                 console.log("FORM-> new input: " + $(form_inputs[i+2]).val());
+    //                 console.log("FORM-> ----------------");
+    //             }
                 
-                // let form_inputs = $(cols[cols.length - 1]).find('input');
-                // for (let i = 1; i < cols.length - 1; i++) {
-                //     let editable = $(cols[i]).find('.editable-form')[0];
-                //     // recorre los inputs del form en manage y cambia el valor del que tenga el nombre igual al editable
-                //     for (let j = 1; j < form_inputs.length; j++) {
-                //         let input = form_inputs[j];
-                //         let name = $(input).attr('name');
-                //         let value = $(input).val();
-                //         console.log("FORM-> name: " + name + " value: " + value);
-                //         console.log("FORM-> name: " + name + " editable: " + $(editable).val());
-                //         if (name == $(editable).attr('name')) {
-                //             let a = $(input).val($(editable).val());
-                //             // console.log("FORM-> input_test: " + a);
-                //         }
-                //         console.log("FORM-> new input: " + $(cols[cols.length - 1]).find('input')[j].value);
-                //     }
+    //             // let form_inputs = $(cols[cols.length - 1]).find('input');
+    //             // for (let i = 1; i < cols.length - 1; i++) {
+    //             //     let editable = $(cols[i]).find('.editable-form')[0];
+    //             //     // recorre los inputs del form en manage y cambia el valor del que tenga el nombre igual al editable
+    //             //     for (let j = 1; j < form_inputs.length; j++) {
+    //             //         let input = form_inputs[j];
+    //             //         let name = $(input).attr('name');
+    //             //         let value = $(input).val();
+    //             //         console.log("FORM-> name: " + name + " value: " + value);
+    //             //         console.log("FORM-> name: " + name + " editable: " + $(editable).val());
+    //             //         if (name == $(editable).attr('name')) {
+    //             //             let a = $(input).val($(editable).val());
+    //             //             // console.log("FORM-> input_test: " + a);
+    //             //         }
+    //             //         console.log("FORM-> new input: " + $(cols[cols.length - 1]).find('input')[j].value);
+    //             //     }
 
-                // }
-                break;
-            }
-        }
-    }
+    //             // }
+    //             break;
+    //         }
+    //     }
+    // }
 
 
     function editMode(elem_id){
@@ -288,4 +288,11 @@
                 break;
             }
         }
+    }
+
+
+    function togglePagesLinks() {
+        let sidenav = $('#responsive-sidenav')[0];
+        let dropdown = $(sidenav).find('.dropdown-content')[0];
+        $(dropdown).toggle();
     }
