@@ -296,3 +296,12 @@
         let dropdown = $(sidenav).find('.dropdown-content')[0];
         $(dropdown).toggle();
     }
+   
+    $(document).click(function(event) { 
+        if(!$(event.target).closest('.dropdown-content').length &&      
+        !$(event.target).hasClass('dropbtn')) {
+            if($('.dropdown-content').is(":visible")) {
+                $('.dropdown-content').hide();
+            }
+        }        
+    })

@@ -121,6 +121,7 @@
         margin: 5%;
         display: none;
         z-index: 200;
+        /* position: absolute; */
     }
 
     .responsive-sidenav .dropbtn {
@@ -130,6 +131,7 @@
         font-size: 16px;
         border: none;
         cursor: pointer;
+        /* position: absolute; */
     }
 
     .responsive-sidenav .dropdown {
@@ -170,7 +172,7 @@
     @media screen and (max-width: 1000px) {
         .responsive-sidenav {
             display: block;
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
         }
@@ -180,7 +182,9 @@
         } 
 
         .logo {
-            display: none;
+            /* display: none; */
+            position: absolute;
+            left: 40%;
         }
 
         .main {
