@@ -455,7 +455,16 @@
                     <td>{{ $user->email }}</td>
                     {{-- <td class="description-cell">{{ $book->description }}</td> --}}
                     <td>
-                        <i class='fa fa-{{ $user->is_admin === true ? "unlock" : "lock" }}'></i>
+                        <i onclick="
+                            if (this.classList.contains('fa-lock')) {
+                                this.classList.remove('fa-lock');
+                                this.classList.add('fa-unlock');
+                                alert('User is not admin. Trolled XD');
+                            } else {
+                                this.classList.remove('fa-unlock');
+                                this.classList.add('fa-lock');
+                            }
+                            " class='fa fa-{{ $user->is_admin === true ? "unlock" : "lock" }}'></i>
                     </td>
                     <td>
                         <button type="button" class="btn btn-primary">Edit</button>
