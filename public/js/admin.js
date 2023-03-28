@@ -44,6 +44,7 @@
     }
 
     function changeMain(main_num) {
+        window.history.replaceState(null, null, '?page_num=' + main_num);
         let mains = $('.main');
         for (let i = 0; i < mains.length; i++) {
             $(mains[i]).hide();

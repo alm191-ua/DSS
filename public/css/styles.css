@@ -119,6 +119,11 @@ Sidebar heading:	'Oswald', sans-serif;
 				DEFAULT CSS
 ==========================================
 */
+
+.pagination {
+	padding-bottom: 5%;
+}
+
 .wrapper{
 	float:left;
 	width:100%;
@@ -1804,7 +1809,7 @@ footer{
 	border:none;
 	width:100%;
 	padding:6px 10px;
-	color:#CCC;
+	color:#452d2d;
 }
 .banner-search button{
 	height:44px;
@@ -5967,7 +5972,7 @@ nav{
 .books-listing-3 .kode-caption a{
 	display:inline-block;
 	height:36px;
-	width:36px;
+	width:auto;
 	background-color:#ececec;
 	border:solid 1px #e2e2e2;
 	border-radius:100%;

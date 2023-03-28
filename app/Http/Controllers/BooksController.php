@@ -28,7 +28,36 @@ class BooksController extends Controller
 
     public function list()
     {
-        return view('books-list');
+        $PER_PAGE = 21;
+
+        $category = request()->query('category');
+        // if category exists, filter query
+        if ($category) {
+            $books = Book::whereHas('category', function ($query) use ($category) {
+                $query->where('tag', $category);
+            })->paginate(
+                $perPage = $PER_PAGE,
+                // all columns except created_at, updated_at, deleted_at, isbn
+                $columns = ['id', 'title', 'author_id', 'category_id', 'image'],
+                $pageName = 'books',
+            )->withQueryString();
+        } else {
+            $books = Book::paginate(
+                $perPage = $PER_PAGE,
+                // all columns except created_at, updated_at, deleted_at, isbn
+                $columns = ['id', 'title', 'author_id', 'category_id', 'image'],
+                $pageName = 'books',
+            )->withQueryString();
+        }
+
+        // $books = Book::paginate(
+        //     $perPage = 21,
+        //     // all columns except created_at, updated_at, deleted_at, isbn
+        //     $columns = ['id', 'title', 'author_id', 'category_id', 'image'],
+        //     $pageName = 'books',
+        // )->withQueryString();
+
+        return view('books-list', compact('books'));
     }
 
     //create function to show the form to create a new book

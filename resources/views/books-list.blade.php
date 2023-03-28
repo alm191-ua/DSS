@@ -28,6 +28,7 @@
                         <b class="pull-right">$ 1000</b>
                         <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[10,400]"/>
                         <a href="#" class="filter">Filter</a>
+                        <a href="{{ route('books-list') }}" class="filter" style="background-color: rgb(201, 64, 64)">Remove filter</a>
                     </div>
                     <!--PRICE FILTER WIDGET END-->
                     <!--NEW ARRIVAL WIDGET START-->
@@ -154,235 +155,30 @@
                 <!--SIDEBAR END-->
                 <div class="col-md-9">
                 	<div class="row">
-                        <!--PRODUCT GRID START-->
-                        <div class="col-md-4 col-sm-6">
-                            <div class="books-listing-3">
-                            	<div class="kode-thumb">
-                                	<a href="#"><img src="images/books-list1.jpg" alt=""></a>
-                                </div>
-                                <div class="kode-text">
-                                	<p class="price">$80.75<span>90.75$</span></p>
-                                    <h3>Stephen King</h3>
-                                    <div class="kode-caption">
-                                    	<p>Well, reading books as a hobby was always a noble, pleasant and very u</p>
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="#"><i class="fa fa-link"></i></a>
+                        @foreach ($books as $book)
+                            <!--PRODUCT GRID START-->
+                            <div class="col-md-4 col-sm-6">
+                                <div class="books-listing-3">
+                                    <div class="kode-thumb">
+                                        <a href="{{ route('book', $book->id) }}"><img src="{{ asset('storage_images/books/' . $book->image) }}" 
+                                            onerror="this.src = '{{ asset('storage_images/books/default.png') }}';" alt="book image" width="269" height="361"></a>
+                                    </div>
+                                    <div class="kode-text">
+                                        {{-- <p class="price">$80.75<span>90.75$</span></p> --}}
+                                        <h3>{{ substr($book->title, 0, 25) }}{{ strlen($book->title) > 20 ? '...' : '' }}</h3>
+                                        <div class="kode-caption">
+                                            <p>{{ $book->author->name }}</p>
+                                            <a href="{{ route('books-list', ['category' => $book->category->tag]) }}">{{ $book->category->tag }}</a>
+                                            {{-- <a href="#"><i class="fa fa-heart"></i></a>
+                                            <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                            <a href="#"><i class="fa fa-link"></i></a> --}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--PRODUCT GRID END-->
-                        <!--PRODUCT GRID START-->
-                        <div class="col-md-4 col-sm-6">
-                            <div class="books-listing-3">
-                            	<div class="kode-thumb">
-                                	<a href="#"><img src="images/books-list2.jpg" alt=""></a>
-                                </div>
-                                <div class="kode-text">
-                                	<p class="price">$80.75<span>90.75$</span></p>
-                                    <h3>Stephen King</h3>
-                                    <div class="kode-caption">
-                                    	<p>Well, reading books as a hobby was always a noble, pleasant and very u</p>
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--PRODUCT GRID END-->
-                        <!--PRODUCT GRID START-->
-                        <div class="col-md-4 col-sm-6">
-                            <div class="books-listing-3">
-                            	<div class="kode-thumb">
-                                	<a href="#"><img src="images/books-list3.jpg" alt=""></a>
-                                </div>
-                                <div class="kode-text">
-                                	<p class="price">$80.75<span>90.75$</span></p>
-                                    <h3>Stephen King</h3>
-                                    <div class="kode-caption">
-                                    	<p>Well, reading books as a hobby was always a noble, pleasant and very u</p>
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--PRODUCT GRID END-->
-                        <!--PRODUCT GRID START-->
-                        <div class="col-md-4 col-sm-6">
-                            <div class="books-listing-3">
-                            	<div class="kode-thumb">
-                                	<a href="#"><img src="images/books-list4.jpg" alt=""></a>
-                                </div>
-                                <div class="kode-text">
-                                	<p class="price">$80.75<span>90.75$</span></p>
-                                    <h3>Stephen King</h3>
-                                    <div class="kode-caption">
-                                    	<p>Well, reading books as a hobby was always a noble, pleasant and very u</p>
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--PRODUCT GRID END-->
-                        <!--PRODUCT GRID START-->
-                        <div class="col-md-4 col-sm-6">
-                            <div class="books-listing-3">
-                            	<div class="kode-thumb">
-                                	<a href="#"><img src="images/books-list5.jpg" alt=""></a>
-                                </div>
-                                <div class="kode-text">
-                                	<p class="price">$80.75<span>90.75$</span></p>
-                                    <h3>Stephen King</h3>
-                                    <div class="kode-caption">
-                                    	<p>Well, reading books as a hobby was always a noble, pleasant and very u</p>
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--PRODUCT GRID END-->
-                        <!--PRODUCT GRID START-->
-                        <div class="col-md-4 col-sm-6">
-                            <div class="books-listing-3">
-                            	<div class="kode-thumb">
-                                	<a href="#"><img src="images/books-list6.jpg" alt=""></a>
-                                </div>
-                                <div class="kode-text">
-                                	<p class="price">$80.75<span>90.75$</span></p>
-                                    <h3>Stephen King</h3>
-                                    <div class="kode-caption">
-                                    	<p>Well, reading books as a hobby was always a noble, pleasant and very u</p>
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--PRODUCT GRID END-->
-                        <!--PRODUCT GRID START-->
-                        <div class="col-md-4 col-sm-6">
-                            <div class="books-listing-3">
-                            	<div class="kode-thumb">
-                                	<a href="#"><img src="images/books-list7.jpg" alt=""></a>
-                                </div>
-                                <div class="kode-text">
-                                	<p class="price">$80.75<span>90.75$</span></p>
-                                    <h3>Stephen King</h3>
-                                    <div class="kode-caption">
-                                    	<p>Well, reading books as a hobby was always a noble, pleasant and very u</p>
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--PRODUCT GRID END-->
-                        <!--PRODUCT GRID START-->
-                        <div class="col-md-4 col-sm-6">
-                            <div class="books-listing-3">
-                            	<div class="kode-thumb">
-                                	<a href="#"><img src="images/books-list9.jpg" alt=""></a>
-                                </div>
-                                <div class="kode-text">
-                                	<p class="price">$80.75<span>90.75$</span></p>
-                                    <h3>Stephen King</h3>
-                                    <div class="kode-caption">
-                                    	<p>Well, reading books as a hobby was always a noble, pleasant and very u</p>
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--PRODUCT GRID END-->
-                        <!--PRODUCT GRID START-->
-                        <div class="col-md-4 col-sm-6">
-                            <div class="books-listing-3">
-                            	<div class="kode-thumb">
-                                	<a href="#"><img src="images/books-list3.jpg" alt=""></a>
-                                </div>
-                                <div class="kode-text">
-                                	<p class="price">$80.75<span>90.75$</span></p>
-                                    <h3>Stephen King</h3>
-                                    <div class="kode-caption">
-                                    	<p>Well, reading books as a hobby was always a noble, pleasant and very u</p>
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--PRODUCT GRID END-->
-                        <!--PRODUCT GRID START-->
-                        <div class="col-md-4 col-sm-6">
-                            <div class="books-listing-3">
-                            	<div class="kode-thumb">
-                                	<a href="#"><img src="images/books-list4.jpg" alt=""></a>
-                                </div>
-                                <div class="kode-text">
-                                	<p class="price">$80.75<span>90.75$</span></p>
-                                    <h3>Stephen King</h3>
-
-                                    <div class="kode-caption">
-                                    	<p>Well, reading books as a hobby was always a noble, pleasant and very u</p>
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--PRODUCT GRID END-->
-                        <!--PRODUCT GRID START-->
-                        <div class="col-md-4 col-sm-6">
-                            <div class="books-listing-3">
-                            	<div class="kode-thumb">
-                                	<a href="#"><img src="images/books-list6.jpg" alt=""></a>
-                                </div>
-                                <div class="kode-text">
-                                	<p class="price">$80.75<span>90.75$</span></p>
-                                    <h3>Stephen King</h3>
-                                    <div class="kode-caption">
-                                    	<p>Well, reading books as a hobby was always a noble, pleasant and very u</p>
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--PRODUCT GRID END-->
-                        <!--PRODUCT GRID START-->
-                        <div class="col-md-4 col-sm-6">
-                            <div class="books-listing-3">
-                            	<div class="kode-thumb">
-                                	<a href="#"><img src="images/books-list7.jpg" alt=""></a>
-                                </div>
-                                <div class="kode-text">
-                                	<p class="price">$80.75<span>90.75$</span></p>
-                                    <h3>Stephen King</h3>
-                                    <div class="kode-caption">
-                                    	<p>Well, reading books as a hobby was always a noble, pleasant and very u</p>
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--PRODUCT GRID END-->
+                            <!--PRODUCT GRID END-->
+                        @endforeach
+                        {{ $books->links() }}
                     </div>
             	</div>
             </div>

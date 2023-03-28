@@ -265,7 +265,8 @@
                         </select>    
                     </td>
                     <td>
-                        <img class="label-cell" src="{{ asset('storage_images/books/' . $book->image) }}" alt="book image" width="100px" height="100px">
+                        <img class="label-cell" src="{{ asset('storage_images/books/' . $book->image) }}" alt="book image" width="100px" height="135px">
+                        {{-- relación de imágenes: 0.75 --}}
                         <img class="editable-form img_editable" hidden id="img_edit{{ $book->id }}" class="img_editable" src="{{ asset('storage_images/books/' . $book->image) }}" alt="book image" width="100px" height="100px">
                         <input name="image" type="file" hidden onchange="readImage(this, {{ $book->id }})" class="editable-form" id="image{{ $book->id }}" 
                         value="{{ $book->image }}" accept="image/*">
