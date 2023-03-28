@@ -275,6 +275,11 @@
                         {{-- <input type="text" hidden class="editable-form" id="image{{ $book->id }}" value="{{ $book->image }}"> --}}
                     </td>
                     <td>
+                        {{-- file --}}
+                        <label for="file{{ $book->id }}" id="label{{ $book->id }}" class="">{{ substr($book->file, 0, 20) . "..." }}</label>
+                        <input name="file" type="file" hidden class="editable-form" id="file{{ $book->id }}" value="{{ $book->file }}">
+                    </td>
+                    <td>
                         <div style="display: flex">
                             <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $book->id }})"><i class="fa fa-edit"></i></button>
                             <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 

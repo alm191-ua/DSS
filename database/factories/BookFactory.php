@@ -27,7 +27,8 @@ class BookFactory extends Factory
             'category_id' => Category::all()->random()->id,  
             'description' => fake()->paragraph(),
             'image' => fake()->imageUrl(640, 480, 'books', true, 'Faker', true),
-            'isbn' => fake()->isbn13(),             
+            'isbn' => fake()->isbn13(), 
+            'file' => fake()->imageUrl(640, 480, 'books', true, 'Faker', true),
         ];
     }
 }

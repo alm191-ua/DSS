@@ -19,8 +19,15 @@ class BooksController extends Controller
         try{
             //get the book with the id passed as parameter
             $book = Book::findOrFail($id);
+            // 3 random books of the same category
+            $related_books = Book::where('category_id', $book->category_id)
+                ->where('id', '!=', $book->id)
+                ->inRandomOrder()
+                ->take(3)
+                ->get();
+
             //return the view with the book
-            return view('book-detail', ['book' => $book]);
+            return view('book-detail', compact('book', 'related_books'));
         }catch(\Exception $e){
             return redirect()->route('404');
         }
@@ -74,6 +81,8 @@ class BooksController extends Controller
         $book->delete();
         // delete image
         File::delete(storage_path('app/images/books/'.$image));
+        // delete file
+        File::delete(storage_path('app/books/'.$book->file));
         return redirect()->back()->withInput($request->page_num);
     }
 
@@ -85,6 +94,7 @@ class BooksController extends Controller
             'author' => 'required',
             'category' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'file' => 'file|mimes:pdf|max:131072',
         ]);
         try{
             $book = Book::findOrFail($id);
@@ -108,11 +118,44 @@ class BooksController extends Controller
                 $image->move(storage_path('app/images/books'), $imageName);
                 $book->image = $imageName;
             }
+
+            if ($request->hasFile('file')) {
+                // delete old file
+                File::delete(storage_path('app/books/'.$book->file));
+
+                // save new file
+                $file = $request->file;
+                $fileName = time().$file->getClientOriginalName();
+                $file->move(storage_path('app/books'), $fileName);
+                $book->file = $fileName;
+            }
             $book->save();
             return redirect()->back()->withInput($request->page_num);
 
         }catch(\Exception $e){
             return redirect()->back()->withInput($request->page_num);
+        }
+    }
+
+    public function download($id)
+    {
+        try{
+            $book = Book::findOrFail($id);
+            $file = storage_path('app/books/'.$book->file);
+            return response()->download($file);
+        }catch(\Exception $e){
+            return redirect()->route('404');
+        }
+    }
+
+    public function showFile($id)
+    {
+        try{
+            $book = Book::findOrFail($id);
+            $file = storage_path('app/books/'.$book->file);
+            return response()->file($file);
+        }catch(\Exception $e){
+            return redirect()->route('404');
         }
     }
 
