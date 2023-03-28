@@ -29,7 +29,19 @@
                     <div class="widget widget-search">
                         <h2>Search</h2>
                     	<div class="input-container">
-                    		<input type="text" placeholder="Enter Keyword" onchange="window.location.replace('?search=' + this.value);">
+                    		<input type="text" placeholder="Enter Keyword" 
+                                onchange="
+                                // // con este codigo puedes añadir varios parámetros a la url
+                                // const {
+                                //     host, hostname, href, origin, pathname, port, protocol, search
+                                // } = window.location;
+                                // let url = origin + pathname + search;
+                                // let params = new URLSearchParams(search);
+                                // params.set('search', this.value);
+                                // url = origin + pathname + '?' + params.toString();
+                                // window.location.replace(url);
+                                window.location.replace('?search=' + this.value);
+                                ">
                             <i class="fa fa-search"></i>
                         </div>
                     </div>
