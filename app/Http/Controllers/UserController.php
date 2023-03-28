@@ -8,10 +8,10 @@ class UserController extends Controller
 {
     public function login()
     {
-        return view('user');
+        return view('userLogin');
     }
     public function register()
     {
-        return view('user');
+        return view('userRegist');
     }
 }
