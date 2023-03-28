@@ -44,6 +44,15 @@
     }
 
     function changeMain(main_num) {
+        const {
+            host, hostname, href, origin, pathname, port, protocol, search
+        } = window.location;
+        let url = origin + pathname + search;
+        let params = new URLSearchParams(search);
+        params.set('page_num', main_num);
+        url = origin + pathname + '?' + params.toString();
+        window.history.replaceState(null, null, url);
+        
         let mains = $('.main');
         for (let i = 0; i < mains.length; i++) {
             $(mains[i]).hide();

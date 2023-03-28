@@ -15,20 +15,50 @@ class BooksController extends Controller
     //index function to show the book with the id passed as parameter
     public function index($id)
     {
-        return view('book-detail'); // esto es para probar, cambiarlo por lo de abajo
-        // try{
-        //     //get the book with the id passed as parameter
-        //     $book = Book::findOrFail($id);
-        //     //return the view with the book
-        //     return view('book', ['book' => $book]);
-        // }catch(\Exception $e){
-        //     return redirect()->route('home');
-        // }
+        // return view('book-detail'); // esto es para probar, cambiarlo por lo de abajo
+        try{
+            //get the book with the id passed as parameter
+            $book = Book::findOrFail($id);
+            //return the view with the book
+            return view('book-detail', ['book' => $book]);
+        }catch(\Exception $e){
+            return redirect()->route('404');
+        }
     }
 
     public function list()
     {
-        return view('books-list');
+        $PER_PAGE = 21;
+
+        $queryBooks = Book::orderBy('title', 'asc');
+
+        $category = request()->query('category');
+        // if category exists, filter query
+        if ($category) {
+            $queryBooks->whereHas('category', function ($query) use ($category) {
+                return $query->where('tag', $category);
+            });
+        }
+
+        $search = request()->query('search');
+        // if search exists, filter query
+        if ($search) {
+            $queryBooks->where('title', 'like', '%'.$search.'%')
+            ->orWhereHas('author', function ($query) use ($search) {
+                return $query->where('name', 'like', '%'.$search.'%');
+            });
+        }
+
+        $books = $queryBooks->paginate(
+            $perPage = $PER_PAGE,
+            // all columns except created_at, updated_at, deleted_at, isbn, description
+            $columns = ['id', 'title', 'author_id', 'category_id', 'image'],
+            $pageName = 'books',
+        )->withQueryString();
+
+        $new_arrivals = Book::orderBy('created_at', 'desc')->take(3)->get();
+
+        return view('books-list', compact('books', 'new_arrivals'));
     }
 
     //create function to show the form to create a new book
@@ -49,15 +79,15 @@ class BooksController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required|max:1000',
+            'author' => 'required',
+            'category' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
         try{
             $book = Book::findOrFail($id);
-            $request->validate([
-                'title' => 'required|max:255',
-                'description' => 'required|max:1000',
-                'author' => 'required',
-                'category' => 'required',
-                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
             $book->title = $request->title;
             $book->description = $request->description;
             

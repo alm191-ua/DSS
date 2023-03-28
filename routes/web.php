@@ -21,6 +21,9 @@ Route::group(['middleware' => 'language'], function () {
     // Route::post('/book/create', [App\Http\Controllers\BookController::class, 'store'])->name('book.store');
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/404', function () {
+        return view('errors.404');
+    })->name('404');
     Route::get('/terms', function () {
         return view('terms');
     })->name('terms');

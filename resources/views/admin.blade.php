@@ -175,7 +175,7 @@
     
     {{-- Error messages --}}
     @if ($errors->any())
-        <ul>
+        <ul class="validation-errors">
         @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
         @endforeach
@@ -265,8 +265,11 @@
                         </select>    
                     </td>
                     <td>
-                        <img class="label-cell" src="{{ asset('storage_images/books/' . $book->image) }}" alt="book image" width="100px" height="100px">
-                        <img class="editable-form img_editable" hidden id="img_edit{{ $book->id }}" class="img_editable" src="{{ asset('storage_images/books/' . $book->image) }}" alt="book image" width="100px" height="100px">
+                        <img class="label-cell" src="{{ asset('storage_images/books/' . $book->image) }}" 
+                            onerror="this.src='{{ asset('storage_images/books/default.png') }}'"
+                            alt="book image" width="100px" height="135px">
+                        {{-- relación de imágenes: 0.75 --}}
+                        <img class="editable-form img_editable" hidden id="img_edit{{ $book->id }}" class="img_editable" src="{{ asset('storage_images/books/' . $book->image) }}" alt="book image" width="100px" height="135px">
                         <input name="image" type="file" hidden onchange="readImage(this, {{ $book->id }})" class="editable-form" id="image{{ $book->id }}" 
                         value="{{ $book->image }}" accept="image/*">
                         {{-- <input type="text" hidden class="editable-form" id="image{{ $book->id }}" value="{{ $book->image }}"> --}}
@@ -452,7 +455,16 @@
                     <td>{{ $user->email }}</td>
                     {{-- <td class="description-cell">{{ $book->description }}</td> --}}
                     <td>
-                        <i class='fa fa-{{ $user->is_admin === true ? "unlock" : "lock" }}'></i>
+                        <i onclick="
+                            if (this.classList.contains('fa-lock')) {
+                                this.classList.remove('fa-lock');
+                                this.classList.add('fa-unlock');
+                                alert('User is not admin. Trolled XD');
+                            } else {
+                                this.classList.remove('fa-unlock');
+                                this.classList.add('fa-lock');
+                            }
+                            " class='fa fa-{{ $user->is_admin === true ? "unlock" : "lock" }}'></i>
                     </td>
                     <td>
                         <button type="button" class="btn btn-primary">Edit</button>
