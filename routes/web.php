@@ -26,6 +26,9 @@ Route::group(['middleware' => 'language'], function () {
     })->name('terms');
     Route::get('/login', [App\Http\Controllers\UserController::class, 'login'])->name('login');
     Route::get('/register', [App\Http\Controllers\UserController::class, 'register'])->name('register');
+    Route::get('/books/create', [App\Http\Controllers\BooksController::class, 'create'])->name('book-create');
+    Route::get('/books/delete/{id}', [App\Http\Controllers\BooksController::class, 'delete', 'id'])->name('book-delete');
+    Route::put('/books/update/{id}', [App\Http\Controllers\BooksController::class, 'update', 'id'])->name('book-edit');
     Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
     Route::get('/books', [App\Http\Controllers\BooksController::class, 'list'])->name('books-list');
     Route::get('/aboutus', [App\Http\Controllers\AboutusController::class, 'index'])->name('aboutus');

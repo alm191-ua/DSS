@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Category;
+use App\Models\Author;
+
+use Illuminate\Support\Facades\File;
+
 
 class BooksController extends Controller
 {
@@ -30,6 +35,55 @@ class BooksController extends Controller
     public function create()
     {
         return view('forms.book-create');
+    }
+
+    public function delete(Request $request, $id)
+    {
+        $book = Book::findOrFail($id);
+        $image = $book->image;
+        $book->delete();
+        // delete image
+        File::delete(storage_path('app/images/books/'.$image));
+        return redirect()->back()->withInput($request->page_num);
+    }
+
+    public function update(Request $request, $id)
+    {
+        try{
+            $book = Book::findOrFail($id);
+            $request->validate([
+                'title' => 'required|max:255',
+                'description' => 'required|max:1000',
+                'author' => 'required',
+                'category' => 'required',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $book->title = $request->title;
+            $book->description = $request->description;
+            
+            $author = Author::findOrFail($request->author);
+            $book->author()->associate($author);
+
+            $category = Category::find($request->category);
+            $book->category()->associate($category);
+            // dd($request->image);
+    
+            if ($request->hasFile('image')) {
+                // delete old image
+                File::delete(storage_path('app/images/books/'.$book->image));
+
+                // save new image
+                $image = $request->image;
+                $imageName = time().$image->getClientOriginalName();
+                $image->move(storage_path('app/images/books'), $imageName);
+                $book->image = $imageName;
+            }
+            $book->save();
+            return redirect()->back()->withInput($request->page_num);
+
+        }catch(\Exception $e){
+            return redirect()->back()->withInput($request->page_num);
+        }
     }
 
     /******* ESTO ES UN EJEMPLO DE COPILOT, NO FUNCIONA :) */
