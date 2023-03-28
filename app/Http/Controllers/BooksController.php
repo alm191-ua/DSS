@@ -15,15 +15,15 @@ class BooksController extends Controller
     //index function to show the book with the id passed as parameter
     public function index($id)
     {
-        return view('book-detail'); // esto es para probar, cambiarlo por lo de abajo
-        // try{
-        //     //get the book with the id passed as parameter
-        //     $book = Book::findOrFail($id);
-        //     //return the view with the book
-        //     return view('book', ['book' => $book]);
-        // }catch(\Exception $e){
-        //     return redirect()->route('home');
-        // }
+        // return view('book-detail'); // esto es para probar, cambiarlo por lo de abajo
+        try{
+            //get the book with the id passed as parameter
+            $book = Book::findOrFail($id);
+            //return the view with the book
+            return view('book-detail', ['book' => $book]);
+        }catch(\Exception $e){
+            return redirect()->route('404');
+        }
     }
 
     public function list()
