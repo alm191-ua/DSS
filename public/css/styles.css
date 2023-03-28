@@ -5975,9 +5975,11 @@ nav{
 	width:auto;
 	background-color:#ececec;
 	border:solid 1px #e2e2e2;
-	border-radius:100%;
+	border-radius: 10%;
 	line-height:34px;
 	color:#666;
+	padding-left: 2%;
+	padding-right: 2%;
 }
 .books-listing-3 .kode-caption a:hover{
 	color:#fff;

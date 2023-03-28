@@ -30,34 +30,35 @@ class BooksController extends Controller
     {
         $PER_PAGE = 21;
 
+        $queryBooks = Book::orderBy('title', 'asc');
+
         $category = request()->query('category');
         // if category exists, filter query
         if ($category) {
-            $books = Book::whereHas('category', function ($query) use ($category) {
-                $query->where('tag', $category);
-            })->paginate(
-                $perPage = $PER_PAGE,
-                // all columns except created_at, updated_at, deleted_at, isbn
-                $columns = ['id', 'title', 'author_id', 'category_id', 'image'],
-                $pageName = 'books',
-            )->withQueryString();
-        } else {
-            $books = Book::paginate(
-                $perPage = $PER_PAGE,
-                // all columns except created_at, updated_at, deleted_at, isbn
-                $columns = ['id', 'title', 'author_id', 'category_id', 'image'],
-                $pageName = 'books',
-            )->withQueryString();
+            $queryBooks->whereHas('category', function ($query) use ($category) {
+                return $query->where('tag', $category);
+            });
         }
 
-        // $books = Book::paginate(
-        //     $perPage = 21,
-        //     // all columns except created_at, updated_at, deleted_at, isbn
-        //     $columns = ['id', 'title', 'author_id', 'category_id', 'image'],
-        //     $pageName = 'books',
-        // )->withQueryString();
+        $search = request()->query('search');
+        // if search exists, filter query
+        if ($search) {
+            $queryBooks->where('title', 'like', '%'.$search.'%')
+            ->orWhereHas('author', function ($query) use ($search) {
+                return $query->where('name', 'like', '%'.$search.'%');
+            });
+        }
 
-        return view('books-list', compact('books'));
+        $books = $queryBooks->paginate(
+            $perPage = $PER_PAGE,
+            // all columns except created_at, updated_at, deleted_at, isbn, description
+            $columns = ['id', 'title', 'author_id', 'category_id', 'image'],
+            $pageName = 'books',
+        )->withQueryString();
+
+        $new_arrivals = Book::orderBy('created_at', 'desc')->take(3)->get();
+
+        return view('books-list', compact('books', 'new_arrivals'));
     }
 
     //create function to show the form to create a new book
@@ -78,15 +79,15 @@ class BooksController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required|max:1000',
+            'author' => 'required',
+            'category' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
         try{
             $book = Book::findOrFail($id);
-            $request->validate([
-                'title' => 'required|max:255',
-                'description' => 'required|max:1000',
-                'author' => 'required',
-                'category' => 'required',
-                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
             $book->title = $request->title;
             $book->description = $request->description;
             

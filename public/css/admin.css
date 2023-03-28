@@ -4,7 +4,12 @@
         height: 3em;
         opacity: 0;
     }
-    
+
+    .validation-errors {
+        color: red;
+        font-size: 1em;
+        margin-top: 1.2em;
+    }    
 
     .logo {
         position: fixed;
