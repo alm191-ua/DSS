@@ -1,39 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.style1')
 
 @section('title', 'Authors')
 
 @section('content')
+    @parent
 
-    <!--BANNER START-->
-    <div class="kode-inner-banner" style="background-color: #054a83">
-    	<div class="kode-page-heading">
-        	<h2>Author</h2>
-            <ol class="breadcrumb">
-              <li><a href="{{ route('home') }}">Home</a></li>
-              {{-- <li><a href="#">Books Guide</a></li> --}}
-              <li class="active">Author</li>
-            </ol>
-        </div>
-        <div class="container">
-        	<div class="banner-search">
-            	<div class="row">
-                	<div class="col-md-2">
-                    	<h2>Search<br> Your Books</h2>
-                    </div>
-                    <div class="col-md-6">
-                    	<input type="text" placeholder="Enter Your Title">
-                    </div>
-                    <div class="col-md-2">
-                    	<select></select>
-                    </div>
-                    <div class="col-md-2">
-                    	<button>Search</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--BANNER END-->
     <!--CONTENT START-->
     <div class="kode-content padding-tb-50">
         <!--TOP AUTHERS START-->

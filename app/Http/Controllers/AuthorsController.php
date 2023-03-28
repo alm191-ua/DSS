@@ -10,4 +10,9 @@ class AuthorsController extends Controller
     {
         return view('authors');
     }
+
+    public function show($id)
+    {
+        return view('author');
+    }
 }

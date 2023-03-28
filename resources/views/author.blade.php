@@ -1,37 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.style1')
 
 @section('title', 'Author Detail')
 
 @section('content')
-    <!--BANNER START-->
-    <div class="kode-inner-banner">
-    	<div class="kode-page-heading">
-        	<h2>Author Detail</h2>
-            <ol class="breadcrumb">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Books Guide</a></li>
-              <li class="active">Author Detail</li>
-            </ol>
-        </div>
-        <div class="container">
-        	<div class="banner-search">
-            	<div class="row">
-                	<div class="col-md-2">
-                    	<h2>Search<br> Your Books</h2>
-                    </div>
-                    <div class="col-md-6">
-                    	<input type="text" placeholder="Enter Your Title">
-                    </div>
-                    <div class="col-md-2">
-                    	<select></select>
-                    </div>
-                    <div class="col-md-2">
-                    	<button>Search</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @parent
+
     <!--CONTENT START-->
     <div class="kode-content">
         <!--AUTHOR DETAIL SECTION START-->
