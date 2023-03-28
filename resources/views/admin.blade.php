@@ -266,7 +266,7 @@
                     </td>
                     <td>
                         <img class="label-cell" src="{{ asset('storage_images/books/' . $book->image) }}" 
-                            onerror="this.src='{{ asset('storage_images/books/default.png') }}'"
+                            onerror="this.src='{{ asset('images/default.png') }}'"
                             alt="book image" width="100px" height="135px">
                         {{-- relación de imágenes: 0.75 --}}
                         <img class="editable-form img_editable" hidden id="img_edit{{ $book->id }}" class="img_editable" src="{{ asset('storage_images/books/' . $book->image) }}" alt="book image" width="100px" height="135px">

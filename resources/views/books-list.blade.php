@@ -62,7 +62,7 @@
                                     <div class="new-arrival">
                                         <div class="kode-thumb">
                                             <a href="#"><img src="{{ asset('storage_images/books/' . $book->image) }}" 
-                                                onerror="this.src = '{{ asset('storage_images/books/default.png') }}';"
+                                                onerror="this.src = '{{ asset('images/default.png') }}';"
                                                 width="150px" height="200px" alt="book image"></a>
                                         </div>
                                         <div class="kode-text">
@@ -172,7 +172,7 @@
                                 <div class="books-listing-3">
                                     <div class="kode-thumb">
                                         <a href="{{ route('book', $book->id) }}"><img src="{{ asset('storage_images/books/' . $book->image) }}" 
-                                            onerror="this.src = '{{ asset('storage_images/books/default.png') }}';" alt="book image" width="269" height="361"></a>
+                                            onerror="this.src = '{{ asset('images/default.png') }}';" alt="book image" width="269" height="361"></a>
                                     </div>
                                     <div class="kode-text">
                                         {{-- <p class="price">$80.75<span>90.75$</span></p> --}}
