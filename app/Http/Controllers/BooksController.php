@@ -44,7 +44,7 @@ class BooksController extends Controller
         // if category exists, filter query
         if ($category) {
             Log::info('category: '.$category);
-            $queryBooks = $queryBooks->whereHas('category', function ($query) use ($category) {
+            $queryBooks->whereHas('category', function ($query) use ($category) {
                 return $query->where('tag', $category);
             });
             Log::info('count: '.$queryBooks->count());
@@ -54,10 +54,16 @@ class BooksController extends Controller
         // if search exists, filter query
         if ($search) {
             Log::info('search: '.$search);
-            $queryBooks = $queryBooks->where('title', 'like', '%'.$search.'%')
+            $queryBooks->where('title', 'like', '%'.$search.'%')
             ->orWhereHas('author', function ($query) use ($search) {
                 return $query->where('name', 'like', '%'.$search.'%');
             });
+            // $queryBooks->where(function(Builder $query1) {
+            //     $query1->where('title', 'like', '%'.$search.'%')
+            //     ->orWhereHas('author', function ($query) use ($search) {
+            //         return $query->where('name', 'like', '%'.$search.'%');
+            //     })
+            // });
             Log::info('count: '.$queryBooks->count());
         }
 
