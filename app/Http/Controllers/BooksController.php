@@ -159,37 +159,53 @@ class BooksController extends Controller
         }
     }
 
-    /******* ESTO ES UN EJEMPLO DE COPILOT, NO FUNCIONA :) */
-    // //store function to save the new book in the database
-    // public function store(Request $request)
-    // {
-    //     //validate the request
-    //     $request->validate([
-    //         'title' => 'required',
-    //         'author' => 'required',
-    //         'description' => 'required',
-    //         'price' => 'required',
-    //         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //     ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required|max:1000',
+            'author' => 'required',
+            'category' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'file' => 'file|mimes:pdf|max:8192',
+        ]);
+        try{
+            //$book = Book::findOrFail($id);
+            //No hace falta ya que se crea un nuevo libro
+            $book = new Book();
+            $book->title = $request->title;
+            $book->description = $request->description;
+            
+            $author = Author::findOrFail($request->author);
+            $book->author()->associate($author);
 
-    //     //get the image from the request
-    //     $image = $request->file('image');
-    //     //get the image name
-    //     $imageName = time().'.'.$image->extension();
-    //     //move the image to the public folder
-    //     $image->move(public_path('images'), $imageName);
+            $category = Category::find($request->category);
+            $book->category()->associate($category);
+            // dd($request->image);
+    
+            if ($request->hasFile('image')) 
+            {
+                // save new image
+                $image = $request->image;
+                $imageName = time().$image->getClientOriginalName();
+                $image->move(storage_path('app/images/books'), $imageName);
+                $book->image = $imageName;
+            }
 
-    //     //create a new book with the data from the request
-    //     $book = new Book([
-    //         'title' => $request->get('title'),
-    //         'author' => $request->get('author'),
-    //         'description' => $request->get('description'),
-    //         'price' => $request->get('price'),
-    //         'image' => $imageName,
-    //     ]);
-    //     //save the book in the database
-    //     $book->save();
-    //     //redirect to the home page
-    //     return redirect()->route('home');
-    // }
+            if ($request->hasFile('file')) 
+            {
+                // save new file
+                $file = $request->file;
+                $fileName = time().$file->getClientOriginalName();
+                $file->move(storage_path('app/books'), $fileName);
+                $book->file = $fileName;
+            }
+            $book->save();
+            return redirect()->back()->withInput($request->page_num);
+
+        }catch(\Exception $e){
+            return redirect()->back()->withInput($request->page_num);
+        }
+    }
+
 }
