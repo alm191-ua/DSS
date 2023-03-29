@@ -30,6 +30,7 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/login', [App\Http\Controllers\UserController::class, 'login'])->name('login');
     Route::get('/register', [App\Http\Controllers\UserController::class, 'register'])->name('register');
     Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
+    Route::get('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'edit', 'id'])->name('user-edit');
     Route::get('/books/create', [App\Http\Controllers\BooksController::class, 'create'])->name('book-create');
     Route::get('/books/delete/{id}', [App\Http\Controllers\BooksController::class, 'delete', 'id'])->name('book-delete');
     Route::put('/books/update/{id}', [App\Http\Controllers\BooksController::class, 'update', 'id'])->name('book-edit');

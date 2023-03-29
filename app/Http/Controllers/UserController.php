@@ -18,4 +18,8 @@ class UserController extends Controller
     {
         return view('userProfile');
     }
+    public function edit($id)
+    {
+        return view('userEdit');
+    }
 }
