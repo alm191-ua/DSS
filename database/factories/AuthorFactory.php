@@ -25,8 +25,7 @@ class AuthorFactory extends Factory
             // Añaade los campos que necesites
             'name' => $this->faker->name,
             'info' => $this->faker->paragraph(),
-
-
+            'image' => $this->faker->imageUrl(200, 200, 'people', true, 'Faker'),
         ];
     }
 }

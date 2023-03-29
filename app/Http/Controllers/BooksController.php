@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Author;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 
 class BooksController extends Controller
@@ -42,18 +43,22 @@ class BooksController extends Controller
         $category = request()->query('category');
         // if category exists, filter query
         if ($category) {
-            $queryBooks->whereHas('category', function ($query) use ($category) {
+            Log::info('category: '.$category);
+            $queryBooks = $queryBooks->whereHas('category', function ($query) use ($category) {
                 return $query->where('tag', $category);
             });
+            Log::info('count: '.$queryBooks->count());
         }
 
         $search = request()->query('search');
         // if search exists, filter query
         if ($search) {
-            $queryBooks->where('title', 'like', '%'.$search.'%')
+            Log::info('search: '.$search);
+            $queryBooks = $queryBooks->where('title', 'like', '%'.$search.'%')
             ->orWhereHas('author', function ($query) use ($search) {
                 return $query->where('name', 'like', '%'.$search.'%');
             });
+            Log::info('count: '.$queryBooks->count());
         }
 
         $books = $queryBooks->paginate(
@@ -94,7 +99,7 @@ class BooksController extends Controller
             'author' => 'required',
             'category' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            // 'file' => 'file|mimes:pdf|max:131072',
+            'file' => 'file|mimes:pdf|max:8192',
         ]);
         try{
             $book = Book::findOrFail($id);
