@@ -4,272 +4,15 @@
 
 @section('content')
 
-<style>
-    .header-space {
-    }
-
-    .void-space {
-        text-align: center;
-        height: 3em;
-        opacity: 0;
-    }
-    
-    header {
-        /* position: fixed; */
-        /* margin-left: 15%; */
-        /* padding-left: 15%; */
-        /* padding-right: 15%; */
-        /* width: 100%; */
-    }
-
-    .logo {
-        position: fixed;
-    }
-
-    .copyrights {
-        position: sticky;
-        z-index: 3;
-        margin: 0;
-        /* margin-top: 2.5em; */
-        padding-left: 2%;
-        /* margin-top: auto; */
-    }
-
-    body {
-        background-color: #253341;
-        margin-left: 15%;
-    }
-
-    /* ---------- */
-    .sidenav {
-        /* margin-top: 10%; */
-        height: 100%;
-        width: 17%;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #111;
-        overflow-x: hidden;
-        padding-top: 10%;
-    }
-
-    .sidenav a {
-        padding: 6px 6px 6px 32px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-    }
-
-    .sidenav a:hover {
-        color: #f1f1f1;
-    }
-
-    .main {
-        min-height: 29.8em;
-        color: white;
-        margin-left: 5%; /* Same as the width of the sidenav */
-    }
-
-    @media screen and (max-height: 450px) {
-        .sidenav {padding-top: 15px;}
-        .sidenav a {font-size: 18px;}
-    }
-
-    tr:nth-child(even){
-        background-color: #394756;
-    }
-
-    tr:nth-child(odd){
-        /* background-color: red; */
-    }
-
-    .btn-order {
-        background-color: #394756;
-        color: white;
-        border: none;
-        padding: 2px;
-        padding-left: 4px;
-        padding-right: 4px;
-        margin: 2px;
-        margin-left: 15px;
-    }
-
-    .btn {
-        height: 25px;
-        font-size: 12px;
-        text-align: center;
-    }
-
-    .filter-bar {
-        margin-top: 1em;
-        margin-bottom: 1em;
-        color : black;
-    }
-
-    th {
-        /* min-width: 10em; */
-        white-space: nowrap;
-    }
-
-    td {
-        max-width: 15em;
-        word-wrap: break-word;
-    }
-
-    table {
-        width: 100%;
-        max-width: 800px;
-        overflow-x: auto;
-        border-collapse: collapse;
-    }
-
-    h2 {
-        color: white;
-    }
-
-    /* @media (max-width: 800px) {
-        th, td {
-            display: block;
-            width: 100%;
-        }
-    } */
-
-</style>
-
-@php
-    // $page_num = $_GET['page_num'] ?? 0;
-    $_SESSION['page_num'] = $_GET['page_num'] ?? 0;
-@endphp
+{{-- link styles --}}
+<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+{{-- link script --}}
+<script src="{{ asset('js/admin.js') }}"></script>
 
 <form name="form" method="get" action="">
-    <input type="hidden" id="page_num" name="page_num" value="{{ $_SESSION['page_num'] }}">
+    <input type="hidden" id="page_num" name="page_num" value="{{ $_GET['page_num'] ?? 0 }}">
 </form>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script language="javascript">
-    document.onload = console.log('loaded');
-    var view;
-
-    function firstPage(view) {
-        view = document.getElementById('page_num').value;
-        console.log(view);
-        changeMain(view);
-    }
-
-    function changeTable() {
-        $('#table1').toggle();
-        $('#table2').toggle();
-    }
-
-    function changeMain(main_num) {
-        let mains = $('.main');
-        for (let i = 0; i < mains.length; i++) {
-            $(mains[i]).hide();
-            console.log(mains[i]);
-            view = main_num;
-            $('#page_num').val(main_num);
-
-        }
-        $(mains[main_num]).show();
-    }
-
-    // function initOrderButtons() {
-    //     const buttons = document.getElementsByClassName("btn-order");
-    //     for (let button of buttons) {
-    //         button.addEventListener("click", orderTable);
-    //     }
-    // }
-
-    function orderTable(table_num, col, are_numbers = false) {
-        console.log(table_num, col);
-        let table, rows, switching, i, x, y, shouldSwitch;
-        // get the table to order from the button pressed, target id 
-        // table = document.getElementById(this.id.slice(0, -1));
-        let main = $('.main')[view];
-        let tables = $(main).find('table');
-        // console.log(tables);
-        table = tables; //$(tables[table_num]);
-        // console.log(table);
-        switching = true;
-        /* Make a loop that will continue until
-        no switching has been done: */
-        while (switching) {
-            // Start by saying: no switching is done:
-            switching = false;
-            // rows = table.rows;
-            rows = $(table).find('tbody tr');
-            // console.log(table.rows);
-            /* Loop through all table rows (except the
-            first, which contains table headers): */
-            for (i = 0; i < (rows.length - 1); i++) {
-                // Start by saying there should be no switching:
-                shouldSwitch = false;
-                /* Get the two elements you want to compare,
-                one from current row and one from the next: */
-                // console.log(id);
-                x = $(rows[i]).find('td')[col];
-                y = $(rows[i + 1]).find('td')[col];
-                // Check if the two rows should switch place:
-                if (are_numbers) {
-                    if (Number(x.innerHTML) > Number(y.innerHTML)) {
-                        // If so, mark as a switch and break the loop:
-                        shouldSwitch = true;
-                        break;
-                    }
-                } else if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                    // If so, mark as a switch and break the loop:
-                    shouldSwitch = true;
-                    break;
-                }
-            }
-            if (shouldSwitch) {
-                /* If a switch has been marked, make the switch
-                and mark that a switch has been done: */
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-            }
-        }
-    }
-
-    // sync the searcg bar with the table
-    function searchTable() {
-        // get the value of the search bar
-        let input = $('#searchBar').val();
-        input = input.toLowerCase();
-        // get table not hidden
-        let main = $('.main')[view];
-        let tables = $(main).find('.table');
-        let table;
-        for (let i = 0; i < tables.length; i++) {
-            if (!tables[i].hidden) {
-                table = tables[i];
-                break;
-            }
-        }
-        // let table = document.getElementsByClassName("table")[table_num];
-        // use jquery to get the table
-        let tr = $(table).find('tr');
-        for (let i = 0; i < tr.length; i++) {
-            let td = $(tr[i]).find('td');
-            for (let j = 0; j < td.length; j++) {
-                let txtValue = td[j].textContent || td[j].innerText;
-                if (txtValue.toLowerCase().indexOf(input) > -1) {
-                    $(tr[i]).show();
-                    break;
-                } else {
-                    $(tr[i]).hide();
-                }
-            }
-            
-        }
-    }
-</script>
-
-{{-- @php
-    echo '<script>changeMain(' . $page_num . ');</script>';
-@endphp --}}
 
 <div class="header-space">
     <h1 class="void-space"></h1>
@@ -289,6 +32,27 @@
     <a href="#" onclick="changeMain(5)">Users</a>
     <a href="#" onclick="changeMain(6)">Categories</a>
     <a href="#" onclick="changeMain(7)">Settings</a>
+</div>
+
+<div id="responsive-sidenav" class="responsive-sidenav">
+    <div class="dropdown">
+        <button class="dropbtn" onclick="togglePagesLinks()">Pages</button>
+        <div hidden class="dropdown-content">
+            {{-- <a href="#" onclick="
+                if ($('#test-main').hidden){
+                    changeMain(0);
+                }else{
+                    changeTable();
+                }">Test Boards</a> --}}
+            <a href="#" onclick="changeMain(1)">Statistics</a>
+            <a href="#" onclick="changeMain(2)">Books</a>
+            <a href="#" onclick="changeMain(3)">Authors</a>
+            <a href="#" onclick="changeMain(4)">Suggestions</a>
+            <a href="#" onclick="changeMain(5)">Users</a>
+            <a href="#" onclick="changeMain(6)">Categories</a>
+            <a href="#" onclick="changeMain(7)">Settings</a>
+        </div>
+    </div>
 </div>
   
 <div class="main" id="test-main" hidden>
@@ -349,15 +113,15 @@
             <th scope="col">#</th>
             <th scope="col">
                 hello
-                <button type="button" class="fa fa-sort btn-order" id="btn1" onclick="orderTable(1, 0)"></button>
+                <button type="button" class="fa fa-sort btn-order" id="btn1" onclick="orderTable(1, 1)"></button>
             </th>
             <th scope="col">
                 Last
-                <button type="button" class="fa fa-sort btn-order" id="btn2" onclick="orderTable(1, 1)"></button>
+                <button type="button" class="fa fa-sort btn-order" id="btn2" onclick="orderTable(1, 2)"></button>
             </th>
             <th scope="col">
                 Handle
-                <button type="button" class="fa fa-sort btn-order" id="btn3" onclick="orderTable(1, 2)"></button>
+                <button type="button" class="fa fa-sort btn-order" id="btn3" onclick="orderTable(1, 3)"></button>
             </th>
             <th scope="col">Manage</th>
           </tr>
@@ -371,7 +135,7 @@
             {{-- create 2 buttons to edit and delete --}}
             <td>
                 <button type="button" class="btn btn-primary">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
             </td>
           </tr>
           <tr>
@@ -381,7 +145,7 @@
             <td>@fat</td>
             <td>
                 <button type="button" class="btn btn-primary">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
             </td>
           </tr>
           <tr>
@@ -391,7 +155,7 @@
             <td>@twitter</td>
             <td>
                 <button type="button" class="btn btn-primary">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -405,12 +169,28 @@
 
 <div class="main" name="books" hidden>
     <h2>Books Admin</h2>
+
+    {{-- create book button --}}
+    <a id="create_button" type="button" class="button btn-primary" href="{{ route('book-create') }}" ><i class="fa fa-plus"></i> {{ __('admin.create-book') }}</a> 
+    
+    {{-- Error messages --}}
+    @if ($errors->any())
+        <ul class="validation-errors">
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    @endif
+    
+    <div class="responsive-pagination">
+        {{ $books->appends(array('page_num' => 2, ))->links() }}
+    </div>
     <table class="table table-striped table-dark">
         <thead>
           <tr>
             <th scope="col">#</th>
             @php 
-                $i = 0;
+                $i = 1;
             @endphp
             @if (count($books) > 0)
                 @foreach ($books[0]->getAttributes() as $key => $value)
@@ -441,26 +221,87 @@
             
             @foreach ($books as $book)
                 <tr>
-                    <th scope="row">{{ $book->id }}</th>
-                    <td>{{ $book->title }}</td>
-                    <td>{{ substr($book->description, 0, 50) . "..." }}</td>
-                    {{-- <td class="description-cell">{{ $book->description }}</td> --}}
-                    <td>{{ $book->author->name }}</td>
-                    <td>{{ $book->category->tag }}</td>
-                    <td>{{ $book->image }}</td>
+                <form action={{ route('book-edit', $book->id) }} 
+                    method="POST" id="form{{ $book->id }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                    <td scope="row">{{ $book->id }}</td>
                     <td>
-                        <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        {{-- label --}}
+                        <label for="title{{ $book->id }}" id="label{{ $book->id }}" class="label-cell">{{ $book->title }}</label>
+                        {{-- editable --}}
+                        <input name="title" type="text" hidden class="editable-form" id="title{{ $book->id }}" value="{{ $book->title }}">
                     </td>
+                    <td>
+                        <label for="description{{ $book->id }}" id="label{{ $book->id }}" class="label-cell">{{ substr($book->description, 0, 50) . "..." }}</label>
+                        <input name="description" type="text" hidden class="editable-form" id="description{{ $book->id }}" value="{{ $book->description }}">
+                    </td>
+                    <td>
+                        <label for="author{{ $book->id }}" id="label{{ $book->id }}" class="label-cell">{{ $book->author->name }}</label>
+                        {{-- desplegable con los autores --}}
+                        <select name="author" id="author{{ $book->id }}" class="editable-form" hidden>
+                            @foreach ($all_authors as $author)
+                                @if ($author->id == $book->author->id)
+                                    <option value="{{ $author->id }}" selected>{{ $author->name }}</option>
+                                @else
+                                    <option value="{{ $author->id }}">{{ $author->name }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        {{-- <input type="text" hidden class="editable-form" id="author{{ $book->id }}" value="{{ $book->author->name }}"> --}}
+                    </td>
+                    <td>
+                        <label for="category{{ $book->id }}" id="label{{ $book->id }}" class="label-cell">{{ $book->category->tag }}</label>
+                        {{-- desplegable con las categorias --}}
+                        <select name="category" id="category{{ $book->id }}" class="editable-form" hidden>
+                            @foreach ($all_categories as $category)
+                                @if ($category->id == $book->category->id)
+                                    <option value="{{ $category->id }}" selected>{{ $category->tag }}</option>
+                                @else
+                                    <option value="{{ $category->id }}">{{ $category->tag }}</option>
+                                @endif
+                            @endforeach
+                        </select>    
+                    </td>
+                    <td>
+                        <img class="label-cell" src="{{ asset('storage_images/books/' . $book->image) }}" 
+                            onerror="this.src='{{ asset('images/default.png') }}'"
+                            alt="book image" width="100px" height="135px">
+                        {{-- relación de imágenes: 0.75 --}}
+                        <img class="editable-form img_editable" hidden id="img_edit{{ $book->id }}" class="img_editable" src="{{ asset('storage_images/books/' . $book->image) }}" alt="book image" width="100px" height="135px">
+                        <input name="image" type="file" hidden onchange="readImage(this, {{ $book->id }})" class="editable-form" id="image{{ $book->id }}" 
+                        value="{{ $book->image }}" accept="image/*">
+                        {{-- <input type="text" hidden class="editable-form" id="image{{ $book->id }}" value="{{ $book->image }}"> --}}
+                    </td>
+                    <td>
+                        {{-- file --}}
+                        <label for="file{{ $book->id }}" id="label{{ $book->id }}" class="">{{ substr($book->file, 0, 20) . "..." }}</label>
+                        <input name="file" type="file" hidden class="editable-form" id="file{{ $book->id }}" value="{{ $book->file }}">
+                    </td>
+                    <td>
+                        <div style="display: flex">
+                            <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $book->id }})"><i class="fa fa-edit"></i></button>
+                            <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
+                                href="{{route('book-delete', $book->id)}}"><i class="fa fa-trash"></i></a>
+                        </div>
+
+                        <div style="display: inline-flex">
+                            <button type="submit" class="editable-form btn btn-success" onmouseup="editMode({{ $book->id }})">
+                                <i class="fa fa-check"></i>
+                            <button type="button" class="editable-form btn btn-danger" onclick="editMode({{ $book->id }})">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </td>
+                </form>
                 </tr>
             @endforeach
           
         </tbody>
     </table>
-    {{-- {{echo: $_GET['page_num'];}}  --}}
-    {{         
-        $books->appends(array('page_num' => 2, request()->except('page_num', 'books')))->links()
-    }}
+    
+    {{ $books->appends(array('page_num' => 2, ))->links() }}
 </div>
 
 <div class="main" name="authors" hidden>
@@ -470,7 +311,7 @@
           <tr>
             <th scope="col">#</th>
             @php 
-                $i = 0;
+                $i = 1;
             @endphp
             @if (count($authors) > 0)
                 @foreach ($authors[0]->getAttributes() as $key => $value)
@@ -501,13 +342,13 @@
             
             @foreach ($authors as $author)
                 <tr>
-                    <th scope="row">{{ $author->id }}</th>
+                    <td scope="row">{{ $author->id }}</td>
                     <td>{{ $author->name }}</td>
                     <td>{{ substr($author->info, 0, 50) . "..." }}</td>
                     {{-- <td>{{ $book->image }}</td> --}}
                     <td>
                         <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
                     </td>
                 </tr>
             @endforeach
@@ -515,7 +356,7 @@
         </tbody>
     </table>
     {{         
-        $authors->appends(array('page_num' => 3, request()->except('page_num', 'authors')))->links()
+        $authors->appends(array('page_num' => 3, ))->links()
     }}
 </div>
 
@@ -526,7 +367,7 @@
           <tr>
             <th scope="col">#</th>
             @php 
-                $i = 0;
+                $i = 1;
                 // dd($suggestions);
             @endphp
             @if (count($suggestions) > 0)
@@ -558,13 +399,13 @@
             
             @foreach ($suggestions as $suggestion)
                 <tr>
-                    <th scope="row">{{ $suggestion->id }}</th>
+                    <td scope="row">{{ $suggestion->id }}</td>
                     <td>{{ $suggestion->email }}</td>
                     <td>{{ $suggestion->phone }}</td>
                     <td>{{ substr($suggestion->message, 0, 50) . "..." }}</td>
                     <td>
                         <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
                     </td>
                 </tr>
             @endforeach
@@ -572,7 +413,7 @@
         </tbody>
     </table>
     {{         
-        $suggestions->appends(array('page_num' => 4, request()->except('page_num', 'suggestions')))->links()
+        $suggestions->appends(array('page_num' => 4, ))->links()
     }}
 </div>
 
@@ -583,7 +424,7 @@
           <tr>
             <th scope="col">#</th>
             @php 
-                $i = 0;
+                $i = 1;
             @endphp
             @if (count($users) > 0)
                 @foreach ($users[0]->getAttributes() as $key => $value)
@@ -614,16 +455,25 @@
             
             @foreach ($users as $user)
                 <tr>
-                    <th scope="row">{{ $user->id }}</th>
+                    <td scope="row">{{ $user->id }}</td>
                     <td>{{ $user->username }}</td>
                     <td>{{ $user->email }}</td>
                     {{-- <td class="description-cell">{{ $book->description }}</td> --}}
-                    <td>{{ 
-                        $user->is_admin == 1 ? "Admin" : "User" 
-                    }}</td>
+                    <td>
+                        <i onclick="
+                            if (this.classList.contains('fa-lock')) {
+                                this.classList.remove('fa-lock');
+                                this.classList.add('fa-unlock');
+                                alert('User is not admin. Trolled XD');
+                            } else {
+                                this.classList.remove('fa-unlock');
+                                this.classList.add('fa-lock');
+                            }
+                            " class='fa fa-{{ $user->is_admin === true ? "unlock" : "lock" }}'></i>
+                    </td>
                     <td>
                         <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
                     </td>
                 </tr>
             @endforeach
@@ -631,7 +481,7 @@
         </tbody>
     </table>
     {{         
-        $users->appends(array('page_num' => 5, request()->except('page_num', 'users')))->links()
+        $users->appends(array('page_num' => 5, ))->links()
     }}
 </div>
 
@@ -640,22 +490,20 @@
     <table class="table table-striped table-dark">
         <thead>
           <tr>
-            {{-- <th scope="col">#</th> --}}
+            <th scope="col">#</th>
             @php 
-                $i = 0;
+                $i = 1;
             @endphp
             @if (count($categories) > 0)
                 @foreach ($categories[0]->getAttributes() as $key => $value)
                     @if ($key == 'id') 
-                        <th scope="col" style="max-width: 30px;">
-                            {{ $key }}
-                            {{-- get number of column --}}
-                            <button type="button" class="fa fa-sort btn-order" onclick="orderTable(5, {{ $i }}, true)"></button>
-                            @php
-                                $i++;
-                            @endphp
-                        </th>
                         @continue
+                    @endif
+                    {{-- if ends with _id erase _id --}}
+                    @if (substr($key, -3) == '_id')
+                        @php
+                            $key = substr($key, 0, -3);
+                        @endphp
                     @endif
                     <th scope="col">
                         {{ $key }}
@@ -679,33 +527,78 @@
                     <td>{{ $category->tag }}</td>
                     <td>
                         <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
                     </td>
                 </tr>
             @endforeach
           
         </tbody>
     </table>
-    {{-- <script>
-        console.log("{{ Request::capture()->except('page') }}");
-        
-    </script> --}}
-    {{
-        // $my_dict = array('page_num' => 6);
-        // foreach (Request::capture()->except('page') as $key => $value) {
-        //     $my_dict[$key] = $value;
-        // }
-        // $categories->appends(my_dict)->links()
-        $categories->appends(array('page_num' => 6, request()->except('page_num', 'categories')))->links()
+    {{         
+        $users->appends(array('page_num' => 6, ))->links()
     }}
 </div>
+
+{{-- <div class="main" name="categories" hidden>
+    <h2>Categories Admin</h2>
+    <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            @php 
+                $i = 1;
+            @endphp
+            @if (count($categories) > 0)
+                @foreach ($categories[0]->getAttributes() as $key => $value)
+                    @if ($key == 'id') 
+                        <th scope="col" style="max-width: 30px;">
+                            {{ $key }}
+                            <button type="button" class="fa fa-sort btn-order" onclick="orderTable(5, {{ $i }}, true)"></button>
+                            @php
+                                $i++;
+                            @endphp
+                        </th>
+                        @continue
+                    @endif
+                    <th scope="col">
+                        {{ $key }}
+                        <button type="button" class="fa fa-sort btn-order" onclick="orderTable(5, {{ $i }})"></button>
+                        @php
+                            $i++;
+                        @endphp
+                    </th>
+                @endforeach
+            
+            @endif
+            <th scope="col">Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            @foreach ($categories as $category)
+                <tr>
+                    <td scope="row">{{ $category->id }}</td>
+                    <td>{{ $category->tag }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
+                    </td>
+                </tr>
+            @endforeach
+          
+        </tbody>
+    </table>
+
+    {{
+        $categories->appends(array('page_num' => 6, ))->links()
+    }}
+</div> --}}
 
 <div class="main" name="settings" hidden>
     <h2>Settings</h2>
 </div>
 
 <script type="text/javascript">
-    document.onload = firstPage(view);
+    document.onload = init(view);
 </script>
 
 @endsection

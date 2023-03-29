@@ -21,9 +21,15 @@ Route::group(['middleware' => 'language'], function () {
     // Route::post('/book/create', [App\Http\Controllers\BookController::class, 'store'])->name('book.store');
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/404', function () {
+        return view('errors.404');
+    })->name('404');
     Route::get('/terms', function () {
         return view('terms');
     })->name('terms');
+    Route::get('/books/create', [App\Http\Controllers\BooksController::class, 'create'])->name('book-create');
+    Route::get('/books/delete/{id}', [App\Http\Controllers\BooksController::class, 'delete', 'id'])->name('book-delete');
+    Route::put('/books/update/{id}', [App\Http\Controllers\BooksController::class, 'update', 'id'])->name('book-edit');
     Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
     Route::get('/books', [App\Http\Controllers\BooksController::class, 'list'])->name('books-list');
     Route::get('/aboutus', [App\Http\Controllers\AboutusController::class, 'index'])->name('aboutus');
@@ -31,6 +37,8 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/authors', [App\Http\Controllers\AuthorsController::class, 'index'])->name('authors');
     Route::get('/contactus', [App\Http\Controllers\ContactusController::class, 'index'])->name('contactus');
     Route::get('/book/{id}', [App\Http\Controllers\BooksController::class, 'index', 'id'])->name('book');
+    Route::get('/book/download/{id}', [App\Http\Controllers\BooksController::class, 'download', 'id'])->name('book-download');
+    Route::get('/book/read/{id}', [App\Http\Controllers\BooksController::class, 'showFile', 'id'])->name('book-read');
     // Route::post('/contactus', [App\Http\Controllers\ContactusController::class, 'store'])->name('contactus.store');
     
     
