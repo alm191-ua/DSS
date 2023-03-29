@@ -76,19 +76,23 @@ class BooksController extends Controller
     //create function to show the form to create a new book
     public function create()
     {
-        return view('forms.book-create');
+        return view('forms.store-book');
     }
 
     public function delete(Request $request, $id)
     {
-        $book = Book::findOrFail($id);
-        $image = $book->image;
-        $book->delete();
-        // delete image
-        File::delete(storage_path('app/images/books/'.$image));
-        // delete file
-        File::delete(storage_path('app/books/'.$book->file));
-        return redirect()->back()->withInput($request->page_num);
+        try{
+            $book = Book::findOrFail($id);
+            $image = $book->image;
+            $book->delete();
+            // delete image
+            File::delete(storage_path('app/images/books/'.$image));
+            // delete file
+            File::delete(storage_path('app/books/'.$book->file));
+        }catch(\Exception $e){
+            //No hace nada
+        }
+        return redirect()->back()->withInput($request->page_num);        
     }
 
     public function update(Request $request, $id)
