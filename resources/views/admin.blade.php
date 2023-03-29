@@ -31,7 +31,8 @@
     <a href="#" onclick="changeMain(4)">Suggestions</a>
     <a href="#" onclick="changeMain(5)">Users</a>
     <a href="#" onclick="changeMain(6)">Categories</a>
-    <a href="#" onclick="changeMain(7)">Settings</a>
+    <a href="#" onclick="changeMain(7)">Newsletter Subscriptors</a>
+    <a href="#" onclick="changeMain(8)">Settings</a>
 </div>
 
 <div id="responsive-sidenav" class="responsive-sidenav">
@@ -50,7 +51,8 @@
             <a href="#" onclick="changeMain(4)">Suggestions</a>
             <a href="#" onclick="changeMain(5)">Users</a>
             <a href="#" onclick="changeMain(6)">Categories</a>
-            <a href="#" onclick="changeMain(7)">Settings</a>
+            <a href="#" onclick="changeMain(7)">Newsletter Subscriptors</a>
+            <a href="#" onclick="changeMain(8)">Settings</a>
         </div>
     </div>
 </div>
@@ -165,13 +167,24 @@
 
 <div class="main" name="statistics">
     <h2>Statistics</h2>
+
+    {{-- not available for now with cool style--}}
+    <div class="alert alert-warning" role="alert" style="max-width: 500px; margin-right: auto;">
+        <h4 class="alert-heading">This feature is not available for now!</h4>
+        <p>Sorry for the inconvenience, we are working on it.</p>
+        <hr>
+        <p class="mb-0">If you have any suggestion, please contact us.</p>
+
+        <a href="{{ route('contactus') }}" class="btn btn-primary">Contact us</a>
+
+    </div>
 </div>
 
 <div class="main" name="books" hidden>
-    <h2>Books Admin</h2>
+    <h2>Books Admin Panel</h2>
 
     {{-- create book button --}}
-    <a id="create_button" type="button" class="button btn-primary" href="{{ route('book-create') }}" ><i class="fa fa-plus"></i> {{ __('admin.create-book') }}</a> 
+    <a id="create_button" type="button" class="button btn-primary" href="{{ route('book-create') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
     
     {{-- Error messages --}}
     @if ($errors->any())
@@ -205,7 +218,7 @@
                     @endif
                     <th scope="col">
                         {{ $key }}
-                        {{-- get number of column --}}
+                        {{-- get number of column e--}}
                         <button type="button" class="fa fa-sort btn-order" onclick="orderTable(1, {{ $i }})"></button>
                         @php
                             $i++;
@@ -304,8 +317,25 @@
     {{ $books->appends(array('page_num' => 2, ))->links() }}
 </div>
 
+
 <div class="main" name="authors" hidden>
-    <h2>Authors Admin</h2>
+    <h2>Authors Admin Panel</h2>
+
+    {{-- create book button --}}
+    <a id="create_button" type="button" class="button btn-primary" href="{{ route('404') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
+    {{-- TODO: cambiar ruta 'author-create' --}}
+    {{-- Error messages --}}
+    @if ($errors->any())
+        <ul class="validation-errors">
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    @endif
+    
+    <div class="responsive-pagination">
+        {{ $authors->appends(array('page_num' => 3, ))->links() }}
+    </div>
     <table class="table table-striped table-dark">
         <thead>
           <tr>
@@ -326,7 +356,7 @@
                     @endif
                     <th scope="col">
                         {{ $key }}
-                        {{-- get number of column --}}
+                        {{-- get number of column :D --}}
                         <button type="button" class="fa fa-sort btn-order" onclick="orderTable(2, {{ $i }})"></button>
                         @php
                             $i++;
@@ -342,33 +372,79 @@
             
             @foreach ($authors as $author)
                 <tr>
+                <form action={{ route('author-edit', $author->id) }} 
+                    method="POST" id="form{{ $author->id }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
                     <td scope="row">{{ $author->id }}</td>
-                    <td>{{ $author->name }}</td>
-                    <td>{{ substr($author->info, 0, 50) . "..." }}</td>
-                    {{-- <td>{{ $book->image }}</td> --}}
                     <td>
-                        <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
+                        <label for="name{{ $author->id }}" id="label{{ $author->id }}" class="label-cell">{{ $author->name }}</label>
+                        <input name="name" type="text" hidden class="editable-form" id="name{{ $author->id }}" value="{{ $author->name }}">
                     </td>
+                    <td>
+                        {{-- author info --}}
+                        <label for="info{{ $author->id }}" id="label{{ $author->id }}" class="label-cell">{{ substr($author->info, 0, 20) . "..." }}</label>
+                        <textarea name="info" hidden class="editable-form" id="info{{ $author->id }}" cols="30" rows="10" value="{{ $author->info }}">{{ $author->info }}</textarea>
+                    </td>
+                    <td>
+                        <img class="label-cell user-img" src="{{ asset('storage_images/authors/' . $author->image) }}"
+                            {{-- onerror="this.src='{{ asset('images/default.png') }}'" --}}
+                            alt="author image" width="100px" height="100px">
+                        {{-- relación de imágenes: 0.75 --}}
+                        <img class="editable-form img_editable" hidden id="img_edit{{ $author->id }}" class="img_editable" src="{{ asset('storage_images/authors/' . $author->image) }}" alt="book image" width="100px" height="135px">
+                        <input name="image" type="file" hidden onchange="readImage(this, {{ $author->id }})" class="editable-form" id="image{{ $author->id }}" 
+                        value="{{ $author->image }}" accept="image/*">
+                    </td>
+                    <td>
+                        <div style="display: flex">
+                            <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $author->id }})"><i class="fa fa-edit"></i></button>
+                            <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
+                                href="{{route('author-delete', $author->id)}}"><i class="fa fa-trash"></i></a>
+                        </div>
+
+                        <div style="display: inline-flex">
+                            <button type="submit" class="editable-form btn btn-success" onmouseup="editMode({{ $author->id }})">
+                                <i class="fa fa-check"></i>
+                            <button type="button" class="editable-form btn btn-danger" onclick="editMode({{ $author->id }})">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </td>
+                </form>
                 </tr>
             @endforeach
           
         </tbody>
     </table>
-    {{         
-        $authors->appends(array('page_num' => 3, ))->links()
-    }}
+    
+    {{ $authors->appends(array('page_num' => 3, ))->links() }}
 </div>
 
 <div class="main" name="suggestions" hidden>
-    <h2>Suggestions Admin</h2>
+    <h2>Suggestions Admin Panel</h2>
+
+    {{-- create book button --}}
+    <a id="create_button" type="button" class="button btn-primary" href="{{ route('404') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
+    {{-- TODO: cambiar ruta 'author-create' --}}
+    {{-- Error messages --}}
+    @if ($errors->any())
+        <ul class="validation-errors">
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    @endif
+    
+    <div class="responsive-pagination">
+        {{ $suggestions->appends(array('page_num' => 4, ))->links() }}
+    </div>
     <table class="table table-striped table-dark">
         <thead>
           <tr>
             <th scope="col">#</th>
             @php 
                 $i = 1;
-                // dd($suggestions);
             @endphp
             @if (count($suggestions) > 0)
                 @foreach ($suggestions[0]->getAttributes() as $key => $value)
@@ -383,7 +459,7 @@
                     @endif
                     <th scope="col">
                         {{ $key }}
-                        {{-- get number of column --}}
+                        {{-- get number of column :D --}}
                         <button type="button" class="fa fa-sort btn-order" onclick="orderTable(3, {{ $i }})"></button>
                         @php
                             $i++;
@@ -399,26 +475,70 @@
             
             @foreach ($suggestions as $suggestion)
                 <tr>
+                <form action={{ route('suggestion-edit', $suggestion->id) }} 
+                    method="POST" id="form{{ $suggestion->id }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
                     <td scope="row">{{ $suggestion->id }}</td>
-                    <td>{{ $suggestion->email }}</td>
-                    <td>{{ $suggestion->phone }}</td>
-                    <td>{{ substr($suggestion->message, 0, 50) . "..." }}</td>
                     <td>
-                        <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
+                        {{-- email --}}
+                        <label for="email{{ $suggestion->id }}" id="label{{ $suggestion->id }}" class="label-cell">{{ $suggestion->email }}</label>
+                        <input name="email" type="text" hidden class="editable-form" id="email{{ $suggestion->id }}" value="{{ $suggestion->email }}">
                     </td>
+                    <td>
+                        {{-- phone --}}
+                        <label for="phone{{ $suggestion->id }}" id="label{{ $suggestion->id }}" class="label-cell">{{ $suggestion->phone }}</label>
+                        <input name="phone" type="text" hidden class="editable-form" id="phone{{ $suggestion->id }}" value="{{ $suggestion->phone }}">
+                    </td>
+                    <td>
+                        {{-- message --}}
+                        <label for="message{{ $suggestion->id }}" id="label{{ $suggestion->id }}" class="label-cell">{{ $suggestion->message }}</label>
+                        <textarea name="message" type="text" hidden class="editable-form" id="message{{ $suggestion->id }}" value="{{ $suggestion->message }}">{{ $suggestion->message }}</textarea>
+                    </td>
+                    <td>
+                        <div style="display: flex">
+                            <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $suggestion->id }})"><i class="fa fa-edit"></i></button>
+                            <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
+                                href="{{route('suggestion-delete', $suggestion->id)}}"><i class="fa fa-trash"></i></a>
+                        </div>
+
+                        <div style="display: inline-flex">
+                            <button type="submit" class="editable-form btn btn-success" onmouseup="editMode({{ $suggestion->id }})">
+                                <i class="fa fa-check"></i>
+                            <button type="button" class="editable-form btn btn-danger" onclick="editMode({{ $suggestion->id }})">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </td>
+                </form>
                 </tr>
             @endforeach
           
         </tbody>
     </table>
-    {{         
-        $suggestions->appends(array('page_num' => 4, ))->links()
-    }}
+    
+    {{ $suggestions->appends(array('page_num' => 4, ))->links() }}
 </div>
 
 <div class="main" name="users" hidden>
-    <h2>Users Admin</h2>
+    <h2>Users Admin Panel</h2>
+
+    {{-- create book button --}}
+    <a id="create_button" type="button" class="button btn-primary" href="{{ route('404') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
+    {{-- TODO: cambiar ruta 'author-create' --}}
+    {{-- Error messages --}}
+    @if ($errors->any())
+        <ul class="validation-errors">
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    @endif
+    
+    <div class="responsive-pagination">
+        {{ $users->appends(array('page_num' => 5, ))->links() }}
+    </div>
     <table class="table table-striped table-dark">
         <thead>
           <tr>
@@ -439,7 +559,7 @@
                     @endif
                     <th scope="col">
                         {{ $key }}
-                        {{-- get number of column --}}
+                        {{-- get number of column :D --}}
                         <button type="button" class="fa fa-sort btn-order" onclick="orderTable(4, {{ $i }})"></button>
                         @php
                             $i++;
@@ -455,11 +575,24 @@
             
             @foreach ($users as $user)
                 <tr>
+                <form action={{ route('user-edit', $user->id) }} 
+                    method="POST" id="form{{ $user->id }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
                     <td scope="row">{{ $user->id }}</td>
-                    <td>{{ $user->username }}</td>
-                    <td>{{ $user->email }}</td>
-                    {{-- <td class="description-cell">{{ $book->description }}</td> --}}
                     <td>
+                        {{-- username --}}
+                        <label for="username{{ $user->id }}" id="label{{ $user->id }}" class="label-cell">{{ $user->username }}</label>
+                        <input name="username" type="text" hidden class="editable-form" id="username{{ $user->id }}" value="{{ $user->username }}">
+                    </td>
+                    <td>
+                        {{-- email --}}
+                        <label for="email{{ $user->id }}" id="label{{ $user->id }}" class="label-cell">{{ $user->email }}</label>
+                        <input name="email" type="text" hidden class="editable-form" id="email{{ $user->id }}" value="{{ $user->email }}">
+                    </td>
+                    <td>
+                        {{-- is_admin --}}
                         <i onclick="
                             if (this.classList.contains('fa-lock')) {
                                 this.classList.remove('fa-lock');
@@ -472,21 +605,54 @@
                             " class='fa fa-{{ $user->is_admin === true ? "unlock" : "lock" }}'></i>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
+                        {{-- image --}}
+                        <img src="{{ asset('storage_images/users/' . $user->image) }}" class="label-cell user-img" alt="user image" width="50px" height="50px">
+                        <input name="image" type="file" hidden class="editable-form" id="image{{ $user->id }}" value="{{ $user->image }}">
                     </td>
+                    <td>
+                        <div style="display: flex">
+                            <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $user->id }})"><i class="fa fa-edit"></i></button>
+                            <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
+                                href="{{route('user-delete', $user->id)}}"><i class="fa fa-trash"></i></a>
+                        </div>
+
+                        <div style="display: inline-flex">
+                            <button type="submit" class="editable-form btn btn-success" onmouseup="editMode({{ $user->id }})">
+                                <i class="fa fa-check"></i>
+                            <button type="button" class="editable-form btn btn-danger" onclick="editMode({{ $user->id }})">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </td>
+                </form>
                 </tr>
             @endforeach
           
         </tbody>
     </table>
-    {{         
-        $users->appends(array('page_num' => 5, ))->links()
-    }}
+    
+    {{ $suggestions->appends(array('page_num' => 5, ))->links() }}
 </div>
 
+
 <div class="main" name="categories" hidden>
-    <h2>Categories Admin</h2>
+    <h2>Categories Admin Panel</h2>
+
+    {{-- create book button --}}
+    <a id="create_button" type="button" class="button btn-primary" href="{{ route('404') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
+    {{-- TODO: cambiar ruta 'author-create' --}}
+    {{-- Error messages --}}
+    @if ($errors->any())
+        <ul class="validation-errors">
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    @endif
+    
+    <div class="responsive-pagination">
+        {{ $categories->appends(array('page_num' => 6, ))->links() }}
+    </div>
     <table class="table table-striped table-dark">
         <thead>
           <tr>
@@ -507,7 +673,7 @@
                     @endif
                     <th scope="col">
                         {{ $key }}
-                        {{-- get number of column --}}
+                        {{-- get number of column :D --}}
                         <button type="button" class="fa fa-sort btn-order" onclick="orderTable(5, {{ $i }})"></button>
                         @php
                             $i++;
@@ -523,78 +689,71 @@
             
             @foreach ($categories as $category)
                 <tr>
+                <form action={{ route('category-edit', $category->id) }} 
+                    method="POST" id="form{{ $category->id }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
                     <td scope="row">{{ $category->id }}</td>
-                    <td>{{ $category->tag }}</td>
                     <td>
-                        <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
+                        {{-- tag --}}
+                        <label for="tag{{ $category->id }}" id="label{{ $category->id }}" class="label-cell">{{ $category->tag }}</label>
+                        <input name="tag" type="text" hidden class="editable-form" id="tag{{ $category->id }}" value="{{ $category->tag }}">
                     </td>
+                    <td>
+                        <div style="display: flex">
+                            <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $category->id }})"><i class="fa fa-edit"></i></button>
+                            <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
+                                href="{{route('category-delete', $category->id)}}"><i class="fa fa-trash"></i></a>
+                        </div>
+
+                        <div style="display: inline-flex">
+                            <button type="submit" class="editable-form btn btn-success" onmouseup="editMode({{ $category->id }})">
+                                <i class="fa fa-check"></i>
+                            <button type="button" class="editable-form btn btn-danger" onclick="editMode({{ $category->id }})">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </td>
+                </form>
                 </tr>
             @endforeach
           
         </tbody>
     </table>
-    {{         
-        $users->appends(array('page_num' => 6, ))->links()
-    }}
+    
+    {{ $categories->appends(array('page_num' => 6, ))->links() }}
 </div>
 
-{{-- <div class="main" name="categories" hidden>
-    <h2>Categories Admin</h2>
-    <table class="table table-striped table-dark">
-        <thead>
-          <tr>
-            @php 
-                $i = 1;
-            @endphp
-            @if (count($categories) > 0)
-                @foreach ($categories[0]->getAttributes() as $key => $value)
-                    @if ($key == 'id') 
-                        <th scope="col" style="max-width: 30px;">
-                            {{ $key }}
-                            <button type="button" class="fa fa-sort btn-order" onclick="orderTable(5, {{ $i }}, true)"></button>
-                            @php
-                                $i++;
-                            @endphp
-                        </th>
-                        @continue
-                    @endif
-                    <th scope="col">
-                        {{ $key }}
-                        <button type="button" class="fa fa-sort btn-order" onclick="orderTable(5, {{ $i }})"></button>
-                        @php
-                            $i++;
-                        @endphp
-                    </th>
-                @endforeach
-            
-            @endif
-            <th scope="col">Manage</th>
-          </tr>
-        </thead>
-        <tbody>
-            
-            @foreach ($categories as $category)
-                <tr>
-                    <td scope="row">{{ $category->id }}</td>
-                    <td>{{ $category->tag }}</td>
-                    <td>
-                        <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete</button>
-                    </td>
-                </tr>
-            @endforeach
-          
-        </tbody>
-    </table>
+<div class="main" name="newsletter-subsciptors" hidden>
+    <h2>Newsletter Subsciptors Admin Panel</h2>
 
-    {{
-        $categories->appends(array('page_num' => 6, ))->links()
-    }}
-</div> --}}
+    {{-- no available for now --}}
+    <div class="alert alert-warning" role="alert" style="max-width: 500px; margin-right: auto;">
+        <h4 class="alert-heading">No available for now!</h4>
+        <p>Sorry for the inconvenience, we are working on it.</p>
+        <hr>
+        <p class="mb-0">If you have any suggestion, please contact us.</p>
+
+        <a href="{{ route('contactus') }}" class="btn btn-primary">Contact us</a>
+    </div>
+    
+</div>
 
 <div class="main" name="settings" hidden>
-    <h2>Settings</h2>
+    <h2>Settings Panel</h2>
+    <p>Here you can change the settings of the website</p>
+    {{-- no settings available for now message with cool style--}}
+    <div class="alert alert-warning" role="alert" style="max-width: 500px; margin-right: auto;">
+        <h4 class="alert-heading">No settings available for now!</h4>
+        <p>Sorry for the inconvenience, we are working on it.</p>
+        <hr>
+        <p class="mb-0">If you have any suggestion, please contact us.</p>
+
+        <a href="{{ route('contactus') }}" class="btn btn-primary">Contact us</a>
+
+    </div>
+
 </div>
 
 <script type="text/javascript">
