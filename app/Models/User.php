@@ -54,4 +54,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_admin' => 'boolean',
     ];
+
+    /**
+     * Always encrypt the password when it is updated.
+     *
+     * @param $value
+     * @return string
+     */
+    public function setPasswordAttribute($value) 
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }

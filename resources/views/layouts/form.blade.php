@@ -35,7 +35,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-10">
-                                <button type="button" class="btn btn-light px-4">Confirm</button>
+                                <button type="submit" class="btn btn-light px-4" id="submit" disabled>Submit</button>
                             </div>
                         </div>
                     
@@ -47,4 +47,27 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    // check if gridCheck2 is checked
+    document.getElementById('gridCheck2').addEventListener('change', function() {
+        if (this.checked) {
+            document.getElementById('submit').disabled = false;            
+            console.log('checked');
+        } else {
+            document.getElementById('submit').disabled = true;
+            console.log('unchecked');
+        }
+    });
+</script>
+
+{{-- Error messages --}}
+@if ($errors->any())
+    <ul class="validation-errors">
+    @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+    @endforeach
+    </ul>
+@endif
+
 @endsection
+

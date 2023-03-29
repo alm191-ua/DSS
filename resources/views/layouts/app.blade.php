@@ -70,11 +70,28 @@
                                     </ul>
                                 </li>
                                 <!-- <li><a id="search-box" href="#"><i class="fa fa-search"></i></a></li> -->
-                                <li><a href="{{ route('login') }}"><i class="fa fa-user"></i></a>
+                                
+                                <!-- <li><a href="{{ route('login.perform') }}"><i class="fa fa-user"></i></a>
                                     <ul>
-                                        <li><a href="{{ route('login') }}">{{ __('master.menu.login') }}</a></li>
-                                        <li><a href="{{ route('register') }}">{{ __('master.menu.register') }}</a></li>
+                                        <li><a href="{{ route('login.perform') }}">{{ __('master.menu.login') }}</a></li>
+                                        <li><a href="{{ route('register.perform') }}">{{ __('master.menu.register') }}</a></li>
                                     </ul>
+                                </li> -->
+                                <li>
+                                    @auth
+                                        {{auth()->user()->name}}
+                                        <div class="text-end" style="display: inline-flex">
+                                            <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-2">Logout</a>
+                                        </div>
+                                    @endauth
+
+                                    @guest
+                                        <div class="text-end" style="display: inline-flex">
+                                            <a href="{{ route('login.perform') }}" class="btn btn-outline-light me-2" style="margin-right: 0.5em;">Login</a>
+                                            <a href="{{ route('register.perform') }}" class="btn btn-warning">Sign-up</a>
+                                        </div>
+                                    @endguest
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -166,3 +183,7 @@
         <script src="{{ asset('js/functions.js') }}"></script> 
     </body>
 </html>
+
+<style>
+
+</style>

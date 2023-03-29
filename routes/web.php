@@ -27,10 +27,21 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/terms', function () {
         return view('terms');
     })->name('terms');
-    Route::get('/login', [App\Http\Controllers\UserController::class, 'login'])->name('login');
-    Route::get('/register', [App\Http\Controllers\UserController::class, 'register'])->name('register');
-    Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
-    Route::get('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'edit', 'id'])->name('user-edit');
+
+    Route::group(['middleware' => ['guest']], function() {
+        Route::get('/login', [App\Http\Controllers\LoginController::class, 'showLogin'])->name('login.show');
+        Route::post('/login', [App\Http\Controllers\LoginController::class, 'login'])->name('login.perform');
+        Route::get('/register', [App\Http\Controllers\RegisterController::class, 'showRegister'])->name('register.show');
+        Route::post('/register', [App\Http\Controllers\RegisterController::class, 'register'])->name('register.perform');
+    });
+
+    Route::group(['middleware' => ['auth']], function() {
+        Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'logout'])->name('logout.perform');
+    });
+
+
+    Route::get('/profile', [App\Http\Controllers\UserController::class, 'showProfile'])->name('profile');
+    Route::get('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'showEdit', 'id'])->name('user-edit');
     Route::get('/books/create', [App\Http\Controllers\BooksController::class, 'create'])->name('book-create');
     Route::get('/books/delete/{id}', [App\Http\Controllers\BooksController::class, 'delete', 'id'])->name('book-delete');
     Route::put('/books/update/{id}', [App\Http\Controllers\BooksController::class, 'update', 'id'])->name('book-edit');

@@ -6,7 +6,7 @@
 {{-- es la ruta post definida en web.php y que se ejecuta en el controlador --}}
 {{-- por ejemplo: route('books.store') --}}
 {{-- tiene que ser una ruta post, esta de ejemplo es get, por lo que no hace nada --}}
-@section('form-action', route('terms')) 
+@section('form-action', route('register.perform'))
 
 {{-- margin guidelines:
 22% -> para formularios grandes (default)
@@ -73,16 +73,16 @@
         </div>        
     </div>
     <div class="form-group row">
-        <label for="password-2" class="col-sm-2 col-form-label">Confirm Password</label>
+        <label for="password_confirmation" class="col-sm-2 col-form-label">Confirm Password</label>
         <div class="col-sm-10">
-            <input type="password" name="password-2" id="password-2" class="form-control" value="{{ old('password-2') }}" required>
+            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
             <i class="fa fa-eye-slash" id="toggleConfirmPassword" onmousedown="seePassword()" onmouseup="hidePassword()" onmouseout="hidePassword()" ></i>
         </div>
     </div>
 
     <script type="text/javascript">
         let password = document.getElementById('password');
-        let password2 = document.getElementById('password-2');
+        let password2 = document.getElementById('password_confirmation');
 
         password.addEventListener('keyup', function() {
             // comprobar que las contraseñas coinciden
@@ -153,15 +153,16 @@
             document.getElementById("togglePassword").className = "fa fa-eye";
             document.getElementById("toggleConfirmPassword").className = "fa fa-eye";
             $('#password').attr('type', 'text');
-            $('#password-2').attr('type', 'text');
+            $('#password_confirmation').attr('type', 'text');
 
         }
         function hidePassword() {
             document.getElementById("togglePassword").className = "fa fa-eye-slash";
             document.getElementById("toggleConfirmPassword").className = "fa fa-eye-slash";
             $('#password').attr('type', 'password');
-            $('#password-2').attr('type', 'password');
+            $('#password_confirmation').attr('type', 'password');
         }
     </script>
-                
+        
 @endsection
+
