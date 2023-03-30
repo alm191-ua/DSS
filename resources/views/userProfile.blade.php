@@ -95,68 +95,56 @@
             </div>
         </form>       
 
-        {{--<span>{{ Bookshelf::where('user_id', Auth::user()->id)->get() }}</span>--}}
+        @foreach ($bookshelves as $bookshelf)
+            <form action="{{route('bookshelf.delete', $bookshelf->id)}}" method="POST">
+                @csrf
+                @method('DELETE')
 
+                <div class="shelf shelf_{{ $bookshelf->name }}">
+                    <div class="shelf_options">
+                        <h3 class="shelf_title">{{ $bookshelf->name }}</h3>                    
+                    </div>
+                    <div class="shelf_books">
+                        <div class="shelf_item"> Uno </div>
+                        <div class="shelf_item"> Dos </div>
+                    </div>
+                </div>
+            </form>
+        @endforeach
     </div>
-
 </div>
 
 <script type="text/javascript">
     function addCruz(bloque) {
-        var cruz = document.createElement("span");
+        var cruz = document.createElement("button");
         cruz.className = "borra";
         cruz.innerHTML = '☒';
-        bloque.appendChild(cruz);
+        cruz.id = "shelf-delete_button";
+        cruz.setAttribute("type", "submit");
+        bloque.insertBefore(cruz, bloque.firstChild);
         // add event listener to cruz
         cruz.addEventListener("click", function() {
-            // remove shelf
-            var padre = cruz.parentNode.parentNode;
-            padre.parentNode.removeChild(padre);
+            // warn user before deleting
+            if(!confirm("Are you sure you want to delete this shelf?")) {return;}
         });
     }
 
-    function addShelf() {
+    document.getElementById("shelf-add_button").addEventListener("click", function() {
         var shelf_name = document.getElementById("shelf-name_button");
         if (shelf_name.value == "") {
             alert("Please enter a name for the shelf");
             return;
         }
-        // * Start shelf *
-        var newShelf = document.createElement("div");
-        newShelf.className = "shelf shelf_"+shelf_name.value;    
-
-        // ** Start shelf options **
-        var newShelfOptions = document.createElement("div");
-        newShelfOptions.className = "shelf_options";
-
-        addCruz(newShelfOptions);
-
-        var newShelfTitle = document.createElement("h3");
-        newShelfTitle.className = "shelf_title";
-        newShelfTitle.innerHTML = shelf_name.value;
-        newShelfOptions.appendChild(newShelfTitle);
-
-        newShelf.appendChild(newShelfOptions);
-        // ** End shelf options **
-
-        shelf_name.value = "";
-        
-        // ** Start shelf books **
-        var newShelfBooks = document.createElement("div");
-        newShelfBooks.className = "shelf_books";
-        newShelfBooks.innerHTML = '<div class="shelf_item"> Uno </div> <div class="shelf_item"> Dos </div>';
-        newShelf.appendChild(newShelfBooks);
-        // ** End shelf books **       
-
-        document.getElementById("bookshelves").appendChild(newShelf);
-        // * End shelf *
-    }
-
-    document.getElementById("shelf-add_button").addEventListener("click", function() {
-        console.log("add shelf");
-        addShelf();
     });
 
+    // wait for the DOM to be loaded
+    document.addEventListener("DOMContentLoaded", function(event) {
+        // add cruz to each shelf
+        var bloques = document.getElementsByClassName("shelf_options");
+        for (var i = 0; i < bloques.length; i++) {
+            addCruz(bloques[i]);
+        }
+    });
 
 </script>
 

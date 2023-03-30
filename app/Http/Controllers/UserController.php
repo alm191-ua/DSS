@@ -12,7 +12,8 @@ class UserController extends Controller
 {
     public function showProfile()
     {
-        return view('userProfile');
+        $bookshelves = Auth::user()->bookshelves;
+        return view('userProfile', ['bookshelves' => $bookshelves]);
     }
     public function showEdit($id)
     {

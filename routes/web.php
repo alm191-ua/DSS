@@ -43,6 +43,7 @@ Route::group(['middleware' => 'language'], function () {
 
     Route::post('/bookshelf/create', [App\Http\Controllers\BookshelfController::class, 'store'])->name('bookshelf.store');
     Route::get('/bookshelf/list', [App\Http\Controllers\BookshelfController::class, 'list'])->name('bookshelf.list');
+    Route::delete('/bookshelf/delete/{id}', [App\Http\Controllers\BookshelfController::class, 'delete', 'id'])->name('bookshelf.delete');
 
     Route::get('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'showEdit', 'id'])->name('user-edit');
     Route::get('/books/create', [App\Http\Controllers\BooksController::class, 'create'])->name('book-create');

@@ -12,9 +12,11 @@ class BookshelfController extends Controller
     // list all bookshelves for a user
     public function list()
     {
-        $bookshelves = Bookshelf::where('user_id', Auth::user()->id)->get();
+        // $bookshelves = Bookshelf::where('id', Auth::user()->id)->get();
 
-        return view('profile', ['bookshelves' => $bookshelves]);
+        $bookshelves = Auth::user()->bookshelves;
+
+        return view('userProfile', ['bookshelves' => $bookshelves]);
     }
 
     public function store(Request $request)
@@ -28,6 +30,14 @@ class BookshelfController extends Controller
         $bookshelf->user_id = Auth::user()->id;
 
         $bookshelf->save();
+
+        return redirect()->route('profile');
+    }
+
+    public function delete($id)
+    {
+        $bookshelf = Bookshelf::find($id);
+        $bookshelf->delete();
 
         return redirect()->route('profile');
     }

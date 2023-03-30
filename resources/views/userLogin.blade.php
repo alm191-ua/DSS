@@ -41,7 +41,7 @@
     <div class="form-group row">
         <label for="password" class="col-sm-2 col-form-label">Password</label>
         <div class="col-sm-10">
-            <input type="password" name="password" id="password" class="form-control" value="{{ old('password') }}" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+            <input type="password" name="password" id="password" class="form-control" value="{{ old('password') }}" required>
             <i class="fa fa-eye-slash" id="togglePassword" onmousedown="seePassword()" onmouseup="hidePassword()" onmouseout="hidePassword()"></i>
         </div>    
     </div>

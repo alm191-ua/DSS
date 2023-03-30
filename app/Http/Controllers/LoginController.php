@@ -28,6 +28,12 @@ class LoginController extends Controller
 
         Log::info('Credentials: ' . json_encode($credentials));
 
+        // check if user exists
+        if (!Auth::getProvider()->retrieveByCredentials($credentials)) {
+            Log::info('Login failed from: ' . $request->ip());
+            return redirect()->back()->with('error', 'Invalid username or password');
+        }
+
         // Obtain user from database
         $user = User::where('username', $credentials['username'])->first();
         Log::info('User: ' . json_encode($user));
