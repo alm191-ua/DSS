@@ -14,13 +14,7 @@
                 	<h2>book guide</h2>
                     <h5>online library</h5>
                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor<br>emque laudantium, totam rem aperiam.ipsam voluptatem.</p>
-					<div class="input-container">
-                    	<input 
-                            {{-- redirect to /books?search=this.value --}}
-                            onchange="window.location.href = '/books?search=' + this.value"
-                            type="text" placeholder="Enter Your Book Title Here">
-                        <button><i class="fa fa-search"></i></button>
-                    </div>
+					
                 </div>
             </li>
             <li>
@@ -29,13 +23,7 @@
                 	<h2>book Reading</h2>
                     <h5>Best Book Available</h5>
                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor<br>emque laudantium, totam rem aperiam.ipsam voluptatem.</p>
-					<div class="input-container">
-                    	<input 
-                            {{-- redirect to /books?search=this.value --}}
-                            onchange="window.location.href = '/books?search=' + this.value"
-                            type="text" placeholder="Enter Your Book Title Here">
-                        <button><i class="fa fa-search"></i></button>
-                    </div>
+					
                 </div>
             </li>
             <li>
@@ -44,16 +32,15 @@
                 	<h2>Best library</h2>
                     <h5>Books Guiders</h5>
                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor<br>emque laudantium, totam rem aperiam.ipsam voluptatem.</p>
-					<div class="input-container">
-                    	<input 
-                            {{-- redirect to /books?search=this.value --}}
-                            onchange="window.location.href = '/books?search=' + this.value"
-                            type="text" placeholder="Enter Your Book Title Here">
-                        <button><i class="fa fa-search"></i></button>
-                    </div>
                 </div>
             </li>
         </ul>
+        <div class="input-container" style=" position: absolute; top: 80%; left: 27%; ">
+            <input id="wv-search-input" style="color: #fff"
+                type="text" placeholder="Enter Your Book Title Here">
+            <button onclick="window.location.href = '/books?search=' + $('#wv-search-input').val()"
+                ><i class="fa fa-search"></i></button>
+        </div>
     </div>
     <!--BANNER END-->
     {{-- <!--BUT NOW START-->
