@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Author;
+use App\Models\Category;
 
 // file
 use Illuminate\Support\Facades\File;
@@ -12,12 +13,16 @@ class AuthorsController extends Controller
 {
     public function index()
     {
-        return view('authors');
+        $categories = Category::all();
+
+        return view('authors', compact('categories'));
     }
 
     public function show($id)
     {
-        return view('author');
+        $categories = Category::all();
+
+        return view('author', compact('categories'));
     }
 
     public function delete ($id)

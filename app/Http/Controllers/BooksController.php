@@ -27,8 +27,10 @@ class BooksController extends Controller
                 ->take(3)
                 ->get();
 
+            $categories = Category::all();
+
             //return the view with the book
-            return view('book-detail', compact('book', 'related_books'));
+            return view('book-detail', compact('book', 'related_books', 'categories'));
         }catch(\Exception $e){
             return redirect()->route('404');
         }
@@ -73,10 +75,11 @@ class BooksController extends Controller
             $columns = ['id', 'title', 'author_id', 'category_id', 'image'],
             $pageName = 'books',
         )->withQueryString();
-
+        
+        $categories = Category::all();
         $new_arrivals = Book::orderBy('created_at', 'desc')->take(3)->get();
 
-        return view('books-list', compact('books', 'new_arrivals'));
+        return view('books-list', compact('books', 'new_arrivals', 'categories'));
     }
 
     //create function to show the form to create a new book
