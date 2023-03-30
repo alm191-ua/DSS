@@ -51,6 +51,9 @@ Route::group(['middleware' => 'language'], function () {
     Route::put('/category/update/{id}', [App\Http\Controllers\CategoriesController::class, 'update', 'id'])->name('category-edit');
     Route::get('/category/delete/{id}', [App\Http\Controllers\CategoriesController::class, 'delete', 'id'])->name('category-delete');
 
+    Route::put('/review/update/{id}', [App\Http\Controllers\ReviewsController::class, 'update', 'id'])->name('review-edit');
+    Route::get('/review/delete/{id}', [App\Http\Controllers\ReviewsController::class, 'delete', 'id'])->name('review-delete');
+    
     Route::get('/contactus', [App\Http\Controllers\ContactusController::class, 'index'])->name('contactus');
     Route::get('/aboutus', [App\Http\Controllers\AboutusController::class, 'index'])->name('aboutus');
     // Route::post('/contactus', [App\Http\Controllers\ContactusController::class, 'store'])->name('contactus.store');
