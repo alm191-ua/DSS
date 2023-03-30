@@ -51,9 +51,9 @@
                     <div class="container">
                         <div class="kode-navigation" style="height: 35px;"> <!-- site-info -->
                             <ul>
-                                <li><a href="mailto:contact.wordwaves@gmail.com"><i class="fa fa-envelope-o"></i>contact.wordwaves@gmail.com</a></li>
+                                <li style="top:9px;"><a href="mailto:contact.wordwaves@gmail.com"><i class="fa fa-envelope-o"></i>contact.wordwaves@gmail.com</a></li>
                                 <!-- <li><a href="#"><i class="fa fa-heart"></i></a></li> -->
-                                <li><a href="#"><i class="fa fa-language"></i></a>
+                                <li style="top:10px;"><a href="#"><i class="fa fa-language"></i></a>
                                     <ul>
                                         <li>
                                             <a href="{{ route('locale', ['locale' => 'es']) }}">
@@ -81,6 +81,7 @@
                                     @auth
                                         {{auth()->user()->name}}
                                         <div class="text-end" style="display: inline-flex">
+                                            <a href="{{ route('profile') }}"><i class="fa fa-user" style="margin-right: 15px; position:relative; top:9px;"></i></a>                 
                                             <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-2">Logout</a>
                                         </div>
                                     @endauth

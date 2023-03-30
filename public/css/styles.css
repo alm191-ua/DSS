@@ -239,8 +239,10 @@ header{
 .kode-navigation ul li a{
 	color:#fff;
 	text-decoration:none;
-	padding:15px 0px;
 	display:block;
+}
+.kode-navigation ul li a:hover{
+	color:#fff;
 }
 .header-3 .kode-navigation ul li a{
 	font-family: 'Roboto', sans-serif;

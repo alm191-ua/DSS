@@ -16,20 +16,16 @@ class RegisterController extends Controller
 
     public function register(RegisterRequest $request)
     {
-                
         $request->validated();
-
-        Log::info('Registering user: ' . $request->username);
                 
         $user = new User();
 
         $user->email = $request->email;
         $user->username = $request->username;
-        $user->password = bcrypt($request->password);
+        $user->password = password_hash($request->password, PASSWORD_DEFAULT);
+        $user->is_admin = false;
 
         $user->save();
-
-        Log::info('User registered: ' . $user->username);
 
         auth()->login($user);
 

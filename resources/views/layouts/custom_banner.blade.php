@@ -16,7 +16,7 @@
             <li><a href="{{ route('home') }}">{{ __('master.menu.home') }}</a></li>
             <li class="active">@yield('title')</li>
             </ol>
-            <h3>Welcome 'UwU' to your personal profile</h3>
+            <h3>Welcome {{ Auth::user()->username ?? 'Guest' }} to your personal profile</h3>
         </div>
     </div>
     <!--BANNER END-->

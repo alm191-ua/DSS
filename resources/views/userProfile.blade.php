@@ -1,5 +1,10 @@
 @extends('layouts.custom_banner')
 
+@section('title', 'Profile')
+
+@section('content')
+    @parent
+
 <style>
     .kode-content {
         padding-top: 0px;
@@ -64,18 +69,13 @@
     }
 </style>
 
-@section('title', 'Profile')
-
-@section('content')
-    @parent
-
 <div class="my-content">
     <div class="account_info">
         <!--SIDEBAR START-->
         <div class="sidebar">
             <div class="widget widget-list">
                 <h2>My Account</h2>
-                <span>Username: {{ Auth::user()->name ?? 'Guest' }}</span>
+                <span>Username: {{ Auth::user()->username ?? 'Guest' }}</span>
                 <span>Email: {{ Auth::user()->email ?? 'Guest email' }}</span>
                 <!-- Button to edit user profile -->
                 <a href="{{ route('user-edit', Auth::user()->id ?? 0) }}" class="btn btn-primary">Edit Profile</a>
@@ -87,11 +87,15 @@
     <div class="bookshelves" id="bookshelves">
         <!-- Button to add shelf -->
         <!-- Each tiem button is clicked add <div class="shelf"></div> -->
-        <div class="form-shelves">
-            <input type="text" name="shelf-name_button" id="shelf-name_button">
-            <button type="button" class="btn" id="shelf-add_button">Add Shelf</button>            
-        </div>
-        
+        <form action="{{route('bookshelf.store')}}" method="POST">
+            @csrf
+            <div class="form-shelves">
+                <input type="text" name="name" id="shelf-name">
+                <button type="submit" class="btn" id="shelf-add_button">Add Shelf</button>            
+            </div>
+        </form>       
+
+        {{--<span>{{ Bookshelf::where('user_id', Auth::user()->id)->get() }}</span>--}}
 
     </div>
 
@@ -142,13 +146,14 @@
         newShelfBooks.className = "shelf_books";
         newShelfBooks.innerHTML = '<div class="shelf_item"> Uno </div> <div class="shelf_item"> Dos </div>';
         newShelf.appendChild(newShelfBooks);
-        // ** End shelf books **
+        // ** End shelf books **       
 
         document.getElementById("bookshelves").appendChild(newShelf);
         // * End shelf *
     }
 
     document.getElementById("shelf-add_button").addEventListener("click", function() {
+        console.log("add shelf");
         addShelf();
     });
 

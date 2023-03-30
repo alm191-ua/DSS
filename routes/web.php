@@ -39,8 +39,11 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'logout'])->name('logout.perform');
     });
 
-
     Route::get('/profile', [App\Http\Controllers\UserController::class, 'showProfile'])->name('profile');
+
+    Route::post('/bookshelf/create', [App\Http\Controllers\BookshelfController::class, 'store'])->name('bookshelf.store');
+    Route::get('/bookshelf/list', [App\Http\Controllers\BookshelfController::class, 'list'])->name('bookshelf.list');
+
     Route::get('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'showEdit', 'id'])->name('user-edit');
     Route::get('/books/create', [App\Http\Controllers\BooksController::class, 'create'])->name('book-create');
     Route::get('/books/delete/{id}', [App\Http\Controllers\BooksController::class, 'delete', 'id'])->name('book-delete');
