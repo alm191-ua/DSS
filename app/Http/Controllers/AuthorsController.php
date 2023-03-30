@@ -15,14 +15,22 @@ class AuthorsController extends Controller
     {
         $categories = Category::all();
 
-        return view('authors', compact('categories'));
+        $authors = Author::paginate(6);
+
+        return view('authors', compact('categories', 'authors'));
     }
 
     public function show($id)
     {
         $categories = Category::all();
 
-        return view('author', compact('categories'));
+        try{
+            $author = Author::findOrfail($id);
+        }catch(\Exception $e){
+            return redirect()->route('404');
+        }
+        
+        return view('author', compact('categories', 'author'));
     }
 
     public function delete ($id)
