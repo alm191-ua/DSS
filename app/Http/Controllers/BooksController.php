@@ -54,16 +54,16 @@ class BooksController extends Controller
         // if search exists, filter query
         if ($search) {
             Log::info('search: '.$search);
-            $queryBooks->where('title', 'like', '%'.$search.'%')
-            ->orWhereHas('author', function ($query) use ($search) {
-                return $query->where('name', 'like', '%'.$search.'%');
-            });
-            // $queryBooks->where(function(Builder $query1) {
-            //     $query1->where('title', 'like', '%'.$search.'%')
-            //     ->orWhereHas('author', function ($query) use ($search) {
-            //         return $query->where('name', 'like', '%'.$search.'%');
-            //     })
+            // $queryBooks->where('title', 'like', '%'.$search.'%')
+            // ->orWhereHas('author', function ($query) use ($search) {
+            //     return $query->where('name', 'like', '%'.$search.'%');
             // });
+            $queryBooks->where(function($query1) use ($search) {
+                $query1->where('title', 'like', '%'.$search.'%')
+                ->orWhereHas('author', function ($query) use ($search) {
+                    return $query->where('name', 'like', '%'.$search.'%');
+                });
+            });
             Log::info('count: '.$queryBooks->count());
         }
 
@@ -93,7 +93,7 @@ class BooksController extends Controller
         // delete image
         File::delete(storage_path('app/images/books/'.$image));
         // delete file
-        File::delete(storage_path('app/books/'.$book->file));
+        File::delete(storage_path('app/book_files/'.$book->file));
         return redirect()->back()->withInput($request->page_num);
     }
 
@@ -132,12 +132,12 @@ class BooksController extends Controller
 
             if ($request->hasFile('file')) {
                 // delete old file
-                File::delete(storage_path('app/books/'.$book->file));
+                File::delete(storage_path('app/book_files/'.$book->file));
 
                 // save new file
                 $file = $request->file;
                 $fileName = time().$file->getClientOriginalName();
-                $file->move(storage_path('app/books'), $fileName);
+                $file->move(storage_path('app/book_files'), $fileName);
                 $book->file = $fileName;
             }
             $book->save();
@@ -152,7 +152,7 @@ class BooksController extends Controller
     {
         try{
             $book = Book::findOrFail($id);
-            $file = storage_path('app/books/'.$book->file);
+            $file = storage_path('app/book_files/'.$book->file);
             return response()->download($file);
         }catch(\Exception $e){
             return redirect()->route('404');
@@ -163,7 +163,7 @@ class BooksController extends Controller
     {
         try{
             $book = Book::findOrFail($id);
-            $file = storage_path('app/books/'.$book->file);
+            $file = storage_path('app/book_files/'.$book->file);
             return response()->file($file);
         }catch(\Exception $e){
             return redirect()->route('404');

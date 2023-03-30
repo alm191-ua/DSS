@@ -45,7 +45,7 @@
                                     </div>
                                     <a href="#" class="add-to-cart">Add To Bookshelf</a>
                                     <a href="{{ route('book-download', $book->id) }}" class="add-to-cart">Download</a>
-                                    <a href="{{ route('book-read', $book->id) }}" class="add-to-cart">Read</a>
+                                    <a href="{{ route('book-read', $book->id) }}" class="add-to-cart" target="_blank">Read</a>
                                     {{-- <a href="#" class="add-to-cart">Add To Cart</a>
                                     <a href="#" class="add-to-cart">Add To Wishlist</a>
                                     <a href="#" class="add-to-cart">Get a Quote</a> --}}
@@ -101,16 +101,16 @@
                                     </ul>
                                 </div>                        
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="read">
+                            <div role="tabpanel" class="tab-pane fade" id="read" style="height: 60em">
                                 {{-- show the pdf book embed --}}
-                                <div class="embed-responsive embed-responsive-16by9">
+                                <div class="embed-responsive embed-responsive-16by9" style="height: 60em">
                                     {{-- <object data="{{ asset('books/'.$book->file) }}" type="application/pdf" width="100%" height="100%">
                                         <p>It appears you don't have a PDF plugin for this browser.
                                         No biggie... you can <a href="{{ route('book-download', $book->id) }}">click here to
                                         download the PDF file.</a></p>
                                     </object> --}}
                                     {{-- <iframe src="{{ asset('books/'.$book->file) }}" width="100%" height="100%" style="border: none;"></iframe> --}}
-                                    <embed src="{{ asset('books/'.$book->file) }}" width="100%" height="100%" />
+                                    <embed style="height: 60em" src="{{ asset('storage_books/'.$book->file) }}" width="100%" height="100%" />
                                 </div>
                             </div>
                             {{-- <div role="tabpanel" class="tab-pane fade" id="tags">
