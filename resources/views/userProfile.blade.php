@@ -56,6 +56,7 @@
         margin: 10px;
         height: 110px;
         border: 1px solid #ccc;        
+        /* height: fit-content; */
     }
     .shelf_books {
         background-color: #ccc;
@@ -105,8 +106,24 @@
                         <h3 class="shelf_title">{{ $bookshelf->name }}</h3>                    
                     </div>
                     <div class="shelf_books">
-                        <div class="shelf_item"> Uno </div>
-                        <div class="shelf_item"> Dos </div>
+                        @foreach ($bookshelf->books as $book)
+                            <div class="col-6 col-md-2" style="">
+                                {{-- <div class="books-listing-3"> --}}
+                                    <div class="kode-thumb">
+                                        <a href="{{ route('book', $book->id) }}"><img src="{{ asset('storage_images/books/' . $book->image) }}" 
+                                            onerror="this.src = '{{ asset('images/default.png') }}';" alt="book image" width="75" height="100"></a>
+                                    </div>
+                                    <div class="kode-text">
+                                        {{-- <p class="price">$80.75<span>90.75$</span></p> --}}
+                                        <p style="font-size: 20px; color:black;">{{ substr($book->title, 0, 15) }}{{ strlen($book->title) > 15 ? '...' : '' }}</p>
+                                        <div class="kode-caption">
+                                            <p>{{ $book->author->name }}</p>
+                                            {{-- <a href="{{ route('books-list', ['category' => $book->category->tag]) }}">{{ $book->category->tag }}</a> --}}
+                                        </div>
+                                    </div>
+                                {{-- </div> --}}
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </form>

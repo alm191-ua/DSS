@@ -31,7 +31,7 @@ class BookshelfController extends Controller
 
         $bookshelf->save();
 
-        return redirect()->route('profile');
+        return redirect()->back();
     }
 
     public function delete($id)
@@ -40,5 +40,13 @@ class BookshelfController extends Controller
         $bookshelf->delete();
 
         return redirect()->route('profile');
+    }
+
+    public function add_book($book_id, $bookshelf_id)
+    {
+        $bookshelf = Bookshelf::findOrFail($bookshelf_id);
+        $bookshelf->books()->attach($book_id);
+
+        return redirect()->back();
     }
 }

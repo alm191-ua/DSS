@@ -40,6 +40,11 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('/book/{id}', [App\Http\Controllers\BooksController::class, 'index', 'id'])->name('book');
         Route::get('/book/download/{id}', [App\Http\Controllers\BooksController::class, 'download', 'id'])->name('book-download');
         Route::get('/book/read/{id}', [App\Http\Controllers\BooksController::class, 'showFile', 'id'])->name('book-read');
+        
+        Route::post('/bookshelf/create', [App\Http\Controllers\BookshelfController::class, 'store'])->name('bookshelf.store');
+        Route::get('/bookshelf/add/{book_id}/{bookshelf_id}', [App\Http\Controllers\BookshelfController::class, 'add_book', 'book_id', 'bookshelf_id'])->name('bookshelf.add_book');
+        Route::get('/bookshelf/list', [App\Http\Controllers\BookshelfController::class, 'list'])->name('bookshelf.list');
+        Route::delete('/bookshelf/delete/{id}', [App\Http\Controllers\BookshelfController::class, 'delete', 'id'])->name('bookshelf.delete');
     });
     
     Route::group(['middleware' => ['admin']], function() {
@@ -59,9 +64,6 @@ Route::group(['middleware' => 'language'], function () {
     
     Route::get('/profile', [App\Http\Controllers\UsersController::class, 'showProfile'])->name('profile');
     
-    Route::post('/bookshelf/create', [App\Http\Controllers\BookshelfController::class, 'store'])->name('bookshelf.store');
-    Route::get('/bookshelf/list', [App\Http\Controllers\BookshelfController::class, 'list'])->name('bookshelf.list');
-    Route::delete('/bookshelf/delete/{id}', [App\Http\Controllers\BookshelfController::class, 'delete', 'id'])->name('bookshelf.delete');
 
     Route::get('/user/edit/{id}', [App\Http\Controllers\UsersController::class, 'showEdit', 'id'])->name('user-edit.show');
     
