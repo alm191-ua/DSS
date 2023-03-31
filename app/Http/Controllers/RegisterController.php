@@ -34,6 +34,6 @@ class RegisterController extends Controller
 
         app('App\Http\Controllers\BookshelfController')->store($request_bookshelf);
 
-        return redirect()->route('login.show');
+        return redirect()->route('login');
     }
 }

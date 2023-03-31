@@ -185,7 +185,7 @@
     <h2>Books Admin Panel</h2>
 
     {{-- create book button --}}
-    <a id="create_button" type="button" class="button btn-primary" href="{{ route('book-create') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
+    <a id="create_button" type="button" class="button btn-primary" href="{{ route('book.create') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
     
     {{-- Error messages --}}
     @if ($errors->any())
@@ -237,7 +237,7 @@
             
             @foreach ($books as $book)
                 <tr>
-                <form action={{ route('book-edit', $book->id) }} 
+                <form action={{ route('book.edit', $book->id) }} 
                     method="POST" id="form{{ $book->id }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -299,7 +299,7 @@
                         <div style="display: flex">
                             <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $book->id }})"><i class="fa fa-edit"></i></button>
                             <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
-                                href="{{route('book-delete', $book->id)}}"><i class="fa fa-trash"></i></a>
+                                href="{{route('book.delete', $book->id)}}"><i class="fa fa-trash"></i></a>
                         </div>
 
                         <div style="display: inline-flex">
@@ -376,7 +376,7 @@
             
             @foreach ($authors as $author)
                 <tr>
-                <form action={{ route('author-edit', $author->id) }} 
+                <form action={{ route('author.edit', $author->id) }} 
                     method="POST" id="form{{ $author->id }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -404,7 +404,7 @@
                         <div style="display: flex">
                             <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $author->id }})"><i class="fa fa-edit"></i></button>
                             <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
-                                href="{{route('author-delete', $author->id)}}"><i class="fa fa-trash"></i></a>
+                                href="{{route('author.delete', $author->id)}}"><i class="fa fa-trash"></i></a>
                         </div>
 
                         <div style="display: inline-flex">
@@ -479,7 +479,7 @@
             
             @foreach ($suggestions as $suggestion)
                 <tr>
-                <form action={{ route('suggestion-edit', $suggestion->id) }} 
+                <form action={{ route('suggestion.edit', $suggestion->id) }} 
                     method="POST" id="form{{ $suggestion->id }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -504,7 +504,7 @@
                         <div style="display: flex">
                             <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $suggestion->id }})"><i class="fa fa-edit"></i></button>
                             <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
-                                href="{{route('suggestion-delete', $suggestion->id)}}"><i class="fa fa-trash"></i></a>
+                                href="{{route('suggestion.delete', $suggestion->id)}}"><i class="fa fa-trash"></i></a>
                         </div>
 
                         <div style="display: inline-flex">
@@ -580,7 +580,7 @@
             
             @foreach ($users as $user)
                 <tr>
-                <form action={{ route('user-edit', $user->id) }} 
+                <form action={{ route('user.edit', $user->id) }} 
                     method="POST" id="form{{ $user->id }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -618,7 +618,7 @@
                         <div style="display: flex">
                             <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $user->id }})"><i class="fa fa-edit"></i></button>
                             <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
-                                href="{{route('user-delete', $user->id)}}"><i class="fa fa-trash"></i></a>
+                                href="{{route('user.delete', $user->id)}}"><i class="fa fa-trash"></i></a>
                         </div>
 
                         <div style="display: inline-flex">
@@ -695,7 +695,7 @@
             
             @foreach ($categories as $category)
                 <tr>
-                <form action={{ route('category-edit', $category->id) }} 
+                <form action={{ route('category.edit', $category->id) }} 
                     method="POST" id="form{{ $category->id }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -710,7 +710,7 @@
                         <div style="display: flex">
                             <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $category->id }})"><i class="fa fa-edit"></i></button>
                             <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
-                                href="{{route('category-delete', $category->id)}}"><i class="fa fa-trash"></i></a>
+                                href="{{route('category.delete', $category->id)}}"><i class="fa fa-trash"></i></a>
                         </div>
 
                         <div style="display: inline-flex">
@@ -785,7 +785,7 @@
             
             @foreach ($reviews as $review)
                 <tr>
-                <form action={{ route('review-edit', $review->id) }} 
+                <form action={{ route('review.edit', $review->id) }} 
                     method="POST" id="form{{ $review->id }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -812,7 +812,7 @@
                         <div style="display: flex">
                             <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $review->id }})"><i class="fa fa-edit"></i></button>
                             <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
-                                href="{{route('review-delete', $review->id)}}"><i class="fa fa-trash"></i></a>
+                                href="{{route('review.delete', $review->id)}}"><i class="fa fa-trash"></i></a>
                         </div>
 
                         <div style="display: inline-flex">

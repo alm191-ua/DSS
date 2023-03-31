@@ -6,7 +6,7 @@
 
 @section('fields')
 
-@section('form-action', route('user-edit', $user->id))
+@section('form-action', route('user.edit', $user->id))
 
 @method('PUT')
     <style>
