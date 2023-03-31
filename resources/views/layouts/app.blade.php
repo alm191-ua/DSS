@@ -51,9 +51,9 @@
                     <div class="container">
                         <div class="kode-navigation" style="height: 35px;"> <!-- site-info -->
                             <ul>
-                                <li><a href="mailto:contact.wordwaves@gmail.com"><i class="fa fa-envelope-o"></i>contact.wordwaves@gmail.com</a></li>
+                                <li style="top:9px;"><a id="mail-link" href="mailto:contact.wordwaves@gmail.com"><i id="mail-icon" class="fa fa-envelope-o"></i>contact.wordwaves@gmail.com</a></li>
                                 <!-- <li><a href="#"><i class="fa fa-heart"></i></a></li> -->
-                                <li><a href="#"><i class="fa fa-language"></i></a>
+                                <li style="top:0.5em;" id="lang-icon"><a href="#"><i class="fa fa-language"></i></a>
                                     <ul>
                                         <li>
                                             <a href="{{ route('locale', ['locale' => 'es']) }}">
@@ -69,7 +69,36 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a id="search-box" href="#"><i class="fa fa-search"></i></a></li>
+                                <!-- <li><a id="search-box" href="#"><i class="fa fa-search"></i></a></li> -->
+                                
+                                <!-- <li><a href="{{ route('login.perform') }}"><i class="fa fa-user"></i></a>
+                                    <ul>
+                                        <li><a href="{{ route('login.perform') }}">{{ __('master.menu.login') }}</a></li>
+                                        <li><a href="{{ route('register.perform') }}">{{ __('master.menu.register') }}</a></li>
+                                    </ul>
+                                </li> -->
+                                @auth
+                                    {{auth()->user()->name}}
+                                    {{-- <div class="text-end" style="display: inline-flex"> --}}
+                                    <li>
+                                        <a id="profile-link" href="{{ route('profile') }}"><i class="fa fa-user" style="margin-right: 15px; position:relative; top:9px;"></i></a>                 
+                                    </li>
+                                    <li>    
+                                        <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-2">Logout</a>
+                                    </li>
+                                        {{-- </div> --}}
+                                @endauth
+
+                                @guest
+                                    {{-- <div class="text-end" style="display: inline-flex"> --}}
+                                    <li style="margin-right: -20px">
+                                        <a href="{{ route('login.perform') }}" class="btn btn-outline-light me-2" style="margin-right: 0.5em;">{{ __('master.menu.login') }}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('register.perform') }}" class="btn btn-warning">Sign-up</a>
+                                    </li>
+                                        {{-- </div> --}}
+                                @endguest
                             </ul>
                         </div>
                     </div>
@@ -92,6 +121,11 @@
                         <!--LOGO END-->
                         <div class="kode-navigation">
                             <ul>
+                                @auth
+                                    @if (Auth::user()->is_admin)
+                                        <li><a href="{{ route('admin') }}">Admin</a></li>
+                                    @endif
+                                @endauth
                                 <li><a href="{{ route('home') }}">{{ __('master.menu.home') }}</a></li>
                                 <li><a href="{{ route('aboutus') }}">{{ __('master.menu.aboutus') }}</a></li>
                                 <li class="last"><a href="{{ route('authors') }}">Teams</a>
@@ -112,6 +146,7 @@
                         <div id="kode-responsive-navigation" class="dl-menuwrapper">
                             <button class="dl-trigger">{{ __('master.menu.open') }}</button>
                             <ul class="dl-menu">
+                                <li><a href="{{ route('admin') }}">Admin</a></li>
                                 <li><a href="{{ route('home') }}">{{ __('master.menu.home') }}</a></li>
                                 <li><a href="{{ route('aboutus') }}">{{ __('master.menu.aboutus') }}</a></li>
                                 <li class="last"><a href="{{ route('authors') }}">Teams</a>
@@ -161,3 +196,7 @@
         <script src="{{ asset('js/functions.js') }}"></script> 
     </body>
 </html>
+
+<style>
+
+</style>

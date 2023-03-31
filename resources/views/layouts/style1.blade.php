@@ -23,13 +23,28 @@
                         <h2>Search<br> Your Books</h2>
                     </div>
                     <div class="col-md-6">
-                        <input type="text" placeholder="Enter Your Title">
+                        <input id="title_search" 
+                            {{-- onchange="window.location.href = '/books?search=' + this.value" --}}
+                            type="text" placeholder="Enter Your Title">
                     </div>
                     <div class="col-md-2">
-                        <select></select>
+                        {{-- select with categories --}}
+                        <select id="category_search" 
+                            {{-- onchange="window.location.href = '/books?category=' + this.value" --}}
+                            >
+                            <option value="">Select Category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->tag }}">{{ $category->tag }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-md-2">
-                        <button>Search</button>
+                        <button onclick="
+                            let title = $('#title_search').val();
+                            let category = $('#category_search').val();
+                            window.location.href = '/books?search=' + title + '&category=' + category;
+                            "
+                            >Search</button>
                     </div>
                 </div>
             </div>

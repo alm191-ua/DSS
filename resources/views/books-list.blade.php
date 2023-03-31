@@ -32,15 +32,15 @@
                     		<input type="text" placeholder="Enter Keyword" 
                                 onchange="
                                 // // con este codigo puedes añadir varios parámetros a la url
-                                // const {
-                                //     host, hostname, href, origin, pathname, port, protocol, search
-                                // } = window.location;
-                                // let url = origin + pathname + search;
-                                // let params = new URLSearchParams(search);
-                                // params.set('search', this.value);
-                                // url = origin + pathname + '?' + params.toString();
-                                // window.location.replace(url);
-                                window.location.replace('?search=' + this.value);
+                                const {
+                                    host, hostname, href, origin, pathname, port, protocol, search
+                                } = window.location;
+                                let url = origin + pathname + search;
+                                let params = new URLSearchParams(search);
+                                params.set('search', this.value);
+                                url = origin + pathname + '?' + params.toString();
+                                window.location.replace(url);
+                                // window.location.replace('?search=' + this.value);
                                 ">
                             <i class="fa fa-search"></i>
                         </div>
@@ -76,7 +76,7 @@
                     </div>
                     <!--NEW ARRIVAL WIDGET END--> 
                     <!--CATEGORY WIDGET START-->
-                    <div class="widget widget-categories">
+                    {{-- <div class="widget widget-categories">
                     	<h2>Categories</h2>
                         <ul>
                         	<li><a href="#">Photoshop</a></li>
@@ -88,10 +88,10 @@
                             <li><a href="#">Mobile Development</a></li>
                             <li><a href="#">Video Editing</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
                     <!--CATEGORY WIDGET END-->
                     <!--NEW ARRIVAL WIDGET START-->
-                    <div class="widget widget-new-arrival">
+                    {{-- <div class="widget widget-new-arrival">
                     	<h2>Best Sellers</h2>
                         <ul class="bxslider">
                             <li>
@@ -153,10 +153,35 @@
                                 </div>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                     <!--NEW ARRIVAL WIDGET END-->
                 </div>
                 <!--SIDEBAR END-->
+                {{-- aviso con los filtros activados, obtenidos de los parametros de la url --}}
+                @if (count($filters) > 0)
+                    <div class="col-md-9">
+                        <div class="alert alert-info">
+                            <strong>Filters:</strong>
+                            @foreach ($filters as $filter)
+                                <span style="margin-left: 0.8em" class="label label-info">
+                                    {{ $filter }}
+                                </span>
+                            @endforeach
+                            <a href="{{ route('books-list') }}" 
+                                class="close" aria-label="close" title="Remove filter">
+                                <span aria-hidden="true">&times;</span>
+                            </a>
+                        </div>
+                    </div>
+                @else
+                    <div class="col-md-9">
+                        <div class="alert alert-info">
+                            <strong>Filters:</strong>
+                            <span class="label label-info">All</span>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="col-md-9">
                 	<div class="row">
                         @if (count($books) == 0)

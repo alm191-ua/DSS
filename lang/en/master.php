@@ -18,6 +18,8 @@ return [
     'newsletter_title' => 'NewsletterSubscribe to our Newsletter for the latest news.',
     'menu.open' => 'Open Menu',
     'menu.home' => 'Home',
+    'menu.login' => 'Login',
+    'menu.register' => 'Register',
     'menu.books' => 'Books',
     'menu.authors' => 'Authors',
     'menu.aboutus' => 'About Us',

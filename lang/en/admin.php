@@ -2,6 +2,6 @@
 
 return [
     'confirm' => 'Are you sure?',
-    'create-book' => 'Create book',
+    'create' => 'Create',
     
 ];
