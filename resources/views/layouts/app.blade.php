@@ -115,6 +115,7 @@
                         <!--LOGO END-->
                         <div class="kode-navigation">
                             <ul>
+                                <li><a href="{{ route('admin') }}">Admin</a></li>
                                 <li><a href="{{ route('home') }}">{{ __('master.menu.home') }}</a></li>
                                 <li><a href="{{ route('aboutus') }}">{{ __('master.menu.aboutus') }}</a></li>
                                 <li class="last"><a href="{{ route('authors') }}">Teams</a>
@@ -135,6 +136,7 @@
                         <div id="kode-responsive-navigation" class="dl-menuwrapper">
                             <button class="dl-trigger">{{ __('master.menu.open') }}</button>
                             <ul class="dl-menu">
+                                <li><a href="{{ route('admin') }}">Admin</a></li>
                                 <li><a href="{{ route('home') }}">{{ __('master.menu.home') }}</a></li>
                                 <li><a href="{{ route('aboutus') }}">{{ __('master.menu.aboutus') }}</a></li>
                                 <li class="last"><a href="{{ route('authors') }}">Teams</a>

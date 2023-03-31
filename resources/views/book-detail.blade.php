@@ -9,158 +9,19 @@
     <div class="kode-content padding-tb-50">
     	<div class="container">
             <div class="row">
-                <div class="col-md-3 sidebar">
-                	<!--SEARCH WIDGET START-->	
-                    <div class="widget widget-search">
-                    	<h2>Search</h2>
-                    	<div class="input-container">
-                    		<input type="text" placeholder="Enter Keyword">
-                            <i class="fa fa-search"></i>
-                        </div>
-                    </div>
-                    <!--SEARCH WIDGET END-->
-                    <!--PRICE FILTER WIDGET START-->
-                    <div class="widget widget-price-filter">
-                    	<h2>Filter by Price</h2>
-                        <b>$ 10</b> 
-                        <b class="pull-right">$ 1000</b>
-                        <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[10,400]"/>
-                        <a href="#" class="filter">Filter</a>
-                    </div>
-                    <!--PRICE FILTER WIDGET END-->
-                    <!--NEW ARRIVAL WIDGET START-->
-                    <div class="widget widget-new-arrival">
-                    	<h2>New Arrival</h2>
-                        <ul>
-                        	<li>
-                            	<div class="new-arrival">
-                                    <div class="kode-thumb">
-                                        <a href="#"><img src="{{ asset('images/new-arrival1.png') }}" alt=""></a>
-                                    </div>
-                                    <div class="kode-text">
-                                        <h3>consetetur sadip scing</h3>
-                                        <p>Sed diam nonumy eirmod tempor invidunt ut labore et dolore</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                            	<div class="new-arrival">
-                                    <div class="kode-thumb">
-                                        <a href="#"><img src="{{ asset('images/new-arrival2.png') }}" alt=""></a>
-                                    </div>
-                                    <div class="kode-text">
-                                        <h3>consetetur sadip scing</h3>
-                                        <p>Sed diam nonumy eirmod tempor invidunt ut labore et dolore</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                            	<div class="new-arrival">
-                                    <div class="kode-thumb">
-                                        <a href="#"><img src="{{ asset('images/new-arrival3.png') }}" alt=""></a>
-                                    </div>
-                                    <div class="kode-text">
-                                        <h3>consetetur sadip scing</h3>
-                                        <p>Sed diam nonumy eirmod tempor invidunt ut labore et dolore</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--NEW ARRIVAL WIDGET END--> 
-                    <!--CATEGORY WIDGET START-->
-                    <div class="widget widget-categories">
-                    	<h2>Categories</h2>
-                        <ul>
-                        	<li><a href="#">Photoshop</a></li>
-                            <li><a href="#">web/Graphic Design</a></li>
-                            <li><a href="#">Mobile Development</a></li>
-                            <li><a href="#">Video Editing</a></li>
-                            <li><a href="#">Photoshop</a></li>
-                            <li><a href="#">web/Graphic Design</a></li>
-                            <li><a href="#">Mobile Development</a></li>
-                            <li><a href="#">Video Editing</a></li>
-                        </ul>
-                    </div>
-                    <!--CATEGORY WIDGET END-->
-                    <!--NEW ARRIVAL WIDGET START-->
-                    <div class="widget widget-new-arrival">
-                    	<h2>Best Sellers</h2>
-                        <ul class="bxslider">
-                            <li>
-                            	<div class="new-arrival">
-                                    <div class="kode-thumb">
-                                        <a href="#"><img src="{{ asset('images/new-arrival2.png') }}" alt=""></a>
-                                    </div>
-                                    <div class="kode-text">
-                                        <h3>consetetur sadip scing</h3>
-                                        <p>Sed diam nonumy eirmod tempor invidunt ut labore et dolore</p>
-                                    </div>
-                                </div>
-                                <div class="new-arrival">
-                                    <div class="kode-thumb">
-                                        <a href="#"><img src="{{ asset('images/new-arrival1.png') }}" alt=""></a>
-                                    </div>
-                                    <div class="kode-text">
-                                        <h3>consetetur sadip scing</h3>
-                                        <p>Sed diam nonumy eirmod tempor invidunt ut labore et</p>
-                                    </div>
-                                </div>
-                                <div class="new-arrival">
-                                    <div class="kode-thumb">
-                                        <a href="#"><img src="{{ asset('images/new-arrival3.png') }}" alt=""></a>
-                                    </div>
-                                    <div class="kode-text">
-                                        <h3>consetetur sadip scing</h3>
-                                        <p>Sed diam nonumy eirmod tempor invidunt ut labore et dolore</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                            	<div class="new-arrival">
-                                    <div class="kode-thumb">
-                                        <a href="#"><img src="{{ asset('images/new-arrival3.png') }}" alt=""></a>
-                                    </div>
-                                    <div class="kode-text">
-                                        <h3>consetetur sadip scing</h3>
-                                        <p>Sed diam nonumy eirmod tempor invidunt ut labore et dolore</p>
-                                    </div>
-                                </div>
-                                <div class="new-arrival">
-                                    <div class="kode-thumb">
-                                        <a href="#"><img src="{{ asset('images/new-arrival2.png') }}" alt=""></a>
-                                    </div>
-                                    <div class="kode-text">
-                                        <h3>consetetur sadip scing</h3>
-                                        <p>Sed diam nonumy eirmod tempor invidunt ut labore et dolore</p>
-                                    </div>
-                                </div>
-                                <div class="new-arrival">
-                                    <div class="kode-thumb">
-                                        <a href="#"><img src="{{ asset('images/new-arrival1.png') }}" alt=""></a>
-                                    </div>
-                                    <div class="kode-text">
-                                        <h3>consetetur sadip scing</h3>
-                                        <p>Sed diam nonumy eirmod tempor invidunt ut labore et dolore</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--NEW ARRIVAL WIDGET END-->
-                </div>
-                <div class="col-md-9">
+                <div class="col-md-9" style="margin-left: 13%">
                     <!--BOOK DETAIL START-->
                     <div class="lib-book-detail">
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="kode-thumb">
-                                    <img src="{{ asset('images/book-detail.jpg') }}" alt="">
+                                    <img src="{{ asset('storage_images/books/'.$book->image) }}" alt="book image"
+                                    onerror="this.src='{{ asset('images/default.png') }}'">
                                 </div>
                             </div>
                             <div class="col-md-7">
                                 <div class="kode-text">
-                                	<h2>Apllication Health and Well-Beign</h2>
+                                	<h2>{{ $book->title }}</h2>
                                     <div class="product-review">
                                         <div class="rating">
                                             <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
@@ -168,22 +29,26 @@
                                         <p>4 Customer reveiws</p>
                                     </div>
                                     <div class="product-price">
-                                        <h4>$ 19.90</h4>
-                                        <p>Author : <span class="color">Robert L. Lukdke</span></p>
+                                        <p>Author : <span class="color">{{ $book->author->name }}</span></p>
                                     </div>
-                                    <div class="book-text">
+                                    {{-- <div class="book-text">
                                     	<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.</p>
-                                    </div>
+                                    </div> --}}
                                     <div class="book-text">
-                                    	<p>Category: Books.</p>
-                                        <p>Tag: books.</p>
+                                    	<p>Category: {{ $book->category->tag }}</p>
+                                        <p>ISBN: {{ $book->isbn }}</p>
+                                        <p>ID: {{ $book->id }}</p>
+                                        {{-- <p>Tag: books.</p>
                                         <p>Author: Daniel Abraham</p>
                                         <p>Publisher: Journal inc</p>
-                                        <p>Product ID: 1100</p>
+                                        <p>Product ID: 1100</p> --}}
                                     </div>
-                                    <a href="#" class="add-to-cart">Add To Cart</a>
+                                    <a href="#" class="add-to-cart">Add To Bookshelf</a>
+                                    <a href="{{ route('book-download', $book->id) }}" class="add-to-cart">Download</a>
+                                    <a href="{{ route('book-read', $book->id) }}" class="add-to-cart" target="_blank">Read</a>
+                                    {{-- <a href="#" class="add-to-cart">Add To Cart</a>
                                     <a href="#" class="add-to-cart">Add To Wishlist</a>
-                                    <a href="#" class="add-to-cart">Get a Quote</a>
+                                    <a href="#" class="add-to-cart">Get a Quote</a> --}}
                                 </div>
                             </div>
                         </div>
@@ -195,16 +60,18 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active"><a href="#Description " aria-controls="Description" role="tab" data-toggle="tab">Description </a></li>
                             <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li>
-                            <li role="presentation"><a href="#tags" aria-controls="tags" role="tab" data-toggle="tab">Tags</a></li>
-                            <li role="presentation"><a href="#CustomTab" aria-controls="CustomTab" role="tab" data-toggle="tab">Custom Tab</a></li>
+                            <li role="presentation"><a href="#read" aria-controls="read" role="tab" data-toggle="tab">Read</a></li>
+                            {{-- <li role="presentation"><a href="#tags" aria-controls="tags" role="tab" data-toggle="tab">Tags</a></li>
+                            <li role="presentation"><a href="#CustomTab" aria-controls="CustomTab" role="tab" data-toggle="tab">Custom Tab</a></li> --}}
                         </ul>
                         <!--NAV TABS END-->
                         <!--TAB PANEL START-->
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="Description">
-                                <p>Cum altera mandamus in, mea verear disputationi et. Vel regione discere ut, legere expetenda ut eos. In nam nibh invenire similique. Atqui mollis ea his, ius graecis accommodare te. No eam tota nostrum cotidieque. Est cu nibh clita. Sed an nominavi maiestatis, et duo corrumpit constituto, duo id rebum lucilius. Te eam iisque deseruisse, ipsum euismod his at. Eu putent habemus voluptua sit, sit cu rationibus scripserit, modus voluptaria ex per. Aeque dicam consulatu eu his, probatus neglegentur disputationi sit et. Ei nec ludus epicuri petentium, vis appetere maluisset ad. Et hinc exerci utinam cum. Sonet saperet nominavi est at, vel eu sumo tritani. Cum ex minim legere.</p>
+                                {{-- <p>Cum altera mandamus in, mea verear disputationi et. Vel regione discere ut, legere expetenda ut eos. In nam nibh invenire similique. Atqui mollis ea his, ius graecis accommodare te. No eam tota nostrum cotidieque. Est cu nibh clita. Sed an nominavi maiestatis, et duo corrumpit constituto, duo id rebum lucilius. Te eam iisque deseruisse, ipsum euismod his at. Eu putent habemus voluptua sit, sit cu rationibus scripserit, modus voluptaria ex per. Aeque dicam consulatu eu his, probatus neglegentur disputationi sit et. Ei nec ludus epicuri petentium, vis appetere maluisset ad. Et hinc exerci utinam cum. Sonet saperet nominavi est at, vel eu sumo tritani. Cum ex minim legere.</p>
                                 <p>Sed an nominavi maiestatis, et duo corrumpit constituto, duo id rebum lucilius. Te eam iisque deseruisse, ipsum euismod his at. Eu putent habemus voluptua sit, sit cu rationibus scripserit, modus voluptaria ex per. Aeque dicam consulatu eu his, probatus neglegentur disputationi sit et. Ei nec ludus epicuri petentium, vis appetere maluisset ad. Et hinc exerci utinam cum. Sonet saperet nominavi est at, vel eu sumo tritani. Cum ex minim legere.</p>
-                                <p>Ipsum euismod his at. Eu putent habemus voluptua sit, sit cu rationibus scripserit, modus voluptaria ex per. Aeque dicam consulatu eu his, probatus neglegentur disputationi sit et. Ei nec ludus epicuri petentium, vis appetere maluisset ad. Et hinc exerci utinam cum. Sonet saperet nominavi est at, vel eu sumo tritani. Cum ex minim legere.</p>
+                                <p>Ipsum euismod his at. Eu putent habemus voluptua sit, sit cu rationibus scripserit, modus voluptaria ex per. Aeque dicam consulatu eu his, probatus neglegentur disputationi sit et. Ei nec ludus epicuri petentium, vis appetere maluisset ad. Et hinc exerci utinam cum. Sonet saperet nominavi est at, vel eu sumo tritani. Cum ex minim legere.</p> --}}
+                                <p>{{ $book->description }}</p>
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="reviews">
                                 <div class="kode-comments">
@@ -234,7 +101,19 @@
                                     </ul>
                                 </div>                        
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="tags">
+                            <div role="tabpanel" class="tab-pane fade" id="read" style="height: 60em">
+                                {{-- show the pdf book embed --}}
+                                <div class="embed-responsive embed-responsive-16by9" style="height: 60em">
+                                    {{-- <object data="{{ asset('books/'.$book->file) }}" type="application/pdf" width="100%" height="100%">
+                                        <p>It appears you don't have a PDF plugin for this browser.
+                                        No biggie... you can <a href="{{ route('book-download', $book->id) }}">click here to
+                                        download the PDF file.</a></p>
+                                    </object> --}}
+                                    {{-- <iframe src="{{ asset('books/'.$book->file) }}" width="100%" height="100%" style="border: none;"></iframe> --}}
+                                    <embed style="height: 60em" src="{{ asset('storage_books/'.$book->file) }}" width="100%" height="100%" />
+                                </div>
+                            </div>
+                            {{-- <div role="tabpanel" class="tab-pane fade" id="tags">
                                  <div class="product-tags">
                                     	<a href="#">habemus</a>
                                         <a href="#">accusam</a>
@@ -273,84 +152,45 @@
                                         <a href="#">gubergren</a>
                                         <a href="#">eirmod</a>
                                  </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="CustomTab">
+                            </div> --}}
+                            {{-- <div role="tabpanel" class="tab-pane fade" id="CustomTab">
                                 <p>Ipsum euismod his at. Eu putent habemus voluptua sit, sit cu rationibus scripserit, modus voluptaria ex per. Aeque dicam consulatu eu his, probatus neglegentur disputationi sit et. Ei nec ludus epicuri petentium, vis appetere maluisset ad. Et hinc exerci utinam cum. Sonet saperet nominavi est at, vel eu sumo tritani. Cum ex minim legere.</p> 
                                 <p>Te eam iisque deseruisse, ipsum euismod his at. Eu putent habemus voluptua sit, sit cu rationibus scripserit, modus voluptaria ex per. Aeque dicam consulatu eu his, probatus neglegentur disputationi sit et. Ei nec ludus epicuri petentium, vis appetere maluisset ad. Et hinc exerci utinam cum. Sonet saperet nominavi est at, vel eu sumo tritani. Cum ex minim legere.</p>
                                 <p>Sed an nominavi maiestatis, et duo corrumpit constituto, duo id rebum lucilius. Te eam iisque deseruisse, ipsum euismod his at. Eu putent habemus voluptua sit, sit cu rationibus scripserit, modus voluptaria ex per. Aeque dicam consulatu eu his, probatus neglegentur disputationi sit et. Ei nec ludus epicuri petentium, vis appetere maluisset ad. Et hinc exerci utinam cum. Sonet saperet nominavi est at, vel eu sumo tritani. Cum ex minim legere.</p>
                                 <p>Ipsum euismod his at. Eu putent habemus voluptua sit, sit cu rationibus scripserit, modus voluptaria ex per. Aeque dicam consulatu eu his, probatus neglegentur disputationi sit et. Ei nec ludus epicuri petentium, vis appetere maluisset ad. Et hinc exerci utinam cum. Sonet saperet nominavi est at, vel eu sumo tritani. Cum ex minim legere.</p> 
-                            </div>
+                            </div> --}}
                         </div>
                         <!--TAB PANEL END-->
                     </div>
                     <!--PRODUCT REVIEW TABS END-->
                     <!--RELATED PRODUCTS START-->
                     <div class="lib-related-products">
-                        <h2>Related Books</h2>
+                        <h2>Related Books - Category: {{ $book->category->tag }}</h2>
                         <div class="row">
-                            <!--PRODUCT GRID START-->
-                            <div class="col-md-4">
-                                <div class="best-seller-pro">
-                                    <figure>
-                                        <img src="{{ asset('images/book7.png') }}" alt="">
-                                    </figure>
-                                    <div class="kode-text">
-                                        <h3><a href="#">Burnt Siena</a></h3>
-                                    </div>
-                                    <div class="kode-caption">
-                                        <h3>Art History Mystery</h3>
-                                        <div class="rating">
-                                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                            @foreach ($related_books as $book)
+                                <!--PRODUCT GRID START-->
+                                <div class="col-md-4">
+                                    <div class="best-seller-pro">
+                                        <figure>
+                                            <img src="{{ asset('storage_images/books/'.$book->image) }}" alt="book image"
+                                                onerror="this.src='{{ asset('images/default.png') }}'">
+                                        </figure>
+                                        <div class="kode-text">
+                                            <h3><a href="#">{{ $book->author->name }}</a></h3>
                                         </div>
-                                        <p>Sara Wisseman</p>
-                                        <p class="price">$334.50</p>
-                                        <a href="#" class="add-to-cart">Add To Cart</a>
+                                        <div class="kode-caption">
+                                            <h3>{{ $book->title }}</h3>
+                                            <div class="rating">
+                                                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                            </div>
+                                            <p>{{ $book->author->name }}</p>
+                                            {{-- <p class="price">$334.50</p> --}}
+                                            <a href="#" class="add-to-cart">Add To Bookshelf</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!--PRODUCT GRID END-->
-                            <!--PRODUCT GRID START-->
-                            <div class="col-md-4">
-                                <div class="best-seller-pro">
-                                    <figure>
-                            	<img src="{{ asset('images/book8.png') }}" alt="">
-                            </figure>
-                            <div class="kode-text">
-                            	<h3><a href="#">Chrysalis</a></h3>
-                            </div>
-                            <div class="kode-caption">
-                            	<h3>The Brave Girl</h3>
-                                <div class="rating">
-<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-</div>
-                                <p>William S.</p>
-                                <p class="price">$24.75</p>
-                                <a href="#" class="add-to-cart">Add To Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--PRODUCT GRID END-->
-                            <!--PRODUCT GRID START-->
-                            <div class="col-md-4">
-                                <div class="best-seller-pro">
-                                    <figure>
-                            	<img alt="" src="{{ asset('images/book12.png') }}">
-                            </figure>
-                            <div class="kode-text">
-                            	<h3><a href="#">Dead Water</a></h3>
-                            </div>
-                            <div class="kode-caption">
-                            	<h3>Dead Water in the Sea</h3>
-                                <div class="rating">
-<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-</div>
-                                <p>Ann Grannger</p>
-                                <p class="price">$777.75</p>
-                                <a class="add-to-cart" href="#">Add To Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--PRODUCT GRID END-->
+                                <!--PRODUCT GRID END-->
+                            @endforeach
                         </div>
                     </div>
                     <!--RELATED PRODUCTS END-->

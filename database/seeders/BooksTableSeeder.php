@@ -47,6 +47,7 @@ class BooksTableSeeder extends Seeder
             $book->category_id = Category::all()->random()->id;
             $book->image = fake()->imageUrl(200, 300);
             $book->isbn = "9780547928227";
+            $book->file = fake()->imageUrl(200, 300);
             $book->save();
         }
 

@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Author;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 
 class BooksController extends Controller
@@ -19,8 +20,17 @@ class BooksController extends Controller
         try{
             //get the book with the id passed as parameter
             $book = Book::findOrFail($id);
+            // 3 random books of the same category
+            $related_books = Book::where('category_id', $book->category_id)
+                ->where('id', '!=', $book->id)
+                ->inRandomOrder()
+                ->take(3)
+                ->get();
+
+            $categories = Category::all();
+
             //return the view with the book
-            return view('book-detail', ['book' => $book]);
+            return view('book-detail', compact('book', 'related_books', 'categories'));
         }catch(\Exception $e){
             return redirect()->route('404');
         }
@@ -35,18 +45,28 @@ class BooksController extends Controller
         $category = request()->query('category');
         // if category exists, filter query
         if ($category) {
+            Log::info('category: '.$category);
             $queryBooks->whereHas('category', function ($query) use ($category) {
                 return $query->where('tag', $category);
             });
+            Log::info('count: '.$queryBooks->count());
         }
 
         $search = request()->query('search');
         // if search exists, filter query
         if ($search) {
-            $queryBooks->where('title', 'like', '%'.$search.'%')
-            ->orWhereHas('author', function ($query) use ($search) {
-                return $query->where('name', 'like', '%'.$search.'%');
+            Log::info('search: '.$search);
+            // $queryBooks->where('title', 'like', '%'.$search.'%')
+            // ->orWhereHas('author', function ($query) use ($search) {
+            //     return $query->where('name', 'like', '%'.$search.'%');
+            // });
+            $queryBooks->where(function($query1) use ($search) {
+                $query1->where('title', 'like', '%'.$search.'%')
+                ->orWhereHas('author', function ($query) use ($search) {
+                    return $query->where('name', 'like', '%'.$search.'%');
+                });
             });
+            Log::info('count: '.$queryBooks->count());
         }
 
         $books = $queryBooks->paginate(
@@ -55,10 +75,11 @@ class BooksController extends Controller
             $columns = ['id', 'title', 'author_id', 'category_id', 'image'],
             $pageName = 'books',
         )->withQueryString();
-
+        
+        $categories = Category::all();
         $new_arrivals = Book::orderBy('created_at', 'desc')->take(3)->get();
 
-        return view('books-list', compact('books', 'new_arrivals'));
+        return view('books-list', compact('books', 'new_arrivals', 'categories'));
     }
 
     //create function to show the form to create a new book
@@ -74,6 +95,8 @@ class BooksController extends Controller
         $book->delete();
         // delete image
         File::delete(storage_path('app/images/books/'.$image));
+        // delete file
+        File::delete(storage_path('app/book_files/'.$book->file));
         return redirect()->back()->withInput($request->page_num);
     }
 
@@ -85,6 +108,7 @@ class BooksController extends Controller
             'author' => 'required',
             'category' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'file' => 'file|mimes:pdf|max:8192',
         ]);
         try{
             $book = Book::findOrFail($id);
@@ -108,11 +132,44 @@ class BooksController extends Controller
                 $image->move(storage_path('app/images/books'), $imageName);
                 $book->image = $imageName;
             }
+
+            if ($request->hasFile('file')) {
+                // delete old file
+                File::delete(storage_path('app/book_files/'.$book->file));
+
+                // save new file
+                $file = $request->file;
+                $fileName = time().$file->getClientOriginalName();
+                $file->move(storage_path('app/book_files'), $fileName);
+                $book->file = $fileName;
+            }
             $book->save();
             return redirect()->back()->withInput($request->page_num);
 
         }catch(\Exception $e){
             return redirect()->back()->withInput($request->page_num);
+        }
+    }
+
+    public function download($id)
+    {
+        try{
+            $book = Book::findOrFail($id);
+            $file = storage_path('app/book_files/'.$book->file);
+            return response()->download($file);
+        }catch(\Exception $e){
+            return redirect()->route('404');
+        }
+    }
+
+    public function showFile($id)
+    {
+        try{
+            $book = Book::findOrFail($id);
+            $file = storage_path('app/book_files/'.$book->file);
+            return response()->file($file);
+        }catch(\Exception $e){
+            return redirect()->route('404');
         }
     }
 

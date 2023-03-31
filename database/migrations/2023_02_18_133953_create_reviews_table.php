@@ -18,7 +18,9 @@ return new class extends Migration
             $table->text('comment');
             //$table->unsignedBigInteger('user_id') -> unsigned() -> nullable(false);
             //$table->unsignedBigInteger('book_id') -> unsigned() -> nullable(false);
-            $table->foreignId('user_id') -> references('id') -> on('users') -> onDelete('set default') -> default(0); // 0: anonymous
+            // $table->foreignId('user_id') -> references('id') -> on('users') -> onDelete('set default') -> default(0); // 0: anonymous
+            // me gustaria que no se borrasen las reviews cuando se borre un usuario, pero así no deja borrar usuarios
+            $table->foreignId('user_id') -> references('id') -> on('users') -> onDelete('cascade');
             $table->foreignId('book_id') -> references('id') -> on('books') -> onDelete('cascade');
             $table->timestamps();
         });

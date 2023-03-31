@@ -7,6 +7,7 @@ use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -41,7 +42,18 @@ class LoginController extends Controller
         // Log user password
         Log::info('User password: ' . $user->password);
         Log::info('Credentials password: ' . $credentials['password']);
-        Log::info('Password hashed credentials: ' . password_hash($credentials['password'], PASSWORD_DEFAULT));
+
+        $hash1 = Hash::make($credentials['password']);
+        $hash2 = Hash::make($credentials['password']);
+
+        Log::info('Password hashed credentials: ' . $hash1);
+        Log::info('Password hashed credentials: ' . $hash2);
+
+        Log::info('Password hashed credentials: ' . Hash::check($credentials['password'], $hash1));
+        Log::info('Password hashed credentials: ' . Hash::check($credentials['password'], $hash2));
+
+        var_dump(Hash::check($credentials['password'], $hash1) && Hash::check($credentials['password'], $hash2));
+
 
         // TODO: passwords not matching
 

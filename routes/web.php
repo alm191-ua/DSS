@@ -46,16 +46,32 @@ Route::group(['middleware' => 'language'], function () {
     Route::delete('/bookshelf/delete/{id}', [App\Http\Controllers\BookshelfController::class, 'delete', 'id'])->name('bookshelf.delete');
 
     Route::get('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'showEdit', 'id'])->name('user-edit');
+    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
+    
     Route::get('/books/create', [App\Http\Controllers\BooksController::class, 'create'])->name('book-create');
     Route::get('/books/delete/{id}', [App\Http\Controllers\BooksController::class, 'delete', 'id'])->name('book-delete');
     Route::put('/books/update/{id}', [App\Http\Controllers\BooksController::class, 'update', 'id'])->name('book-edit');
-    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
     Route::get('/books', [App\Http\Controllers\BooksController::class, 'list'])->name('books-list');
-    Route::get('/aboutus', [App\Http\Controllers\AboutusController::class, 'index'])->name('aboutus');
-    Route::get('/author/{id}', [App\Http\Controllers\AuthorsController::class, 'show', 'id'])->name('author');
-    Route::get('/authors', [App\Http\Controllers\AuthorsController::class, 'index'])->name('authors');
-    Route::get('/contactus', [App\Http\Controllers\ContactusController::class, 'index'])->name('contactus');
     Route::get('/book/{id}', [App\Http\Controllers\BooksController::class, 'index', 'id'])->name('book');
+    Route::get('/book/download/{id}', [App\Http\Controllers\BooksController::class, 'download', 'id'])->name('book-download');
+    Route::get('/book/read/{id}', [App\Http\Controllers\BooksController::class, 'showFile', 'id'])->name('book-read');
+    
+    Route::get('/author/{id}', [App\Http\Controllers\AuthorsController::class, 'show', 'id'])->name('author');
+    Route::put('/author/update/{id}', [App\Http\Controllers\AuthorsController::class, 'update', 'id'])->name('author-edit');
+    Route::get('/author/delete/{id}', [App\Http\Controllers\AuthorsController::class, 'delete', 'id'])->name('author-delete');
+    Route::get('/authors', [App\Http\Controllers\AuthorsController::class, 'index'])->name('authors');
+    
+    Route::put('/suggestion/update/{id}', [App\Http\Controllers\SuggestionsController::class, 'update', 'id'])->name('suggestion-edit');
+    Route::get('/suggestion/delete/{id}', [App\Http\Controllers\SuggestionsController::class, 'delete', 'id'])->name('suggestion-delete');
+    
+    Route::put('/user/update/{id}', [App\Http\Controllers\UsersController::class, 'update', 'id'])->name('user-edit');
+    Route::get('/user/delete/{id}', [App\Http\Controllers\UsersController::class, 'delete', 'id'])->name('user-delete');
+
+    Route::put('/category/update/{id}', [App\Http\Controllers\CategoriesController::class, 'update', 'id'])->name('category-edit');
+    Route::get('/category/delete/{id}', [App\Http\Controllers\CategoriesController::class, 'delete', 'id'])->name('category-delete');
+
+    Route::get('/contactus', [App\Http\Controllers\ContactusController::class, 'index'])->name('contactus');
+    Route::get('/aboutus', [App\Http\Controllers\AboutusController::class, 'index'])->name('aboutus');
     // Route::post('/contactus', [App\Http\Controllers\ContactusController::class, 'store'])->name('contactus.store');
     
     

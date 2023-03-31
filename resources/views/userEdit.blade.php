@@ -4,9 +4,10 @@
 
 @section('margin', "30%")
 
-
 @section('fields')
-<style>
+
+@method('PUT')
+    <style>
         .invalid {
             border: 1px solid red;
         }

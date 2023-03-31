@@ -21,21 +21,21 @@ class AdminController extends Controller
         $books = Book::paginate(
             $perPage = $PER_PAGE,
             // all columns except created_at, updated_at, deleted_at, isbn
-            $columns = ['id', 'title', 'description', 'author_id', 'category_id', 'image'],
+            $columns = ['id', 'title', 'description', 'author_id', 'category_id', 'image', 'file', ],
             $pageName = 'books',
         )->withQueryString();
 
         $authors = Author::paginate(
             $perPage = $PER_PAGE,
             // all columns except created_at, updated_at, deleted_at
-            $columns = ['id', 'name', 'info', ], //'image'
+            $columns = ['id', 'name', 'info', 'image', ],
             $pageName = 'authors',
         )->withQueryString();
 
         $users = User::paginate(
             $perPage = $PER_PAGE,
             // all columns except created_at, updated_at, deleted_at
-            $columns = ['id', 'username', 'email', 'is_admin', ], //'image'
+            $columns = ['id', 'username', 'email', 'is_admin', 'image', ],
             $pageName = 'users',
         )->withQueryString();
 
