@@ -19,6 +19,11 @@
         .form-check {
             display: none;
         }
+
+        #profile-link {
+            margin-left : 2em;
+            margin-right : -2em;
+        }
     </style>
 
     <div class="form-group custom-row">  

@@ -28,18 +28,25 @@ class UsersController extends Controller
             'email' => 'required|email',
             // 'phone' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'password' => 'required',
+            // 'password' => 'required',
         ]);
 
         $user = User::findOrfail($id);        
-            
-        // check password match or not 
-        if (!Hash::check($request->password, $user->password)) {
-            Log::info('Password is incorrect');
-            return redirect()->back()->with('error', 'Password is incorrect');
-        } 
-        $request->merge(['password' => Hash::make($request->password)]);
-        $user->update($request->all());
+        if (!Auth::user()->is_admin) {
+            $request->validate([
+                'password' => 'required',
+            ]);
+            // check password match or not 
+            if (!Hash::check($request->password, $user->password)) {
+                Log::info('Password is incorrect');
+                return redirect()->back()->with('error', 'Password is incorrect');
+            } 
+            $request->merge(['password' => Hash::make($request->password)]);
+            $user->update($request->all());
+        }else{
+            $user->update($request->except('password'));
+        }
+
 
         if (Auth::user()->is_admin) {
             return redirect()->route('admin',['page_num'=>5]);
