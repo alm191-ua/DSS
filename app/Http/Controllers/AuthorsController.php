@@ -24,25 +24,17 @@ class AuthorsController extends Controller
     {
         $categories = Category::all();
 
-        try{
-            $author = Author::findOrfail($id);
-        }catch(\Exception $e){
-            return redirect()->route('404');
-        }
+        $author = Author::findOrfail($id);
         
         return view('author', compact('categories', 'author'));
     }
 
     public function delete ($id)
     {
-        try{
-            $author = Author::findOrfail($id);
-            // delete image
-            File::delete(storage_path('app/images/authors/'.$author->image));
-            $author->delete();
-        }catch(\Exception $e){
-            // do nothing
-        }
+        $author = Author::findOrfail($id);
+        // delete image
+        File::delete(storage_path('app/images/authors/'.$author->image));
+        $author->delete();
         return redirect()->back();
     }
 
@@ -54,25 +46,21 @@ class AuthorsController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        try{
-            $author = Author::findOrfail($id);
-            $author->name = $request->name;
-            $author->info = $request->info;
-            // save image in storage
-            if ($request->hasFile('image')) {
-                // delete old image
-                File::delete(storage_path('app/images/authors/'.$author->image));
-                // save new image
-                $image = $request->image;
-                $imageName = time().$image->getClientOriginalName();
-                $image->move(storage_path('app/images/authors'), $imageName);
-                $author->image = $imageName;
-            }
-            $author->save();
-
-        }catch(\Exception $e){
-            // do nothing
+        $author = Author::findOrfail($id);
+        $author->name = $request->name;
+        $author->info = $request->info;
+        // save image in storage
+        if ($request->hasFile('image')) {
+            // delete old image
+            File::delete(storage_path('app/images/authors/'.$author->image));
+            // save new image
+            $image = $request->image;
+            $imageName = time().$image->getClientOriginalName();
+            $image->move(storage_path('app/images/authors'), $imageName);
+            $author->image = $imageName;
         }
+        $author->save();
+
         return redirect()->back();
     }
 }

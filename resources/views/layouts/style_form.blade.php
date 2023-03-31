@@ -1,4 +1,15 @@
 <style>
+    
+    #lang-icon {
+        margin-right: -1.2em;
+        margin-left: 3em;
+    }
+
+    #mail-icon {
+        right: 14.5em;
+    }
+
+
     .row {
         display: -ms-flexbox;
         display: flex;
@@ -273,5 +284,19 @@
     .slider.round:before {
         border-radius: 50%;
     }
+
+    /* .kode-navigation {
+        display: inline-block;
+    } */
+
+    .kode-navigation ul {
+        /* list-style: none; */
+        display: inline-flex;
+    }
+
+    /* .kode-navigation ul li {
+        display: inline-block;
+        position: relative;
+    } */
 
 </style>

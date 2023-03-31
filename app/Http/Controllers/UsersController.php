@@ -30,19 +30,16 @@ class UsersController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'password' => 'required',
         ]);
-        try {
-            $user = User::findOrfail($id);        
+
+        $user = User::findOrfail($id);        
             
-            // check password match or not 
-            if (!Hash::check($request->password, $user->password)) {
-                Log::info('Password is incorrect');
-                return redirect()->back()->with('error', 'Password is incorrect');
-            } 
-            $request->merge(['password' => Hash::make($request->password)]);
-            $user->update($request->all());
-        } catch (\Exception $e) {
-            // do nothing
-        }
+        // check password match or not 
+        if (!Hash::check($request->password, $user->password)) {
+            Log::info('Password is incorrect');
+            return redirect()->back()->with('error', 'Password is incorrect');
+        } 
+        $request->merge(['password' => Hash::make($request->password)]);
+        $user->update($request->all());
 
         if (Auth::user()->is_admin) {
             return redirect()->route('admin',['page_num'=>5]);
@@ -53,12 +50,8 @@ class UsersController extends Controller
 
     public function delete($id)
     {
-        try {
-            $user = User::findOrfail($id);
-            $user->delete();
-        } catch (\Exception $e) {
-            // do nothing
-        }
+        $user = User::findOrfail($id);
+        $user->delete();
         return redirect()->back();
     }
 }

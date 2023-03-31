@@ -51,9 +51,9 @@
                     <div class="container">
                         <div class="kode-navigation" style="height: 35px;"> <!-- site-info -->
                             <ul>
-                                <li style="top:9px;"><a href="mailto:contact.wordwaves@gmail.com"><i class="fa fa-envelope-o"></i>contact.wordwaves@gmail.com</a></li>
+                                <li style="top:9px;"><a id="mail-link" href="mailto:contact.wordwaves@gmail.com"><i id="mail-icon" class="fa fa-envelope-o"></i>contact.wordwaves@gmail.com</a></li>
                                 <!-- <li><a href="#"><i class="fa fa-heart"></i></a></li> -->
-                                <li style="top:10px;"><a href="#"><i class="fa fa-language"></i></a>
+                                <li style="top:0.5em;" id="lang-icon"><a href="#"><i class="fa fa-language"></i></a>
                                     <ul>
                                         <li>
                                             <a href="{{ route('locale', ['locale' => 'es']) }}">
@@ -77,22 +77,28 @@
                                         <li><a href="{{ route('register.perform') }}">{{ __('master.menu.register') }}</a></li>
                                     </ul>
                                 </li> -->
-                                <li>
-                                    @auth
-                                        {{auth()->user()->name}}
-                                        <div class="text-end" style="display: inline-flex">
-                                            <a href="{{ route('profile') }}"><i class="fa fa-user" style="margin-right: 15px; position:relative; top:9px;"></i></a>                 
-                                            <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-2">Logout</a>
-                                        </div>
-                                    @endauth
+                                @auth
+                                    {{auth()->user()->name}}
+                                    {{-- <div class="text-end" style="display: inline-flex"> --}}
+                                    <li>
+                                        <a href="{{ route('profile') }}"><i class="fa fa-user" style="margin-right: 15px; position:relative; top:9px;"></i></a>                 
+                                    </li>
+                                    <li>    
+                                        <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-2">Logout</a>
+                                    </li>
+                                        {{-- </div> --}}
+                                @endauth
 
-                                    @guest
-                                        <div class="text-end" style="display: inline-flex">
-                                            <a href="{{ route('login.perform') }}" class="btn btn-outline-light me-2" style="margin-right: 0.5em;">Login</a>
-                                            <a href="{{ route('register.perform') }}" class="btn btn-warning">Sign-up</a>
-                                        </div>
-                                    @endguest
-                                </li>
+                                @guest
+                                    {{-- <div class="text-end" style="display: inline-flex"> --}}
+                                    <li style="margin-right: -20px">
+                                        <a href="{{ route('login.perform') }}" class="btn btn-outline-light me-2" style="margin-right: 0.5em;">{{ __('master.menu.login') }}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('register.perform') }}" class="btn btn-warning">Sign-up</a>
+                                    </li>
+                                        {{-- </div> --}}
+                                @endguest
                             </ul>
                         </div>
                     </div>

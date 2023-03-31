@@ -14,23 +14,16 @@ class SuggestionsController extends Controller
             'phone' => 'required',
             'message' => 'required|max:1200',
         ]);
-        try {
-            $suggestion = Suggestion::findOrfail($id);
-            $suggestion->update($request->all());
-        } catch (\Exception $e) {
-            // do nothing
-        }
+
+        $suggestion = Suggestion::findOrfail($id);
+        $suggestion->update($request->all());
         return redirect()->back();
     }
 
     public function delete($id)
     {
-        try {
-            $suggestion = Suggestion::findOrfail($id);
-            $suggestion->delete();
-        } catch (\Exception $e) {
-            // do nothing
-        }
+        $suggestion = Suggestion::findOrfail($id);
+        $suggestion->delete();
         return redirect()->back();
     }
 }

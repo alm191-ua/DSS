@@ -9,23 +9,15 @@ class ReviewsController extends Controller
 {
     public function update(Request $request, $id)
     {
-        try{
-            $review = Review::findOrFail($id);
-            $review->update($request->all());
-            return redirect()->back();
-        }catch(\Exception $e){
-            return redirect()->route('404');
-        }
+        $review = Review::findOrFail($id);
+        $review->update($request->all());
+        return redirect()->back();
     }
 
     public function delete($id)
     {
-        try{
-            $review = Review::findOrFail($id);
-            $review->delete();
-            return redirect()->back();
-        }catch(\Exception $e){
-            return redirect()->route('404');
-        }
+        $review = Review::findOrFail($id);
+        $review->delete();
+        return redirect()->back();
     }
 }

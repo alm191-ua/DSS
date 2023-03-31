@@ -12,23 +12,16 @@ class CategoriesController extends Controller
         $request->validate([
             'tag' => 'required|max:255',
         ]);
-        try {
-            $category = Category::findOrfail($id);
-            $category->update($request->all());
-        } catch (\Exception $e) {
-            // do nothing
-        }
+
+        $category = Category::findOrfail($id);
+        $category->update($request->all());
         return redirect()->back();
     }
 
     public function delete ($id)
     {
-        try {
-            $category = Category::findOrfail($id);
-            $category->delete();
-        } catch (\Exception $e) {
-            // do nothing
-        }
+        $category = Category::findOrfail($id);
+        $category->delete();
         return redirect()->back();
     }
 }

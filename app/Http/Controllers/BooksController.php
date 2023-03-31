@@ -16,26 +16,21 @@ class BooksController extends Controller
     //index function to show the book with the id passed as parameter
     public function index($id)
     {
-        // return view('book-detail'); // esto es para probar, cambiarlo por lo de abajo
-        try{
-            //get the book with the id passed as parameter
-            $book = Book::findOrFail($id);
-            // 3 random books of the same category
-            $related_books = Book::where('category_id', $book->category_id)
-                ->where('id', '!=', $book->id)
-                ->inRandomOrder()
-                ->take(3)
-                ->get();
+        //get the book with the id passed as parameter
+        $book = Book::findOrFail($id);
+        // 3 random books of the same category
+        $related_books = Book::where('category_id', $book->category_id)
+            ->where('id', '!=', $book->id)
+            ->inRandomOrder()
+            ->take(3)
+            ->get();
 
-            $categories = Category::all();
+        $categories = Category::all();
 
-            $reviews = $book->reviews()->orderBy('created_at', 'desc')->get();
+        $reviews = $book->reviews()->orderBy('created_at', 'desc')->get();
 
-            //return the view with the book
-            return view('book-detail', compact('book', 'related_books', 'categories', 'reviews'));
-        }catch(\Exception $e){
-            return redirect()->route('404');
-        }
+        //return the view with the book
+        return view('book-detail', compact('book', 'related_books', 'categories', 'reviews'));
     }
 
     public function list()
@@ -112,67 +107,56 @@ class BooksController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'file' => 'file|mimes:pdf|max:8192',
         ]);
-        try{
-            $book = Book::findOrFail($id);
-            $book->title = $request->title;
-            $book->description = $request->description;
-            
-            $author = Author::findOrFail($request->author);
-            $book->author()->associate($author);
+        
+        $book = Book::findOrFail($id);
+        $book->title = $request->title;
+        $book->description = $request->description;
+        
+        $author = Author::findOrFail($request->author);
+        $book->author()->associate($author);
 
-            $category = Category::find($request->category);
-            $book->category()->associate($category);
-            // dd($request->image);
-    
-            if ($request->hasFile('image')) {
-                // delete old image
-                File::delete(storage_path('app/images/books/'.$book->image));
+        $category = Category::find($request->category);
+        $book->category()->associate($category);
+        // dd($request->image);
 
-                // save new image
-                $image = $request->image;
-                $imageName = time().$image->getClientOriginalName();
-                $image->move(storage_path('app/images/books'), $imageName);
-                $book->image = $imageName;
-            }
+        if ($request->hasFile('image')) {
+            // delete old image
+            File::delete(storage_path('app/images/books/'.$book->image));
 
-            if ($request->hasFile('file')) {
-                // delete old file
-                File::delete(storage_path('app/book_files/'.$book->file));
-
-                // save new file
-                $file = $request->file;
-                $fileName = time().$file->getClientOriginalName();
-                $file->move(storage_path('app/book_files'), $fileName);
-                $book->file = $fileName;
-            }
-            $book->save();
-            return redirect()->back()->withInput($request->page_num);
-
-        }catch(\Exception $e){
-            return redirect()->back()->withInput($request->page_num);
+            // save new image
+            $image = $request->image;
+            $imageName = time().$image->getClientOriginalName();
+            $image->move(storage_path('app/images/books'), $imageName);
+            $book->image = $imageName;
         }
+
+        if ($request->hasFile('file')) {
+            // delete old file
+            File::delete(storage_path('app/book_files/'.$book->file));
+
+            // save new file
+            $file = $request->file;
+            $fileName = time().$file->getClientOriginalName();
+            $file->move(storage_path('app/book_files'), $fileName);
+            $book->file = $fileName;
+        }
+        $book->save();
+        return redirect()->back()->withInput($request->page_num);
+
     }
 
     public function download($id)
     {
-        try{
-            $book = Book::findOrFail($id);
-            $file = storage_path('app/book_files/'.$book->file);
-            return response()->download($file);
-        }catch(\Exception $e){
-            return redirect()->route('404');
-        }
+        $book = Book::findOrFail($id);
+        $file = storage_path('app/book_files/'.$book->file);
+        return response()->download($file);
     }
 
     public function showFile($id)
     {
-        try{
-            $book = Book::findOrFail($id);
-            $file = storage_path('app/book_files/'.$book->file);
-            return response()->file($file);
-        }catch(\Exception $e){
-            return redirect()->route('404');
-        }
+        $book = Book::findOrFail($id);
+        $file = storage_path('app/book_files/'.$book->file);
+        return response()->file($file);
     }
 
     /******* ESTO ES UN EJEMPLO DE COPILOT, NO FUNCIONA :) */
