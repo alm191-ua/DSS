@@ -325,7 +325,7 @@
     <h2>Authors Admin Panel</h2>
 
     {{-- create book button --}}
-    <a id="create_button" type="button" class="button btn-primary" href="{{ route('404') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
+    <a id="create_button" type="button" class="button btn-primary" href="{{ route('author.create') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
     {{-- TODO: cambiar ruta 'author-create' --}}
     {{-- Error messages --}}
     @if ($errors->any())

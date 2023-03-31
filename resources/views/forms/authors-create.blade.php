@@ -6,7 +6,7 @@
 {{-- es la ruta post definida en web.php y que se ejecuta en el controlador --}}
 {{-- por ejemplo: route('books.store') --}}
 {{-- tiene que ser una ruta post, esta de ejemplo es get, por lo que no hace nada --}}
-@section('form-action', route('authors-store')) 
+@section('form-action', route('author.store')) 
 
 {{-- margin guidelines:
 

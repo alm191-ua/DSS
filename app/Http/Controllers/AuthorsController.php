@@ -13,13 +13,22 @@ class AuthorsController extends Controller
 {
     //index y list en el mismo
     //Por acabar
-    public function index($id)
+    public function index()
     {
         $categories = Category::all();
 
         $authors = Author::paginate(6);
 
         return view('authors', compact('categories', 'authors'));
+    }
+
+    public function show($id)
+    {
+        $categories = Category::all();
+
+        $author = Author::findOrfail($id);
+        
+        return view('author', compact('categories', 'author'));
     }
 
     public function delete ($id)
@@ -55,5 +64,35 @@ class AuthorsController extends Controller
         $author->save();
 
         return redirect()->back();
+    }
+
+    public function create()
+    {
+        return view('forms.authors-create');
+    }
+
+    public function store(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'info' => 'required|max:1000',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        $author = Author::findOrFail($id);
+        $author->name = $request->name;
+        $author->info = $request->info;
+
+        if ($request->hasFile('image')) 
+        {
+            // save new image
+            $image = $request->image;
+            $imageName = time().$image->getClientOriginalName();
+            $image->move(storage_path('app/images/authors'), $imageName);
+            $author->image = $imageName;
+        }
+        $author->save();
+
+        return redirect()->route('admin', $request->page_num);
     }
 }
