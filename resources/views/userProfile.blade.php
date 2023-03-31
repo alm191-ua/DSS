@@ -78,7 +78,7 @@
                 <span>Username: {{ Auth::user()->username ?? 'Guest' }}</span>
                 <span>Email: {{ Auth::user()->email ?? 'Guest email' }}</span>
                 <!-- Button to edit user profile -->
-                <a href="{{ route('user-edit', Auth::user()->id ?? 0) }}" class="btn btn-primary">Edit Profile</a>
+                <a href="{{ route('user-edit.show', Auth::user()->id ?? 0) }}" class="btn btn-primary">Edit Profile</a>
             </div>
         </div>
         <!--SIDEBAR END-->

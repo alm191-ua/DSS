@@ -52,10 +52,8 @@
     document.getElementById('gridCheck2').addEventListener('change', function() {
         if (this.checked) {
             document.getElementById('submit').disabled = false;            
-            console.log('checked');
         } else {
             document.getElementById('submit').disabled = true;
-            console.log('unchecked');
         }
     });
 </script>

@@ -27,43 +27,13 @@ class LoginController extends Controller
     {
         $credentials = $request->getCredentials();
 
-        Log::info('Credentials: ' . json_encode($credentials));
+        // check if user exists in database
+        $user_db = User::where('username', $credentials['username'])->firstorFail();
 
-        // check if user exists
-        if (!Auth::getProvider()->retrieveByCredentials($credentials)) {
+        if (!Hash::check($credentials['password'], $user_db->password)) {
             Log::info('Login failed from: ' . $request->ip());
             return redirect()->back()->with('error', 'Invalid username or password');
         }
-
-        // Obtain user from database
-        $user = User::where('username', $credentials['username'])->first();
-        Log::info('User: ' . json_encode($user));
-
-        // Log user password
-        Log::info('User password: ' . $user->password);
-        Log::info('Credentials password: ' . $credentials['password']);
-
-        $hash1 = Hash::make($credentials['password']);
-        $hash2 = Hash::make($credentials['password']);
-
-        Log::info('Password hashed credentials: ' . $hash1);
-        Log::info('Password hashed credentials: ' . $hash2);
-
-        Log::info('Password hashed credentials: ' . Hash::check($credentials['password'], $hash1));
-        Log::info('Password hashed credentials: ' . Hash::check($credentials['password'], $hash2));
-
-        var_dump(Hash::check($credentials['password'], $hash1) && Hash::check($credentials['password'], $hash2));
-
-
-        // TODO: passwords not matching
-
-        // // Check if user exists and password is correct
-        // if (!$user || !password_verify($credentials['password'], $user->password)) {
-        //     Log::info('Login failed from: ' . $request->ip());
-        //     return redirect()->back()->with('error', 'Invalid username or password');
-        // }
-
-        // Log::info('Login successful from: ' . $request->ip());
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
 

@@ -18,7 +18,7 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/example-form', function () {
         return view('forms.example');
     })->name('example-form');
-    // Route::post('/book/create', [App\Http\Controllers\BookController::class, 'store'])->name('book.store');
+    // Route::post('/book/create', [App\Http\Controllers\BookController::class, 'store'])->name('book.store');UsersController
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/404', function () {
@@ -39,13 +39,13 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'logout'])->name('logout.perform');
     });
 
-    Route::get('/profile', [App\Http\Controllers\UserController::class, 'showProfile'])->name('profile');
+    Route::get('/profile', [App\Http\Controllers\UsersController::class, 'showProfile'])->name('profile');
 
     Route::post('/bookshelf/create', [App\Http\Controllers\BookshelfController::class, 'store'])->name('bookshelf.store');
     Route::get('/bookshelf/list', [App\Http\Controllers\BookshelfController::class, 'list'])->name('bookshelf.list');
     Route::delete('/bookshelf/delete/{id}', [App\Http\Controllers\BookshelfController::class, 'delete', 'id'])->name('bookshelf.delete');
 
-    Route::get('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'showEdit', 'id'])->name('user-edit');
+    Route::get('/user/edit/{id}', [App\Http\Controllers\UsersController::class, 'showEdit', 'id'])->name('user-edit.show');
     Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
     
     Route::get('/books/create', [App\Http\Controllers\BooksController::class, 'create'])->name('book-create');

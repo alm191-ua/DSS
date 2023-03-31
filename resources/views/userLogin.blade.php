@@ -27,8 +27,6 @@
         .form-check {
             display: none;
         }
-
-
     </style>
 
 
@@ -48,8 +46,6 @@
 
 
     <script type="text/javascript">
-        let password = document.getElementById('password');
-
         function seePassword() {
             document.getElementById("togglePassword").className = "fa fa-eye";
             $('#password').attr('type', 'text');
