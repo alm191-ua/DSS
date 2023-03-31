@@ -13,7 +13,7 @@
                 @foreach ($authors as $author)
                     <div class="col-md-4 col-sm-6">
                         <div class="kode-author">
-                            <a href="{{ route('author', $author->id) }}"><img src="{{ asset('storage_images/authors/' . $author->image) }}" alt="author image"
+                            <a href="{{ route('author', $author->id) }}"><img src="{{ asset('storage/authors/' . $author->image) }}" alt="author image"
                                 onerror="this.onerror=null;this.src='{{ asset('images/author.png') }}';"                                        
                                 ></a>
                             <div class="kode-caption">

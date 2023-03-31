@@ -11,7 +11,7 @@
         <section class="kode-author-detail-2">
         	<div class="container">
             	<div class="kode-thumb">
-                	<img src="{{asset('storage_images/authors/'.$author->image)}}" alt="author image"
+                	<img src="{{asset('storage/authors/'.$author->image)}}" alt="author image"
                         onerror="this.onerror=null;this.src='{{ asset('images/author.png') }}';"
                     >
                 </div>
