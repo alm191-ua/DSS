@@ -29,8 +29,10 @@ class BooksController extends Controller
 
             $categories = Category::all();
 
+            $reviews = $book->reviews()->orderBy('created_at', 'desc')->get();
+
             //return the view with the book
-            return view('book-detail', compact('book', 'related_books', 'categories'));
+            return view('book-detail', compact('book', 'related_books', 'categories', 'reviews'));
         }catch(\Exception $e){
             return redirect()->route('404');
         }
@@ -40,33 +42,33 @@ class BooksController extends Controller
     {
         $PER_PAGE = 21;
 
+        $filters = [];
+
         $queryBooks = Book::orderBy('title', 'asc');
 
         $category = request()->query('category');
         // if category exists, filter query
         if ($category) {
-            Log::info('category: '.$category);
+            $filters['category'] = $category;
+            // Log::info('category: '.$category);
             $queryBooks->whereHas('category', function ($query) use ($category) {
                 return $query->where('tag', $category);
             });
-            Log::info('count: '.$queryBooks->count());
+            // Log::info('count: '.$queryBooks->count());
         }
 
         $search = request()->query('search');
         // if search exists, filter query
         if ($search) {
-            Log::info('search: '.$search);
-            // $queryBooks->where('title', 'like', '%'.$search.'%')
-            // ->orWhereHas('author', function ($query) use ($search) {
-            //     return $query->where('name', 'like', '%'.$search.'%');
-            // });
+            $filters['search'] = $search;
+            // Log::info('search: '.$search);
             $queryBooks->where(function($query1) use ($search) {
                 $query1->where('title', 'like', '%'.$search.'%')
                 ->orWhereHas('author', function ($query) use ($search) {
                     return $query->where('name', 'like', '%'.$search.'%');
                 });
             });
-            Log::info('count: '.$queryBooks->count());
+            // Log::info('count: '.$queryBooks->count());
         }
 
         $books = $queryBooks->paginate(
@@ -79,7 +81,7 @@ class BooksController extends Controller
         $categories = Category::all();
         $new_arrivals = Book::orderBy('created_at', 'desc')->take(3)->get();
 
-        return view('books-list', compact('books', 'new_arrivals', 'categories'));
+        return view('books-list', compact('books', 'new_arrivals', 'categories', 'filters', ));
     }
 
     //create function to show the form to create a new book

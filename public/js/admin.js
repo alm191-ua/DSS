@@ -34,6 +34,9 @@
 
     function firstPage(view) {
         view = document.getElementById('page_num').value;
+        if (view == null || view < 0 || view > 8) {
+            view = 1;
+        }
         console.log("view: " + view);
         changeMain(view);
     }

@@ -39,7 +39,7 @@ class BooksTableSeeder extends Seeder
         // $book->isbn = "9780547928227";
         // $book->save();
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 521; $i++) {
             $book = new Book();
             $book->title = fake()->sentence();
             $book->description = fake()->paragraph();

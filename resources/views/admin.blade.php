@@ -11,7 +11,7 @@
 <script src="{{ asset('js/admin.js') }}"></script>
 
 <form name="form" method="get" action="">
-    <input type="hidden" id="page_num" name="page_num" value="{{ $_GET['page_num'] ?? 0 }}">
+    <input type="hidden" id="page_num" name="page_num" value="{{ $_GET['page_num'] ?? 2 }}">
 </form>
 
 <div class="header-space">
@@ -31,8 +31,9 @@
     <a href="#" onclick="changeMain(4)">Suggestions</a>
     <a href="#" onclick="changeMain(5)">Users</a>
     <a href="#" onclick="changeMain(6)">Categories</a>
-    <a href="#" onclick="changeMain(7)">Newsletter Subscriptors</a>
-    <a href="#" onclick="changeMain(8)">Settings</a>
+    <a href="#" onclick="changeMain(7)">Reviews</a>
+    <a href="#" onclick="changeMain(8)">Newsletter Subscriptors</a>
+    <a href="#" onclick="changeMain(9)">Settings</a>
 </div>
 
 <div id="responsive-sidenav" class="responsive-sidenav">
@@ -210,16 +211,18 @@
                     @if ($key == 'id') 
                         @continue
                     @endif
-                    {{-- if ends with _id erase _id --}}
-                    @if (substr($key, -3) == '_id')
-                        @php
-                            $key = substr($key, 0, -3);
-                        @endphp
-                    @endif
+                    
                     <th scope="col">
-                        {{ $key }}
-                        {{-- get number of column e--}}
-                        <button type="button" class="fa fa-sort btn-order" onclick="orderTable(1, {{ $i }})"></button>
+                        {{-- if ends with _id erase _id --}}
+                        @if (substr($key, -3) == '_id')
+                            {{substr($key, 0, -3);}}
+                        @else
+                            {{$key}}
+                        @endif
+                        @if ($key != 'image' && $key != 'file')
+                            <a type="button" class="fa fa-sort btn-order" 
+                                href="{{ route('admin', ['page_num' => 2, 'order_books' => $key]) }}"></a>
+                        @endif
                         @php
                             $i++;
                         @endphp
@@ -348,16 +351,17 @@
                     @if ($key == 'id') 
                         @continue
                     @endif
-                    {{-- if ends with _id erase _id --}}
-                    @if (substr($key, -3) == '_id')
-                        @php
-                            $key = substr($key, 0, -3);
-                        @endphp
-                    @endif
                     <th scope="col">
-                        {{ $key }}
-                        {{-- get number of column :D --}}
-                        <button type="button" class="fa fa-sort btn-order" onclick="orderTable(2, {{ $i }})"></button>
+                        {{-- if ends with _id erase _id --}}
+                        @if (substr($key, -3) == '_id')
+                            {{substr($key, 0, -3);}}
+                        @else
+                            {{$key}}
+                        @endif
+                        @if ($key != 'image')
+                            <a type="button" class="fa fa-sort btn-order" 
+                                href="{{ route('admin', ['page_num' => 3, 'order_authors' => $key]) }}"></a>
+                        @endif
                         @php
                             $i++;
                         @endphp
@@ -451,16 +455,16 @@
                     @if ($key == 'id') 
                         @continue
                     @endif
-                    {{-- if ends with _id erase _id --}}
-                    @if (substr($key, -3) == '_id')
-                        @php
-                            $key = substr($key, 0, -3);
-                        @endphp
-                    @endif
                     <th scope="col">
-                        {{ $key }}
-                        {{-- get number of column :D --}}
-                        <button type="button" class="fa fa-sort btn-order" onclick="orderTable(3, {{ $i }})"></button>
+                        {{-- if ends with _id erase _id --}}
+                        @if (substr($key, -3) == '_id')
+                            {{substr($key, 0, -3);}}
+                        @else
+                            {{$key}}
+                        @endif
+                        <a type="button" class="fa fa-sort btn-order" 
+                            href="{{ route('admin', ['page_num' => 4, 'order_suggestions' => $key]) }}"></a>
+                            
                         @php
                             $i++;
                         @endphp
@@ -551,16 +555,17 @@
                     @if ($key == 'id') 
                         @continue
                     @endif
-                    {{-- if ends with _id erase _id --}}
-                    @if (substr($key, -3) == '_id')
-                        @php
-                            $key = substr($key, 0, -3);
-                        @endphp
-                    @endif
                     <th scope="col">
-                        {{ $key }}
-                        {{-- get number of column :D --}}
-                        <button type="button" class="fa fa-sort btn-order" onclick="orderTable(4, {{ $i }})"></button>
+                        {{-- if ends with _id erase _id --}}
+                        @if (substr($key, -3) == '_id')
+                            {{substr($key, 0, -3);}}
+                        @else
+                            {{$key}}
+                        @endif
+                        @if ($key != 'image')
+                            <a type="button" class="fa fa-sort btn-order" 
+                                href="{{ route('admin', ['page_num' => 5, 'order_users' => $key]) }}"></a>
+                        @endif
                         @php
                             $i++;
                         @endphp
@@ -665,16 +670,17 @@
                     @if ($key == 'id') 
                         @continue
                     @endif
-                    {{-- if ends with _id erase _id --}}
-                    @if (substr($key, -3) == '_id')
-                        @php
-                            $key = substr($key, 0, -3);
-                        @endphp
-                    @endif
                     <th scope="col">
-                        {{ $key }}
-                        {{-- get number of column :D --}}
-                        <button type="button" class="fa fa-sort btn-order" onclick="orderTable(5, {{ $i }})"></button>
+                        {{-- if ends with _id erase _id --}}
+                        @if (substr($key, -3) == '_id')
+                            {{substr($key, 0, -3);}}
+                        @else
+                            {{$key}}
+                        @endif
+                        @if ($key != 'image')
+                            <a type="button" class="fa fa-sort btn-order" 
+                                href="{{ route('admin', ['page_num' => 6, 'order_categories' => $key]) }}"></a>
+                        @endif
                         @php
                             $i++;
                         @endphp
@@ -723,6 +729,108 @@
     </table>
     
     {{ $categories->appends(array('page_num' => 6, ))->links() }}
+</div>
+
+<div class="main" name="reviews" hidden>
+    <h2>Reviews Admin Panel</h2>
+
+    {{-- create book button --}}
+    <a id="create_button" type="button" class="button btn-primary" href="{{ route('404') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
+    {{-- TODO: cambiar ruta 'author-create' --}}
+    {{-- Error messages --}}
+    @if ($errors->any())
+        <ul class="validation-errors">
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    @endif
+    
+    <div class="responsive-pagination">
+        {{ $reviews->appends(array('page_num' => 7, ))->links() }}
+    </div>
+    <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            @php 
+                $i = 1;
+            @endphp
+            @if (count($reviews) > 0)
+                @foreach ($reviews[0]->getAttributes() as $key => $value)
+                    @if ($key == 'id') 
+                        @continue
+                    @endif
+                    <th scope="col">
+                        {{-- if ends with _id erase _id --}}
+                        @if (substr($key, -3) == '_id')
+                            {{substr($key, 0, -3);}}
+                        @else
+                            {{$key}}
+                        @endif
+                        <a type="button" class="fa fa-sort btn-order" 
+                            href="{{ route('admin', ['page_num' => 7, 'order_reviews' => $key]) }}"></a>
+                        
+                        @php
+                            $i++;
+                        @endphp
+                    </th>
+                @endforeach
+            
+            @endif
+            <th scope="col">Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            @foreach ($reviews as $review)
+                <tr>
+                <form action={{ route('review-edit', $review->id) }} 
+                    method="POST" id="form{{ $review->id }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                    <td scope="row">{{ $review->id }}</td>
+                    <td>
+                        {{-- comment --}}
+                        <label for="comment{{ $review->id }}" id="label{{ $review->id }}" class="label-cell">{{ $review->comment }}</label>
+                        <input name="comment" type="text" hidden class="editable-form" id="comment{{ $review->id }}" value="{{ $review->comment }}">
+                    </td>
+                    <td>
+                        {{-- user --}}
+                        <label for="user{{ $review->id }}" id="label{{ $review->id }}" class="">{{ $review->user->username }}</label>
+                    </td>
+                    <td>
+                        {{-- book --}}
+                        <label for="book{{ $review->id }}" id="label{{ $review->id }}" class="">
+                            <a href="{{ route('book', $review->book->id) }}">
+                                {{ $review->book->title }}
+                            </a>
+                        </label>
+                    </td>
+                    <td>
+                        <div style="display: flex">
+                            <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $review->id }})"><i class="fa fa-edit"></i></button>
+                            <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
+                                href="{{route('review-delete', $review->id)}}"><i class="fa fa-trash"></i></a>
+                        </div>
+
+                        <div style="display: inline-flex">
+                            <button type="submit" class="editable-form btn btn-success" onmouseup="editMode({{ $review->id }})">
+                                <i class="fa fa-check"></i>
+                            <button type="button" class="editable-form btn btn-danger" onclick="editMode({{ $review->id }})">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </td>
+                </form>
+                </tr>
+            @endforeach
+          
+        </tbody>
+    </table>
+    
+    {{ $reviews->appends(array('page_num' => 7, ))->links() }}
 </div>
 
 <div class="main" name="newsletter-subsciptors" hidden>
