@@ -29,7 +29,19 @@
                     <div class="widget widget-search">
                         <h2>Search</h2>
                     	<div class="input-container">
-                    		<input type="text" placeholder="Enter Keyword" onchange="window.location.replace('?search=' + this.value);">
+                    		<input type="text" placeholder="Enter Keyword" 
+                                onchange="
+                                // // con este codigo puedes añadir varios parámetros a la url
+                                const {
+                                    host, hostname, href, origin, pathname, port, protocol, search
+                                } = window.location;
+                                let url = origin + pathname + search;
+                                let params = new URLSearchParams(search);
+                                params.set('search', this.value);
+                                url = origin + pathname + '?' + params.toString();
+                                window.location.replace(url);
+                                // window.location.replace('?search=' + this.value);
+                                ">
                             <i class="fa fa-search"></i>
                         </div>
                     </div>
@@ -50,7 +62,7 @@
                                     <div class="new-arrival">
                                         <div class="kode-thumb">
                                             <a href="#"><img src="{{ asset('storage_images/books/' . $book->image) }}" 
-                                                onerror="this.src = '{{ asset('storage_images/books/default.png') }}';"
+                                                onerror="this.src = '{{ asset('images/default.png') }}';"
                                                 width="150px" height="200px" alt="book image"></a>
                                         </div>
                                         <div class="kode-text">
@@ -64,7 +76,7 @@
                     </div>
                     <!--NEW ARRIVAL WIDGET END--> 
                     <!--CATEGORY WIDGET START-->
-                    <div class="widget widget-categories">
+                    {{-- <div class="widget widget-categories">
                     	<h2>Categories</h2>
                         <ul>
                         	<li><a href="#">Photoshop</a></li>
@@ -76,10 +88,10 @@
                             <li><a href="#">Mobile Development</a></li>
                             <li><a href="#">Video Editing</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
                     <!--CATEGORY WIDGET END-->
                     <!--NEW ARRIVAL WIDGET START-->
-                    <div class="widget widget-new-arrival">
+                    {{-- <div class="widget widget-new-arrival">
                     	<h2>Best Sellers</h2>
                         <ul class="bxslider">
                             <li>
@@ -141,10 +153,35 @@
                                 </div>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                     <!--NEW ARRIVAL WIDGET END-->
                 </div>
                 <!--SIDEBAR END-->
+                {{-- aviso con los filtros activados, obtenidos de los parametros de la url --}}
+                @if (count($filters) > 0)
+                    <div class="col-md-9">
+                        <div class="alert alert-info">
+                            <strong>Filters:</strong>
+                            @foreach ($filters as $filter)
+                                <span style="margin-left: 0.8em" class="label label-info">
+                                    {{ $filter }}
+                                </span>
+                            @endforeach
+                            <a href="{{ route('books-list') }}" 
+                                class="close" aria-label="close" title="Remove filter">
+                                <span aria-hidden="true">&times;</span>
+                            </a>
+                        </div>
+                    </div>
+                @else
+                    <div class="col-md-9">
+                        <div class="alert alert-info">
+                            <strong>Filters:</strong>
+                            <span class="label label-info">All</span>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="col-md-9">
                 	<div class="row">
                         @if (count($books) == 0)
@@ -160,7 +197,7 @@
                                 <div class="books-listing-3">
                                     <div class="kode-thumb">
                                         <a href="{{ route('book', $book->id) }}"><img src="{{ asset('storage_images/books/' . $book->image) }}" 
-                                            onerror="this.src = '{{ asset('storage_images/books/default.png') }}';" alt="book image" width="269" height="361"></a>
+                                            onerror="this.src = '{{ asset('images/default.png') }}';" alt="book image" width="269" height="361"></a>
                                     </div>
                                     <div class="kode-text">
                                         {{-- <p class="price">$80.75<span>90.75$</span></p> --}}

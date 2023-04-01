@@ -3446,6 +3446,13 @@ fieldset[disabled] .btn-link:focus {
 .btn-block + .btn-block {
   margin-top: 5px;
 }
+
+.btn-outline-light {
+  color: #f8f9fa;
+  border-color: #f8f9fa;
+  
+}
+
 input[type="submit"].btn-block,
 input[type="reset"].btn-block,
 input[type="button"].btn-block {

@@ -9,15 +9,12 @@
     <div class="kode-banner">
     	<ul class="bxslider">
         	<li>
-            	<img src="images/banner-1.png" alt=""> 
+            	<img src="images/banner-3.png" alt=""> 
                 <div class="kode-caption">
                 	<h2>book guide</h2>
-                    <h5>online books store</h5>
+                    <h5>online library</h5>
                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor<br>emque laudantium, totam rem aperiam.ipsam voluptatem.</p>
-					<div class="input-container">
-                    	<input type="text" placeholder="Enter Your Book Title Here">
-                        <button><i class="fa fa-search"></i></button>
-                    </div>
+					
                 </div>
             </li>
             <li>
@@ -26,28 +23,27 @@
                 	<h2>book Reading</h2>
                     <h5>Best Book Available</h5>
                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor<br>emque laudantium, totam rem aperiam.ipsam voluptatem.</p>
-					<div class="input-container">
-                    	<input type="text" placeholder="Enter Your Book Title Here">
-                        <button><i class="fa fa-search"></i></button>
-                    </div>
+					
                 </div>
             </li>
             <li>
-            	<img src="images/banner-3.png" alt="">
+            	<img src="images/banner-1.png" alt="">
                 <div class="kode-caption">
-                	<h2>Book Store</h2>
+                	<h2>Best library</h2>
                     <h5>Books Guiders</h5>
                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor<br>emque laudantium, totam rem aperiam.ipsam voluptatem.</p>
-					<div class="input-container">
-                    	<input type="text" placeholder="Enter Your Book Title Here">
-                        <button><i class="fa fa-search"></i></button>
-                    </div>
                 </div>
             </li>
         </ul>
+        <div class="input-container" style=" position: absolute; top: 80%; left: 27%; ">
+            <input id="wv-search-input" style="color: #fff"
+                type="text" placeholder="Enter Your Book Title Here">
+            <button onclick="window.location.href = '/books?search=' + $('#wv-search-input').val()"
+                ><i class="fa fa-search"></i></button>
+        </div>
     </div>
     <!--BANNER END-->
-    <!--BUT NOW START-->
+    {{-- <!--BUT NOW START-->
     <section class="buy-template">
         <div class="container">
             <div class="row">
@@ -64,7 +60,7 @@
             </div>
         </div>
     </section>
-    <!--BUT NOW END-->
+    <!--BUT NOW END--> --}}
     <!--CONTENT START-->
     <div class="kode-content">
         <!--BOOK GUIDE SECTION START-->
@@ -123,90 +119,28 @@
                 </div>
                 <!--SECTION CONTENT END-->
                 <div class="row">
-                	<!--PRODUCT GRID START-->
-                	<div class="col-md-3">
-                    	<div class="best-seller-pro">
-                        	<figure>
-                            	<img src="images/book2.png" alt="">
-                            </figure>
-                            <div class="kode-text">
-                            	<h3>Broken Visions</h3>
-                            </div>
-                            <div class="kode-caption">
-                            	<h3>Broken Visions Jessica</h3>
-                                <div class="rating">
-                                    <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                    @foreach ($top_books as $book)
+                        <div class="col-md-3">
+                            <div class="best-seller-pro">
+                                <figure>
+                                    <img src="{{ asset('storage_images/books/' . $book->image) }}" alt="book image"
+                                        onerror="this.src='{{ asset('images/default.png') }}'">
+                                </figure>
+                                <div class="kode-text">
+                                    <h3>{{ substr($book->title, 0, 50) }}{{ strlen($book->title) > 50 ? '...' : '' }}</h3>
                                 </div>
-                                <p>Jessica Sorensen</p>
-                                <p class="price">$692.20</p>
-                                <a href="#" class="add-to-cart">Add To Cart</a>
+                                <div class="kode-caption">
+                                    <h3>{{ substr($book->title, 0, 50) }}{{ strlen($book->title) > 50 ? '...' : '' }}</h3>
+                                    <div class="rating">
+                                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                    </div>
+                                    <p>{{ $book->author->name }}</p>
+                                    <a href="#" class="add-to-cart">Add To Bookshelf</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!--PRODUCT GRID END-->
-                    <!--PRODUCT GRID START-->
-                	<div class="col-md-3">
-                    	<div class="best-seller-pro">
-                        	<figure>
-                            	<img src="images/book6.png" alt="">
-                            </figure>
-                            <div class="kode-text">
-                            	<h3><a href="#">Bridget Jones</a></h3>
-                            </div>
-                            <div class="kode-caption">
-                            	<h3>Mad About the Boy</h3>
-                                <div class="rating">
-                                    <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                                </div>
-                                <p>Helen Fielding</p>
-                                <p class="price">$77.70</p>
-                                <a href="#" class="add-to-cart">Add To Cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--PRODUCT GRID END-->
-                    <!--PRODUCT GRID START-->
-                	<div class="col-md-3">
-                    	<div class="best-seller-pro">
-                        	<figure>
-                            	<img src="images/book3.png" alt="">
-                            </figure>
-                            <div class="kode-text">
-                            	<h3><a href="#">Fairies in my FirePlace</a></h3>
-                            </div>
-                            <div class="kode-caption">
-                            	<h3>Art History Mystery</h3>
-                                <div class="rating">
-                                    <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                                </div>
-                                <p>R.L Naquin</p>
-                                <p class="price">$334.50</p>
-                                <a href="#" class="add-to-cart">Add To Cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--PRODUCT GRID END-->
-                    <!--PRODUCT GRID START-->
-                	<div class="col-md-3">
-                    	<div class="best-seller-pro">
-                        	<figure>
-                            	<img src="images/book8.png" alt="">
-                            </figure>
-                            <div class="kode-text">
-                            	<h3><a href="#">Chrysalis</a></h3>
-                            </div>
-                            <div class="kode-caption">
-                            	<h3>The Brave Girl</h3>
-                                <div class="rating">
-                                    <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                                </div>
-                                <p>William S.</p>
-                                <p class="price">$24.75</p>
-                                <a href="#" class="add-to-cart">Add To Cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--PRODUCT GRID END-->
+                        
+                    @endforeach
 				</div>	
             </div>
         </section>
@@ -216,7 +150,7 @@
         	<div class="container">
             	<h2>Play a video on Parallax</h2>
                 <a class="fa fa-play play" href="https://www.youtube.com/watch?v=DFIJ6AUOY9c"></a>
-                <h4>Title: Book Store</h4>
+                <h4>Title: Word Waves</h4>
                 <p>Source: Youtube, Vimeo</p>
             </div>
         </section>
@@ -617,7 +551,7 @@
             	<div class="row">
                 	<div class="col-md-3">
                     	<div class="count-up">
-                            <span class="counter circle">3578</span>
+                            <span class="counter circle">{{ $num_books }}</span>
                             <p>Books To Read</p>
                         </div>
                     </div>
@@ -629,7 +563,7 @@
                     </div>
                     <div class="col-md-3">
                     	<div class="count-up">
-                            <span class="counter circle">1250</span>
+                            <span class="counter circle">{{ $num_authors }}</span>
                             <p>Best Authors</p>
                         </div>
                     </div>

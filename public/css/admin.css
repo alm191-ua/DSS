@@ -11,6 +11,16 @@
         margin-top: 1.2em;
     }    
 
+    .user-img {
+        border-radius: 50%;
+    }
+
+    textarea {
+        height: 3em;
+        color: black;
+        resize: vertical;
+    }
+
     .logo {
         position: fixed;
     }
@@ -59,7 +69,7 @@
         min-height: 29.8em;
         color: white;
         margin-left: 5%; /* Same as the width of the sidenav */
-        overflow-x: scroll;
+        overflow-x: auto;
     }
 
     @media screen and (max-height: 450px) {
@@ -116,7 +126,7 @@
         margin-top: 1.5em;
         width: 100%;
         max-width: 800px;
-        overflow-x: scroll;
+        /* overflow-x: scroll; */
         /* border-collapse: separate; */
         /* border-width: 20px; */
         /* border-color: black; */
@@ -250,4 +260,21 @@
             display: block;
             width: 100%;
         }
+    } */
+
+    #page_num {
+        width: 3em;
+        height: auto;
+        background-color: transparent;
+        color: white;
+        border-color: transparent;
+        text-align: center;
+    }
+
+    #page_num:focus {
+        border-color: white;
+    }
+
+    /* .pagination_text {
+        margin-left: 40%;
     } */

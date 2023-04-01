@@ -23,7 +23,7 @@
         	<!--SECTION HEADING START-->
             <div class="section-content">
                 <h2>Find us on map</h2>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                <p>You can find us at [insert address here] on the map. We're located [insert directions here].</p>
             </div>
             <!--SECTION HEADING END-->
             <div class="row">
@@ -55,7 +55,13 @@
                 	<!--LOCATION INFO START-->
                 	<div class="kode-location">
                     	<h2>About Location</h2>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi sed quia consequuntur voluptatem quia voluptas sit aspernaturasdeed.</p>
+                        <p>
+                            Location is key to our library's mission of providing access to information for all. Our central location in [insert city/town here] means that we're easily accessible by public transportation and offer plenty of parking options for those who prefer to drive.
+
+                            Our library is housed in a [insert building type here] that has been renovated specifically to meet the needs of our patrons. Our physical spaces are designed to be welcoming, comfortable, and conducive to learning.
+
+
+                        </p>
                     </div>
                     <!--LOCATION INFO END-->
                     <div class="contact-info">

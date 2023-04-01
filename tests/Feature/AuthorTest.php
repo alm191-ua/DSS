@@ -84,12 +84,17 @@ class AuthorTest extends TestCase
         //     'tag' => 'Comedy'
         // ]);
 
+        // get category if exists, otherwise create it
+        $categoria = Category::firstOrCreate([
+            'tag' => 'Comedy'
+        ]);
+
         $libro= Book::create([
             'title' => 'EL Diario de Greg ',
             'author_id' => $autor->id,
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
             'image' => 'https://images-na.ssl-images-amazon.com/images/I/51Zt3J9ZQNL._SX331_BO1,204,203,200_.jpg',
-            'category_id' => Category::all()->random()->id,
+            'category_id' => $categoria->id,
             'isbn' => '978-3-16-148410-0',
         ]);
         
@@ -98,7 +103,7 @@ class AuthorTest extends TestCase
             'author_id' => $autor->id,
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
             'image' => 'https://images-na.ssl-images-amazon.com/images/I/51Zt3J9ZQNL._SX331_BO1,204,203,200_.jpg',
-            'category_id' => Category::all()->random()->id,
+            'category_id' => $categoria->id,
             'isbn' => '978-3-16-148410-1',
         ]);
 

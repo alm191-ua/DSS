@@ -39,7 +39,7 @@ class BooksTableSeeder extends Seeder
         // $book->isbn = "9780547928227";
         // $book->save();
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 521; $i++) {
             $book = new Book();
             $book->title = fake()->sentence();
             $book->description = fake()->paragraph();
@@ -47,6 +47,7 @@ class BooksTableSeeder extends Seeder
             $book->category_id = Category::all()->random()->id;
             $book->image = fake()->imageUrl(200, 300);
             $book->isbn = "9780547928227";
+            $book->file = fake()->imageUrl(200, 300);
             $book->save();
         }
 

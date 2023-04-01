@@ -17,6 +17,8 @@ return [
     'newsletter_title' => 'Suscríbete a nuestro boletín para recibir las últimas noticias.',
     'menu.open' => 'Abrir menú',
     'menu.home' => 'Inicio',
+    'menu.login' => 'Iniciar sesión',
+    'menu.register' => 'Registrarse',
     'menu.books' => 'Libros',
     'menu.authors' => 'Autores',
     'menu.aboutus' => 'Sobre Nosotros',
