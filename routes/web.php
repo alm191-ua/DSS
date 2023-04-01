@@ -78,8 +78,9 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/author/{id}', [App\Http\Controllers\AuthorsController::class, 'show', 'id'])->name('author');
     Route::get('/authors', [App\Http\Controllers\AuthorsController::class, 'index'])->name('authors');
     
-    Route::put('/suggestion/update/{id}', [App\Http\Controllers\SuggestionsController::class, 'update', 'id'])->name('suggestion.edit');
-    Route::get('/suggestion/delete/{id}', [App\Http\Controllers\SuggestionsController::class, 'delete', 'id'])->name('suggestion.delete');
+    Route::put('/suggestion/create', [App\Http\Controllers\SuggestionsController::class, 'store'])->name('suggestion.store');
+    //Route::put('/suggestion/update/{id}', [App\Http\Controllers\SuggestionsController::class, 'update', 'id'])->name('suggestion.edit');
+    //Route::get('/suggestion/delete/{id}', [App\Http\Controllers\SuggestionsController::class, 'delete', 'id'])->name('suggestion.delete');
     
     Route::put('/user/update/{id}', [App\Http\Controllers\UsersController::class, 'update', 'id'])->name('user.edit');
 

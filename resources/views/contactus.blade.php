@@ -30,24 +30,28 @@
             	<div class="col-md-7">
                 	<!--CONTACT FORM START-->
                 	<div class="comment-form">
-                    	<h2>Drop Us an Email</h2>
+                    <form action="{{ route('suggestion.store') }}" method="POST" class="comment-form">
+                        @csrf
+                        @method('PUT')
+                        <h2>Drop Us an Email</h2>
                         <div class="row">
-                        	<div class="col-md-4">
-                            	<input type="text" placeholder="Name">
+                            <div class="col-md-4">
+                                <input type="text" name="name" placeholder="Name" value="{{ old('name') }}" >
                             </div>
                             <div class="col-md-4">
-                            	<input type="text" placeholder="Email">
+                                <input type="text" name="email" placeholder="Email" value="{{ old('email') }}" >
                             </div>
                             <div class="col-md-4">
-                            	<input type="text" placeholder="Phone">
+                                <input type="text" name="phone" placeholder="Phone" value="{{ old('phone') }}" >
                             </div>
                             <div class="col-md-12">
-                            	<textarea style="resize: vertical; min-height: 40px;"></textarea>
+                                <textarea name="message" value="{{ old('message') }}"  style="resize: vertical; min-height: 40px;"></textarea>
                             </div>
                             <div class="col-md-12">
-                            	<button>Send Message</button>
+                                <button type="submit">Send Message</button>
                             </div>
                         </div>
+                    </form>
                     </div>
                     <!--CONTACT FORM END-->
                 </div>
