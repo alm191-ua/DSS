@@ -8,6 +8,7 @@ use App\Models\Category;
 
 // file
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 class AuthorsController extends Controller
 {
@@ -71,15 +72,16 @@ class AuthorsController extends Controller
         return view('forms.authors-create');
     }
 
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
+        Log::info($request);
         $request->validate([
             'name' => 'required|max:255',
-            'info' => 'required|max:1000',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'info' => 'required|max:1500',
+            'image' => 'max:2048', //image|mimes:jpeg,png,jpg,gif,svg|max:2048
         ]);
     
-        $author = Author::findOrFail($id);
+        $author = new Author();
         $author->name = $request->name;
         $author->info = $request->info;
 

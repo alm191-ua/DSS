@@ -46,7 +46,7 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
         
         Route::get('/books/create', [App\Http\Controllers\BooksController::class, 'create'])->name('book.create');
-        // Route::post('/books/create', [App\Http\Controllers\BooksController::class, 'store'])->name('book.store');
+        Route::post('/books/create', [App\Http\Controllers\BooksController::class, 'store'])->name('book.store');
         Route::get('/books/delete/{id}', [App\Http\Controllers\BooksController::class, 'delete', 'id'])->name('book.delete');
         Route::put('/books/update/{id}', [App\Http\Controllers\BooksController::class, 'update', 'id'])->name('book.edit');
         

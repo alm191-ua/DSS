@@ -82,7 +82,10 @@ class BooksController extends Controller
     //create function to show the form to create a new book
     public function create()
     {
-        return view('forms.store-book');
+        $categories = Category::all();
+        $authors = Author::all();
+
+        return view('forms.store-book', compact('categories', 'authors'));
     }
 
     public function delete(Request $request, $id)
@@ -169,43 +172,39 @@ class BooksController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'file' => 'file|mimes:pdf|max:8192',
         ]);
-        try{
-            //$book = Book::findOrFail($id);
-            //No hace falta ya que se crea un nuevo libro
-            $book = new Book();
-            $book->title = $request->title;
-            $book->description = $request->description;
-            
-            $author = Author::findOrFail($request->author);
-            $book->author()->associate($author);
 
-            $category = Category::find($request->category);
-            $book->category()->associate($category);
-            // dd($request->image);
-    
-            if ($request->hasFile('image')) 
-            {
-                // save new image
-                $image = $request->image;
-                $imageName = time().$image->getClientOriginalName();
-                $image->move(storage_path('app/images/books'), $imageName);
-                $book->image = $imageName;
-            }
+        //$book = Book::findOrFail($id);
+        //No hace falta ya que se crea un nuevo libro
+        $book = new Book();
+        $book->title = $request->title;
+        $book->description = $request->description;
+        
+        $author = Author::findOrFail($request->author);
+        $book->author()->associate($author);
 
-            if ($request->hasFile('file')) 
-            {
-                // save new file
-                $file = $request->file;
-                $fileName = time().$file->getClientOriginalName();
-                $file->move(storage_path('app/books'), $fileName);
-                $book->file = $fileName;
-            }
-            $book->save();
-            return redirect()->back()->withInput($request->page_num);
+        $category = Category::find($request->category);
+        $book->category()->associate($category);
+        // dd($request->image);
 
-        }catch(\Exception $e){
-            return redirect()->back()->withInput($request->page_num);
+        if ($request->hasFile('image')) 
+        {
+            // save new image
+            $image = $request->image;
+            $imageName = time().$image->getClientOriginalName();
+            $image->move(storage_path('app/images/books'), $imageName);
+            $book->image = $imageName;
         }
+
+        if ($request->hasFile('file')) 
+        {
+            // save new file
+            $file = $request->file;
+            $fileName = time().$file->getClientOriginalName();
+            $file->move(storage_path('app/books'), $fileName);
+            $book->file = $fileName;
+        }
+        $book->save();
+        return redirect()->back()->withInput($request->page_num);
     }
 
 }

@@ -6,14 +6,14 @@
 {{-- es la ruta post definida en web.php y que se ejecuta en el controlador --}}
 {{-- por ejemplo: route('books.store') --}}
 {{-- tiene que ser una ruta post, esta de ejemplo es get, por lo que no hace nada --}}
-@section('form-action', route('books.store')) 
+@section('form-action', route('book.store')) 
 
 {{-- margin guidelines:
 
 {{-- margin guidelines:
 22% -> para formularios grandes (default)
 30% -> para formularios pequeños, como el de login --}}
-@section('margin', "30%")
+@section('margin', "22%")
 
 @section('fields')
     {{-- para usar el método put --}}
@@ -61,10 +61,10 @@
     <div class="form-group row">
         <label for="ejemplo" class="col-sm-2 col-form-label">Ejemplo</label>
         <div class="col-sm-10">
-            <select class="form-control" name="ejemplo" id="ejemplo">
-                <option selected>Default select 1</option>
-                <option>Default select 2</option>
-                <option>Default select 3</option>
+            <select class="form-control" name="category" id="category">
+                @foreach ($categories as $category)
+                    <option value="{{$category->id}}" >{{ $category->tag }}</option>
+                @endforeach
             </select>
         </div>
     </div>
