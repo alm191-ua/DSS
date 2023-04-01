@@ -54,7 +54,24 @@
                                         <p>Product ID: 1100</p> --}}
                                     </div>
                                     @auth
-                                        <a href="#" class="add-to-cart">Add To Bookshelf</a>
+                                    @php
+                                        $bookshelf = Auth::user()->bookshelves->first(); 
+                                        // TODO: add a dropdown to select bookshelf
+                                    @endphp
+                                        {{-- <select name="bookshelf" id="bookshelf">
+                                            @foreach (Auth::user()->bookshelves as $bookshelf)
+                                                <option value="{{ $bookshelf->id }}">{{ $bookshelf->name }}</option>
+                                            @endforeach
+                                        </select> --}}
+                                        {{-- <form action="{{ route('bookshelf.add_book', ['book_id' => $book->id, 'bookshelf_id' => $bookshelf->id]) }}" method="POST">
+                                            @csrf
+                                            @method('put')
+                                            <button type="submit" class="add-to-cart">Add To Bookshelf</button>
+                                        </form> --}}
+                                        <a 
+                                            href="{{ route('bookshelf.add_book', ['book_id' => $book->id, 'bookshelf_id' => $bookshelf->id]) }}"
+                                            class="add-to-cart">Add To Bookshelf
+                                        </a>
                                     @else
                                         <a href="#" class="add-to-cart inactive">Add To Bookshelf</a>
                                     @endauth
@@ -93,7 +110,7 @@
                                         @foreach ($reviews as $review)
                                             <li>
                                                 <div class="kode-thumb">
-                                                    <a href="#"><img alt="user image" src="{{ asset('storage_images/users/' . $review->user->image) }}"></a>
+                                                    <a href="#"><img alt="user image" src="{{ asset('storage/users/' . $review->user->image) }}"></a>
                                                 </div>
                                                 <div class="kode-text">
                                                     <h4>{{ $review->user->username }}</h4>

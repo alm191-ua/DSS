@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use PgSql\Lob;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File;
 
 class UsersController extends Controller
 {
@@ -31,7 +32,24 @@ class UsersController extends Controller
             // 'password' => 'required',
         ]);
 
-        $user = User::findOrfail($id);        
+        $user = User::findOrfail($id); 
+        $user->username = $request->username;
+        $user->email = $request->email;
+        if ($request->phone) {
+            $user->phone = $request->phone;
+        }
+        
+        if ($request->hasFile('image')) {
+            // delete old image
+            File::delete(storage_path('app/public/users/'.$user->image));
+
+            // save new image
+            $image = $request->image;
+            $imageName = time().$image->getClientOriginalName();
+            $image->move(storage_path('app/public/users'), $imageName);
+            $user->image = $imageName;
+        }
+
         if (!Auth::user()->is_admin) {
             $request->validate([
                 'password' => 'required',
@@ -41,12 +59,14 @@ class UsersController extends Controller
                 Log::info('Password is incorrect');
                 return redirect()->back()->with('error', 'Password is incorrect');
             } 
-            $request->merge(['password' => Hash::make($request->password)]);
-            $user->update($request->all());
-        }else{
-            $user->update($request->except('password'));
+            $user->password = Hash::make($request->password);
+            // $request->merge(['password' => Hash::make($request->password)]);
+            // $user->update($request->all());
         }
-
+        // else{
+        //     $user->update($request->except('password'));
+        // }
+        $user->save();
 
         if (Auth::user()->is_admin) {
             return redirect()->route('admin',['page_num'=>5]);
@@ -58,6 +78,8 @@ class UsersController extends Controller
     public function delete($id)
     {
         $user = User::findOrfail($id);
+        // delete image
+        File::delete(storage_path('app/public/users/'.$user->image));
         $user->delete();
         return redirect()->back();
     }

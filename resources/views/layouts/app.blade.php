@@ -78,10 +78,10 @@
                                     </ul>
                                 </li> -->
                                 @auth
-                                    {{auth()->user()->name}}
+                                    {{-- {{auth()->user()->name}} --}}
                                     {{-- <div class="text-end" style="display: inline-flex"> --}}
                                     <li>
-                                        <a id="profile-link" href="{{ route('profile') }}"><i class="fa fa-user" style="margin-right: 15px; position:relative; top:9px;"></i></a>                 
+                                        <a title="{{auth()->user()->username}}" id="profile-link" href="{{ route('profile') }}"><i class="fa fa-user" style="margin-right: 15px; position:relative; top:9px;"></i></a>                 
                                     </li>
                                     <li>    
                                         <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-2">Logout</a>

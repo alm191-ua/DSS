@@ -36,7 +36,7 @@ class AuthorsController extends Controller
     {
         $author = Author::findOrfail($id);
         // delete image
-        File::delete(storage_path('app/images/authors/'.$author->image));
+        File::delete(storage_path('app/public/authors/'.$author->image));
         $author->delete();
         return redirect()->back();
     }
@@ -55,11 +55,11 @@ class AuthorsController extends Controller
         // save image in storage
         if ($request->hasFile('image')) {
             // delete old image
-            File::delete(storage_path('app/images/authors/'.$author->image));
+            File::delete(storage_path('app/public/authors/'.$author->image));
             // save new image
             $image = $request->image;
             $imageName = time().$image->getClientOriginalName();
-            $image->move(storage_path('app/images/authors'), $imageName);
+            $image->move(storage_path('app/public/authors'), $imageName);
             $author->image = $imageName;
         }
         $author->save();

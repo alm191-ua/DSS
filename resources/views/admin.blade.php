@@ -392,11 +392,11 @@
                         <textarea name="info" hidden class="editable-form" id="info{{ $author->id }}" cols="30" rows="10" value="{{ $author->info }}">{{ $author->info }}</textarea>
                     </td>
                     <td>
-                        <img class="label-cell user-img" src="{{ asset('storage_images/authors/' . $author->image) }}"
+                        <img class="label-cell user-img" src="{{ asset('storage/authors/' . $author->image) }}"
                             {{-- onerror="this.src='{{ asset('images/default.png') }}'" --}}
                             alt="author image" width="100px" height="100px">
                         {{-- relación de imágenes: 0.75 --}}
-                        <img class="editable-form img_editable" hidden id="img_edit{{ $author->id }}" class="img_editable" src="{{ asset('storage_images/authors/' . $author->image) }}" alt="book image" width="100px" height="135px">
+                        <img class="editable-form img_editable" hidden id="img_edit{{ $author->id }}" class="img_editable" src="{{ asset('storage/authors/' . $author->image) }}" alt="book image" width="100px" height="135px">
                         <input name="image" type="file" hidden onchange="readImage(this, {{ $author->id }})" class="editable-form" id="image{{ $author->id }}" 
                         value="{{ $author->image }}" accept="image/*">
                     </td>
@@ -611,7 +611,7 @@
                     </td>
                     <td>
                         {{-- image --}}
-                        <img src="{{ asset('storage_images/users/' . $user->image) }}" class="label-cell user-img" alt="user image" width="50px" height="50px">
+                        <img src="{{ asset('storage/users/' . $user->image) }}" class="label-cell user-img" alt="user image" width="50px" height="50px">
                         <input name="image" type="file" hidden class="editable-form" id="image{{ $user->id }}" value="{{ $user->image }}">
                     </td>
                     <td>
