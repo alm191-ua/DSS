@@ -106,6 +106,32 @@
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="reviews">
                                 <div class="kode-comments">
+                                    <!--Formulario review -->
+                                    <div class="card">
+                                        <div class="card-header">{{ __('Crear una nueva review') }}</div>
+
+                                        <div class="card-body">
+                                            <form method="POST" action="{{ route('review.store', $book->id) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="form-group">
+                                                    <label for="message">{{ __('Mensaje') }}</label>
+                                                    <textarea id="message" type="text" rows="5" class="form-control @error('message') is-invalid @enderror" name="message" required autocomplete="message"></textarea>
+
+                                                    @error('message')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary">{{ __('Crear review') }}</button>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <!--Formulario review -->
+
                                     <ul>
                                         @foreach ($reviews as $review)
                                             <li>
