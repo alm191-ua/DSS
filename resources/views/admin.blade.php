@@ -636,7 +636,7 @@
         </tbody>
     </table>
     
-    {{ $suggestions->appends(array('page_num' => 5, ))->links() }}
+    {{ $users->appends(array('page_num' => 5, ))->links() }}
 </div>
 
 

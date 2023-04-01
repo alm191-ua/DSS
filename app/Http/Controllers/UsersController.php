@@ -83,4 +83,14 @@ class UsersController extends Controller
         $user->delete();
         return redirect()->back();
     }
+
+    // public function softdelete($id)
+    // {
+    //     $user = User::findOrfail($id);
+    //     $user->name = $user->name. '-'. time() .'-deleted';
+    //     // esto falta pulirlo, quizá con un atributo is_deleted en la tabla users
+    //     // y cambiar todas las apariciones de usuario para comprobar si está borrado o no
+    //     // posible futura mejora
+    //     return redirect()->back();
+    // }
 }

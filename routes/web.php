@@ -45,6 +45,8 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('/bookshelf/add/{book_id}/{bookshelf_id}', [App\Http\Controllers\BookshelfController::class, 'add_book', 'book_id', 'bookshelf_id'])->name('bookshelf.add_book');
         Route::get('/bookshelf/list', [App\Http\Controllers\BookshelfController::class, 'list'])->name('bookshelf.list');
         Route::delete('/bookshelf/delete/{id}', [App\Http\Controllers\BookshelfController::class, 'delete', 'id'])->name('bookshelf.delete');
+    
+        // Route::delete('/user/softdelete/{id}', [App\Http\Controllers\UsersController::class, 'softDelete', 'id'])->name('user.softdelete');
     });
     
     Route::group(['middleware' => ['admin']], function() {
@@ -62,6 +64,8 @@ Route::group(['middleware' => 'language'], function () {
         
         Route::put('/category/update/{id}', [App\Http\Controllers\CategoriesController::class, 'update', 'id'])->name('category.edit');
         Route::get('/category/delete/{id}', [App\Http\Controllers\CategoriesController::class, 'delete', 'id'])->name('category.delete');
+        
+        Route::get('/user/delete/{id}', [App\Http\Controllers\UsersController::class, 'delete', 'id'])->name('user.delete');
     });
     
     Route::get('/profile', [App\Http\Controllers\UsersController::class, 'showProfile'])->name('profile');
@@ -78,7 +82,6 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/suggestion/delete/{id}', [App\Http\Controllers\SuggestionsController::class, 'delete', 'id'])->name('suggestion.delete');
     
     Route::put('/user/update/{id}', [App\Http\Controllers\UsersController::class, 'update', 'id'])->name('user.edit');
-    Route::get('/user/delete/{id}', [App\Http\Controllers\UsersController::class, 'delete', 'id'])->name('user.delete');
 
 
     Route::put('/review/update/{id}', [App\Http\Controllers\ReviewsController::class, 'update', 'id'])->name('review.edit');

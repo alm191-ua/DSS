@@ -76,10 +76,12 @@
         <div class="sidebar">
             <div class="widget widget-list">
                 <h2>My Account</h2>
+                <img style="border-radius: 50%; border: 1px solid black;" src="{{ asset('storage/users/' . Auth::user()->image) }}" alt="user image" width="100" height="100">
                 <span>Username: {{ Auth::user()->username ?? 'Guest' }}</span>
                 <span>Email: {{ Auth::user()->email ?? 'Guest email' }}</span>
                 <!-- Button to edit user profile -->
                 <a href="{{ route('user-edit.show', Auth::user()->id ?? 0) }}" class="btn btn-primary">Edit Profile</a>
+                {{-- <a href="{{ route('user.softdelete', Auth::user()->id ?? 0) }}" onclick="confirm({{__('admin.confirm')}})" class="btn btn-primary">Delete User</a> --}}
             </div>
         </div>
         <!--SIDEBAR END-->
