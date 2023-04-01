@@ -53,6 +53,7 @@ class AuthorsController extends Controller
         $author->name = $request->name;
         $author->info = $request->info;
         // save image in storage
+        // dd($request->image);
         if ($request->hasFile('image')) {
             // delete old image
             File::delete(storage_path('app/public/authors/'.$author->image));
@@ -78,7 +79,7 @@ class AuthorsController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'info' => 'required|max:1500',
-            'image' => 'max:2048', //image|mimes:jpeg,png,jpg,gif,svg|max:2048
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
     
         $author = new Author();
@@ -90,11 +91,12 @@ class AuthorsController extends Controller
             // save new image
             $image = $request->image;
             $imageName = time().$image->getClientOriginalName();
-            $image->move(storage_path('app/images/authors'), $imageName);
+            $image->move(storage_path('app/public/authors'), $imageName);
+            // $image->storeAs('app/public/authors', $imageName);
             $author->image = $imageName;
         }
         $author->save();
 
-        return redirect()->route('admin', $request->page_num);
+        return redirect()->route('admin', ['page_num' => 3]);
     }
 }

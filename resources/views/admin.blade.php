@@ -316,8 +316,14 @@
           
         </tbody>
     </table>
-    
+
     {{ $books->appends(array('page_num' => 2, ))->links() }}
+    {{-- number of page and max pages of pagination --}}
+    <p class="pagination_text">Page <input type="text" id="page_num" value="{{ $books->currentPage() }}" 
+            onchange="
+            window.location.href = '{{ route('admin') }}?page_num=2&books=' + this.value;
+            "> of {{ $books->lastPage() }}</p>
+
 </div>
 
 
@@ -423,13 +429,17 @@
     </table>
     
     {{ $authors->appends(array('page_num' => 3, ))->links() }}
+    <p class="pagination_text">Page <input type="text" id="page_num" value="{{ $authors->currentPage() }}" 
+        onchange="
+        window.location.href = '{{ route('admin') }}?page_num=3&authors=' + this.value;
+        "> of {{ $authors->lastPage() }}</p>
 </div>
 
 <div class="main" name="suggestions" hidden>
     <h2>Suggestions Admin Panel</h2>
 
     {{-- create book button --}}
-    <a id="create_button" type="button" class="button btn-primary" href="{{ route('404') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
+    <a id="create_button" type="button" class="button btn-primary" href="{{ route('contactus') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
     {{-- TODO: cambiar ruta 'author-create' --}}
     {{-- Error messages --}}
     @if ($errors->any())
@@ -523,6 +533,10 @@
     </table>
     
     {{ $suggestions->appends(array('page_num' => 4, ))->links() }}
+    <p class="pagination_text">Page <input type="text" id="page_num" value="{{ $suggestions->currentPage() }}" 
+        onchange="
+        window.location.href = '{{ route('admin') }}?page_num=4&suggestions=' + this.value;
+        "> of {{ $suggestions->lastPage() }}</p>
 </div>
 
 <div class="main" name="users" hidden>
@@ -637,6 +651,10 @@
     </table>
     
     {{ $users->appends(array('page_num' => 5, ))->links() }}
+    <p class="pagination_text">Page <input type="text" id="page_num" value="{{ $users->currentPage() }}" 
+        onchange="
+        window.location.href = '{{ route('admin') }}?page_num=5&users=' + this.value;
+        "> of {{ $users->lastPage() }}</p>
 </div>
 
 
@@ -729,13 +747,17 @@
     </table>
     
     {{ $categories->appends(array('page_num' => 6, ))->links() }}
+    <p class="pagination_text">Page <input type="text" id="page_num" value="{{ $categories->currentPage() }}" 
+        onchange="
+        window.location.href = '{{ route('admin') }}?page_num=6&categories=' + this.value;
+        "> of {{ $categories->lastPage() }}</p>
 </div>
 
 <div class="main" name="reviews" hidden>
     <h2>Reviews Admin Panel</h2>
 
     {{-- create book button --}}
-    <a id="create_button" type="button" class="button btn-primary" href="{{ route('404') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
+    {{-- <a id="create_button" type="button" class="button btn-primary" href="{{ route('404') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a>  --}}
     {{-- TODO: cambiar ruta 'author-create' --}}
     {{-- Error messages --}}
     @if ($errors->any())
@@ -831,6 +853,10 @@
     </table>
     
     {{ $reviews->appends(array('page_num' => 7, ))->links() }}
+    <p class="pagination_text">Page <input type="text" id="page_num" value="{{ $reviews->currentPage() }}" 
+        onchange="
+        window.location.href = '{{ route('admin') }}?page_num=7&reviews=' + this.value;
+        "> of {{ $reviews->lastPage() }}</p>
 </div>
 
 <div class="main" name="newsletter-subsciptors" hidden>

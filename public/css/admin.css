@@ -261,3 +261,20 @@
             width: 100%;
         }
     } */
+
+    #page_num {
+        width: 3em;
+        height: auto;
+        background-color: transparent;
+        color: white;
+        border-color: transparent;
+        text-align: center;
+    }
+
+    #page_num:focus {
+        border-color: white;
+    }
+
+    /* .pagination_text {
+        margin-left: 40%;
+    } */
