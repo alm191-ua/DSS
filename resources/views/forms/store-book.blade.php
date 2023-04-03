@@ -1,6 +1,6 @@
 @extends('layouts.form')
 
-@section('title', 'Example Form')
+@section('title', 'Create Book')
 
 {{-- aqui iría la ruta de la acción del formulario --}}
 {{-- es la ruta post definida en web.php y que se ejecuta en el controlador --}}
@@ -19,47 +19,71 @@
     {{-- para usar el método put --}}
     {{-- @method('PUT') --}}
 
+
+    {{-- errors --}}
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+
+    <script type="text/javascript">
+        function readImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+            
+                reader.onload = function (e) {
+                let dst = $('.img_editable');
+                // console.log("dst: " + dst.length);
+                for (let i = 0; i < dst.length; i++) {
+                    if ($(dst[i]).attr('id') == "img_edit") {
+                        // console.log("IMG: " + $(dst[i]) + " id: " + $(dst[i]).attr('id'));
+                        $(dst[i]).attr('src', e.target.result);
+                        break;
+                    }
+                }
+                // .attr('src', e.target.result);
+                };
+            
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
     <div class="form-group custom-row">  
         <div class="custom-col">
-            <label for="name" class="col-sm-2 col-form-label">First Name</label>
+            <label for="name" class="col-sm-2 col-form-label">Titulo</label>
             <div class="col-sm-10">
-                <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
+                <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}">
             </div>
         </div>                      
-        <div class="custom-col">
-            <label for="phone" class="col-sm-2 col-form-label">Phone No.</label>
-            <div class="col-sm-10">
-                <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone') }}">
-            </div>
-        </div>
     </div>
-    
+
     <div class="form-group row">
-        <label for="email" class="col-sm-2 col-form-label">Email Address</label>
+        <label for="address" class="col-sm-2 col-form-label">Descripcion</label>
         <div class="col-sm-10">
-            <input type="text" name="email" id="email" class="form-control" value="{{ old('email') }}">
+            <textarea class="form-control" name="description" id="description" rows="6" cols="6">{{ old('description') }}</textarea>
         </div>
     </div>
+
     <div class="form-group row">
-        <label for="password" class="col-sm-2 col-form-label">Choose Password</label>
+        <label for="ejemplo" class="col-sm-2 col-form-label">Autor/a</label>
         <div class="col-sm-10">
-            <input type="password" name="password" id="password" class="form-control" value="{{ old('password') }}">
+            <select class="form-control" name="author" id="author">
+                @foreach ($authors as $author)
+                    <option value="{{$author->id}}" >{{ $author->name }}</option>
+                @endforeach
+            </select>
         </div>
     </div>
+
     <div class="form-group row">
-        <label for="password-2" class="col-sm-2 col-form-label">Confirm Password</label>
-        <div class="col-sm-10">
-            <input type="password" name="password-2" id="password-2" class="form-control" value="{{ old('password-2') }}">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="address" class="col-sm-2 col-form-label">Address</label>
-        <div class="col-sm-10">
-            <textarea class="form-control" name="address" id="address" rows="3" cols="3">{{ old('address') }}</textarea>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="ejemplo" class="col-sm-2 col-form-label">Ejemplo</label>
+        <label for="ejemplo" class="col-sm-2 col-form-label">Categoria</label>
         <div class="col-sm-10">
             <select class="form-control" name="category" id="category">
                 @foreach ($categories as $category)
@@ -68,21 +92,31 @@
             </select>
         </div>
     </div>
+
+    {{-- isbn --}}
     <div class="form-group row">
-        <label for="input_file" class="col-sm-2 col-form-label">Input File:</label>
+        <label for="isbn" class="col-sm-2 col-form-label">ISBN</label>
         <div class="col-sm-10">
-            <input type="file" name="input_file" id="input_file" value="{{ old('input_file') }}">
+            <input type="text" name="isbn" id="isbn" class="form-control" value="{{ old('isbn') }}">
         </div>
     </div>
 
-    <div class="form-group row" 
-    style="flex-wrap: nowrap; display: inline-flex;">
-        <label for="customSwitch1" class="col-sm-2 col-form-label">Toggle</label>
-        <div class="col-sm-10" style="padding: 0%; align-self: flex-end;">
-            <label class="switch">
-                <input type="checkbox" class="custom-control-input" name="customSwitch1" id="customSwitch1">
-                <span class="slider round"></span>
-            </label>
+
+    <div class="form-group row">
+        <div class="col-md-3">
+            <label for="image">Imagen:</label>
+            <img id="img_edit" class="img_editable" src="" alt="Author Image" width="100px" height="100px">
+            <input onchange="readImage(this)" type="file" name="image" id="image" class="form-control"
+                accept="image/*">
+        </div>
+    </div>
+
+
+
+    <div class="form-group row">
+        <label for="file" class="col-sm-2 col-form-label">Input File:</label>
+        <div class="col-sm-10">
+            <input type="file" name="file" id="file" value="{{ old('input_file') }}" accept="pdf">
         </div>
     </div>
                 

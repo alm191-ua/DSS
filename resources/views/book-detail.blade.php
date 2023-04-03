@@ -54,24 +54,28 @@
                                         <p>Product ID: 1100</p> --}}
                                     </div>
                                     @auth
-                                    @php
-                                        $bookshelf = Auth::user()->bookshelves->first(); 
-                                        // TODO: add a dropdown to select bookshelf
-                                    @endphp
-                                        {{-- <select name="bookshelf" id="bookshelf">
-                                            @foreach (Auth::user()->bookshelves as $bookshelf)
-                                                <option value="{{ $bookshelf->id }}">{{ $bookshelf->name }}</option>
-                                            @endforeach
-                                        </select> --}}
-                                        {{-- <form action="{{ route('bookshelf.add_book', ['book_id' => $book->id, 'bookshelf_id' => $bookshelf->id]) }}" method="POST">
-                                            @csrf
-                                            @method('put')
-                                            <button type="submit" class="add-to-cart">Add To Bookshelf</button>
-                                        </form> --}}
-                                        <a 
-                                            href="{{ route('bookshelf.add_book', ['book_id' => $book->id, 'bookshelf_id' => $bookshelf->id]) }}"
-                                            class="add-to-cart">Add To Bookshelf
-                                        </a>
+                                        @php
+                                            $bookshelf = Auth::user()->bookshelves->first(); 
+                                            // TODO: add a dropdown to select bookshelf
+                                        @endphp
+                                            {{-- <select name="bookshelf" id="bookshelf">
+                                                @foreach (Auth::user()->bookshelves as $bookshelf)
+                                                    <option value="{{ $bookshelf->id }}">{{ $bookshelf->name }}</option>
+                                                @endforeach
+                                            </select> --}}
+                                            {{-- <form action="{{ route('bookshelf.add_book', ['book_id' => $book->id, 'bookshelf_id' => $bookshelf->id]) }}" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                <button type="submit" class="add-to-cart">Add To Bookshelf</button>
+                                            </form> --}}
+                                            @if ($bookshelf)
+                                                <a 
+                                                    href="{{ route('bookshelf.add_book', ['book_id' => $book->id, 'bookshelf_id' => $bookshelf->id]) }}"
+                                                    class="add-to-cart">Add To Bookshelf
+                                                </a>
+                                            @else
+                                                <a href="#" class="add-to-cart inactive">Add To Bookshelf</a>
+                                            @endif
                                     @else
                                         <a href="#" class="add-to-cart inactive">Add To Bookshelf</a>
                                     @endauth
@@ -158,6 +162,12 @@
                                         download the PDF file.</a></p>
                                     </object> --}}
                                     {{-- <iframe src="{{ asset('books/'.$book->file) }}" width="100%" height="100%" style="border: none;"></iframe> --}}
+                                    {{-- if exists file in app/book_files --}}
+                                    {{-- @if (Storage::exists(asset('storage_books/'.$book->file))
+                                        <embed style="height: 60em" src="{{ asset('books/'.$book->file) }}" width="100%" height="100%" />
+                                    @else
+                                        <embed style="height: 60em" src="{{ asset('404') }}" width="100%" height="100%" />
+                                    @endif --}}
                                     <embed style="height: 60em" src="{{ asset('storage_books/'.$book->file) }}" width="100%" height="100%" />
                                 </div>
                             </div>
