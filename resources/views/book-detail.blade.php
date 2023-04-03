@@ -39,7 +39,9 @@
                                         <p>4 Customer reveiws</p>
                                     </div>
                                     <div class="product-price">
-                                        <p>Author : <span class="color">{{ $book->author->name }}</span></p>
+                                        <p>Author : <a href="{{ route('author', $book->author->id) }}">
+                                            <span class="color">{{ $book->author->name }}</span>
+                                        </a></p>
                                     </div>
                                     {{-- <div class="book-text">
                                     	<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.</p>
@@ -53,37 +55,32 @@
                                         <p>Publisher: Journal inc</p>
                                         <p>Product ID: 1100</p> --}}
                                     </div>
-                                    @auth
-                                        @php
-                                            $bookshelf = Auth::user()->bookshelves->first(); 
-                                            // TODO: add a dropdown to select bookshelf
-                                        @endphp
-                                            {{-- <select name="bookshelf" id="bookshelf">
-                                                @foreach (Auth::user()->bookshelves as $bookshelf)
-                                                    <option value="{{ $bookshelf->id }}">{{ $bookshelf->name }}</option>
-                                                @endforeach
-                                            </select> --}}
-                                            {{-- <form action="{{ route('bookshelf.add_book', ['book_id' => $book->id, 'bookshelf_id' => $bookshelf->id]) }}" method="POST">
+                                    <div id="book_actions" style="display: inline-flex">
+                                        @auth
+                                            <form style="display: grid" action="{{ route('bookshelf.add_book', $book->id) }}" method="POST">
                                                 @csrf
-                                                @method('put')
-                                                <button type="submit" class="add-to-cart">Add To Bookshelf</button>
-                                            </form> --}}
-                                            @if ($bookshelf)
-                                                <a 
-                                                    href="{{ route('bookshelf.add_book', ['book_id' => $book->id, 'bookshelf_id' => $bookshelf->id]) }}"
-                                                    class="add-to-cart">Add To Bookshelf
-                                                </a>
-                                            @else
-                                                <a href="#" class="add-to-cart inactive">Add To Bookshelf</a>
-                                            @endif
-                                    @else
-                                        <a href="#" class="add-to-cart inactive">Add To Bookshelf</a>
-                                    @endauth
-                                    <a href="{{ route('book-download', $book->id) }}" class="add-to-cart">Download</a>
-                                    <a href="{{ route('book-read', $book->id) }}" class="add-to-cart" target="_blank">Read</a>
-                                    {{-- <a href="#" class="add-to-cart">Add To Cart</a>
-                                    <a href="#" class="add-to-cart">Add To Wishlist</a>
-                                    <a href="#" class="add-to-cart">Get a Quote</a> --}}
+                                                @method('PUT')
+                                                <label for="bookshelf_id">Bookshelf:</label>
+                                                <select name="bookshelf_id" id="bookshelf_id" style="margin-bottom: 0.5em">
+                                                    @foreach (Auth::user()->bookshelves as $bookshelf)
+                                                        <option value="{{ $bookshelf->id }}">{{ $bookshelf->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                {{-- <button type="submit" class="add-to-cart">Add To Bookshelf</button> --}}
+                                                <a href="#" class="add-to-cart" onclick="event.preventDefault(); this.closest('form').submit();">Add To Bookshelf</a>
+                                            </form>
+                                                
+                                        @else
+                                            <a href="{{ route('login') }}" class="add-to-cart inactive">Add To Bookshelf</a>
+                                        @endauth
+                                        <div id="other_actions" style="height: 3em; margin-top: 4em">
+                                            <a href="{{ route('book-download', $book->id) }}" class="add-to-cart">Download</a>
+                                            <a href="{{ route('book-read', $book->id) }}" class="add-to-cart" target="_blank">Read</a>
+                                            {{-- <a href="#" class="add-to-cart">Add To Cart</a>
+                                            <a href="#" class="add-to-cart">Add To Wishlist</a>
+                                            <a href="#" class="add-to-cart">Get a Quote</a> --}}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -243,7 +240,7 @@
                                             </div>
                                             <p>{{ $book->author->name }}</p>
                                             {{-- <p class="price">$334.50</p> --}}
-                                            <a href="#" class="add-to-cart">Add To Bookshelf</a>
+                                            {{-- <a href="#" class="add-to-cart">Add To Bookshelf</a> --}}
                                         </div>
                                     </div>
                                 </div>

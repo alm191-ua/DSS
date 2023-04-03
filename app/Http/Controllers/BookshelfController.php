@@ -42,11 +42,30 @@ class BookshelfController extends Controller
         return redirect()->route('profile');
     }
 
-    public function add_book($book_id, $bookshelf_id)
+    public function add_book(Request $request, $book_id)
     {
+        $request->validate([
+            'bookshelf_id' => 'required'
+        ]);
+
+        $bookshelf_id = $request->bookshelf_id;
+
+        if (!$bookshelf_id) {
+            // dd('no bookshelf_id');
+            return redirect()->route('profile');
+        }
         $bookshelf = Bookshelf::findOrFail($bookshelf_id);
         $bookshelf->books()->attach($book_id);
 
         return redirect()->back();
+
+        // try{
+        //     $bookshelf = Bookshelf::find($bookshelf_id);
+        //     $bookshelf->books()->attach($book_id);
+        // } catch (\Exception $e) {
+        //     return redirect()->route('profile');
+        // }
+
+        // return redirect()->back();
     }
 }

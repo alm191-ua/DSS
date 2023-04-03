@@ -42,7 +42,7 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('/book/read/{id}', [App\Http\Controllers\BooksController::class, 'showFile', 'id'])->name('book-read');
         
         Route::post('/bookshelf/create', [App\Http\Controllers\BookshelfController::class, 'store'])->name('bookshelf.store');
-        Route::get('/bookshelf/add/{book_id}/{bookshelf_id}', [App\Http\Controllers\BookshelfController::class, 'add_book', 'book_id', 'bookshelf_id'])->name('bookshelf.add_book');
+        Route::put('/bookshelf/add/{book_id}', [App\Http\Controllers\BookshelfController::class, 'add_book', 'book_id'])->name('bookshelf.add_book');
         Route::get('/bookshelf/list', [App\Http\Controllers\BookshelfController::class, 'list'])->name('bookshelf.list');
         Route::delete('/bookshelf/delete/{id}', [App\Http\Controllers\BookshelfController::class, 'delete', 'id'])->name('bookshelf.delete');
 
