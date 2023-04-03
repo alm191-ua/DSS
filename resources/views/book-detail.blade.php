@@ -112,10 +112,10 @@
                                 <div class="kode-comments">
                                     <!--Formulario review -->
                                     <div class="card">
-                                        <div class="card-header">{{ __('Crear una nueva review') }}</div>
+                                        <div class="card-header">{{ __('book_details.create_review') }}</div>
 
                                         <div class="card-body">
-                                            <form method="POST" action="{{ route('review.store', $book->id) }}">
+                                            <form style="margin-bottom: 5%;" method="POST" action="{{ route('review.store', $book->id) }}">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="form-group">

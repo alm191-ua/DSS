@@ -81,14 +81,14 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/authors', [App\Http\Controllers\AuthorsController::class, 'index'])->name('authors');
     
     Route::put('/suggestion/create', [App\Http\Controllers\SuggestionsController::class, 'store'])->name('suggestion.store');
-    //Route::put('/suggestion/update/{id}', [App\Http\Controllers\SuggestionsController::class, 'update', 'id'])->name('suggestion.edit');
-    //Route::get('/suggestion/delete/{id}', [App\Http\Controllers\SuggestionsController::class, 'delete', 'id'])->name('suggestion.delete');
+    Route::put('/suggestion/update/{id}', [App\Http\Controllers\SuggestionsController::class, 'update', 'id'])->name('suggestion.edit');
+    Route::get('/suggestion/delete/{id}', [App\Http\Controllers\SuggestionsController::class, 'delete', 'id'])->name('suggestion.delete');
     
     Route::put('/user/update/{id}', [App\Http\Controllers\UsersController::class, 'update', 'id'])->name('user.edit');
 
 
-    //Route::put('/review/update/{id}', [App\Http\Controllers\ReviewsController::class, 'update', 'id'])->name('review.edit');
-    //Route::get('/review/delete/{id}', [App\Http\Controllers\ReviewsController::class, 'delete', 'id'])->name('review.delete');
+    Route::put('/review/update/{id}', [App\Http\Controllers\ReviewsController::class, 'update', 'id'])->name('review.edit');
+    Route::get('/review/delete/{id}', [App\Http\Controllers\ReviewsController::class, 'delete', 'id'])->name('review.delete');
     
     Route::get('/contactus', [App\Http\Controllers\ContactusController::class, 'index'])->name('contactus');
     Route::get('/aboutus', [App\Http\Controllers\AboutusController::class, 'index'])->name('aboutus');
