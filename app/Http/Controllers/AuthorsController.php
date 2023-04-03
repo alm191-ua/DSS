@@ -46,7 +46,7 @@ class AuthorsController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'info' => 'required|max:1500',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $author = Author::findOrfail($id);
@@ -79,7 +79,7 @@ class AuthorsController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'info' => 'required|max:1500',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
     
         $author = new Author();

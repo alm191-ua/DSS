@@ -93,6 +93,14 @@
         </div>
     </div>
 
+    {{-- isbn --}}
+    <div class="form-group row">
+        <label for="isbn" class="col-sm-2 col-form-label">ISBN</label>
+        <div class="col-sm-10">
+            <input type="text" name="isbn" id="isbn" class="form-control" value="{{ old('isbn') }}">
+        </div>
+    </div>
+
 
     <div class="form-group row">
         <div class="col-md-3">
@@ -106,9 +114,9 @@
 
 
     <div class="form-group row">
-        <label for="input_file" class="col-sm-2 col-form-label">Input File:</label>
+        <label for="file" class="col-sm-2 col-form-label">Input File:</label>
         <div class="col-sm-10">
-            <input type="file" name="input_file" id="input_file" value="{{ old('input_file') }}" accept="input_file/pdf">
+            <input type="file" name="file" id="file" value="{{ old('input_file') }}" accept="pdf">
         </div>
     </div>
                 

@@ -132,6 +132,12 @@
                                         download the PDF file.</a></p>
                                     </object> --}}
                                     {{-- <iframe src="{{ asset('books/'.$book->file) }}" width="100%" height="100%" style="border: none;"></iframe> --}}
+                                    {{-- if exists file in app/book_files --}}
+                                    {{-- @if (Storage::exists(asset('storage_books/'.$book->file))
+                                        <embed style="height: 60em" src="{{ asset('books/'.$book->file) }}" width="100%" height="100%" />
+                                    @else
+                                        <embed style="height: 60em" src="{{ asset('404') }}" width="100%" height="100%" />
+                                    @endif --}}
                                     <embed style="height: 60em" src="{{ asset('storage_books/'.$book->file) }}" width="100%" height="100%" />
                                 </div>
                             </div>

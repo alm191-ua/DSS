@@ -9,6 +9,7 @@ use App\Models\Author;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
+// use Illuminate\Support\Facades\Storage;
 
 
 class BooksController extends Controller
@@ -107,7 +108,7 @@ class BooksController extends Controller
             'description' => 'required|max:1000',
             'author' => 'required',
             'category' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
             'file' => 'file|mimes:pdf|max:8192',
         ]);
         
@@ -158,7 +159,15 @@ class BooksController extends Controller
     public function showFile($id)
     {
         $book = Book::findOrFail($id);
+        
         $file = storage_path('app/book_files/'.$book->file);
+        
+        try{
+            File::get($file);
+        }catch (\Exception $e){
+            abort(404);
+        }
+
         return response()->file($file);
     }
 
@@ -169,7 +178,8 @@ class BooksController extends Controller
             'description' => 'required|max:1000',
             'author' => 'required',
             'category' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'isbn' => 'required|max:13',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
             'file' => 'file|mimes:pdf|max:8192',
         ]);
 
@@ -178,6 +188,7 @@ class BooksController extends Controller
         $book = new Book();
         $book->title = $request->title;
         $book->description = $request->description;
+        $book->isbn = $request->isbn;
         
         $author = Author::findOrFail($request->author);
         $book->author()->associate($author);
@@ -195,16 +206,18 @@ class BooksController extends Controller
             $book->image = $imageName;
         }
 
+        // dd($request->file);
         if ($request->hasFile('file')) 
         {
+            // dd($request->file);
             // save new file
             $file = $request->file;
             $fileName = time().$file->getClientOriginalName();
-            $file->move(storage_path('app/books'), $fileName);
+            $file->move(storage_path('app/book_files'), $fileName);
             $book->file = $fileName;
         }
         $book->save();
-        return redirect()->back()->withInput($request->page_num);
+        return redirect()->route('admin', ['page_num' => 2]);
     }
 
 }

@@ -28,7 +28,7 @@ class UsersController extends Controller
             'username' => 'required|max:255',
             'email' => 'required|email',
             // 'phone' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
             // 'password' => 'required',
         ]);
 
