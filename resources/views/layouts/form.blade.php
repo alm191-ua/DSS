@@ -17,7 +17,7 @@
                 </div>
                 <hr>
                 <div class="form-body">
-                    <form action=@yield('form-action') method="POST">
+                    <form action=@yield('form-action') method="POST" enctype="multipart/form-data">
                         @csrf
                         @yield('fields')
 

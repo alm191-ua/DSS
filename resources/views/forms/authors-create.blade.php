@@ -2,13 +2,7 @@
 
 @section('title', 'Create Author')
 
-{{-- aqui iría la ruta de la acción del formulario --}}
-{{-- es la ruta post definida en web.php y que se ejecuta en el controlador --}}
-{{-- por ejemplo: route('books.store') --}}
-{{-- tiene que ser una ruta post, esta de ejemplo es get, por lo que no hace nada --}}
 @section('form-action', route('author.store')) 
-
-{{-- margin guidelines:
 
 {{-- margin guidelines:
 22% -> para formularios grandes (default)
@@ -16,8 +10,6 @@
 @section('margin', "30%")
 
 @section('fields')
-    {{-- para usar el método put --}}
-    {{-- @method('PUT') --}}    
 
     {{-- errors --}}
     @if ($errors->any())
@@ -37,16 +29,13 @@
                 var reader = new FileReader();
             
                 reader.onload = function (e) {
-                let dst = $('.img_editable');
-                // console.log("dst: " + dst.length);
-                for (let i = 0; i < dst.length; i++) {
-                    if ($(dst[i]).attr('id') == "img_edit") {
-                        // console.log("IMG: " + $(dst[i]) + " id: " + $(dst[i]).attr('id'));
-                        $(dst[i]).attr('src', e.target.result);
-                        break;
+                    let dst = $('.img_editable');
+                    for (let i = 0; i < dst.length; i++) {
+                        if ($(dst[i]).attr('id') == "img_edit") {
+                            $(dst[i]).attr('src', e.target.result);
+                            break;
+                        }
                     }
-                }
-                // .attr('src', e.target.result);
                 };
             
                 reader.readAsDataURL(input.files[0]);
@@ -59,8 +48,8 @@
         <div class="col-md-3">
             <label for="image">Imagen:</label>
             <img id="img_edit" class="img_editable" src="" alt="Author Image" width="100px" height="100px">
-            <input onchange="readImage(this)" type="file" name="image" id="image" class="form-control"
-                accept="image/*">
+            <input name="image" type="file" onchange="readImage(this)" id="image" 
+                    accept="image/*">
         </div>
         <div class="col-md-9">
             <label for="name">Nombre:</label>
