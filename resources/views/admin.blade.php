@@ -186,7 +186,49 @@
 
     {{-- create book button --}}
     <a id="create_button" type="button" class="button btn-primary" href="{{ route('book.create') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
-    
+    {{-- filter by --}}
+    <label for="filter_by">Filter by:</label>
+    <select name="filter_by" id="filter_by"
+        onchange="
+            if (this.value == 'author') {
+                $('#authors').show();
+                $('#categories').hide();
+            } else if (this.value == 'category') {
+                $('#authors').hide();
+                $('#categories').show();
+            } else {
+                $('#authors').hide();
+                $('#categories').hide();
+            }
+        ">
+        @if (count($books) > 0)
+            @foreach ($books[0]->getAttributes() as $key => $value)
+                @if ($key == 'image' || $key == 'file')
+                    @continue
+                @endif
+                @if (substr($key, -3) == '_id')
+                    {{ $key = substr($key, 0, -3) }}
+                @endif
+                <option value="{{ $key }}">{{ $key }}</option>
+            @endforeach
+        @endif
+    </select>
+    <select name="authors" id="authors" hidden>
+        @foreach ($all_authors as $author)
+            <option value="{{ $author->id }}">{{ $author->name }}</option>
+        @endforeach
+    </select>
+    <select name="categories" id="categories" hidden>
+        @foreach ($all_categories as $category)
+            <option value="{{ $category->id }}">{{ $category->tag }}</option>
+        @endforeach
+    </select>
+    <input type="text" id="filter_value" name="filter_value" placeholder="Filter value">
+    <button type="button" class="btn btn-secondary" onclick="
+        window.location.href = '{{ route('admin') }}?filter_books_by' + '=' + $('#filter_by').val() + '&filter_books_value' + '=' + $('#filter_value').val();
+    ">Filter</button>
+
+
     {{-- Error messages --}}
     @if ($errors->any())
         <ul class="validation-errors">
@@ -221,7 +263,10 @@
                         @endif
                         @if ($key != 'image' && $key != 'file')
                             <a type="button" class="fa fa-sort btn-order" 
-                                href="{{ route('admin', ['page_num' => 2, 'order_books' => $key]) }}"></a>
+                                href="
+                                {{ request()->fullUrlWithQuery(['order_books' => $key, 'page_num' => 2]) }}
+                                "></a>
+                                {{-- {{ route('admin', ['page_num' => 2, 'order_books' => $key]) }} --}}
                         @endif
                         @php
                             $i++;

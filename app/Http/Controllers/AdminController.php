@@ -22,7 +22,7 @@ class AdminController extends Controller
         $all_categories = Category::all();
 
         // ------------------ BOOKS ------------------
-        try{
+        // try{
             // order books
             $order_books = request()->query('order_books');
             if ($order_books) {
@@ -30,21 +30,43 @@ class AdminController extends Controller
             } else {
                 $books_aux = Book::orderBy('id', 'asc');
             }
+            // filter books
+            $filter = request()->query('filter_books_by');
+            if ($filter) {
+                $value = request()->query('filter_books_value');
+                if ($filter == 'id') {
+                    $books_aux->where('id', $value);
+                }
+                if ($filter == 'author') {
+                    $books_aux->whereHas('author', function ($query) use ($value) {
+                        return $query->where('name', 'like', '%'.$value.'%');
+                    });
+                } elseif ($filter == 'category') {
+                    $books_aux->whereHas('category', function ($query) use ($value) {
+                        return $query->where('tag', 'like', '%'.$value.'%');
+                    });
+                } elseif ($filter == 'title') {
+                    $books_aux->where('title', 'like', '%'.$value.'%');
+                } elseif ($filter == 'description') {
+                    $books_aux->where('description', 'like', '%'.$value.'%');
+                }
+            }
+
             $books = $books_aux->paginate(
                 $perPage = $PER_PAGE,
                 // all columns except created_at, updated_at, deleted_at, isbn
                 $columns = ['id', 'title', 'description', 'author_id', 'category_id', 'image', 'file', ],
                 $pageName = 'books',
             )->withQueryString();
-        }catch(\Exception $e){
-            Log::error($e->getMessage());
-            $books = Book::orderBy('id', 'asc')->paginate(
-                $perPage = $PER_PAGE,
-                // all columns except created_at, updated_at, deleted_at, isbn
-                $columns = ['id', 'title', 'description', 'author_id', 'category_id', 'image', 'file', ],
-                $pageName = 'books',
-            )->withQueryString();
-        }
+        // }catch(\Exception $e){
+        //     Log::error($e->getMessage());
+        //     $books = Book::orderBy('id', 'asc')->paginate(
+        //         $perPage = $PER_PAGE,
+        //         // all columns except created_at, updated_at, deleted_at, isbn
+        //         $columns = ['id', 'title', 'description', 'author_id', 'category_id', 'image', 'file', ],
+        //         $pageName = 'books',
+        //     )->withQueryString();
+        // }
 
         // ------------------ AUTHORS ------------------
         try{
