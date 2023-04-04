@@ -24,4 +24,16 @@ class CategoriesController extends Controller
         $category->delete();
         return redirect()->back();
     }
+
+    public function store (Request $request)
+    {
+        $request->validate([
+            'tag' => 'required|max:255',
+        ]);
+
+        $category = new Category();
+        $category->tag = $request->tag;
+        $category->save();
+        return redirect()->back();
+    }
 }

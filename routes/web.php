@@ -64,6 +64,7 @@ Route::group(['middleware' => 'language'], function () {
         Route::put('/author/update/{id}', [App\Http\Controllers\AuthorsController::class, 'update', 'id'])->name('author.edit');
         Route::get('/author/delete/{id}', [App\Http\Controllers\AuthorsController::class, 'delete', 'id'])->name('author.delete');
         
+        Route::post('/category/create', [App\Http\Controllers\CategoriesController::class, 'store'])->name('category.store');
         Route::put('/category/update/{id}', [App\Http\Controllers\CategoriesController::class, 'update', 'id'])->name('category.edit');
         Route::get('/category/delete/{id}', [App\Http\Controllers\CategoriesController::class, 'delete', 'id'])->name('category.delete');
         

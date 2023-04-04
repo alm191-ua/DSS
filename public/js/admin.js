@@ -9,18 +9,61 @@
             host, hostname, href, origin, pathname, port, protocol, search
         } = window.location;
         let params = new URLSearchParams(search);
+        // filter books old values
         let filter_books_by = params.get('filter_books_by');
         let filter_books_value = params.get('filter_books_value');
         if (filter_books_by != null && filter_books_value != null) {
-            $('#filter_by').val(filter_books_by);
+            $('#books_filter_by').val(filter_books_by);
             showSelects(filter_books_by);
             if (filter_books_by == 'author') {
                 $('#authors').val(filter_books_value);
             }else if (filter_books_by == 'category') {
                 $('#categories').val(filter_books_value);
             } else{
-                $('#filter_value').val(filter_books_value);
+                $('#books_filter_value').val(filter_books_value);
             }
+        }
+
+        // filter authors old values
+        let filter_authors_by = params.get('filter_authors_by');
+        let filter_authors_value = params.get('filter_authors_value');
+        if (filter_authors_by != null && filter_authors_value != null) {
+            $('#authors_filter_by').val(filter_authors_by);
+            $('#authors_filter_value').val(filter_authors_value);
+        }
+
+        // filter suggestions old values
+        let filter_suggestions_by = params.get('filter_suggestions_by');
+        let filter_suggestions_value = params.get('filter_suggestions_value');
+        if (filter_suggestions_by != null && filter_suggestions_value != null) {
+            $('#suggestions_filter_by').val(filter_suggestions_by);
+            $('#suggestions_filter_value').val(filter_suggestions_value);
+        }
+
+        // filter users old values
+        let filter_users_by = params.get('filter_users_by');
+        let filter_users_value = params.get('filter_users_value');
+        if (filter_users_by != null && filter_users_value != null) {
+            showSelectsUsers(filter_users_by);
+            $('#users_filter_by').val(filter_users_by);
+            $('#users_filter_value').val(filter_users_value);
+            $('users_filter_value_boolean').val(filter_users_value);
+        }
+
+        // filter categories old values
+        let filter_categories_by = params.get('filter_categories_by');
+        let filter_categories_value = params.get('filter_categories_value');
+        if (filter_categories_by != null && filter_categories_value != null) {
+            $('#categories_filter_by').val(filter_categories_by);
+            $('#categories_filter_value').val(filter_categories_value);
+        }
+
+        // filter reviews old values
+        let filter_reviews_by = params.get('filter_reviews_by');
+        let filter_reviews_value = params.get('filter_reviews_value');
+        if (filter_reviews_by != null && filter_reviews_value != null) {
+            $('#reviews_filter_by').val(filter_reviews_by);
+            $('#reviews_filter_value').val(filter_reviews_value);
         }
 
         let editables = $('.editable-form');
@@ -118,12 +161,25 @@
         if (select_value == 'author') {
             $('#authors').show();
             $('#categories').hide();
+            $('#books_filter_value').hide();
         } else if (select_value == 'category') {
             $('#authors').hide();
             $('#categories').show();
+            $('#books_filter_value').hide();
         } else {
             $('#authors').hide();
             $('#categories').hide();
+            $('#books_filter_value').show();
+        }
+    }
+
+    function showSelectsUsers (select_value) {
+        if (select_value == 'is_admin') {
+            $('#users_filter_value').hide();
+            $('#users_filter_value_boolean').show();
+        } else {
+            $('#users_filter_value').show();
+            $('#users_filter_value_boolean').hide();
         }
     }
 

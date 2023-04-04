@@ -294,6 +294,11 @@
         /* opacity: 30%; */
     }
 
+    /* #books_filter_value:focus-within {
+        border-color: black;
+        border-width: 2px;
+    } */
+
     .filter-zone-ocult {
         /* margin-top: 1em; */
         margin-left: 1em;
