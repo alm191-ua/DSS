@@ -134,11 +134,7 @@
                                         <li><a href="{{ route('author', ['id'=>3]) }}">Author Detail</a></li>								
                                     </ul>
                                 </li>
-                                <li><a href="book-listing.html">Products</a>
-                                    <ul>
-                                        <li><a href="{{ route('books-list') }}">{{ __('master.menu.books') }}</a></li>						
-                                        <li><a href="{{ route('book', ['id' => 3]) }}">Book Detail</a></li> {{-- only for testing --}}
-                                    </ul>
+                                <li><a href="{{ route('books-list') }}">{{ __('master.menu.books') }}</a>
                                 </li>
                                 <li class="last"><a href="{{ route('contactus') }}">{{ __('master.menu.contactus') }}</a></li>
                             </ul>
@@ -155,11 +151,7 @@
                                         <li><a href="{{ route('author', ['id'=>3]) }}">Author Detail</a></li>								
                                     </ul>
                                 </li>
-                                <li><a href="book-listing.html">Products</a>
-                                    <ul>
-                                        <li><a href="{{ route('books-list') }}">{{ __('master.menu.books') }}</a></li>	
-                                        <li><a href="{{ route('book', ['id' => 3]) }}">Book Detail</a></li> {{-- only for testing --}}
-                                    </ul>
+                                <li><a href="{{ route('books-list') }}">{{ __('master.menu.books') }}</a>
                                 </li>
                                 <li class="last"><a href="{{ route('contactus') }}">{{ __('master.menu.contactus') }}</a></li>
                             </ul>

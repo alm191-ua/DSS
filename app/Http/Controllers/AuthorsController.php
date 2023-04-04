@@ -28,8 +28,15 @@ class AuthorsController extends Controller
         $categories = Category::all();
 
         $author = Author::findOrfail($id);
+
+        $books = $author->books()->paginate(6);
+
+        $random_books = $author->books()->inRandomOrder()->limit(3)->get();
+        $random_reviews = $random_books->map(function ($book) {
+            return $book->reviews()->inRandomOrder()->first();
+        });
         
-        return view('author', compact('categories', 'author'));
+        return view('author', compact('categories', 'author', 'books', 'random_reviews'));
     }
 
     public function delete ($id)
