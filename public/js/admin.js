@@ -4,6 +4,25 @@
     function init(view) {
         firstPage(view);
 
+        // get url parameters filter_books_by and filter_books_value
+        const {
+            host, hostname, href, origin, pathname, port, protocol, search
+        } = window.location;
+        let params = new URLSearchParams(search);
+        let filter_books_by = params.get('filter_books_by');
+        let filter_books_value = params.get('filter_books_value');
+        if (filter_books_by != null && filter_books_value != null) {
+            $('#filter_by').val(filter_books_by);
+            showSelects(filter_books_by);
+            if (filter_books_by == 'author') {
+                $('#authors').val(filter_books_value);
+            }else if (filter_books_by == 'category') {
+                $('#categories').val(filter_books_value);
+            } else{
+                $('#filter_value').val(filter_books_value);
+            }
+        }
+
         let editables = $('.editable-form');
         for (let i = 0; i < editables.length; i++) {
             $(editables[i]).hide();
@@ -94,6 +113,42 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    function showSelects(select_value) {
+        if (select_value == 'author') {
+            $('#authors').show();
+            $('#categories').hide();
+        } else if (select_value == 'category') {
+            $('#authors').hide();
+            $('#categories').show();
+        } else {
+            $('#authors').hide();
+            $('#categories').hide();
+        }
+    }
+
+    $(function() {
+        // $('.filter-zone').hover(function() {
+        //   $('.filter-zone > *').css('opacity', '100%');
+        //   $('.filter-zone').css('background-color', '#394756');
+        // }, function() {
+        //   // on mouseout, reset the background colour
+        //   $('.filter-zone > *').css('opacity', '30%');
+        //   $('.filter-zone > .filter-label').css('opacity', '100%');
+        //   $('.filter-zone').css('background-color', '');
+        // });
+        $('.filter-zone-ocult').hover(function() {
+            $('.filter-zone-ocult').css('display', 'none');
+            $('.filter-zone').css('display', 'block');
+        });
+        $('.filter-zone').hover(function() {
+            $('.filter-zone').css('display', 'block');
+        }, function() {
+            $('.filter-zone').css('display', 'none');
+            $('.filter-zone-ocult').css('display', 'block');
+        });
+
+      });
 
 
     // function sendForm(elem_id){

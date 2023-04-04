@@ -21,6 +21,16 @@ class AdminController extends Controller
         $all_authors = Author::all();
         $all_categories = Category::all();
 
+        $books_attributes = [
+            'id' => 'ID',
+            'title' => 'Title',
+            'author_id' => 'Author',
+            'category_id' => 'Category',
+            'description' => 'Description',
+            'image' => 'Image',
+            'file' => 'File',
+        ];
+
         // ------------------ BOOKS ------------------
         // try{
             // order books
@@ -38,13 +48,9 @@ class AdminController extends Controller
                     $books_aux->where('id', $value);
                 }
                 if ($filter == 'author') {
-                    $books_aux->whereHas('author', function ($query) use ($value) {
-                        return $query->where('name', 'like', '%'.$value.'%');
-                    });
+                    $books_aux->where('author_id', $value);
                 } elseif ($filter == 'category') {
-                    $books_aux->whereHas('category', function ($query) use ($value) {
-                        return $query->where('tag', 'like', '%'.$value.'%');
-                    });
+                    $books_aux->where('category_id', $value);
                 } elseif ($filter == 'title') {
                     $books_aux->where('title', 'like', '%'.$value.'%');
                 } elseif ($filter == 'description') {
@@ -197,7 +203,8 @@ class AdminController extends Controller
         return view('admin', 
             compact('books', 'authors', 'users', 
                 'categories', 'suggestions', 'all_authors', 
-                'all_categories', 'reviews'));
+                'all_categories', 'reviews',
+                'books_attributes'));
         
     }
 

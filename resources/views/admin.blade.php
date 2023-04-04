@@ -185,48 +185,74 @@
     <h2>Books Admin Panel</h2>
 
     {{-- create book button --}}
-    <a id="create_button" type="button" class="button btn-primary" href="{{ route('book.create') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
-    {{-- filter by --}}
-    <label for="filter_by">Filter by:</label>
-    <select name="filter_by" id="filter_by"
-        onchange="
-            if (this.value == 'author') {
-                $('#authors').show();
-                $('#categories').hide();
-            } else if (this.value == 'category') {
-                $('#authors').hide();
-                $('#categories').show();
-            } else {
-                $('#authors').hide();
-                $('#categories').hide();
-            }
-        ">
-        @if (count($books) > 0)
-            @foreach ($books[0]->getAttributes() as $key => $value)
-                @if ($key == 'image' || $key == 'file')
-                    @continue
-                @endif
-                @if (substr($key, -3) == '_id')
-                    {{ $key = substr($key, 0, -3) }}
-                @endif
-                <option value="{{ $key }}">{{ $key }}</option>
-            @endforeach
-        @endif
-    </select>
-    <select name="authors" id="authors" hidden>
-        @foreach ($all_authors as $author)
-            <option value="{{ $author->id }}">{{ $author->name }}</option>
-        @endforeach
-    </select>
-    <select name="categories" id="categories" hidden>
-        @foreach ($all_categories as $category)
-            <option value="{{ $category->id }}">{{ $category->tag }}</option>
-        @endforeach
-    </select>
-    <input type="text" id="filter_value" name="filter_value" placeholder="Filter value">
-    <button type="button" class="btn btn-secondary" onclick="
-        window.location.href = '{{ route('admin') }}?filter_books_by' + '=' + $('#filter_by').val() + '&filter_books_value' + '=' + $('#filter_value').val();
-    ">Filter</button>
+    <div class="general-manage">
+        <a id="create_button" type="button" class="button btn-primary" href="{{ route('book.create') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a> 
+        {{-- filter by --}}
+        {{-- filter zone ocult --}}
+        <div class="filter-zone-ocult">
+            <i class="fa fa-filter"></i>
+        </div>
+        <div class="filter-zone">
+            <label for="filter_by" class="filter-label">FILTER BY:</label>
+            <select name="filter_by" id="filter_by"
+                onchange="showSelects(this.value);
+                ">
+                @foreach ($books_attributes as $key => $value)
+                    @if ($key == 'image' || $key == 'file')
+                        @continue
+                    @endif
+                    @if (substr($key, -3) == '_id')
+                        {{ $key = substr($key, 0, -3) }}
+                    @endif
+                    <option value="{{ $key }}">{{ $key }}</option>
+                @endforeach
+            </select>
+            <select name="authors" id="authors" hidden>
+                @foreach ($all_authors as $author)
+                    <option value="{{ $author->id }}">{{ $author->name }}</option>
+                @endforeach
+            </select>
+            <select name="categories" id="categories" hidden>
+                @foreach ($all_categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->tag }}</option>
+                @endforeach
+            </select>
+            <input type="text" id="filter_value" name="filter_value" placeholder="Filter value">
+            <div class="buttons-zone">
+                <button type="button" class="btn btn-secondary" onclick="
+                    if ($('#filter_by').val() == 'author') {
+                        $('#filter_value').val($('#authors').val());
+                    } else if ($('#filter_by').val() == 'category') {
+                        $('#filter_value').val($('#categories').val());
+                    }
+                    window.location.href = '{{ route('admin') }}?filter_books_by' + '=' + $('#filter_by').val() + '&filter_books_value' + '=' + $('#filter_value').val();
+                ">
+                <i class="fa fa-search"></i>
+                </button>
+                <div class="space-between-buttons"></div>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href = '{{ route('admin') }}'">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            <script type="text/javascript">
+                // on enter activate button
+                // add event listener to input
+                var input = $('#filter_value');
+                input.on('keyup', function(event) {
+                    if (event.keyCode === 13) {
+                        event.preventDefault();
+                        if ($('#filter_by').val() == 'author') {
+                            $('#filter_value').val($('#authors').val());
+                        } else if ($('#filter_by').val() == 'category') {
+                            $('#filter_value').val($('#categories').val());
+                        }
+                        window.location.href = '{{ route('admin') }}?filter_books_by' + '=' + $('#filter_by').val() + '&filter_books_value' + '=' + $('#filter_value').val();
+                
+                    }
+                });
+            </script>
+        </div>
+    </div>
 
 
     {{-- Error messages --}}
@@ -279,7 +305,21 @@
           </tr>
         </thead>
         <tbody>
-            
+            @if (count($books) <= 0)
+                {{-- no books message with cool bootstrap style --}}
+                <tr>
+                    <td colspan="100%">
+                        <div class="alert alert-danger" role="alert">
+                            <h4 class="alert-heading">No books found!</h4>
+                            <p>There are no books for this filter. You can create one by clicking the button above.</p>
+                            <hr>
+                            <p class="mb-0">If you think this is an error, please 
+                                <a href="{{ route('contactus') }}">contact</a>
+                                us.</p>
+                        </div>
+                    </td>
+                </tr>
+            @endif
             @foreach ($books as $book)
                 <tr>
                 <form action={{ route('book.edit', $book->id) }} 
