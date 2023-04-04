@@ -128,11 +128,7 @@
                                 @endauth
                                 <li><a href="{{ route('home') }}">{{ __('master.menu.home') }}</a></li>
                                 <li><a href="{{ route('aboutus') }}">{{ __('master.menu.aboutus') }}</a></li>
-                                <li class="last"><a href="{{ route('authors') }}">Teams</a>
-                                    <ul>
-                                        <li><a href="{{ route('authors') }}">{{ __('master.menu.authors') }}</a></li>
-                                        <li><a href="{{ route('author', ['id'=>3]) }}">Author Detail</a></li>								
-                                    </ul>
+                                <li class="last"><a href="{{ route('authors') }}">{{ __('master.menu.authors') }}</a>
                                 </li>
                                 <li><a href="{{ route('books-list') }}">{{ __('master.menu.books') }}</a>
                                 </li>
@@ -145,11 +141,7 @@
                                 <li><a href="{{ route('admin') }}">Admin</a></li>
                                 <li><a href="{{ route('home') }}">{{ __('master.menu.home') }}</a></li>
                                 <li><a href="{{ route('aboutus') }}">{{ __('master.menu.aboutus') }}</a></li>
-                                <li class="last"><a href="{{ route('authors') }}">Teams</a>
-                                    <ul>
-                                        <li><a href="{{ route('authors') }}">{{ __('master.menu.authors') }}</a></li>
-                                        <li><a href="{{ route('author', ['id'=>3]) }}">Author Detail</a></li>								
-                                    </ul>
+                                <li class="last"><a href="{{ route('authors') }}">{{ __('master.menu.authors') }}</a>
                                 </li>
                                 <li><a href="{{ route('books-list') }}">{{ __('master.menu.books') }}</a>
                                 </li>
