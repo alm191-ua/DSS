@@ -68,10 +68,11 @@ class AdminController extends Controller
         // ------------------ BOOKS ------------------
         // order books
         $order_books = request()->query('order_books');
+        $books_aux = Book::with('author:id,name', 'category');
         if ($order_books) {
-            $books_aux = Book::orderBy($order_books, 'asc');
+            $books_aux->orderBy($order_books, 'asc');
         } else {
-            $books_aux = Book::orderBy('id', 'asc');
+            $books_aux->orderBy('id', 'asc');
         }
         // filter books
         $filter = request()->query('filter_books_by');
@@ -95,7 +96,7 @@ class AdminController extends Controller
             // all columns except created_at, updated_at, deleted_at, isbn
             $columns = ['id', 'title', 'description', 'author_id', 'category_id', 'image', 'file', ],
             $pageName = 'books',
-        )->withQueryString();
+        )->appends(request()->all());
 
         // ------------------ AUTHORS ------------------
             // order authors
@@ -215,10 +216,11 @@ class AdminController extends Controller
         // ------------------ REVIEWS ------------------
         // order reviews
         $order_reviews = request()->query('order_reviews');
+        $reviews_aux = Review::with('user:id,username', 'book:id,title');
         if ($order_reviews) {
-            $reviews_aux = Review::orderBy($order_reviews, 'asc');
+            $reviews_aux->orderBy($order_reviews, 'asc');
         } else {
-            $reviews_aux = Review::orderBy('id', 'asc');
+            $reviews_aux->orderBy('id', 'asc');
         }
         // filter reviews
         $filter = request()->query('filter_reviews_by');
@@ -244,7 +246,7 @@ class AdminController extends Controller
             // all columns except created_at, updated_at, deleted_at
             $columns = ['id', 'comment', 'user_id', 'book_id', ],
             $pageName = 'reviews',
-        )->withQueryString();
+        )->appends(request()->all());
     
 
 

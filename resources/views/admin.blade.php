@@ -166,7 +166,7 @@
 
 </div>
 
-<div class="main" name="statistics">
+<div class="main" name="statistics" hidden>
     <h2>Statistics</h2>
 
     {{-- not available for now with cool style--}}
@@ -181,7 +181,7 @@
     </div>
 </div>
 
-<div class="main" name="books" hidden>
+<div class="main" name="books">
     <h2>Books Admin Panel</h2>
 
     {{-- create book button --}}
