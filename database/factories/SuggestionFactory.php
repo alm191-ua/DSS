@@ -21,10 +21,10 @@ class SuggestionFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $faker->name(),
-            'email' => $faker->unique()->safeEmail(),
-            'phone' => $faker->phoneNumber(),
-            'message' => $faker->text(200),
+            'name' => $this->faker->name(),
+            'email' => $this->faker->safeEmail(),
+            'phone' => $this->faker->phoneNumber(),
+            'message' => $this->faker->text(200),
         ];
     }
 }

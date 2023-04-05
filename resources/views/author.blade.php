@@ -1,48 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.style1')
 
 @section('title', 'Author Detail')
 
 @section('content')
-    <!--BANNER START-->
-    <div class="kode-inner-banner">
-    	<div class="kode-page-heading">
-        	<h2>Author Detail</h2>
-            <ol class="breadcrumb">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Books Guide</a></li>
-              <li class="active">Author Detail</li>
-            </ol>
-        </div>
-        <div class="container">
-        	<div class="banner-search">
-            	<div class="row">
-                	<div class="col-md-2">
-                    	<h2>Search<br> Your Books</h2>
-                    </div>
-                    <div class="col-md-6">
-                    	<input type="text" placeholder="Enter Your Title">
-                    </div>
-                    <div class="col-md-2">
-                    	<select></select>
-                    </div>
-                    <div class="col-md-2">
-                    	<button>Search</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @parent
+
     <!--CONTENT START-->
     <div class="kode-content">
         <!--AUTHOR DETAIL SECTION START-->
         <section class="kode-author-detail-2">
         	<div class="container">
             	<div class="kode-thumb">
-                	<img src="images/author-detail.jpg" alt="">
+                	<img src="{{asset('storage/authors/'.$author->image)}}" alt="author image"
+                        onerror="this.onerror=null;this.src='{{ asset('images/author.png') }}';"
+                    >
                 </div>
                 <div class="kode-text">
-                	<h2>Charlas f. stanley</h2>
-                    <h5>Co-Founder &amp; Author</h5>
+                	<h2>{{$author->name}}</h2>
+                    <h5>Author</h5>
                     <div class="contact-box">
                     	<div class="row">
                         	<div class="col-md-8">
@@ -78,7 +53,7 @@
                             </div>
                         </div>
                     </div>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                    <p>{{ $author->info }}</p>
                     <div class="signature">
                     	<img src="images/signature-1.png" alt="">
                     </div>
@@ -87,7 +62,7 @@
         </section>
         <!--AUTHOR DETAIL SECTION END-->
         <!--KODE BIOGRAPHY SECTION START-->  
-        <section class="kode-bio">
+        {{-- <section class="kode-bio">
         	<div class="container">
             	<div class="section-heading-1">
                     <h2> Biography</h2>
@@ -109,7 +84,7 @@
                     </div>
                 </div>
             </div>
-        </section>    
+        </section>     --}}
         <!--KODE BIOGRAPHY SECTION END--> 
         <!--RECENT RELEASE SECTION START-->  
         <section class="recent-release">
@@ -118,223 +93,34 @@
                     <h2> Published Books</h2>
                     <div class="kode-icon"><i class="fa fa-book"></i></div>
                 </div>
-                <div class="owl-release owl-theme">
-                	<div class="item">
-                    	<div class="book-released">
-                        	<div class="kode-thumb">
-                            	<a href="#"><img src="images/new-release.png" alt=""></a>
-                                <div class="cart-btns">
-                                	<a href="#" data-toggle="tooltip" title="582"><i class="fa fa-eye"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a>
+                <div class="owl-release owl-theme" style="display: block">
+                    @foreach ($books as $book)
+                        <div class="item">
+                            <div class="book-released">
+                                <div class="kode-thumb">
+                                    <a href="#"><img src="{{asset('storage_images/books/' . $book->image)}}" alt=""
+                                        onerror="this.onerror=null;this.src='{{ asset('images/book3.png') }}';"
+                                        height="300px" ></a>
+                                    <div class="cart-btns">
+                                        <a href="{{route('book', $book->id)}}" data-toggle="tooltip" title="View"><i class="fa fa-eye"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="kode-text">
-                            	<h3>Donec eu libero sit</h3>
-                                <div class="rating">
-                                	<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                    	<div class="book-released">
-                        	<div class="kode-thumb">
-                            	<a href="#"><img src="images/new-release-2.png" alt=""></a>
-                                <div class="cart-btns">
-                                	<a href="#" data-toggle="tooltip" title="582"><i class="fa fa-eye"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a>
-                                </div>
-                            </div>
-                            <div class="kode-text">
-                            	<h3>Donec eu libero sit</h3>
-                                <div class="rating">
-                                	<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                <div class="kode-text">
+                                    <h3>{{ $book->title }}</h3>
+                                    <div class="rating">
+                                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="item">
-                    	<div class="book-released">
-                        	<div class="kode-thumb">
-                            	<a href="#"><img src="images/new-release-3.png" alt=""></a>
-                                <div class="cart-btns">
-                                	<a href="#" data-toggle="tooltip" title="582"><i class="fa fa-eye"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a>
-                                </div>
-                            </div>
-                            <div class="kode-text">
-                            	<h3>Donec eu libero sit</h3>
-                                <div class="rating">
-                                	<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                    	<div class="book-released">
-                        	<div class="kode-thumb">
-                            	<a href="#"><img src="images/new-release-4.png" alt=""></a>
-                                <div class="cart-btns">
-                                	<a href="#" data-toggle="tooltip" title="582"><i class="fa fa-eye"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a>
-                                </div>
-                            </div>
-                            <div class="kode-text">
-                            	<h3>Donec eu libero sit</h3>
-                                <div class="rating">
-                                	<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                    	<div class="book-released">
-                        	<div class="kode-thumb">
-                            	<a href="#"><img src="images/new-release.png" alt=""></a>
-                                <div class="cart-btns">
-                                	<a href="#" data-toggle="tooltip" title="582"><i class="fa fa-eye"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a>
-                                </div>
-                            </div>
-                            <div class="kode-text">
-                            	<h3>Donec eu libero sit</h3>
-                                <div class="rating">
-                                	<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                    	<div class="book-released">
-                        	<div class="kode-thumb">
-                            	<a href="#"><img src="images/new-release-2.png" alt=""></a>
-                                <div class="cart-btns">
-                                	<a href="#" data-toggle="tooltip" title="582"><i class="fa fa-eye"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a>
-                                </div>
-                            </div>
-                            <div class="kode-text">
-                            	<h3>Donec eu libero sit</h3>
-                                <div class="rating">
-                                	<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                    	<div class="book-released">
-                        	<div class="kode-thumb">
-                            	<a href="#"><img src="images/new-release-3.png" alt=""></a>
-                                <div class="cart-btns">
-                                	<a href="#" data-toggle="tooltip" title="582"><i class="fa fa-eye"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a>
-                                </div>
-                            </div>
-                            <div class="kode-text">
-                            	<h3>Donec eu libero sit</h3>
-                                <div class="rating">
-                                	<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                    	<div class="book-released">
-                        	<div class="kode-thumb">
-                            	<a href="#"><img src="images/new-release-4.png" alt=""></a>
-                                <div class="cart-btns">
-                                	<a href="#" data-toggle="tooltip" title="582"><i class="fa fa-eye"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a>
-                                </div>
-                            </div>
-                            <div class="kode-text">
-                            	<h3>Donec eu libero sit</h3>
-                                <div class="rating">
-                                	<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                    	<div class="book-released">
-                        	<div class="kode-thumb">
-                            	<a href="#"><img src="images/new-release.png" alt=""></a>
-                                <div class="cart-btns">
-                                	<a href="#" data-toggle="tooltip" title="582"><i class="fa fa-eye"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a>
-                                </div>
-                            </div>
-                            <div class="kode-text">
-                            	<h3>Donec eu libero sit</h3>
-                                <div class="rating">
-                                	<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                    	<div class="book-released">
-                        	<div class="kode-thumb">
-                            	<a href="#"><img src="images/new-release-2.png" alt=""></a>
-                                <div class="cart-btns">
-                                	<a href="#" data-toggle="tooltip" title="582"><i class="fa fa-eye"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a>
-                                </div>
-                            </div>
-                            <div class="kode-text">
-                            	<h3>Donec eu libero sit</h3>
-                                <div class="rating">
-                                	<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                    	<div class="book-released">
-                        	<div class="kode-thumb">
-                            	<a href="#"><img src="images/new-release-3.png" alt=""></a>
-                                <div class="cart-btns">
-                                	<a href="#" data-toggle="tooltip" title="582"><i class="fa fa-eye"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a>
-                                </div>
-                            </div>
-                            <div class="kode-text">
-                            	<h3>Donec eu libero sit</h3>
-                                <div class="rating">
-                                	<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                    	<div class="book-released">
-                        	<div class="kode-thumb">
-                            	<a href="#"><img src="images/new-release-4.png" alt=""></a>
-                                <div class="cart-btns">
-                                	<a href="#" data-toggle="tooltip" title="582"><i class="fa fa-eye"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a>
-                                </div>
-                            </div>
-                            <div class="kode-text">
-                            	<h3>Donec eu libero sit</h3>
-                                <div class="rating">
-                                	<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                    @endforeach
+
+                    {{ $books->links() }}
+
+                    
                 </div>                                
             </div>
         </section>
@@ -372,7 +158,7 @@
         </div>
         <!--COUNT UP SECTION END-->
         <!--CERTIFICATES SECTION START-->
-        <section>
+        {{-- <section>
         	<div class="container">
         		<!--SECTION HEADING START-->
         		<div class="section-heading-1">
@@ -462,104 +248,49 @@
                 	</div>
                 </div>
         	</div>
-        </section>
+        </section> --}}
         <!--CERTIFICATES SECTION END-->
         <!--GIFT CARD SECTION START--> 
         <section class="lib-textimonials">
         	<div class="container">
             	<!--SECTION HEADING START-->
-           <div class="section-heading-1 dark-sec">
-                <h2>Our Testimonials</h2>
-                <p>What our clients say about the books reviews and comments</p>
-                <div class="kode-icon"><i class="fa fa-book"></i></div>
-            </div>
-            <!--SECTION HEADING END-->
-            <div class="owl-testimonials owl-theme">
-                <!--BLOG ITEM START-->
-                <div class="item">
-                    <div class="lib-testimonial-content">
-                    	<div class="kode-text">
-                        	<p>I loved thrift books! It's refreshing to buy discounted books and have them shipped quickly. I could afford to buy 3 copies to hand out to friends also interested in the topic. Thank you!! Read more</p>
-                        </div>
-                        <div class="kode-thumb">
-                            <img src="images/testimonials1.png" alt="">
-                        </div>
-                        <h4>Jenifer Robbert</h4>
-                        <p class="title">Author</p>
-                    </div>
+                <div class="section-heading-1 dark-sec">
+                    <h2>Our Testimonials</h2>
+                    <p>What our clients say about the books reviews and comments</p>
+                    <div class="kode-icon"><i class="fa fa-book"></i></div>
                 </div>
-                <!--BLOG ITEM END-->
-                <!--BLOG ITEM START-->
-                <div class="item">
-                    <div class="lib-testimonial-content">
-                    	<div class="kode-text">
-                        	<p>You have great prices and the books are in the shape as stated. Although it takes so long for them to get to their destination. I have been ordering for years and get great books in the shape said.</p>
+                <!--SECTION HEADING END-->
+                <div class="owl-testimonials owl-theme">
+                    @foreach($random_reviews as $review)
+                        @php
+                            try {
+                                $review->comment = Str::limit($review->comment, 100);
+                            }catch(Exception $e) {
+                                continue;
+                            }
+                        @endphp
+                        <!--BLOG ITEM START-->
+                        <div class="item">
+                            <div class="lib-testimonial-content">
+                                <div class="kode-text">
+                                    <p>
+                                        {{ $review->comment }}
+                                    </p>
+                                </div>
+                                <div class="kode-thumb">
+                                    <img src="{{ asset('storage/users/'.$review->user->image) }}" alt=""
+                                        onerror="this.src='{{ asset('images/testimonials1.png') }}'"
+                                    >
+                                </div>
+                                <h4>
+                                    {{ $review->user->username }}
+                                </h4>
+                                <p class="title">Author</p>
+                            </div>
                         </div>
-                        <div class="kode-thumb">
-                            <img src="images/testimonials-img4.png" alt="">
-                        </div>
-                        <h4>Jenifer Robbert</h4>
-                        <p class="title">Author</p>
-                    </div>
+                        <!--BLOG ITEM END-->
+                    @endforeach
                 </div>
-                <!--BLOG ITEM END-->
-                <!--BLOG ITEM START-->
-                <div class="item">
-                    <div class="lib-testimonial-content">
-                    	<div class="kode-text">
-                        	<p>I have made many orders with Thrift Books. I always get exactly what I order in a timely manner at a great price. I have had to contact the customer service team once.</p>
-                        </div>
-                        <div class="kode-thumb">
-                            <img src="images/testimonials-img3.png" alt="">
-                        </div>
-                        <h4>Jenifer Robbert</h4>
-                        <p class="title">Author</p>
-                    </div>
-                </div>
-                <!--BLOG ITEM END-->
-                <!--BLOG ITEM START-->
-                <div class="item">
-                    <div class="lib-testimonial-content">
-                    	<div class="kode-text">
-                        	<p>I couldn't believe the prices for such great books, at no shipping! I am going to be a good customer at your store! And, I am telling my Facebook friends about.</p>
-                        </div>
-                        <div class="kode-thumb">
-                            <img src="images/testimonials-img2.png" alt="">
-                        </div>
-                        <h4>Jenifer Robbert</h4>
-                        <p class="title">Author</p>
-                    </div>
-                </div>
-                <!--BLOG ITEM END-->
-                <!--BLOG ITEM START-->
-                <div class="item">
-                    <div class="lib-testimonial-content">
-                    	<div class="kode-text">
-                        	<p>ordered 14 books, received 14 books within a week. very happy with customer support and with the receipt of books. Keep It Up Good Guide we love you the best books library available today.</p>
-                        </div>
-                        <div class="kode-thumb">
-                            <img src="images/writer2.png" alt="">
-                        </div>
-                        <h4>Jenifer Robbert</h4>
-                        <p class="title">Author</p>
-                    </div>
-                </div>
-                <!--BLOG ITEM END-->
-                <!--BLOG ITEM START-->
-                <div class="item">
-                    <div class="lib-testimonial-content">
-                    	<div class="kode-text">
-                        	<p>Thrift Books is the absolute best book seller on the Internet!! Their selection is marvelous, price/shipping unbeatable and timely service is outstanding.</p>
-                        </div>
-                        <div class="kode-thumb">
-                            <img src="images/writer3.png" alt="">
-                        </div>
-                        <h4>Jenifer Robbert</h4>
-                        <p class="title">Author</p>
-                    </div>
-                </div>
-                <!--BLOG ITEM END-->
-            </div>
             </div>
         </section>
         <!--GIFT CARD SECTION END-->

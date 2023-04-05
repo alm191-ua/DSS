@@ -11,7 +11,7 @@ class Book extends Model
     use HasFactory;
 
     //Attributes id, title, description, author_id, category_id, image, isbn, created_at, updated_at
-    protected $fillable = ['title', 'description', 'author_id', 'category_id', 'image', 'isbn'];
+    protected $fillable = ['title', 'description', 'author_id', 'category_id', 'image', 'isbn', 'file', ];
 
     //Eloquent Relationships
 

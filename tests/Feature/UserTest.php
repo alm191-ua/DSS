@@ -99,6 +99,7 @@ class UserTest extends TestCase
         $book->description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.";
         $book->author_id = $author->id;
         $book->category_id = $category->id;
+        $book->isbn = "9788498389111";
         $book->save();
 
         $review = new Review();
@@ -113,7 +114,7 @@ class UserTest extends TestCase
         $review2->comment = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.";
         $review2->save();
 
-        $this->assertEquals($user->id, $review->user->id);
+        $this->assertEquals($user->id, $review->user_id);
     }
 
     public function test_has_many_bookshelves(){
@@ -138,6 +139,7 @@ class UserTest extends TestCase
         $book->description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.";
         $book->author_id = $author->id;
         $book->category_id = $category->id;
+        $book->isbn = "9788498389111";
         $book->save();
 
         $bookshelf = new Bookshelf();
@@ -150,7 +152,7 @@ class UserTest extends TestCase
         $bookshelf2->user_id = $user->id;
         $bookshelf2->save();
 
-        $this->assertEquals($user->id, $bookshelf->user->id);
+        $this->assertEquals($user->id, $bookshelf->user_id);
     }
 
 }

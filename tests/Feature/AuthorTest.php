@@ -80,7 +80,12 @@ class AuthorTest extends TestCase
         $autor->info= $texto ;
         $autor->save();
 
-        $categoria = Category::create([
+        // $categoria = Category::create([
+        //     'tag' => 'Comedy'
+        // ]);
+
+        // get category if exists, otherwise create it
+        $categoria = Category::firstOrCreate([
             'tag' => 'Comedy'
         ]);
 
@@ -108,10 +113,10 @@ class AuthorTest extends TestCase
         $this->assertEquals($autor->id, $libro2->author->id);
         $this->assertEquals($libro->author->id, $libro2->author->id);
 
-        $autor->delete();
-        $categoria-> delete();
-        $libro->delete();
-        $libro2->delete();
+        // $autor->delete();
+        // $categoria-> delete();
+        // $libro->delete();
+        // $libro2->delete();
 
     } 
 
