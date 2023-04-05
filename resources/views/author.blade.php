@@ -98,7 +98,7 @@
                         <div class="item">
                             <div class="book-released">
                                 <div class="kode-thumb">
-                                    <a href="#"><img src="{{asset('storage_images/books/' . $book->image)}}" alt=""
+                                    <a href="#"><img src="{{asset('storage/books/' . $book->image)}}" alt=""
                                         onerror="this.onerror=null;this.src='{{ asset('images/book3.png') }}';"
                                         height="300px" ></a>
                                     <div class="cart-btns">

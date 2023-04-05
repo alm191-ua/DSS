@@ -123,7 +123,7 @@
                         <div class="col-md-3">
                             <div class="best-seller-pro">
                                 <figure>
-                                    <img src="{{ asset('storage_images/books/' . $book->image) }}" alt="book image"
+                                    <img src="{{ asset('storage/books/' . $book->image) }}" alt="book image"
                                         onerror="this.src='{{ asset('images/default.png') }}'">
                                 </figure>
                                 <div class="kode-text">
