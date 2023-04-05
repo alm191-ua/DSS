@@ -43,7 +43,7 @@ class AuthorsTableSeeder extends Seeder
                 $author = new Author();
                 $name = ucwords(str_replace('_', ' ', str_replace('.jpg', '', str_replace('storage/authors/', '', $file))));
                 $author->name = $name;
-                $author->info = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec ultricies tincidunt, nisl nisl aliquet nisl, eget aliquet nunc nisl eget nisl. Sed euismod, nisl nec ultricies tincidunt, nisl nisl aliquet nisl, eget aliquet nunc nisl eget nisl.";
+                $author->info = fake()->paragraph();
                 $author->image = $file;
                 $author->save();
             }
