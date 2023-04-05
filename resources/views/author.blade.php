@@ -13,7 +13,7 @@
             	<div class="kode-thumb">
                 	<img src="{{asset('storage/authors/'.$author->image)}}" alt="author image"
                         onerror="this.onerror=null;this.src='{{ asset('images/author.png') }}';"
-                    >
+                    width="400px" height="400px">
                 </div>
                 <div class="kode-text">
                 	<h2>{{$author->name}}</h2>
