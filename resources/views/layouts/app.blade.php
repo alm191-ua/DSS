@@ -53,7 +53,7 @@
                             <ul>
                                 <li style="top:9px;"><a id="mail-link" href="mailto:contact.wordwaves@gmail.com"><i id="mail-icon" class="fa fa-envelope-o"></i>contact.wordwaves@gmail.com</a></li>
                                 <!-- <li><a href="#"><i class="fa fa-heart"></i></a></li> -->
-                                <li style="top:0.5em;" id="lang-icon"><a href="#"><i class="fa fa-language"></i></a>
+                                <li style="top:0.5em;" id="lang-icon"><a href="#"><i class="fa fa-globe"></i></a>
                                     <ul>
                                         <li>
                                             <a href="{{ route('locale', ['locale' => 'es']) }}">

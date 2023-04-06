@@ -132,7 +132,7 @@
                             <div class="col-6 col-md-2">
                                 {{-- <div class="books-listing-3"> --}}
                                     <div class="kode-thumb">
-                                        <a href="{{ route('book', $book->id) }}"><img src="{{ asset('storage_images/books/' . $book->image) }}" 
+                                        <a href="{{ route('book', $book->id) }}"><img src="{{ asset('storage/books/' . $book->image) }}" 
                                             onerror="this.src = '{{ asset('images/default.png') }}';" alt="book image" width="75" height="100"></a>
                                         </div>
                                         <div class="kode-text">

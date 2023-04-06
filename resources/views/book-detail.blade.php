@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="kode-thumb">
-                                    <img src="{{ asset('storage_images/books/'.$book->image) }}" alt="book image"
+                                    <img src="{{ asset('storage/books/'.$book->image) }}" alt="book image"
                                     onerror="this.src='{{ asset('images/default.png') }}'">
                                 </div>
                             </div>
@@ -227,7 +227,7 @@
                                 <div class="col-md-4">
                                     <div class="best-seller-pro">
                                         <figure>
-                                            <img src="{{ asset('storage_images/books/'.$book->image) }}" alt="book image"
+                                            <img src="{{ asset('storage/books/'.$book->image) }}" alt="book image"
                                                 onerror="this.src='{{ asset('images/default.png') }}'">
                                         </figure>
                                         <div class="kode-text">

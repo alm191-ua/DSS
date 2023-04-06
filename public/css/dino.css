@@ -1,0 +1,104 @@
+.msg {
+  font-size: 80px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#start {
+  width: 100px;
+  height: 50px;
+  background-color: green;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  margin: auto;
+  display: block;
+  margin-top: 20px;
+}
+
+.game {
+  width: 600px;
+  height: 200px;
+  border: 1px solid black;
+  background-image: url(./images/dino-img/BG.png);
+  background-size: 600px 200px;
+  margin: auto;
+}
+
+/*Create a score on the top right corner that counts de catus jumped*/
+#score {
+  position: relative;
+  top: 7px;
+  left: 540px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#dino {
+  width: 50px;
+  height: 60px;
+  background-image: url(./images/dino-img/m_t-rex.png);
+  background-size: 50px 60px;
+  position: relative;
+  top: 110px;
+}
+
+.jump {
+  animation: jump 0.3s linear;
+}
+
+@keyframes jump {
+  0% {
+    top: 110px;
+  }
+
+  30% {
+    /* top: 130px; */
+    top: 50px;
+  }
+
+  50% {
+    /* top: 80px; */
+    top: 30px;
+  }
+
+  80% {
+    /* top: 130px; */
+    top: 50px;
+  }
+
+  100% {
+    top: 110px;
+  }
+}
+
+#cactus {
+  width: 40px;
+  height: 80px;
+  position: relative;
+  top: 35px;
+  left: 580px;
+
+  background-image: url(./images/dino-img/cactusMario.png);
+  background-size: 40px 80px;
+}
+
+.cactus-animation {
+  animation: block 1.5s infinite linear;
+}
+
+@keyframes block {
+  0% {
+    /* left: 580px; */
+    left: 580px;
+  }
+
+  100% {
+    /* left: -20px; */
+    left: -20px;
+  }
+}
+

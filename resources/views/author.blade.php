@@ -13,7 +13,7 @@
             	<div class="kode-thumb">
                 	<img src="{{asset('storage/authors/'.$author->image)}}" alt="author image"
                         onerror="this.onerror=null;this.src='{{ asset('images/author.png') }}';"
-                    >
+                    width="400px" height="400px">
                 </div>
                 <div class="kode-text">
                 	<h2>{{$author->name}}</h2>
@@ -98,7 +98,7 @@
                         <div class="item">
                             <div class="book-released">
                                 <div class="kode-thumb">
-                                    <a href="#"><img src="{{asset('storage_images/books/' . $book->image)}}" alt=""
+                                    <a href="#"><img src="{{asset('storage/books/' . $book->image)}}" alt=""
                                         onerror="this.onerror=null;this.src='{{ asset('images/book3.png') }}';"
                                         height="300px" ></a>
                                     <div class="cart-btns">
