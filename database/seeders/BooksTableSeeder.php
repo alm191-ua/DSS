@@ -53,13 +53,14 @@ class BooksTableSeeder extends Seeder
         // }
 
         // for every file in app/book_files
-        $files = glob('storage/app/book_files/*'); // get all file names
-        $authors = glob('storage/app/public/authors/*'); // get all file names
-        foreach($files as $file){ // iterate files
-            if(is_file($file)) {
+        // $files = glob('storage/app/book_files/*');
+        $books = glob('storage/app/public/books/*');
+        $authors = glob('storage/app/public/authors/*');
+        foreach($books as $book){ // iterate files
+            // if(is_file($file)) {
                 // image with the same name as file in jpg
-                $image = str_replace('storage/app/book_files/', '', $file);
-                $image = str_replace('.pdf', '.png', $image);
+                $file = str_replace('storage/app/public/books/', '', $book);
+                $file = str_replace('.png', '.pdf', $file);
 
                 // random author
                 $author_img = $authors[array_rand($authors)];
@@ -78,21 +79,21 @@ class BooksTableSeeder extends Seeder
                 // echo '2:' . $author_name;
 
                 // title = name of file wothout extension
-                $title = str_replace('storage/app/book_files/', '', $file);
-                $title = str_replace('.pdf', '', $title);
+                $title = str_replace('storage/app/public/books/', '', $book);
+                $title = str_replace('.png', '', $title);
 
-                $file = str_replace('storage/app/book_files/', '', $file);
+                $image = str_replace('storage/app/public/books/', '', $book);
 
-                $book = new Book();
-                $book->title = $title;
-                $book->description = fake()->paragraph();
-                $book->author_id = $author->id;
-                $book->category_id = Category::all()->random()->id;
-                $book->isbn = "9780547928227";
-                $book->image = $image;
-                $book->file = $file;
-                $book->save();
-            }
+                $book_toSave = new Book();
+                $book_toSave->title = $title;
+                $book_toSave->description = fake()->paragraph();
+                $book_toSave->author_id = $author->id;
+                $book_toSave->category_id = Category::all()->random()->id;
+                $book_toSave->isbn = "9780547928227";
+                $book_toSave->image = $image;
+                $book_toSave->file = $file;
+                $book_toSave->save();
+            // }
         }
 
     }
