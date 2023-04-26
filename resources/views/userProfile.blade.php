@@ -128,7 +128,14 @@
                 <label hidden for="shelf-name_button">Add Shelf</label>
                 <button type="submit" class="btn" id="shelf-add_button">Add Shelf</button>            
             </div>
-        </form>       
+        </form>     
+        
+        @if (count($bookshelves) === 0)
+            <div class="alert alert-warning" role="alert">
+                <strong>Oh snap!</strong> You have no shelves.
+            </div>
+
+        @endif
 
         @foreach ($bookshelves as $bookshelf)
             <form action="{{route('bookshelf.delete', $bookshelf->id)}}" method="POST">

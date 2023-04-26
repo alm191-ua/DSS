@@ -11,8 +11,12 @@
             </div>
             <!--SECTION CONTENT END-->
             <div class="input-container">
-                <input type="text" placeholder="Subscribe us">
-                <button>Subcribe</button>
+                {{-- <input type="text" placeholder="Subscribe us"> --}}
+                <form action="{{ route('newsletter.store') }}" method="POST">
+                    @csrf
+                    <input type="email" name="email" placeholder="Enter your email">
+                    <button type="submit">Subcribe</button>
+                </form>
             </div>
         </div>
     </section>

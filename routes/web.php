@@ -27,6 +27,8 @@ Route::group(['middleware' => 'language'], function () {
         return view('terms');
     })->name('terms');
     
+    Route::post('/newsletter', [App\Http\Controllers\HomeController::class, 'newsletterStore'])->name('newsletter.store');
+
     Route::group(['middleware' => ['guest']], function() {
         Route::get('/login', [App\Http\Controllers\LoginController::class, 'showLogin'])->name('login');
         Route::post('/login', [App\Http\Controllers\LoginController::class, 'login'])->name('login.perform');
@@ -37,14 +39,20 @@ Route::group(['middleware' => 'language'], function () {
     Route::group(['middleware' => ['auth']], function() {
         Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'logout'])->name('logout.perform');
         
-        Route::get('/book/{id}', [App\Http\Controllers\BooksController::class, 'index', 'id'])->name('book');
-        Route::get('/book/download/{id}', [App\Http\Controllers\BooksController::class, 'download', 'id'])->name('book-download');
-        Route::get('/book/read/{id}', [App\Http\Controllers\BooksController::class, 'showFile', 'id'])->name('book-read');
-        
-        Route::post('/bookshelf/create', [App\Http\Controllers\BookshelfController::class, 'store'])->name('bookshelf.store');
-        Route::put('/bookshelf/add/{book_id}', [App\Http\Controllers\BookshelfController::class, 'add_book', 'book_id'])->name('bookshelf.add_book');
-        Route::get('/bookshelf/list', [App\Http\Controllers\BookshelfController::class, 'list'])->name('bookshelf.list');
-        Route::delete('/bookshelf/delete/{id}', [App\Http\Controllers\BookshelfController::class, 'delete', 'id'])->name('bookshelf.delete');
+        Route::prefix('book')->group(function () {
+            Route::get('/{id}', [App\Http\Controllers\BooksController::class, 'index', 'id'])->name('book');
+            Route::get('/download/{id}', [App\Http\Controllers\BooksController::class, 'download', 'id'])->name('book-download');
+            Route::get('/read/{id}', [App\Http\Controllers\BooksController::class, 'showFile', 'id'])->name('book-read');
+                
+        });
+
+        Route::prefix('bookshelf')->group(function () {
+            Route::post('/create', [App\Http\Controllers\BookshelfController::class, 'store'])->name('bookshelf.store');
+            Route::put('/add/{book_id}', [App\Http\Controllers\BookshelfController::class, 'add_book', 'book_id'])->name('bookshelf.add_book');
+            Route::get('/list', [App\Http\Controllers\BookshelfController::class, 'list'])->name('bookshelf.list');
+            Route::delete('/delete/{id}', [App\Http\Controllers\BookshelfController::class, 'delete', 'id'])->name('bookshelf.delete');
+
+        });
 
         Route::put('/review/{id}/create', [App\Http\Controllers\ReviewsController::class, 'store', 'id'])->name('review.store');
     

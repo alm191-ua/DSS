@@ -137,7 +137,9 @@
                                         @foreach ($reviews as $review)
                                             <li>
                                                 <div class="kode-thumb">
-                                                    <a href="#"><img alt="user image" src="{{ asset('storage/users/' . $review->user->image) }}"></a>
+                                                    <a href="#"><img alt="user image" src="{{ asset('storage/users/' . $review->user->image) }}"
+                                                        onerror="this.src='{{ asset('storage/users/default_user.png') }}'"
+                                                        ></a>
                                                 </div>
                                                 <div class="kode-text">
                                                     <h4>{{ $review->user->username }}</h4>

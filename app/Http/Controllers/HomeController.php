@@ -15,4 +15,16 @@ class HomeController extends Controller
 
         return view('welcome', compact('top_books', 'num_authors', 'num_books'));
     }
+
+    public function newsletterStore(Request $request){
+        $request->validate([
+            'email' => 'required|email|unique:newsletter',
+        ]);
+
+        $newsletter = new \App\Models\Newsletter();
+        $newsletter->email = $request->email;
+        $newsletter->save();
+
+        return redirect()->back()->with('success', 'Thank you for subscribing to our newsletter!');
+    }
 }
