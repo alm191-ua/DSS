@@ -90,7 +90,9 @@
         <div class="sidebar">
             <div class="widget widget-list">
                 <h2>My Account</h2>
-                <img style="border-radius: 50%; border: 1px solid black;" src="{{ asset('storage/users/' . Auth::user()->image) }}" alt="user image" width="100" height="100">
+                <img style="border-radius: 50%; border: 1px solid black;" src="{{ asset('storage/users/' . Auth::user()->image) }}" alt="user image" width="100" height="100"
+                    onerror="this.src = '{{ asset('storage/users/default_user.png') }}';"    
+                >
                 <span>Username: {{ Auth::user()->username ?? 'Guest' }}</span>
                 <span>Email: {{ Auth::user()->email ?? 'Guest email' }}</span>
                 <!-- Button to edit user profile -->
