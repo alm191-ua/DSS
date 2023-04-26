@@ -7,6 +7,10 @@
 
 <style>
 
+    .my-content {
+        min-height: 25em;
+    }
+
     .kode-content {
         padding-top: 0px;
     }
@@ -34,6 +38,16 @@
         
         display: inline-flex;
     }
+
+    #shelf-name {
+        border-color: rgb(153, 132, 132);
+    }
+
+    #shelf-name:focus {
+        border-color: rgb(17, 17, 17);
+        box-shadow: 0 0 0 0.2rem rgb(215, 190, 190);
+    }
+
     #shelf-name_button {
         margin: 5px;
         padding: 5px;
@@ -109,7 +123,9 @@
         <form action="{{route('bookshelf.store')}}" method="POST">
             @csrf
             <div class="form-shelves">
+                <label hidden for="shelf-name">Add Shelf</label>
                 <input type="text" name="name" id="shelf-name">
+                <label hidden for="shelf-name_button">Add Shelf</label>
                 <button type="submit" class="btn" id="shelf-add_button">Add Shelf</button>            
             </div>
         </form>       
