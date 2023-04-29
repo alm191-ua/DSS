@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// use App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,15 +31,15 @@ Route::group(['middleware' => 'language'], function () {
     
     Route::post('/newsletter', [App\Http\Controllers\HomeController::class, 'newsletterStore'])->name('newsletter.store');
 
-    Route::group(['middleware' => ['guest']], function() {
-        Route::get('/login', [App\Http\Controllers\LoginController::class, 'showLogin'])->name('login');
-        Route::post('/login', [App\Http\Controllers\LoginController::class, 'login'])->name('login.perform');
-        Route::get('/register', [App\Http\Controllers\RegisterController::class, 'showRegister'])->name('register.show');
-        Route::post('/register', [App\Http\Controllers\RegisterController::class, 'register'])->name('register.perform');
-    });
+    // Route::group(['middleware' => ['guest']], function() {
+    //     // Route::get('/login', [App\Http\Controllers\LoginController::class, 'showLogin'])->name('login');
+    //     // Route::post('/login', [App\Http\Controllers\LoginController::class, 'login'])->name('login.perform');
+    //     // Route::get('/register', [App\Http\Controllers\RegisterController::class, 'showRegister'])->name('register.show');
+    //     // Route::post('/register', [App\Http\Controllers\RegisterController::class, 'register'])->name('register.perform');
+    // });
     
     Route::group(['middleware' => ['auth']], function() {
-        Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'logout'])->name('logout.perform');
+        Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'logout'])->name('logout');
         
         Route::prefix('book')->group(function () {
             Route::get('/{id}', [App\Http\Controllers\BooksController::class, 'index', 'id'])->name('book');
@@ -112,3 +114,8 @@ Route::group(['middleware' => 'language'], function () {
     })->name('locale');
 
 });
+Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+

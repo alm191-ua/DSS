@@ -21,7 +21,7 @@
                         @csrf
                         @yield('fields')
 
-                        <div class="form-group row">
+                        {{--<div class="form-group row">
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-10">
                                 <div class="form-check">
@@ -29,8 +29,7 @@
                                     <label class="form-check-label" for="gridCheck2">I agree <a target="_blank" href="{{ route('terms') }}">terms &amp; conditions</a></label>
                                 </div>
                             </div>
-                        </div>
-                        
+                        </div>--}}                      
                     
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"></label>
@@ -47,7 +46,7 @@
     </div>
 </div>
 
-<script type="text/javascript">
+{{--<script type="text/javascript">
     // check if gridCheck2 is checked
     document.getElementById('gridCheck2').addEventListener('change', function() {
         if (this.checked) {
@@ -56,6 +55,6 @@
             document.getElementById('submit').disabled = true;
         }
     });
-</script>
+</script>--}}
 @endsection
 

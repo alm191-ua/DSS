@@ -69,14 +69,14 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <!-- <li><a id="search-box" href="#"><i class="fa fa-search"></i></a></li> -->
+                                {{--<!-- <li><a id="search-box" href="#"><i class="fa fa-search"></i></a></li> -->
                                 
                                 <!-- <li><a href="{{ route('login.perform') }}"><i class="fa fa-user"></i></a>
                                     <ul>
                                         <li><a href="{{ route('login.perform') }}">{{ __('master.menu.login') }}</a></li>
                                         <li><a href="{{ route('register.perform') }}">{{ __('master.menu.register') }}</a></li>
                                     </ul>
-                                </li> -->
+                                </li> -->--}}
                                 @auth
                                     {{-- {{auth()->user()->name}} --}}
                                     {{-- <div class="text-end" style="display: inline-flex"> --}}
@@ -84,7 +84,7 @@
                                         <a title="{{auth()->user()->username}}" id="profile-link" href="{{ route('profile') }}"><i class="fa fa-user" style="margin-right: 15px; position:relative; top:9px;"></i></a>                 
                                     </li>
                                     <li>    
-                                        <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-2">Logout</a>
+                                        <a href="{{ route('logout') }}" class="btn btn-outline-light me-2">{{ __('Logout') }}</a>
                                     </li>
                                         {{-- </div> --}}
                                 @endauth
@@ -92,10 +92,10 @@
                                 @guest
                                     {{-- <div class="text-end" style="display: inline-flex"> --}}
                                     <li style="margin-right: -20px">
-                                        <a href="{{ route('login.perform') }}" class="btn btn-outline-light me-2" style="margin-right: 0.5em;">{{ __('master.menu.login') }}</a>
+                                        <a href="{{ route('login') }}" class="btn btn-outline-light me-2" style="margin-right: 0.5em;">{{ __('master.menu.login') }}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('register.perform') }}" class="btn btn-warning">Sign-up</a>
+                                        <a href="{{ route('register') }}" class="btn btn-warning">{{ __('Sign-up') }}</a>
                                     </li>
                                         {{-- </div> --}}
                                 @endguest

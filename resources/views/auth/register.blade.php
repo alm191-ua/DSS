@@ -35,16 +35,16 @@
 
     <div class="form-group custom-row">  
         <div class="custom-col">
-            <label for="username" class="col-sm-2 col-form-label">{{ __('Name') }}</label>
-            <div class="col-sm-10">
-                <input type="text" name="username" id="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required autocomplete="username" autofocus>
-                @error('username')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                <label for="username" class="col-sm-2 col-form-label">{{ __('Name') }}</label>
+                <div class="col-sm-10">
+                    <input type="text" name="username" id="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                    @error('username')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
-        </div>
         
         <div class="custom-col">
             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
@@ -80,6 +80,15 @@
         <div class="col-sm-10">
             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required autocomplete="new-password">
             <i class="fa fa-eye-slash" id="toggleConfirmPassword" onmousedown="seePassword()" onmouseup="hidePassword()" onmouseout="hidePassword()" ></i>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck2">
+                <label class="form-check-label" for="gridCheck2">I agree <a target="_blank" href="{{ route('terms') }}">terms &amp; conditions</a></label>
+            </div>
         </div>
     </div>
 
@@ -165,16 +174,16 @@
             $('#password').attr('type', 'password');
             $('#password_confirmation').attr('type', 'password');
         }
+
+        // check if gridCheck2 is checked
+        document.getElementById('gridCheck2').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('submit').disabled = false;            
+            } else {
+                document.getElementById('submit').disabled = true;
+            }
+        });
     </script>
-        
-{{-- Error messages --}}
-@if ($errors->any())
-    <ul class="validation-errors">
-    @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-    @endforeach
-    </ul>
-@endif
 
 @endsection
 
