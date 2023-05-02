@@ -32,7 +32,7 @@
     <a href="#" onclick="changeMain(5)">Users</a>
     <a href="#" onclick="changeMain(6)">Categories</a>
     <a href="#" onclick="changeMain(7)">Reviews</a>
-    <a href="#" onclick="changeMain(8)">Newsletter Subscriptors</a>
+    <a href="#" onclick="changeMain(8)">Newsletter</a>
     <a href="#" onclick="changeMain(9)">Settings</a>
 </div>
 
@@ -53,7 +53,7 @@
             <a href="#" onclick="changeMain(5)">Users</a>
             <a href="#" onclick="changeMain(6)">Categories</a>
             <a href="#" onclick="changeMain(7)">Reviews</a>
-            <a href="#" onclick="changeMain(8)">Newsletter Subscriptors</a>
+            <a href="#" onclick="changeMain(8)">Newsletter</a>
             <a href="#" onclick="changeMain(9)">Settings</a>
         </div>
     </div>
