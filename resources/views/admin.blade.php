@@ -1279,16 +1279,41 @@
 </div>
 
 <div class="main" name="newsletter-subsciptors" hidden>
-    <h2>Newsletter Subsciptors Admin Panel</h2>
+    <h2>Newsletter Admin Panel</h2>
 
     {{-- no available for now --}}
-    <div class="alert alert-warning" role="alert" style="max-width: 500px; margin-right: auto;">
+    {{-- <div class="alert alert-warning" role="alert" style="max-width: 500px; margin-right: auto;">
         <h4 class="alert-heading">No available for now!</h4>
         <p>Sorry for the inconvenience, we are working on it.</p>
         <hr>
         <p class="mb-0">If you have any suggestion, please contact us.</p>
 
         <a href="{{ route('contactus') }}" class="btn btn-primary">Contact us</a>
+    </div> --}}
+
+    <div class="panels-holder">
+        <div class="panel-title">
+            <h3>Newsletter Subcribers</h3>
+        </div>
+        <div class="panel-content">
+        </div>
+
+        <div class="panel-title">
+            <h3>Send mail</h3>
+        </div>
+        <div class="panel-content" hidden>
+            <form action="" method="POST"> 
+                {{-- {{route('mail.send')}} --}}
+                @csrf
+                <label for="subject">Subject</label>
+                <input type="text" name="subject" id="subject" class="form-control" required>
+                <label for="message">Message</label>
+                <textarea name="message" id="message" cols="30" rows="10" class="form-control" required></textarea>
+                <button type="submit" class="btn btn-primary">Send</button>
+
+            </form>
+        </div>
+
     </div>
     
 </div>
