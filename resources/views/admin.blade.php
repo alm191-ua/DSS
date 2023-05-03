@@ -1292,24 +1292,122 @@
     </div> --}}
 
     <div class="panels-holder">
-        <div class="panel-title" id="nws">
-            <h3>Newsletter Subcribers</h3>
+        <div class="panel-title active" id="nws">
+            <a href="#" class="" id="newsletter-btn" 
+                onclick="showNewsletterPanel(0)"
+                ><h3>Newsletter Subscribers</h3></a>
+        
         </div>
         <div class="panel-title"id="sndm">
-            <h3>Send mail</h3>
+            <a href="#" class="" id="send-mail-btn" 
+                onclick="showNewsletterPanel(1)"
+                ><h3>Send Mail</h3></a>
         </div>
     </div>
     <div class="content-holder">
-        <div class="panel-content" hidden>
+        <div class="panel-content" id="newsletter-panel" hidden>
+            <table class="table table-striped table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    @php 
+                        $i = 1;
+                    @endphp
+                    @if (count($subscribers) > 0)
+                        @foreach ($subscribers[0]->getAttributes() as $key => $value)
+                            @if ($key == 'id') 
+                                @continue
+                            @endif
+                            <th scope="col">
+                                {{-- if ends with _id erase _id --}}
+                                @if (substr($key, -3) == '_id')
+                                    {{substr($key, 0, -3);}}
+                                @else
+                                    {{$key}}
+                                @endif
+                                <a type="button" class="fa fa-sort btn-order" 
+                                    href="{{ route('admin', ['page_num' => 8, 'order_subscribers' => $key]) }}"></a>
+                                
+                                @php
+                                    $i++;
+                                @endphp
+                            </th>
+                        @endforeach
+                    
+                    @endif
+                    {{-- <th scope="col">Manage</th> --}}
+                  </tr>
+                </thead>
+                <tbody>
+                    @if (count($subscribers) <= 0)
+                        {{-- no books message with cool bootstrap style --}}
+                        <tr>
+                            <td colspan="100%">
+                                <div class="alert alert-danger" role="alert">
+                                    <h4 class="alert-heading">No subscribers found!</h4>
+                                    <p>There are no subscribers in the database.</p>
+                                    <hr>
+                                    <p class="mb-0">You can subscribe in home page.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    @endif
+                    
+                    @foreach ($subscribers as $subscriber)
+                        <tr>
+                            <td scope="row">{{ $subscriber->id }}</td>
+                            <td class="my-row">
+                                {{-- email --}}
+                                <label id="label{{ $subscriber->id }}" class="">{{ $subscriber->email }}</label>
+                            </td>
+                            {{-- <td>
+                                <div style="display: flex">
+                                    <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $subscriber->id }})"><i class="fa fa-edit"></i></button>
+                                    <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
+                                        href="{{route('subscriber.delete', $subscriber->id)}}"><i class="fa fa-trash"></i></a>
+                                </div>
+                            </td> --}}
+                        </form>
+                        </tr>
+                    @endforeach
+                  
+                </tbody>
+            </table>
+            {{ $subscribers->appends(array('page_num' => 8, ))->links() }}
+            <p class="pagination_text">Page <input type="text" id="page-num-newsletter" value="{{ $subscribers->currentPage() }}" 
+                onchange="
+                window.location.href = '{{ route('admin') }}?page_num=8&subscribers=' + this.value;
+                "> of {{ $subscribers->lastPage() }}</p>
+
         </div>
         <div class="panel-content" id="send-mail-panel">
+            @if ($errors->any())
+                <ul class="validation-errors">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+                </ul>
+            @endif
             <form action="" method="POST"> 
+                {{-- action="{{ route('newsletter.send') }}" --}}
                 @csrf
                 <label for="subject">Subject</label>
                 <input type="text" name="subject" id="subject" class="form-control" required>
-                <label for="message">Message</label>
-                <textarea name="message" id="message" cols="30" rows="10" class="form-control" required></textarea>
-                <button type="submit" class="btn btn-primary">Send</button>
+                <div class="options">
+                    <label for="message" style="margin-right: 30px">Message</label>
+                    <input type="checkbox" class="html-checkbox" onclick="showHtmlTemplates()" name="html" id="html" value="1">
+                    <label for="html" style="margin-left: 0.3em;">HTML</label>
+                    <select hidden class="html-select" id="HtmlTemplate" class="form-control"
+                        onchange="setHtmlTemplate(this.value)">
+                        <option value="" selected disabled>Select a template</option>
+                        @foreach ($html_templates as $template)
+                            <option value="{{ $template->html }}">{{ $template->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <textarea  name="message" id="message" cols="30" rows="10" class="form-control" required></textarea>
+                <button type="submit" id="send-mail-btn" class="btn btn-primary">
+                    <i class="fa fa-paper-plane"></i>Send</button>
 
             </form>
         </div>
