@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Support\Facades\Log;
 
 class VerificationController extends Controller
 {
@@ -35,6 +36,7 @@ class VerificationController extends Controller
      */
     public function __construct()
     {
+        Log::debug('VerificationController constructor');
         $this->middleware('auth');
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');

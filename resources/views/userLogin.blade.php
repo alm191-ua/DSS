@@ -29,7 +29,6 @@
         }
     </style>
 
-
     <div class="form-group row"> 
         <label for="username" class="col-sm-2 col-form-label">{{ __('Name') }}</label>
             <div class="col-sm-10">
@@ -55,15 +54,30 @@
         @enderror 
     </div>
 
-    <div class="form-group row">        
+    <div class="form-group row">    
         <div class="col-sm-10">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-            <label class="form-check-label" for="remember">
-                {{ __('Remember Me') }}
-            </label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                <label class="form-check-label" for="remember">
+                    {{ __('Remember Me') }}
+                </label>
+            </div>
         </div>
+    </div>
 
+    <div class="row mb-0">
+        <div class="col-md-8 offset-md-4">
+            {{--<button type="submit" class="btn btn-primary">
+                {{ __('Login') }}
+            </button>--}}
+
+            @if (Route::has('password.request'))
+                <a class="btn btn-link" href="{{ route('password.request') }}">
+                    {{ __('Forgot Your Password?') }}
+                </a>
+            @endif
+        </div>
+    </div>
 
     <script type="text/javascript">
         function seePassword() {
@@ -79,5 +93,17 @@
             document.getElementById('submit').disabled = false;
         });        
     </script>
-                
+     
+    {{-- Error messages --}}
+    @if ($errors->any())
+        <ul class="validation-errors">
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    @endif
+
 @endsection
+
+
+

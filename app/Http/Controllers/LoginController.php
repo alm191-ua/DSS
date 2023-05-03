@@ -25,6 +25,7 @@ class LoginController extends Controller
      */
     public function login(LoginRequest $request)
     {
+        Log::info('Login attempt from: ' . $request->ip());
         $credentials = $request->getCredentials();
 
         // check if user exists in database
