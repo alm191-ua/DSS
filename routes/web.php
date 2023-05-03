@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -102,5 +103,7 @@ Route::group(['middleware' => 'language'], function () {
         }
         return back();
     })->name('locale');
+
+    Route::get('/test_mail', [App\Http\Controllers\MailController::class, 'index'])->name('mail');
 
 });
