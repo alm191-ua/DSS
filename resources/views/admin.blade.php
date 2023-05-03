@@ -1278,7 +1278,7 @@
         "> of {{ $reviews->lastPage() }}</p>
 </div>
 
-<div class="main" name="newsletter-subsciptors" hidden>
+<div class="main" name="newsletter" id="abc" hidden>
     <h2>Newsletter Admin Panel</h2>
 
     {{-- no available for now --}}
@@ -1292,18 +1292,18 @@
     </div> --}}
 
     <div class="panels-holder">
-        <div class="panel-title">
+        <div class="panel-title" id="nws">
             <h3>Newsletter Subcribers</h3>
         </div>
-        <div class="panel-content">
-        </div>
-
-        <div class="panel-title">
+        <div class="panel-title"id="sndm">
             <h3>Send mail</h3>
         </div>
+    </div>
+    <div class="content-holder">
         <div class="panel-content" hidden>
+        </div>
+        <div class="panel-content" id="send-mail-panel">
             <form action="" method="POST"> 
-                {{-- {{route('mail.send')}} --}}
                 @csrf
                 <label for="subject">Subject</label>
                 <input type="text" name="subject" id="subject" class="form-control" required>
@@ -1313,8 +1313,34 @@
 
             </form>
         </div>
-
     </div>
+
+    {{-- <div class="panels-holder">
+        <div class="panel">
+            <div class="panel-title">
+                <h3>Newsletter Subcribers</h3>
+            </div>
+            <div class="panel-content" hidden>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-title">
+                <h3>Send mail</h3>
+            </div>
+            <div class="panel-content">
+                <form action="" method="POST"> 
+                    @csrf
+                    <label for="subject">Subject</label>
+                    <input type="text" name="subject" id="subject" class="form-control" required>
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" cols="30" rows="10" class="form-control" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send</button>
+    
+                </form>
+            </div>
+        </div>
+    </div> --}}
     
 </div>
 
