@@ -76,6 +76,9 @@
             $(hide[i]).hide();
         }
 
+        let htmlTemplates = $('#HtmlTemplate');
+        htmlTemplates.hide();
+
         // let main = $('.main');
         // for (let i = 0; i < main.length; i++) {
         //     let tables = $(main[i]).find('table');
@@ -128,6 +131,36 @@
         }
         $(mains[main_num]).show();
     }
+
+    function showNewsletterPanel(panel) {
+        let panels = $('.panel-content');
+        for (let i = 0; i < panels.length; i++) {
+            $(panels[i]).hide();
+        }
+        $(panels[panel]).show();
+        
+        let buttons = $('.panel-title');
+        for (let i = 0; i < buttons.length; i++) {
+            $(buttons[i]).addClass('active');
+        }
+        $(buttons[panel]).removeClass('active');
+    }
+
+    function showHtmlTemplates() {
+        let checkbox = $('#html');
+        let template = $('#HtmlTemplate');
+        if (checkbox.is(':checked')) {
+            template.show();
+        }
+        else {
+            template.hide();
+        }
+    }
+
+    // function setHtmlTemplate(value) {
+    //     let textarea = $('#message');
+    //     textarea.val(value);
+    // }
 
     // function initOrderButtons() {
     //     const buttons = document.getElementsByClassName("btn-order");

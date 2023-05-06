@@ -36,10 +36,20 @@ class BookshelfController extends Controller
 
     public function delete($id)
     {
-        $bookshelf = Bookshelf::find($id);
+        Log::info('deleted bookshelf: '.$id);
+        $bookshelf = Bookshelf::findOrFail($id);
         $bookshelf->delete();
 
         return redirect()->route('profile');
+    }
+
+    public function remove_book($bookshelf_id, $book_id)
+    {
+        Log::info('remove_book: bookshelf_id: '.$bookshelf_id.' book_id: '.$book_id);
+        $bookshelf = Bookshelf::findOrFail($bookshelf_id);
+        $bookshelf->books()->detach($book_id);
+
+        return redirect()->back();
     }
 
     public function add_book(Request $request, $book_id)
