@@ -1401,7 +1401,7 @@
                         onchange="setHtmlTemplate(this.value)">
                         <option value="" selected disabled>Select a template</option>
                         @foreach ($html_templates as $template)
-                            <option value="{{ $template->html }}">{{ $template->name }}</option>
+                            <option value="{{ $template }}">{{ $template }}</option>
                         @endforeach
                     </select>
                 </div>

@@ -22,7 +22,15 @@ class AdminController extends Controller
 
         $all_authors = Author::all();
         $all_categories = Category::all();
-        $html_templates = json_decode(File::get(base_path('resources/views/admin/html_templates.json')));
+        // get all files in resources/views/admin
+        $admin_views = File::files(base_path('resources/views/admin'));
+        // get names of files in $admin_views
+        $html_templates = array_map(function ($file) {
+            // removing .blade.php
+            return substr($file->getFilename(), 0, -10);
+            // return $file->getFilename();
+        }, $admin_views);
+        // $html_templates = json_decode(File::get(base_path('resources/views/admin/html_templates.json')));
         $subscribers = Newsletter::all();
 
         $books_attributes = [

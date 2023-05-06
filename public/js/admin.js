@@ -157,10 +157,10 @@
         }
     }
 
-    function setHtmlTemplate(value) {
-        let textarea = $('#message');
-        textarea.val(value);
-    }
+    // function setHtmlTemplate(value) {
+    //     let textarea = $('#message');
+    //     textarea.val(value);
+    // }
 
     // function initOrderButtons() {
     //     const buttons = document.getElementsByClassName("btn-order");
