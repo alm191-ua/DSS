@@ -113,6 +113,6 @@ Route::group(['middleware' => 'language'], function () {
         return back();
     })->name('locale');
 
-    Route::get('/test_mail', [App\Http\Controllers\MailController::class, 'index'])->name('mail');
+    Route::get('/test_mail', [App\Http\Controllers\MailController::class, 'send'])->name('mail');
 
 });

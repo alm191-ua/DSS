@@ -8,12 +8,13 @@ use App\Mail\WelcomeMail;
 
 class MailController extends Controller
 {
-    public function index()
+    public function send()
     {
-        $destinatario = "contact.wordwaves@ejemplo.com";
+        // $destinatario = "contact.wordwaves@ejemplo.com";
+        $receptor = "llorens.akira@gmail.com";
         $nombre = "Nombre de usuario";
         $correo = new WelcomeMail($nombre);
-        Mail::to($destinatario)->send($correo);
+        Mail::to($receptor)->send($correo);
     }
 }
 //Ahora, en tu controlador, debes instanciar la clase WelcomeMail y 

@@ -29,7 +29,8 @@ class WelcomeMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Bienvenido a WordWaves')
+        return $this->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
+                    ->subject('Bienvenido a WordWaves')
                     ->view('bienvenida')
                     ->with(['name' => $this->name]);
     }
