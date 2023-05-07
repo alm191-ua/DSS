@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
+
+
 
 class ForgotPasswordController extends Controller
 {
@@ -17,6 +21,10 @@ class ForgotPasswordController extends Controller
     | your application to your users. Feel free to explore this trait.
     |
     */
-
     use SendsPasswordResetEmails;
+    function showLinkRequestForm()       
+    {
+        Log::info('Forgot password attempt');
+        return view('auth.passwords.email');
+    }
 }

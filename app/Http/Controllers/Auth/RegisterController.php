@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -65,12 +67,23 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    {
-        return User::create([
+    {        
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'is_admin'=>false,
-        ]);        
+        ]);
+        Log::info('User created: '.$user->username);
+
+        $request_bookshelf = new Request();
+        $request_bookshelf->merge(['name' => 'Favoritos']);
+        // Auth user is not set yet, so we need to set it manually
+        auth()->login($user);
+
+        app('App\Http\Controllers\BookshelfController')->store($request_bookshelf);
+        Log::info('Bookshelf ' .$request_bookshelf->name. ' created for user: '.$user->username);
+
+        return $user;
     }
 }

@@ -32,7 +32,7 @@
 
     <div class="form-group row"> 
         <label for="username" class="col-sm-2 col-form-label">{{ __('Name') }}</label>
-            <div class="col-sm-10">
+            <div class="col-sm-10">                
                 <input type="text" name="username" id="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required autocomplete="username" autofocus>
                 @error('username')
                     <span class="invalid-feedback" role="alert">
@@ -94,5 +94,14 @@
             document.getElementById('submit').disabled = false;
         });        
     </script>
+
+    {{-- Error messages --}}
+    @if ($errors->any())
+        <ul class="validation-errors">
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    @endif
                 
 @endsection
