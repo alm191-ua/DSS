@@ -81,6 +81,8 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('/category/delete/{id}', [App\Http\Controllers\CategoriesController::class, 'delete', 'id'])->name('category.delete');
         
         Route::get('/user/delete/{id}', [App\Http\Controllers\UsersController::class, 'delete', 'id'])->name('user.delete');
+    
+        Route::post('/send_newsletter', [App\Http\Controllers\MailController::class, 'send_newsletter'])->name('newsletter.send');
     });
     
     Route::get('/profile', [App\Http\Controllers\UsersController::class, 'showProfile'])->name('profile');
@@ -114,10 +116,6 @@ Route::group(['middleware' => 'language'], function () {
         }
         return back();
     })->name('locale');
-
-    // meter en admin
-    Route::get('/test_mail', [App\Http\Controllers\MailController::class, 'send'])->name('mail');
-    Route::post('/send_newsletter', [App\Http\Controllers\MailController::class, 'send_newsletter'])->name('newsletter.send');
 
 });
 Auth::routes(['login' => false]);

@@ -9,17 +9,6 @@ use App\Models\MyMail;
 
 class MailController extends Controller
 {
-    public function send()
-    {
-        // $destinatario = "contact.wordwaves@ejemplo.com";
-        $receptor = "llorens.akira@gmail.com";
-        $nombre = "Nombre de usuario";
-        $correo = new MyMail($nombre, 'Bienvenido a WordWaves', 'Este es el cuerpo del mensaje', 'bienvenida');
-        Mail::to($receptor)->send($correo);
-
-        return redirect()->back()->with('success', 'Email sent successfully!');
-    }
-
     public function send_newsletter(Request $request)
     {
         $request->validate([
