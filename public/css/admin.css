@@ -23,6 +23,8 @@
 
     .logo {
         position: fixed;
+        left: 20;
+        top: 20;
     }
 
     .copyrights {
@@ -63,6 +65,7 @@
 
     .sidenav a:hover {
         color: #f1f1f1;
+        background-color: #465c73;
     }
 
     .main {
@@ -388,4 +391,88 @@
 
     /* .pagination_text {
         margin-left: 40%;
+    } */
+
+    .panels-holder {
+        display: inline-flex;
+        margin-left: 3em;
+    }
+
+    .panel {
+        background-color: transparent;
+    }
+
+    .panel-title {
+        background-color: #f1f1f1;
+        /* border-radius: 10px; */
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        margin-right: 0.5em;
+        padding: 0.5em;
+        padding-bottom: 0;
+        align-content: top;
+    }
+
+    .panel-title.active {
+        background-color: #afa9a9;
+    }
+
+    .panel-title.active:hover {
+        background-color: #82b9ef;
+    }
+
+    .panel-content {
+        background-color: #f1f1f1;
+        border-radius: 10px;
+        padding : 0.5em;
+        color: black;
+        padding-top: 1.5em;
+    }
+
+    .content-holder {
+        margin-top: 0em;
+        margin-bottom: 1em;
+        margin-right: 2em;
+    }
+
+    #newsletter-panel {
+        padding: 1em;
+    }
+
+    #page-num-newsletter {
+        width: 3em;
+        height: auto;
+        background-color: transparent;
+        color: black;
+        border-color: transparent;
+        text-align: center;
+    }
+
+    #page-num-newsletter:focus {
+        border-color: black;
+    }
+
+    #send-mail-panel {
+        padding: 1em;
+    }
+
+    .html-checkbox {
+        margin-left: 20px;
+    }
+
+    .html-select {
+        /* margin-left: 1em;
+        margin-top: 0.5em; */
+        max-height: 2em;
+        margin-left : 1em;
+    }
+
+    .options {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    /* .my-row {
+        background-color: #aaafb4;
+        color: yellow;
     } */

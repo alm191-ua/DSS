@@ -23,6 +23,13 @@ class HomeController extends Controller
 
         $newsletter = new \App\Models\Newsletter();
         $newsletter->email = $request->email;
+        
+        // check if email already exists
+        $exists = \App\Models\Newsletter::where('email', $request->email)->first();
+        if($exists){
+            return redirect()->back()->with('error', 'You are already subscribed to our newsletter!');
+        }
+
         $newsletter->save();
 
         return redirect()->back()->with('success', 'Thank you for subscribing to our newsletter!');

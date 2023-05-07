@@ -96,6 +96,44 @@
 
         display: inline-block;        
     }
+
+    .my-book {
+        /* width: 100px;
+        height: 150px; */
+        margin: 5px;
+        border: 1px solid #0e0c0c;
+        display: inline-block;
+    }
+
+    .book-delete {
+        position: absolute;
+        top: 10%;
+        left: 55%;
+        transform: translate(-80%, -50%);
+        /* make it transparent */
+        /* opacity: 0;
+        transition: opacity 0.3s ease-in-out; */
+    }
+
+    .author_name {
+        color : #5b5555;
+    }
+
+    .btn-danger {
+        border-color: #e0d7d5;
+    }
+
+    .btn-danger:hover {
+        border-color: #e0d7d5;
+    }
+
+    /* .my-book:hover {
+        margin: 5px;
+        border: 1px solid #0e0c0c;
+        display: inline-block;
+        opacity: 0.5;
+    } */
+
 </style>
 
 <div class="my-content">
@@ -154,21 +192,35 @@
                             </div>
                         @else    
                             @foreach ($bookshelf->books as $book)
-                            <div class="col-6 col-md-2">
-                                {{-- <div class="books-listing-3"> --}}
-                                    <div class="kode-thumb">
+                                <div class="col-6 col-md-2"
+                                    {{-- onmouseover="show_delete_button({{ $bookshelf->id }}, {{ $book->id }})", 
+                                    onmouseout="hide_delete_button({{ $bookshelf->id }}, {{ $book->id }})" --}}
+                                    >
+                                    
+                                    <div class="kode-thumb my-book">
                                         <a href="{{ route('book', $book->id) }}"><img src="{{ asset('storage/books/' . $book->image) }}" 
                                             onerror="this.src = '{{ asset('images/default.png') }}';" alt="book image" width="75" height="100"></a>
+                                    </div>
+                                    <div class="kode-text">
+                                        {{-- <p class="price">$80.75<span>90.75$</span></p> --}}
+                                        <p style="font-size: 20px; color:black;"
+                                            title="{{ $book->title }}"
+                                        >{{ substr($book->title, 0, 15) }}{{ strlen($book->title) > 15 ? '...' : '' }}</p>
+                                        <div class="kode-caption">
+                                            <a href="{{ route('author', $book->author->id) }}" class="author_name">{{ $book->author->name }}</a>
+                                            {{-- <p>{{ $book->author->name }}</p> --}}
+                                            {{-- <a href="{{ route('books-list', ['category' => $book->category->tag]) }}">{{ $book->category->tag }}</a> --}}
                                         </div>
-                                        <div class="kode-text">
-                                            {{-- <p class="price">$80.75<span>90.75$</span></p> --}}
-                                            <p style="font-size: 20px; color:black;">{{ substr($book->title, 0, 15) }}{{ strlen($book->title) > 15 ? '...' : '' }}</p>
-                                            <div class="kode-caption">
-                                                <p>{{ $book->author->name }}</p>
-                                                {{-- <a href="{{ route('books-list', ['category' => $book->category->tag]) }}">{{ $book->category->tag }}</a> --}}
-                                            </div>
-                                        </div>
-                                    {{-- </div> --}}
+                                    </div>
+                                    <div class="book-delete" id="book-delete_{{ $bookshelf->id }}_{{ $book->id }}">
+                                        {{-- <button type="button" class="btn btn-danger" id="shelf-delete_button"
+                                            onclick="remove_book({{ $bookshelf->id }}, {{ $book->id }})"
+                                        >Delete</button> --}}
+                                        <a href="{{ route('bookshelf.remove_book', ['bookshelf_id' => $bookshelf->id, 'book_id' => $book->id]) }}" 
+                                            class="btn btn-danger" onclick="return confirm('Are you sure you want to remove this book from this shelf?')"
+                                            ><i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             @endforeach
                         @endif
@@ -211,6 +263,16 @@
             addCruz(bloques[i]);
         }
     });
+
+    function show_delete_button(bookshelf_id, book_id) {
+        let delete_button = $('#book-delete_' + bookshelf_id + '_' + book_id);
+        delete_button.show();
+    }
+
+    function hide_delete_button(bookshelf_id, book_id) {
+        let delete_button = $('#book-delete_' + bookshelf_id + '_' + book_id);
+        delete_button.hide();
+    }
 
 </script>
 

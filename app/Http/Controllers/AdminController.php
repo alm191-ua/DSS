@@ -9,7 +9,9 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Suggestion;
 use App\Models\Review;
+use App\Models\Newsletter;
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
@@ -20,6 +22,16 @@ class AdminController extends Controller
 
         $all_authors = Author::all();
         $all_categories = Category::all();
+        // get all files in resources/views/admin
+        $admin_views = File::files(base_path('resources/views/admin'));
+        // get names of files in $admin_views
+        $html_templates = array_map(function ($file) {
+            // removing .blade.php
+            return substr($file->getFilename(), 0, -10);
+            // return $file->getFilename();
+        }, $admin_views);
+        // $html_templates = json_decode(File::get(base_path('resources/views/admin/html_templates.json')));
+        $subscribers = Newsletter::all();
 
         $books_attributes = [
             'id' => 'ID',
@@ -248,6 +260,31 @@ class AdminController extends Controller
             $pageName = 'reviews',
         )->appends(request()->all());
     
+        // ------------------ SUBSCRIBERS ------------------
+        // order subscribers
+        $order_subscribers = request()->query('order_subscribers');
+        if ($order_subscribers) {
+            $subscribers_aux = Newsletter::orderBy($order_subscribers, 'asc');
+        } else {
+            $subscribers_aux = Newsletter::orderBy('id', 'asc');
+        }
+        // filter subscribers
+        $filter = request()->query('filter_subscribers_by');
+        if ($filter) {
+            $value = request()->query('filter_subscribers_value');
+            if ($filter == 'id') {
+                $subscribers_aux->where('id', $value);
+            } elseif ($filter == 'email') {
+                $subscribers_aux->where('email', 'like', '%'.$value.'%');
+            }
+        }
+
+        $subscribers = $subscribers_aux->paginate(
+            $perPage = $PER_PAGE,
+            // all columns except created_at, updated_at, deleted_at
+            $columns = ['id', 'email', ],
+            $pageName = 'subscribers',
+        )->withQueryString();
 
 
         return view('admin', 
@@ -257,6 +294,8 @@ class AdminController extends Controller
 
                 'books_attributes', 'authors_attributes', 'suggestions_attributes',
                 'users_attributes', 'categories_attributes', 'reviews_attributes',
+
+                'html_templates', 'subscribers', 
             ));
         
     }

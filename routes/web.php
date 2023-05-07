@@ -1,5 +1,6 @@
 <?php
 
+// use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\Auth;
@@ -53,6 +54,7 @@ Route::group(['middleware' => 'language'], function () {
             Route::put('/add/{book_id}', [App\Http\Controllers\BookshelfController::class, 'add_book', 'book_id'])->name('bookshelf.add_book');
             Route::get('/list', [App\Http\Controllers\BookshelfController::class, 'list'])->name('bookshelf.list');
             Route::delete('/delete/{id}', [App\Http\Controllers\BookshelfController::class, 'delete', 'id'])->name('bookshelf.delete');
+            Route::get('/remove/{bookshelf_id}/{book_id}', [App\Http\Controllers\BookshelfController::class, 'remove_book', 'bookshelf_id', 'book_id'])->name('bookshelf.remove_book');
 
         });
 
@@ -112,6 +114,8 @@ Route::group(['middleware' => 'language'], function () {
         }
         return back();
     })->name('locale');
+
+    Route::get('/test_mail', [App\Http\Controllers\MailController::class, 'send'])->name('mail');
 
 });
 Auth::routes(['login' => false]);
