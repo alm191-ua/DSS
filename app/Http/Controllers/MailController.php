@@ -34,5 +34,3 @@ class MailController extends Controller
         return redirect()->back()->with('success', 'Newsletter sent successfully!');
     }
 }
-//Ahora, en tu controlador, debes instanciar la clase WelcomeMail y 
-//usar el método send() de la clase Mail de Laravel para enviar el correo electrónico:

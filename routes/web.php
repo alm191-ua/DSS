@@ -80,7 +80,7 @@ Route::group(['middleware' => 'language'], function () {
         Route::put('/category/update/{id}', [App\Http\Controllers\CategoriesController::class, 'update', 'id'])->name('category.edit');
         Route::get('/category/delete/{id}', [App\Http\Controllers\CategoriesController::class, 'delete', 'id'])->name('category.delete');
         
-        Route::get('/user/delete/{id}', [App\Http\Controllers\UsersController::class, 'delete', 'id'])->name('user.delete');
+        Route::get('/user/delete/{id}', [App\Services\UsersServices::class, 'delete', 'id'])->name('user.delete');
     
         Route::post('/send_newsletter', [App\Http\Controllers\MailController::class, 'send_newsletter'])->name('newsletter.send');
     });
