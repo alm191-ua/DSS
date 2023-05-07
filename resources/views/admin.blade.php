@@ -25,20 +25,20 @@
         }else{
             changeTable();
         }">Test Boards</a> --}}
-    <a href="#" onclick="changeMain(1)">Statistics</a>
-    <a href="#" onclick="changeMain(2)">Books</a>
-    <a href="#" onclick="changeMain(3)">Authors</a>
-    <a href="#" onclick="changeMain(4)">Suggestions</a>
-    <a href="#" onclick="changeMain(5)">Users</a>
-    <a href="#" onclick="changeMain(6)">Categories</a>
-    <a href="#" onclick="changeMain(7)">Reviews</a>
-    <a href="#" onclick="changeMain(8)">Newsletter</a>
-    <a href="#" onclick="changeMain(9)">Settings</a>
+    <a href="#" onclick="changeMain(1)">{{__('admin.menu.statistics')}}</a>
+    <a href="#" onclick="changeMain(2)">{{__('admin.menu.books')}}</a>
+    <a href="#" onclick="changeMain(3)">{{__('admin.menu.authors')}}</a>
+    <a href="#" onclick="changeMain(4)">{{__('admin.menu.suggestions')}}</a>
+    <a href="#" onclick="changeMain(5)">{{__('admin.menu.users')}}</a>
+    <a href="#" onclick="changeMain(6)">{{__('admin.menu.categories')}}</a>
+    <a href="#" onclick="changeMain(7)">{{__('admin.menu.reviews')}}</a>
+    <a href="#" onclick="changeMain(8)">{{__('admin.menu.newsletter')}}</a>
+    <a href="#" onclick="changeMain(9)">{{__('admin.menu.settings')}}</a>
 </div>
 
 <div id="responsive-sidenav" class="responsive-sidenav">
     <div class="dropdown">
-        <button class="dropbtn" onclick="togglePagesLinks()">Pages</button>
+        <button class="dropbtn" onclick="togglePagesLinks()">{{__('admin.pages')}}</button>
         <div hidden class="dropdown-content">
             {{-- <a href="#" onclick="
                 if ($('#test-main').hidden){
@@ -46,15 +46,15 @@
                 }else{
                     changeTable();
                 }">Test Boards</a> --}}
-            <a href="#" onclick="changeMain(1)">Statistics</a>
-            <a href="#" onclick="changeMain(2)">Books</a>
-            <a href="#" onclick="changeMain(3)">Authors</a>
-            <a href="#" onclick="changeMain(4)">Suggestions</a>
-            <a href="#" onclick="changeMain(5)">Users</a>
-            <a href="#" onclick="changeMain(6)">Categories</a>
-            <a href="#" onclick="changeMain(7)">Reviews</a>
-            <a href="#" onclick="changeMain(8)">Newsletter</a>
-            <a href="#" onclick="changeMain(9)">Settings</a>
+            <a href="#" onclick="changeMain(1)">{{__('admin.menu.statistics')}}</a>
+            <a href="#" onclick="changeMain(2)">{{__('admin.menu.books')}}</a>
+            <a href="#" onclick="changeMain(3)">{{__('admin.menu.authors')}}</a>
+            <a href="#" onclick="changeMain(4)">{{__('admin.menu.suggestions')}}</a>
+            <a href="#" onclick="changeMain(5)">{{__('admin.menu.users')}}</a>
+            <a href="#" onclick="changeMain(6)">{{__('admin.menu.categories')}}</a>
+            <a href="#" onclick="changeMain(7)">{{__('admin.menu.reviews')}}</a>
+            <a href="#" onclick="changeMain(8)">{{__('admin.menu.newsletter')}}</a>
+            <a href="#" onclick="changeMain(9)">{{__('admin.menu.settings')}}</a>
         </div>
     </div>
 </div>
@@ -168,7 +168,7 @@
 </div>
 
 <div class="main" name="statistics" hidden>
-    <h2>Statistics</h2>
+    <h2>{{__('admin.menu.statistics')}}</h2>
 
     {{-- not available for now with cool style--}}
     <div class="alert alert-warning" role="alert" style="max-width: 500px; margin-right: auto;">
@@ -183,7 +183,7 @@
 </div>
 
 <div class="main" name="books">
-    <h2>Books Admin Panel</h2>
+    <h2>{{__('admin.menu.books')}}</h2>
 
     {{-- create book button --}}
     <div class="general-manage">
@@ -194,7 +194,7 @@
             <i class="fa fa-filter"></i>
         </div>
         <div class="filter-zone">
-            <label for="books_filter_by" class="filter-label">FILTER BY:</label>
+            <label for="books_filter_by" class="filter-label">{{__('admin.filter_by')}}</label>
             <select name="books_filter_by" id="books_filter_by"
                 onchange="showSelects(this.value);
                 ">
@@ -305,7 +305,7 @@
                 @endforeach
             
             @endif
-            <th scope="col">Manage</th>
+            <th scope="col">{{__('admin.manage')}}</th>
           </tr>
         </thead>
         <tbody>
