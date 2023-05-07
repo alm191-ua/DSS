@@ -81,7 +81,7 @@
     }
 
     tr:nth-child(even){
-        background-color: #394756;
+        background-color: #788594;
     }
 
     /* tr:nth-child(odd){
@@ -89,7 +89,7 @@
     } */
 
     .btn-order {
-        background-color: #394756;
+        background-color: #788594;
         color: white;
         border: none;
         padding: 2px;
@@ -176,7 +176,7 @@
     }
 
     .responsive-sidenav .dropbtn:hover, .dropdown-content a:hover {
-        background-color: #394756;
+        background-color: #788594;
     }
 
     .pagination {
