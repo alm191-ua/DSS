@@ -115,7 +115,9 @@ Route::group(['middleware' => 'language'], function () {
         return back();
     })->name('locale');
 
+    // meter en admin
     Route::get('/test_mail', [App\Http\Controllers\MailController::class, 'send'])->name('mail');
+    Route::post('/send_newsletter', [App\Http\Controllers\MailController::class, 'send_newsletter'])->name('newsletter.send');
 
 });
 Auth::routes(['login' => false]);

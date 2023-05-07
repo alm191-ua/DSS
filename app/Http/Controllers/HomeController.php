@@ -18,7 +18,7 @@ class HomeController extends Controller
 
     public function newsletterStore(Request $request){
         $request->validate([
-            'email' => 'required|email|unique:newsletter',
+            'email' => 'required|email|unique:newsletters',
         ]);
 
         $newsletter = new \App\Models\Newsletter();

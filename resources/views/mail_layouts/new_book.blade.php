@@ -1,5 +1,5 @@
 
-<h1>Hi {{ $user->name }},</h1>
+<h1>Hi {{ $name }},</h1>
 
 <p>Thank you for adding a new book to our library. We will review it and let you know if it is approved.</p>
 

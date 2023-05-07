@@ -1388,16 +1388,15 @@
                 @endforeach
                 </ul>
             @endif
-            <form action="" method="POST"> 
-                {{-- action="{{ route('newsletter.send') }}" --}}
+            <form action="{{ route('newsletter.send') }}" method="POST"> 
                 @csrf
                 <label for="subject">Subject</label>
                 <input type="text" name="subject" id="subject" class="form-control" required>
                 <div class="options">
-                    <label for="message" style="margin-right: 30px">Message</label>
+                    <label for="body" style="margin-right: 30px">Body</label>
                     <input type="checkbox" class="html-checkbox" onclick="showHtmlTemplates()" name="html" id="html" value="1">
-                    <label for="html" style="margin-left: 0.3em;">HTML</label>
-                    <select hidden class="html-select" id="HtmlTemplate" class="form-control"
+                    <label for="html" style="margin-left: 0.3em;">Templates</label>
+                    <select hidden class="html-select" id="HtmlTemplate" class="form-control" name="template"
                         onchange="setHtmlTemplate(this.value)">
                         <option value="" selected disabled>Select a template</option>
                         @foreach ($html_templates as $template)
@@ -1405,9 +1404,13 @@
                         @endforeach
                     </select>
                 </div>
-                <textarea  name="message" id="message" cols="30" rows="10" class="form-control" required></textarea>
-                <button type="submit" id="send-mail-btn" class="btn btn-primary">
-                    <i class="fa fa-paper-plane"></i>Send</button>
+                <textarea  name="body" id="body" cols="30" rows="10" class="form-control" required></textarea>
+                <button type="submit" id="send-mail-btn" class="btn btn-primary"
+                    onclick="
+                        if ($('#html').is(':unchecked')) {
+                            $('#HtmlTemplate').val('default');
+                        }
+                    "><i class="fa fa-paper-plane"></i>Send</button>
 
             </form>
         </div>

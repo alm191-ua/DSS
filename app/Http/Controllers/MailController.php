@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Models\WelcomeMail;
+use App\Models\Newsletter;
+use App\Models\MyMail;
 
 class MailController extends Controller
 {
@@ -13,8 +14,35 @@ class MailController extends Controller
         // $destinatario = "contact.wordwaves@ejemplo.com";
         $receptor = "llorens.akira@gmail.com";
         $nombre = "Nombre de usuario";
-        $correo = new WelcomeMail($nombre);
+        $correo = new MyMail($nombre, 'Bienvenido a WordWaves', 'Este es el cuerpo del mensaje', 'bienvenida');
         Mail::to($receptor)->send($correo);
+
+        return redirect()->back()->with('success', 'Email sent successfully!');
+    }
+
+    public function send_newsletter(Request $request)
+    {
+        $request->validate([
+            'subject' => 'required',
+            'body' => 'required',
+        ]);
+
+        $subject = $request->subject;
+        $body = $request->body;
+        $template = $request->template;
+
+        if ($template == null) {
+            $template = 'default';
+        }
+
+        $destinatarios = Newsletter::all();
+        foreach ($destinatarios as $destinatario) {
+            $name = $destinatario->email;
+            $correo = new MyMail($name, $subject, $body, $template);
+            Mail::to($destinatario->email)->send($correo);
+        }
+
+        return redirect()->back()->with('success', 'Newsletter sent successfully!');
     }
 }
 //Ahora, en tu controlador, debes instanciar la clase WelcomeMail y 

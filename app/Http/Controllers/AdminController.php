@@ -23,7 +23,7 @@ class AdminController extends Controller
         $all_authors = Author::all();
         $all_categories = Category::all();
         // get all files in resources/views/admin
-        $admin_views = File::files(base_path('resources/views/admin'));
+        $admin_views = File::files(base_path('resources/views/mail_layouts'));
         // get names of files in $admin_views
         $html_templates = array_map(function ($file) {
             // removing .blade.php
