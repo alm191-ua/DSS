@@ -4,8 +4,71 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5eb0a958901f26fa5fd621dc4a0b7236",
+    "content-hash": "c3e5143f68817b3ef885edabc9d54fee",
     "packages": [
+        {
+            "name": "5balloons/laravel-smart-ads",
+            "version": "v1.2.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/5balloons/laravel-smart-ads.git",
+                "reference": "6c59296e301241e4a88ceb2e20d0d1cdcdce7baa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/5balloons/laravel-smart-ads/zipball/6c59296e301241e4a88ceb2e20d0d1cdcdce7baa",
+                "reference": "6c59296e301241e4a88ceb2e20d0d1cdcdce7baa",
+                "shasum": ""
+            },
+            "require": {
+                "livewire/livewire": "^2.11",
+                "php": "^8.0|^8.1|^8.2",
+                "spatie/laravel-package-tools": "^1.0.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.6",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "_5balloons\\LaravelSmartAds\\LaravelSmartAdsServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelSmartAds": "_5balloons\\LaravelSmartAds\\LaravelSmartAdsFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "_5balloons\\LaravelSmartAds\\": "src",
+                    "_5balloons\\LaravelSmartAds\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tushar Gugnani",
+                    "email": "tushar@5balloons.info",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Ad, Banners, Callouts Manager for Laravel",
+            "homepage": "https://github.com/5balloons/laravel-smart-ads",
+            "keywords": [
+                "5balloons",
+                "laravel-smart-ads"
+            ],
+            "support": {
+                "issues": "https://github.com/5balloons/laravel-smart-ads/issues",
+                "source": "https://github.com/5balloons/laravel-smart-ads/tree/v.1.2.8"
+            },
+            "time": "2023-03-04T10:32:53+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.10.2",
@@ -2109,6 +2172,79 @@
             "time": "2022-04-17T13:12:02+00:00"
         },
         {
+            "name": "livewire/livewire",
+            "version": "v2.12.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/livewire/livewire.git",
+                "reference": "019b1e69d8cd8c7e749eba7a38e4fa69ecbc8f74"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/019b1e69d8cd8c7e749eba7a38e4fa69ecbc8f74",
+                "reference": "019b1e69d8cd8c7e749eba7a38e4fa69ecbc8f74",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^7.0|^8.0|^9.0|^10.0",
+                "illuminate/support": "^7.0|^8.0|^9.0|^10.0",
+                "illuminate/validation": "^7.0|^8.0|^9.0|^10.0",
+                "league/mime-type-detection": "^1.9",
+                "php": "^7.2.5|^8.0",
+                "symfony/http-kernel": "^5.0|^6.0"
+            },
+            "require-dev": {
+                "calebporzio/sushi": "^2.1",
+                "laravel/framework": "^7.0|^8.0|^9.0|^10.0",
+                "mockery/mockery": "^1.3.1",
+                "orchestra/testbench": "^5.0|^6.0|^7.0|^8.0",
+                "orchestra/testbench-dusk": "^5.2|^6.0|^7.0|^8.0",
+                "phpunit/phpunit": "^8.4|^9.0",
+                "psy/psysh": "@stable"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Livewire\\LivewireServiceProvider"
+                    ],
+                    "aliases": {
+                        "Livewire": "Livewire\\Livewire"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Livewire\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb Porzio",
+                    "email": "calebporzio@gmail.com"
+                }
+            ],
+            "description": "A front-end framework for Laravel.",
+            "support": {
+                "issues": "https://github.com/livewire/livewire/issues",
+                "source": "https://github.com/livewire/livewire/tree/v2.12.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/livewire",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-03-03T20:12:38+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "2.9.1",
             "source": {
@@ -3391,6 +3527,66 @@
                 }
             ],
             "time": "2023-01-12T18:13:24+00:00"
+        },
+        {
+            "name": "spatie/laravel-package-tools",
+            "version": "1.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-package-tools.git",
+                "reference": "efab1844b8826443135201c4443690f032c3d533"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/efab1844b8826443135201c4443690f032c3d533",
+                "reference": "efab1844b8826443135201c4443690f032c3d533",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.28|^10.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^7.7|^8.0",
+                "pestphp/pest": "^1.22",
+                "phpunit/phpunit": "^9.5.24",
+                "spatie/pest-plugin-test-time": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelPackageTools\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Tools for creating Laravel packages",
+            "homepage": "https://github.com/spatie/laravel-package-tools",
+            "keywords": [
+                "laravel-package-tools",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-package-tools/issues",
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.15.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-04-27T08:09:01+00:00"
         },
         {
             "name": "symfony/console",

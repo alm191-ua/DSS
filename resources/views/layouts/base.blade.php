@@ -23,7 +23,7 @@
     <!--NEWSLETTER END-->
 
     <footer>
-        <div class="container">
+        <div class="container ad-before">
             <div class="row">
                 <!--TEXT WIDGET START-->
                 <div class="col-md-3">

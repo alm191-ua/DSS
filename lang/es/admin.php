@@ -11,7 +11,7 @@ return [
         'users' => 'Usuarios',
         'categories' => 'Categorías',
         'reviews' => 'Reseñas',
-        'newsletter' => 'Newsletter',
+        'newsletter' => 'Boletín',
         'settings' => 'Ajustes',
     ],
     'pages' => 'Páginas',
@@ -26,5 +26,7 @@ return [
         'select_template' => 'Seleccionar Plantilla',
         'send_btn' => 'Enviar',
     ],  
+    'ads' => 'Gestor de anuncios',
+    
 
 ];

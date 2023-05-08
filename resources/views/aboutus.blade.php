@@ -19,7 +19,7 @@
                     	<div class="col-md-5">
                         	<img src="images/about-img2.png" alt="">
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-7 ad-inside-right">
                         	<p class="cap">Welcome to our online library's About Us page! We're thrilled to have the opportunity to share our story with you. Our library is committed to providing the best possible experience for our patrons, and we take great pride in offering a wide range of resources and services to meet their needs.</p>
                             <p>Our team is made up of dedicated librarians and support staff who are passionate about helping people find the information they need to succeed. From online research databases to a vast collection of books, journals, and multimedia resources, we're here to provide our patrons with everything they need to achieve their academic and personal goals.
                                 We believe that access to information is essential, and that everyone deserves equal access to knowledge. That's why we're committed to making our resources available to everyone, regardless of their background or circumstances.

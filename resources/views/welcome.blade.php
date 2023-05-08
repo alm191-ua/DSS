@@ -63,6 +63,8 @@
     <!--BUT NOW END--> --}}
     <!--CONTENT START-->
     <div class="kode-content">
+        <div class="ad-home">
+        </div>
         <!--BOOK GUIDE SECTION START-->
         <section class="kode-services-section">
         	<div class="container">

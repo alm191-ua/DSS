@@ -26,5 +26,6 @@ return [
         'select_template' => 'Select Template',
         'send_btn' => 'Send',
     ],
-
+    'ads' => 'Ads Manager',
+    
 ];

@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Word Waves - @yield('title')</title>
         <!-- CUSTOM STYLE -->
@@ -28,6 +29,9 @@
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
         <!-- Component -->
         <link rel="stylesheet" href="{{ asset('js/dl-menu/component.css') }}">
+
+        {{-- for ads --}}
+        <script src="{{ asset('vendor/smart-ads/js/smart-banner.min.js') }}"></script>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
