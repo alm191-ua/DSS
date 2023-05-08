@@ -417,7 +417,7 @@
 
 
 <div class="main" name="authors" hidden>
-    <h2>Authors Admin Panel</h2>
+    <h2>{{ __('admin.menu.authors') }}</h2>
 
     {{-- create book button --}}
     <div class="general-manage">
@@ -427,7 +427,7 @@
             <i class="fa fa-filter"></i>
         </div>
         <div class="filter-zone">
-            <label for="authors_filter_by" class="filter-label">FILTER BY:</label>
+            <label for="authors_filter_by" class="filter-label">{{__('admin.filter_by')}}</label>
             <select name="authors_filter_by" id="authors_filter_by">
                 @foreach ($authors_attributes as $key => $value)
                     @if ($key == 'image')
@@ -512,7 +512,7 @@
                 @endforeach
             
             @endif
-            <th scope="col">Manage</th>
+            <th scope="col">{{__('admin.manage')}}</th>
           </tr>
         </thead>
         <tbody>
@@ -586,7 +586,7 @@
 </div>
 
 <div class="main" name="suggestions" hidden>
-    <h2>Suggestions Admin Panel</h2>
+    <h2>{{__('admin.menu.suggestions')}}</h2>
 
     <div class="general-manage">
         {{-- create book button --}}
@@ -680,7 +680,7 @@
                 @endforeach
             
             @endif
-            <th scope="col">Manage</th>
+            <th scope="col">{{__('admin.manage')}}</th>
           </tr>
         </thead>
         <tbody>
@@ -751,7 +751,7 @@
 </div>
 
 <div class="main" name="users" hidden>
-    <h2>Users Admin Panel</h2>
+    <h2>{{__('admin.menu.users')}}</h2>
 
     <div class="general-manage">
         {{-- create book button --}}
@@ -761,7 +761,7 @@
             <i class="fa fa-filter"></i>
         </div>
         <div class="filter-zone">
-            <label for="users_filter_by" class="filter-label">FILTER BY:</label>
+            <label for="users_filter_by" class="filter-label">{{__('admin.filter_by')}}</label>
             <select name="users_filter_by" id="users_filter_by"
                 onchange="showSelectsUsers(this.value);
                 ">
@@ -860,7 +860,7 @@
                 @endforeach
             
             @endif
-            <th scope="col">Manage</th>
+            <th scope="col">{{__('admin.manage')}}</th>
           </tr>
         </thead>
         <tbody>
@@ -902,7 +902,7 @@
                             if (this.classList.contains('fa-lock')) {
                                 this.classList.remove('fa-lock');
                                 this.classList.add('fa-unlock');
-                                alert('User is not admin. Trolled XD');
+                                // alert('User is not admin. Trolled XD');
                             } else {
                                 this.classList.remove('fa-unlock');
                                 this.classList.add('fa-lock');
@@ -945,7 +945,7 @@
 
 
 <div class="main" name="categories" hidden>
-    <h2>Categories Admin Panel</h2>
+    <h2>{{__('admin.menu.categories')}}</h2>
 
     <div class="general-manage">
         {{-- create book button --}}
@@ -1054,7 +1054,7 @@
                 @endforeach
             
             @endif
-            <th scope="col">Manage</th>
+            <th scope="col">{{__('admin.manage')}}</th>
           </tr>
         </thead>
         <tbody>
@@ -1112,7 +1112,7 @@
 </div>
 
 <div class="main" name="reviews" hidden>
-    <h2>Reviews Admin Panel</h2>
+    <h2>{{__('admin.menu.reviews')}}</h2>
 
     {{-- create book button --}}
     {{-- <a id="create_button" type="button" class="button btn-primary" href="{{ route('404') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a>  --}}
@@ -1122,7 +1122,7 @@
             <i class="fa fa-filter"></i>
         </div>
         <div class="filter-zone">
-            <label for="reviews_filter_by" class="filter-label">FILTER BY:</label>
+            <label for="reviews_filter_by" class="filter-label">{{__('admin.filter_by')}}</label>
             <select name="reviews_filter_by" id="reviews_filter_by">
                 @foreach ($reviews_attributes as $key => $value)
                     @if ($key == 'image')
@@ -1206,7 +1206,7 @@
                 @endforeach
             
             @endif
-            <th scope="col">Manage</th>
+            <th scope="col">{{__('admin.manage')}}</th>
           </tr>
         </thead>
         <tbody>
@@ -1279,7 +1279,7 @@
 </div>
 
 <div class="main" name="newsletter" id="abc" hidden>
-    <h2>Newsletter Admin Panel</h2>
+    <h2>{{__('admin.menu.newsletter')}}</h2>
 
     {{-- no available for now --}}
     {{-- <div class="alert alert-warning" role="alert" style="max-width: 500px; margin-right: auto;">
@@ -1295,13 +1295,13 @@
         <div class="panel-title active" id="nws">
             <a href="#" class="" id="newsletter-btn" 
                 onclick="showNewsletterPanel(0)"
-                ><h3>Newsletter Subscribers</h3></a>
+                ><h3>{{__('admin.newsletter.subscribers')}}</h3></a>
         
         </div>
         <div class="panel-title"id="sndm">
             <a href="#" class="" id="send-mail-btn" 
                 onclick="showNewsletterPanel(1)"
-                ><h3>Send Mail</h3></a>
+                ><h3>{{__('admin.newsletter.send')}}</h3></a>
         </div>
     </div>
     <div class="content-holder">
@@ -1390,15 +1390,15 @@
             @endif
             <form action="{{ route('newsletter.send') }}" method="POST"> 
                 @csrf
-                <label for="subject">Subject</label>
+                <label for="subject">{{__('admin.newsletter.subject')}}</label>
                 <input type="text" name="subject" id="subject" class="form-control" required>
                 <div class="options">
-                    <label for="body" style="margin-right: 30px">Body</label>
+                    <label for="body" style="margin-right: 30px">{{__('admin.newsletter.body')}}</label>
                     <input type="checkbox" class="html-checkbox" onclick="showHtmlTemplates()" name="html" id="html" value="1">
-                    <label for="html" style="margin-left: 0.3em;">Templates</label>
+                    <label for="html" style="margin-left: 0.3em;">{{__('admin.newsletter.templates')}}</label>
                     <select hidden class="html-select" id="HtmlTemplate" class="form-control" name="template"
                         onchange="setHtmlTemplate(this.value)">
-                        <option value="" selected disabled>Select a template</option>
+                        <option value="" selected disabled>{{__('admin.newsletter.select_template')}}</option>
                         @foreach ($html_templates as $template)
                             <option value="{{ $template }}">{{ $template }}</option>
                         @endforeach
@@ -1410,7 +1410,7 @@
                         if ($('#html').is(':unchecked')) {
                             $('#HtmlTemplate').val('default');
                         }
-                    "><i class="fa fa-paper-plane"></i>Send</button>
+                    "><i class="fa fa-paper-plane"></i>{{__('admin.newsletter.send_btn')}}</button>
 
             </form>
         </div>
@@ -1446,7 +1446,7 @@
 </div>
 
 <div class="main" name="settings" hidden>
-    <h2>Settings Panel</h2>
+    <h2>{{__('admin.menu.settings')}}</h2>
     <p>Here you can change the settings of the website</p>
     {{-- no settings available for now message with cool style--}}
     <div class="alert alert-warning" role="alert" style="max-width: 500px; margin-right: auto;">

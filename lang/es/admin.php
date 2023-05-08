@@ -16,6 +16,15 @@ return [
     ],
     'pages' => 'Páginas',
     'filter_by' => 'FILTRAR POR:',
-    'manage' => 'Gestionar',   
+    'manage' => 'Gestionar', 
+    'newsletter' => [
+        'subscribers' => 'Suscriptores al boletín',
+        'send' => 'Enviar Boletín',
+        'subject' => 'Asunto',
+        'body' => 'Cuerpo',
+        'templates' => 'Plantillas',
+        'select_template' => 'Seleccionar Plantilla',
+        'send_btn' => 'Enviar',
+    ],  
 
 ];

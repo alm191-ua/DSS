@@ -17,5 +17,14 @@ return [
     'pages' => 'Pages',
     'filter_by' => 'FILTER BY:',
     'manage' => 'Manage',
-    
+    'newsletter' => [
+        'subscribers' => 'Newsletter Subscribers',
+        'send' => 'Send Newsletter',
+        'subject' => 'Subject',
+        'body' => 'Body',
+        'templates' => 'Templates',
+        'select_template' => 'Select Template',
+        'send_btn' => 'Send',
+    ],
+
 ];
