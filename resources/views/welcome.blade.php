@@ -36,8 +36,11 @@
             </li>
         </ul>
         <div class="input-container" style=" position: absolute; top: 80%; left: 50%; transform: translate(-50%, -50%); width: 50%;">
-            <input id="wv-search-input" style="color: #fff"
-                type="text" placeholder="Enter Your Book Title Here">
+            <input id="wv-search-input" class="search-books" style="color: #fff"
+                type="text" placeholder="Enter Your Book Title Here" name="wv-search-input">
+            <ul class="list-group" id="search-list" style="display: block; position: absolute; 
+            background-color: white; z-index: 20; max-height:200px; width:87%; overflow:auto;">
+            </ul>
             <button onclick="window.location.href = '/books?search=' + $('#wv-search-input').val()"
                 ><i class="fa fa-search"></i></button>
         </div>

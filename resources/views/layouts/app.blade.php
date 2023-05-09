@@ -30,6 +30,8 @@
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
         <!-- Component -->
         <link rel="stylesheet" href="{{ asset('js/dl-menu/component.css') }}">
+        <!-- JQuery -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
         {{-- for ads --}}
         <script src="{{ asset('vendor/smart-ads/js/smart-banner.min.js') }}"></script>
@@ -190,6 +192,39 @@
     </body>
 </html>
 
-<style>
+<script type="text/javascript">
+    // remove list on not focus
+    $(document).on('click', function (e) {
+        if ($(e.target).closest("#search-list").length === 0) {
+            $("#search-list").empty();
+        }
+    });
 
-</style>
+    $('.search-books').on('keyup', function (e) {
+        if($(this).val().length > 0)
+        {
+            $value = $(this).val();
+            if (e.key === 'Enter' || e.keyCode === 13) {
+                window.location.href = '/books?search=' + $value;
+            }
+
+            // $.ajax({
+            //     type: 'get',
+            //     url: '{{ URL::to('search') }}',
+            //     data: {'search': $value},
+            //     success: function (data) {
+            //         $('#search-list').html(data);
+            //     }
+            // });
+            $.get("{{route('search')}}", {'search': $value}, function (data) {
+                $('#search-list').html(data);
+            });
+
+            return;
+        }
+        else
+        {
+            $('#search-list').empty();
+        }
+    });
+    </script>
