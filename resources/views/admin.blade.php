@@ -6,7 +6,7 @@
 
 {{-- link styles --}}
 <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 {{-- link script --}}
 <script src="{{ asset('js/admin.js') }}"></script>
 
