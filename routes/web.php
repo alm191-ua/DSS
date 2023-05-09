@@ -87,6 +87,7 @@ Route::group(['middleware' => 'language'], function () {
     });
 
     Route::get('/search', [Controller\SearchController::class, 'search'])->name('search');
+    Route::get('/search/category', [Controller\SearchController::class, 'searchCategory'])->name('search-category');
     
     Route::get('/profile', [Controller\UsersController::class, 'showProfile'])->name('profile');
     

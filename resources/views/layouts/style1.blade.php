@@ -23,7 +23,7 @@
                         <h2>Search<br> Your Books</h2>
                     </div>
                     <div class="col-md-6">
-                        <input id="title_search" class="search-books" 
+                        <input id="title_search" class="search-books-category" 
                             {{-- onchange="window.location.href = '/books?search=' + this.value" --}}
                             type="text" placeholder="Enter Your Title">
                         <ul class="list-group" id="search-list" style="display: block; position: absolute; 

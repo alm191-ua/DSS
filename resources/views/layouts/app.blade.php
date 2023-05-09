@@ -208,14 +208,6 @@
                 window.location.href = '/books?search=' + $value;
             }
 
-            // $.ajax({
-            //     type: 'get',
-            //     url: '{{ URL::to('search') }}',
-            //     data: {'search': $value},
-            //     success: function (data) {
-            //         $('#search-list').html(data);
-            //     }
-            // });
             $.get("{{route('search')}}", {'search': $value}, function (data) {
                 $('#search-list').html(data);
             });
@@ -227,4 +219,24 @@
             $('#search-list').empty();
         }
     });
-    </script>
+
+    $('.search-books-category').on('keyup', function (e) {
+        if($(this).val().length > 0)
+        {
+            $value = $(this).val();
+            if (e.key === 'Enter' || e.keyCode === 13) {
+                window.location.href = '/books?search=' + $value + '&category=' + $('#category_search').val();
+            }
+
+            $.get("{{route('search-category')}}", {'search': $value, 'category': $('#category_search').val()}, function (data) {
+                $('#search-list').html(data);
+            });
+
+            return;
+        }
+        else
+        {
+            $('#search-list').empty();
+        }
+    });
+</script>
