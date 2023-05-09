@@ -35,7 +35,7 @@
                 </div>
             </li>
         </ul>
-        <div class="input-container" style=" position: absolute; top: 80%; left: 27%; ">
+        <div class="input-container" style=" position: absolute; top: 80%; left: 50%; transform: translate(-50%, -50%); width: 50%;">
             <input id="wv-search-input" style="color: #fff"
                 type="text" placeholder="Enter Your Book Title Here">
             <button onclick="window.location.href = '/books?search=' + $('#wv-search-input').val()"
