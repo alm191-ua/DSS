@@ -1419,7 +1419,7 @@
     {{-- <div class="panels-holder">
         <div class="panel">
             <div class="panel-title">
-                <h3>Newsletter Subcribers</h3>
+                <h3>Newsletter Subscribers</h3>
             </div>
             <div class="panel-content" hidden>
             </div>
