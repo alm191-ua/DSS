@@ -159,11 +159,11 @@
                 <!--SIDEBAR END-->
                 {{-- aviso con los filtros activados, obtenidos de los parametros de la url --}}
                 @if (count($filters) > 0)
-                    <div class="col-md-9">
+                    <div class="col-md-9 filters">
                         <div class="alert alert-info">
                             <strong>Filters:</strong>
                             @foreach ($filters as $filter)
-                                <span style="margin-left: 0.8em" class="label label-info">
+                                <span style="margin-left: 0.8em;" class="label label-info">
                                     {{ $filter }}
                                 </span>
                             @endforeach
@@ -174,13 +174,21 @@
                         </div>
                     </div>
                 @else
-                    <div class="col-md-9">
+                    <div class="col-md-9 filters">
                         <div class="alert alert-info">
                             <strong>Filters:</strong>
                             <span class="label label-info">All</span>
                         </div>
                     </div>
                 @endif
+
+                <style>
+                    @media (max-width: 768px) {
+                        .filters {
+                            display: none;
+                        }
+                    }
+                </style>
 
                 <div class="col-md-9">
                 	<div class="row">
