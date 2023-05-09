@@ -278,12 +278,18 @@
         border-color: white;
     }
 
+    button > i {
+        pointer-events: none;
+    } 
+
     .filter-zone {
         /* margin-top: 1em; */
         margin-left: 1em;
         /* margin-bottom: 1em; */
         color : white;
-        max-width: 18%;
+        /* max-width: 18%; */
+        max-width: 250px;
+        z-index: 100;
         border-color: white;
         border-style: solid;
         border-radius: 10%;

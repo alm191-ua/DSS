@@ -38,7 +38,10 @@
 
 <div id="responsive-sidenav" class="responsive-sidenav">
     <div class="dropdown">
-        <button class="dropbtn" onclick="togglePagesLinks()">{{__('admin.pages')}}</button>
+        <button class="dropbtn" onclick="togglePagesLinks()">
+            {{-- {{__('admin.pages')}} --}}
+            <i class="fa fa-pagelines"></i>
+        </button>
         <div hidden class="dropdown-content">
             {{-- <a href="#" onclick="
                 if ($('#test-main').hidden){
