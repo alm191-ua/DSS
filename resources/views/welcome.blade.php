@@ -6,7 +6,7 @@
     @parent
 
     <!--BANNER START-->
-    <div class="kode-banner">
+    <div class="kode-banner" style="z-index:100;">
     	<ul class="bxslider">
         	<li>
             	<img src="images/banner-3.png" alt=""> 
@@ -38,7 +38,7 @@
         <div class="input-container" style=" position: absolute; top: 80%; left: 50%; transform: translate(-50%, -50%); width: 50%;">
             <input id="wv-search-input" class="search-books" style="color: #fff"
                 type="text" placeholder="Enter Your Book Title Here" name="wv-search-input">
-            <ul class="list-group" id="search-list" style="display: block; position: absolute; 
+            <ul class="list-group" id="search-list" style="display: block; position: fixed; 
             background-color: white; z-index: 20; max-height:200px; width:87%; overflow:auto;">
             </ul>
             <button onclick="window.location.href = '/books?search=' + $('#wv-search-input').val()"
