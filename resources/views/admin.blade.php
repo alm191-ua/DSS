@@ -33,7 +33,7 @@
     <a href="#" onclick="changeMain(6)">{{__('admin.menu.categories')}}</a>
     <a href="#" onclick="changeMain(7)">{{__('admin.menu.reviews')}}</a>
     <a href="#" onclick="changeMain(8)">{{__('admin.menu.newsletter')}}</a>
-    <a href="/smart-ad-manager">{{__('admin.ads')}}</a>
+    <a href="/smart-ad-manager" target="_blank">{{__('admin.ads')}}</a>
     <a href="#" onclick="changeMain(9)">{{__('admin.menu.settings')}}</a>
 </div>
 
@@ -55,7 +55,7 @@
             <a href="#" onclick="changeMain(6)">{{__('admin.menu.categories')}}</a>
             <a href="#" onclick="changeMain(7)">{{__('admin.menu.reviews')}}</a>
             <a href="#" onclick="changeMain(8)">{{__('admin.menu.newsletter')}}</a>
-            <a href="/smart-ad-manager">{{__('admin.ads')}}</a>
+            <a href="/smart-ad-manager" target="_blank">{{__('admin.ads')}}</a>
             <a href="#" onclick="changeMain(9)">{{__('admin.menu.settings')}}</a>
         </div>
     </div>
