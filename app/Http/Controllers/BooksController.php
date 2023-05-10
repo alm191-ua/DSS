@@ -36,7 +36,7 @@ class BooksController extends Controller
 
     public function list()
     {
-        $PER_PAGE = 21;
+        $PER_PAGE = 20;
 
         $filters = [];
 
