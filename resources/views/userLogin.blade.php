@@ -30,7 +30,7 @@
     </style>
 
     <div class="form-group row"> 
-        <label for="username" class="col-sm-2 col-form-label">{{ __('Name') }}</label>
+        <label for="username" class="col-sm-2 col-form-label">{{ __('login.menu.name') }}</label>
             <div class="col-sm-10">
                 <input type="text" name="username" id="username" class="form-control @error('username') 
                 is-invalid @enderror" value="{{ old('username') }}" required autocomplete="username" 
@@ -44,7 +44,7 @@
         </div> 
     </div>
     <div class="form-group row">
-        <label for="password" class="col-sm-2 col-form-label">{{ __('Password') }}</label>
+        <label for="password" class="col-sm-2 col-form-label">{{ __('login.menu.password') }}</label>
         <div class="col-sm-10">
             <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" autocomplete="current-password">
             <i class="fa fa-eye-slash" id="togglePassword" onmousedown="seePassword()" onmouseup="hidePassword()" onmouseout="hidePassword()"></i>
@@ -56,26 +56,15 @@
         @enderror 
     </div>
 
-    <div class="form-group row">    
-        <div class="col-sm-10">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                <label class="form-check-label" for="remember">
-                    {{ __('Remember Me') }}
-                </label>
-            </div>
-        </div>
-    </div>
-
     <div class="row mb-0">
         <div class="col-md-8 offset-md-4">
             {{--<button type="submit" class="btn btn-primary">
-                {{ __('Login') }}
+                {{ __('login.button.login') }}
             </button>--}}
 
             @if (Route::has('password.request'))
                 <a class="btn btn-link" href="{{ route('password.request') }}">
-                    {{ __('Forgot Your Password?') }}
+                    {{ __('login.button.forgot') }}
                 </a>
             @endif
         </div>
