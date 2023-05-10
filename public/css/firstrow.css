@@ -1,0 +1,52 @@
+/* estilo para el anuncio de firstrow */
+.fr-container {
+    position: relative;
+    text-align: center;
+    color: white;
+    /* position: fixed;
+    top: 20%;
+    z-index: 20; */
+
+    /* box shadow */
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+}
+.fr-centered {
+    color: white;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* add background blur */
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+    /* add animation */
+    animation-name: fr-animation;
+    animation-duration: 3s;
+
+    /* add animation delay */
+    animation-delay: 1.5s;
+
+    /* add animation iteration count */
+    animation-iteration-count: infinite;
+
+    /* add animation direction */
+    animation-direction: alternate;
+
+    /* box shadow */
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+
+}
+
+/* add animation keyframes */
+@keyframes fr-animation {
+    from {
+        top: 30%;
+    }
+    to {
+        top: 60%;
+    }
+}

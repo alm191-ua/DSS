@@ -33,6 +33,8 @@
         <!-- JQuery -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
+        <link rel="stylesheet" href="{{ asset('css/firstrow.css') }}">
+
         {{-- for ads --}}
         <script src="{{ asset('vendor/smart-ads/js/smart-banner.min.js') }}"></script>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
