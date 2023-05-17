@@ -7,11 +7,11 @@
 </head>
 <body>
     <div class="container">
-        <p>Hi, {{ $name }}</p>
+        <p>Hola, {{ $name }}</p>
         <br>
         {{ $body }}
         <br>
-        <p>Thank you</p>
+        <p>¡Muchas Gracias!</p>
     </div>
 </body>
 </html>
