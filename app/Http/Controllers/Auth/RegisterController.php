@@ -84,6 +84,13 @@ class RegisterController extends Controller
         app('App\Http\Controllers\BookshelfController')->store($request_bookshelf);
         Log::info('Bookshelf ' .$request_bookshelf->name. ' created for user: '.$user->username);
 
+        // send mail to user
+        $subject = 'Bienvenido a WordWaves';
+        $body = 'Hola';
+        $template = 'register';
+
+        app('App\Http\Controllers\MailController')->send($user->email, $subject, $body, $template);
+
         return $user;
     }
 }

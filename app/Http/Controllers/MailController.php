@@ -33,4 +33,28 @@ class MailController extends Controller
 
         return redirect()->back()->with('success', 'Newsletter sent successfully!');
     }
+
+    public function send(Request $request)
+    {
+        $request->validate([
+            'subject' => 'required',
+            'body' => 'required',
+            'user' => 'required',
+        ]);
+
+        $subject = $request->subject;
+        $body = $request->body;
+        $user = $request->user;
+        $template = $request->template;
+
+        if ($template == null) {
+            $template = 'default';
+        }
+
+        $name = $user->email;
+        $correo = new MyMail($name, $subject, $body, $template);
+        Mail::to($user->email)->send($correo);
+
+        return redirect()->back()->with('success', 'Newsletter sent successfully!');
+    }
 }
