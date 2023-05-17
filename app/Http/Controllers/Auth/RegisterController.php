@@ -89,7 +89,12 @@ class RegisterController extends Controller
         $body = 'Hola';
         $template = 'register';
 
-        app('App\Http\Controllers\MailController')->send($user->email, $subject, $body, $template);
+        $request_mail = new Request();
+        $request_mail->merge(['email' => $user->email]);
+        $request_mail->merge(['subject' => $subject]);
+        $request_mail->merge(['body' => $body]);
+        $request_mail->merge(['template' => $template]);
+        app('App\Http\Controllers\MailController')->send($request_mail);
 
         return $user;
     }

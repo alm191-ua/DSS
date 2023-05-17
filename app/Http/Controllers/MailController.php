@@ -39,21 +39,21 @@ class MailController extends Controller
         $request->validate([
             'subject' => 'required',
             'body' => 'required',
-            'user' => 'required',
+            'email' => 'required',
         ]);
 
         $subject = $request->subject;
         $body = $request->body;
-        $user = $request->user;
+        $email = $request->email;
         $template = $request->template;
 
         if ($template == null) {
             $template = 'default';
         }
 
-        $name = $user->email;
+        $name = $email;
         $correo = new MyMail($name, $subject, $body, $template);
-        Mail::to($user->email)->send($correo);
+        Mail::to($email)->send($correo);
 
         return redirect()->back()->with('success', 'Newsletter sent successfully!');
     }

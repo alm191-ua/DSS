@@ -86,7 +86,7 @@ Route::group(['middleware' => 'language'], function () {
         Route::post('/send_newsletter', [Controller\MailController::class, 'send_newsletter'])->name('newsletter.send');
     });
 
-    Route::get('/send_mail', [Controller\MailController::class, 'send'])->name('send_mail');
+    Route::post('/send_mail', [Controller\MailController::class, 'send'])->name('send_mail');
 
     Route::get('/search', [Controller\SearchController::class, 'search'])->name('search');
     Route::get('/search/category', [Controller\SearchController::class, 'searchCategory'])->name('search-category');
