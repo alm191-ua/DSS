@@ -35,7 +35,7 @@
 
     <div class="form-group custom-row">  
         <div class="custom-col">
-                <label for="username" class="col-sm-2 col-form-label">{{ __('Name') }}</label>
+                <label for="username" class="col-sm-2 col-form-label">{{ __('regist.menu.name') }}</label>
                 <div class="col-sm-10">
                     <input type="text" name="username" id="username" class="form-control @error('username') 
                     is-invalid @enderror" value="{{ old('username') }}" required autocomplete="username" 
@@ -49,7 +49,7 @@
             </div>
         
         <div class="custom-col">
-            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('regist.menu.email') }}</label>
 
             <div class="col-md-6">
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -63,7 +63,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <label for="password" class="col-sm-2 col-form-label">{{ __('Password') }}</label>
+        <label for="password" class="col-sm-2 col-form-label">{{ __('regist.menu.password') }}</label>
         <div class="col-sm-10">
             <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" autocomplete="new-password">
             <i class="fa fa-eye-slash" id="togglePassword" onmousedown="seePassword()" onmouseup="hidePassword()" onmouseout="hidePassword()"></i>
@@ -78,7 +78,7 @@
         @enderror       
     </div>
     <div class="form-group row">
-        <label for="password_confirmation" class="col-sm-2 col-form-label">{{ __('Confirm Password') }}</label>
+        <label for="password_confirmation" class="col-sm-2 col-form-label">{{ __('regist.menu.confirm') }}</label>
         <div class="col-sm-10">
             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required autocomplete="new-password">
             <i class="fa fa-eye-slash" id="toggleConfirmPassword" onmousedown="seePassword()" onmouseup="hidePassword()" onmouseout="hidePassword()" ></i>
@@ -89,7 +89,7 @@
         <div class="col-sm-10">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="gridCheck2">
-                <label class="form-check-label" for="gridCheck2">I agree <a target="_blank" href="{{ route('terms') }}">terms &amp; conditions</a></label>
+                <label class="form-check-label" for="gridCheck2">{{ __('regist.conditions.agree') }} <a target="_blank" href="{{ route('terms') }}">{{ __('regist.conditions.terms')}}</a></label>
             </div>
         </div>
     </div>

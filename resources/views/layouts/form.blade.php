@@ -34,7 +34,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-light px-4" id="submit" disabled>Submit</button>
+                                <button type="submit" class="btn btn-light px-4" id="submit" disabled>{{ __('form.button.submit') }}</button>
                             </div>
                         </div>
                     

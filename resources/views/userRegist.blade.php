@@ -1,3 +1,5 @@
+{{-- NO SE USA --}}
+
 @extends('layouts.form')
 
 @section('title', 'Register')
