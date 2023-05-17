@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             ReviewsTableSeeder::class,
             BookshelvesTableSeeder::class,
             SuggestionsTableSeeder::class,
+            Smart_adsTableSeeder::class,
         ]);
         $this->command->info('Database seeded!');
         // \App\Models\User::factory(10)->create();
