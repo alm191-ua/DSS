@@ -8,6 +8,8 @@
 
 @include('layouts.style_form')
 
+<div class="ad-product">
+</div>
 <div class="row">
     <div class="col-12 col-lg-9 mx-auto">
         <div class="card radius-15">
