@@ -11,7 +11,7 @@
 {{-- margin guidelines:
 22% -> para formularios grandes (default)
 30% -> para formularios pequeños, como el de login --}}
-@section('margin', "30%")
+@section('margin', "20%")
 
 
 @section('fields')
