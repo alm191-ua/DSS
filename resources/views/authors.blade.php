@@ -9,7 +9,7 @@
     <div class="kode-content padding-tb-50">
         <!--TOP AUTHERS START-->
         <div class="container">
-            <div class="row ad-product"> {{-- firstrow --}}
+            <div class="row"> {{-- firstrow --}}
                 @foreach ($authors as $author)
                     <div class="col-md-4 col-sm-6">
                         <div class="kode-author">
