@@ -141,14 +141,14 @@
         <!--SIDEBAR START-->
         <div class="sidebar">
             <div class="widget widget-list">
-                <h2>My Account</h2>
+                <h2>{{__('profile.my_account')}}</h2>
                 <img style="border-radius: 50%; border: 1px solid black;" src="{{ asset('storage/users/' . Auth::user()->image) }}" alt="user image" width="100" height="100"
                     onerror="this.src = '{{ asset('storage/users/default_user.png') }}';"    
                 >
-                <span>Username: {{ Auth::user()->username ?? 'Guest' }}</span>
+                <span>{{__('profile.username')}}: {{ Auth::user()->username ?? 'Guest' }}</span>
                 <span>Email: {{ Auth::user()->email ?? 'Guest email' }}</span>
                 <!-- Button to edit user profile -->
-                <a href="{{ route('user-edit.show', Auth::user()->id ?? 0) }}" class="btn btn-primary">Edit Profile</a>
+                <a href="{{ route('user-edit.show', Auth::user()->id ?? 0) }}" class="btn btn-primary">{{__('profile.edit_profile')}}</a>
                 {{-- <a href="{{ route('user.softdelete', Auth::user()->id ?? 0) }}" onclick="confirm({{__('admin.confirm')}})" class="btn btn-primary">Delete User</a> --}}
             </div>
         </div>
@@ -161,16 +161,16 @@
         <form action="{{route('bookshelf.store')}}" method="POST">
             @csrf
             <div class="form-shelves">
-                <label hidden for="shelf-name">Add Shelf</label>
+                <label hidden for="shelf-name">{{__('profile.add_shelf')}}</label>
                 <input type="text" name="name" id="shelf-name">
-                <label hidden for="shelf-name_button">Add Shelf</label>
-                <button type="submit" class="btn" id="shelf-add_button">Add Shelf</button>            
+                <label hidden for="shelf-name_button">{{__('profile.add_shelf')}}</label>
+                <button type="submit" class="btn" id="shelf-add_button">{{__('profile.add_shelf')}}</button>            
             </div>
         </form>     
         
         @if (count($bookshelves) === 0)
             <div class="alert alert-warning" role="alert">
-                <strong>Oh snap!</strong> You have no shelves.
+                <strong>{{__('profile.no_shelves_1')}}</strong> {{__('profile.no_shelves_2')}}
             </div>
 
         @endif
@@ -188,7 +188,7 @@
                         @if ($bookshelf->books->count() <= 0)
                             {{-- no books message with cool bootstrap style --}}
                             <div class="alert alert-warning" role="alert">
-                                <strong>Oh snap!</strong> You have no books in this shelf.
+                                <strong>{{__('profile.no_books_1')}}</strong> {{__('profile.no_books_2')}}
                             </div>
                         @else    
                             @foreach ($bookshelf->books as $book)

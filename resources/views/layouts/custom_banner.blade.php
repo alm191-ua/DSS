@@ -9,14 +9,16 @@
 </style>
 
     <!--BANNER START-->
-    <div class="kode-inner-banner" style="background-image: url('/images/inner-banner.png')"> {{-- <img src="{{ asset('images/inner-banner.png') }}" alt=""> --}}
-        <div class="kode-page-heading">
+    <div class="kode-inner-banner" style="background-image: url('/images/inner-banner.png');
+        max-height: 300px; min-height: 300px;
+    "> {{-- <img src="{{ asset('images/inner-banner.png') }}" alt=""> --}}
+        <div class="kode-page-heading" style="margin-top:150px">
             <h2>@yield('title')</h2>
             <ol class="breadcrumb">
             <li><a href="{{ route('home') }}">{{ __('master.menu.home') }}</a></li>
             <li class="active">@yield('title')</li>
             </ol>
-            <h3>Welcome [{{ Auth::user()->username ?? 'Guest' }}], to your personal profile</h3>
+            <h3>{{__('profile.welcome_1')}} [{{ Auth::user()->username ?? 'Guest' }}], {{__('profile.welcome_2')}}</h3>
         </div>
     </div>
     <!--BANNER END-->

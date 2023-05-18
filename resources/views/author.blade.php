@@ -90,7 +90,7 @@
         <section class="recent-release">
         	<div class="container">
             	<div class="section-heading-1">
-                    <h2> Published Books</h2>
+                    <h2> {{__('author.published_books')}}</h2>
                     <div class="kode-icon"><i class="fa fa-book"></i></div>
                 </div>
                 <div class="owl-release owl-theme" style="display: block">
@@ -255,8 +255,8 @@
         	<div class="container">
             	<!--SECTION HEADING START-->
                 <div class="section-heading-1 dark-sec">
-                    <h2>Our Testimonials</h2>
-                    <p>What our clients say about the books reviews and comments</p>
+                    <h2>{{__('author.testimonials_title')}}</h2>
+                    <p>{{__('author.testimonials_subtitle')}}</p>
                     <div class="kode-icon"><i class="fa fa-book"></i></div>
                 </div>
                 <!--SECTION HEADING END-->
@@ -285,7 +285,7 @@
                                 <h4>
                                     {{ $review->user->username }}
                                 </h4>
-                                <p class="title">Author</p>
+                                {{-- <p class="title">Author</p> --}}
                             </div>
                         </div>
                         <!--BLOG ITEM END-->
