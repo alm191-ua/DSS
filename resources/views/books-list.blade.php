@@ -1,6 +1,8 @@
 @extends('layouts.style1')
 
-@section('title', 'Books List')
+@section('title')
+    {{__('books-list.title')}}
+@endsection
 
 @section('content')
     @parent
