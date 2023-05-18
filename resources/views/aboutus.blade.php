@@ -379,7 +379,7 @@
                 <!--SECTION HEADING END-->
                 <div class="row">
                     <!--AUTHOR LIST START-->
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-md-3 col-sm-6">
                         <div class="kode-author kode-author-2">
                             <a href="#"><img alt="" src="images/author2.png"></a>
                             <div class="kode-caption">
@@ -398,7 +398,7 @@
                     </div>
                     <!--AUTHOR LIST END-->
                     <!--AUTHOR LIST START-->
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-md-3 col-sm-6">
                         <div class="kode-author kode-author-2">
                             <a href="#"><img alt="" src="images/author2.png"></a>
                             <div class="kode-caption">
@@ -417,7 +417,7 @@
                     </div>
                     <!--AUTHOR LIST END-->
                     <!--AUTHOR LIST START-->
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-md-3 col-sm-6">
                         <div class="kode-author kode-author-2">
                             <a href="#"><img alt="" src="images/author.png"></a>
                             <div class="kode-caption">
@@ -436,7 +436,7 @@
                     </div>
                     <!--AUTHOR LIST END-->
                     <!--AUTHOR LIST START-->
-                    <div class="col-md-4">
+                    <div class="col-md-3 col-sm-6">
                         <div class="kode-author kode-author-2">
                             <a href="#"><img alt="" src="images/author3.png"></a>
                             <div class="kode-caption">
