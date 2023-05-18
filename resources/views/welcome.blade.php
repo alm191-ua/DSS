@@ -107,10 +107,10 @@
         <!--VIDEO SECTION START-->
         <section class="kode-video-section">
         	<div class="container">
-            	<h2>Play a video on Parallax</h2>
-                <a class="fa fa-play play" href="https://youtu.be/dQw4w9WgXcQ"></a>
+            	<h2>This is not a RickRoll</h2>
+                <a class="fa fa-play play" href="https://youtu.be/dQw4w9WgXcQ" target="_blank"></a>
                 <h4>Title: Word Waves</h4>
-                <p>Source: Youtube, Vimeo</p>
+                <p>Source: Youtube</p>
             </div>
         </section>
         <!--VIDEO SECTION END-->
