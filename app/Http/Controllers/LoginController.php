@@ -25,14 +25,20 @@ class LoginController extends Controller
      */
     public function login(LoginRequest $request)
     {
+        Log::info('Login attempt from: ' . $request->ip());
         $credentials = $request->getCredentials();
 
         // check if user exists in database
-        $user_db = User::where('username', $credentials['username'])->firstorFail();
+        $user_db = User::where('username', $credentials['username'])->first();
+        if (!$user_db) {
+            Log::info('Login user not found from: ' . $request->ip());
+            return redirect()->back()->with('error', 'Invalid username');
+        }
 
+        // check if password match
         if (!Hash::check($credentials['password'], $user_db->password)) {
-            Log::info('Login failed from: ' . $request->ip());
-            return redirect()->back()->with('error', 'Invalid username or password');
+            Log::info('Login password not match from: ' . $request->ip());
+            return redirect()->back()->with('error', 'Invalid password');
         }
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);

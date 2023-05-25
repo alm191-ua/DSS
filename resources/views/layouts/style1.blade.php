@@ -20,19 +20,25 @@
             <div class="banner-search">
                 <div class="row">
                     <div class="col-md-2">
-                        <h2>Search<br> Your Books</h2>
+                        <h2>{{__('style1.search_title_1')}}<br> {{__('style1.search_title_2')}}</h2>
                     </div>
                     <div class="col-md-6">
-                        <input id="title_search" 
+                        <input id="title_search" class="search-books-category" 
                             {{-- onchange="window.location.href = '/books?search=' + this.value" --}}
-                            type="text" placeholder="Enter Your Title">
+                            type="text" placeholder="{{__('style1.search_bar')}}">
+                        <ul class="list-group" id="search-list" style="display: block; position: absolute; 
+                            background-color: white; z-index: 20; max-height:200px; overflow:auto;
+                            width:95%; transform:translateX(-20px);
+                            ">
+                        </ul>
                     </div>
                     <div class="col-md-2">
                         {{-- select with categories --}}
                         <select id="category_search" 
                             {{-- onchange="window.location.href = '/books?category=' + this.value" --}}
                             >
-                            <option value="">Select Category</option>
+                            <option value="" disabled selected>{{__('style1.select_category')}}</option>
+                            <option value="">{{__('style1.all_categories')}}</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->tag }}">{{ $category->tag }}</option>
                             @endforeach
@@ -44,7 +50,7 @@
                             let category = $('#category_search').val();
                             window.location.href = '/books?search=' + title + '&category=' + category;
                             "
-                            >Search</button>
+                            >{{__('style1.search_button')}}</button>
                     </div>
                 </div>
             </div>

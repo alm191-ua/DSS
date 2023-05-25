@@ -11,15 +11,19 @@
             </div>
             <!--SECTION CONTENT END-->
             <div class="input-container">
-                <input type="text" placeholder="Subscribe us">
-                <button>Subcribe</button>
+                {{-- <input type="text" placeholder="Subscribe us"> --}}
+                <form action="{{ route('newsletter.store') }}" method="POST">
+                    @csrf
+                    <input type="email" name="email" placeholder="Enter your email">
+                    <button type="submit" style="align-items: center; display: inline-flex;">Subscribe</button>
+                </form>
             </div>
         </div>
     </section>
     <!--NEWSLETTER END-->
 
     <footer>
-        <div class="container">
+        <div class="container ad-before">
             <div class="row">
                 <!--TEXT WIDGET START-->
                 <div class="col-md-3">
@@ -42,10 +46,10 @@
                         <h2>Latest Tweets</h2>
                         <ul>
                             <li>
-                                <p>There are some amazing submissions in the latest<a href="#"> @tutsplus ‘Created by you ’challenge http://t.co/duajgjahuz 16 hour ago</a></p>
+                                <p>There are some amazing submissions in the latest<a href="#"> @elonmusk</a></p>
                             </li>
                             <li>
-                                <p>There are some amazing submissions in the latest<a href="#"> @tutsplus ‘Created by you ’challenge http://t.co/duajgjahuz 16 hour ago</a></p>
+                                <p>There are some amazing submissions in the latest<a href="#"> @elonmusk</a></p>
                             </li>
                         </ul>
                     </div>
@@ -56,12 +60,12 @@
                     <div class="widget widget-categories">
                         <h2>Information</h2>
                         <ul>
-                            <li><a href="#">Specials</a></li> 
-                            <li><a href="#">New products</a></li> 
-                            <li><a href="#">Best sellers</a></li> 
-                            <li><a href="#">Contact us</a></li> 
-                            <li><a href="#">Terms of use</a></li> 
-                            <li><a href="#">Sitemap</a></li>  
+                            <li><a href="{{route('books-list')}}">Specials</a></li> 
+                            <li><a href="{{route('books-list')}}">New products</a></li> 
+                            <li><a href="{{route('books-list')}}">Best sellers</a></li> 
+                            <li><a href="{{route('contactus')}}">Contact us</a></li> 
+                            <li><a href="{{route('terms')}}">Terms of use</a></li> 
+                            <li><a href="{{route('contactus')}}">Sitemap</a></li>  
                         </ul>
                     </div>
                 </div>
@@ -71,8 +75,11 @@
                     <div class="widget widget-newletter">
                         <h2>Newsletter</h2>
                         <p> {{ __('master.newsletter_text') }} </p>
-                        <input type="text" placeholder="E-mail ID">
-                        <button>Subscribe</button>
+                        <form action="{{ route('newsletter.store') }}" method="POST">
+                            @csrf
+                            <input type="text" name="email" placeholder="E-mail">
+                            <button type="submit" style="align-items: center; display: inline-flex;">Subscribe</button>
+                        </form>
                     </div>
                 </div>
                 <!--NEWSLETTER START END-->

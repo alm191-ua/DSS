@@ -1,6 +1,8 @@
 @extends('layouts.style1')
 
-@section('title', 'Books List')
+@section('title')
+    {{__('books-list.title')}}
+@endsection
 
 @section('content')
     @parent
@@ -27,7 +29,7 @@
                 <div class="col-md-3 sidebar">
                 	<!--SEARCH WIDGET START-->	
                     <div class="widget widget-search">
-                        <h2>Search</h2>
+                        <h2>{{__('books-list.search')}}</h2>
                     	<div class="input-container">
                     		<input type="text" placeholder="Enter Keyword" 
                                 onchange="
@@ -55,7 +57,7 @@
                     <!--PRICE FILTER WIDGET END-->
                     <!--NEW ARRIVAL WIDGET START-->
                     <div class="widget widget-new-arrival">
-                    	<h2>New Arrival</h2>
+                    	<h2>{{__('books-list.new_arrivals')}}</h2>
                         <ul>
                             @foreach ($new_arrivals as $book)
                                 <li>
@@ -159,11 +161,11 @@
                 <!--SIDEBAR END-->
                 {{-- aviso con los filtros activados, obtenidos de los parametros de la url --}}
                 @if (count($filters) > 0)
-                    <div class="col-md-9">
+                    <div class="col-md-9 filters">
                         <div class="alert alert-info">
-                            <strong>Filters:</strong>
+                            <strong>{{__('books-list.filters')}}</strong>
                             @foreach ($filters as $filter)
-                                <span style="margin-left: 0.8em" class="label label-info">
+                                <span style="margin-left: 0.8em;" class="label label-info">
                                     {{ $filter }}
                                 </span>
                             @endforeach
@@ -174,16 +176,26 @@
                         </div>
                     </div>
                 @else
-                    <div class="col-md-9">
+                    <div class="col-md-9 filters">
                         <div class="alert alert-info">
-                            <strong>Filters:</strong>
+                            <strong>{{__('books-list.filters')}}</strong>
                             <span class="label label-info">All</span>
                         </div>
                     </div>
                 @endif
 
+                <style>
+                    @media (max-width: 768px) {
+                        .filters {
+                            display: none;
+                        }
+                    }
+                </style>
+
                 <div class="col-md-9">
-                	<div class="row">
+                    <div class="row">
+                    </div>
+                	<div class="row firstrow">
                         @if (count($books) == 0)
                             <div class="col-md-12">
                                 <div class="alert alert-danger">

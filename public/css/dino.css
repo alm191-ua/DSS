@@ -1,3 +1,31 @@
+/* make body expands all page */
+
+html {
+  height: 98%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+body {
+  min-height: 98%;
+  background-image: url(./images/LibraryBG.jpg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  /* Height allign center */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+
+}
+
 .msg {
   font-size: 80px;
   font-weight: bold;
@@ -25,7 +53,6 @@
   border: 1px solid black;
   background-image: url(./images/dino-img/BG.png);
   background-size: 600px 200px;
-  margin: auto;
 }
 
 /*Create a score on the top right corner that counts de catus jumped*/

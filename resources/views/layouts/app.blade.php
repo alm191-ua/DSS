@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="{{ asset('icon.ico') }}">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Word Waves - @yield('title')</title>
         <!-- CUSTOM STYLE -->
@@ -28,6 +30,13 @@
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
         <!-- Component -->
         <link rel="stylesheet" href="{{ asset('js/dl-menu/component.css') }}">
+        <!-- JQuery -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="{{ asset('css/firstrow.css') }}">
+
+        {{-- for ads --}}
+        <script src="{{ asset('vendor/smart-ads/js/smart-banner.min.js') }}"></script>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -69,14 +78,14 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <!-- <li><a id="search-box" href="#"><i class="fa fa-search"></i></a></li> -->
+                                {{--<!-- <li><a id="search-box" href="#"><i class="fa fa-search"></i></a></li> -->
                                 
                                 <!-- <li><a href="{{ route('login.perform') }}"><i class="fa fa-user"></i></a>
                                     <ul>
                                         <li><a href="{{ route('login.perform') }}">{{ __('master.menu.login') }}</a></li>
                                         <li><a href="{{ route('register.perform') }}">{{ __('master.menu.register') }}</a></li>
                                     </ul>
-                                </li> -->
+                                </li> -->--}}
                                 @auth
                                     {{-- {{auth()->user()->name}} --}}
                                     {{-- <div class="text-end" style="display: inline-flex"> --}}
@@ -84,7 +93,7 @@
                                         <a title="{{auth()->user()->username}}" id="profile-link" href="{{ route('profile') }}"><i class="fa fa-user" style="margin-right: 15px; position:relative; top:9px;"></i></a>                 
                                     </li>
                                     <li>    
-                                        <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-2">Logout</a>
+                                        <a href="{{ route('logout') }}" class="btn btn-outline-light me-2">{{ __('Logout') }}</a>
                                     </li>
                                         {{-- </div> --}}
                                 @endauth
@@ -92,10 +101,10 @@
                                 @guest
                                     {{-- <div class="text-end" style="display: inline-flex"> --}}
                                     <li style="margin-right: -20px">
-                                        <a href="{{ route('login.perform') }}" class="btn btn-outline-light me-2" style="margin-right: 0.5em;">{{ __('master.menu.login') }}</a>
+                                        <a href="{{ route('login') }}" class="btn btn-outline-light me-2" style="margin-right: 0.5em;">{{ __('master.menu.login') }}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('register.perform') }}" class="btn btn-warning">Sign-up</a>
+                                        <a href="{{ route('register') }}" class="btn btn-warning">{{ __('Sign-up') }}</a>
                                     </li>
                                         {{-- </div> --}}
                                 @endguest
@@ -138,7 +147,11 @@
                         <div id="kode-responsive-navigation" class="dl-menuwrapper">
                             <button class="dl-trigger">{{ __('master.menu.open') }}</button>
                             <ul class="dl-menu">
-                                <li><a href="{{ route('admin') }}">Admin</a></li>
+                                @auth
+                                    @if (Auth::user()->is_admin)
+                                        <li><a href="{{ route('admin') }}">Admin</a></li>
+                                    @endif
+                                @endauth
                                 <li><a href="{{ route('home') }}">{{ __('master.menu.home') }}</a></li>
                                 <li><a href="{{ route('aboutus') }}">{{ __('master.menu.aboutus') }}</a></li>
                                 <li class="last"><a href="{{ route('authors') }}">{{ __('master.menu.authors') }}</a>
@@ -181,6 +194,51 @@
     </body>
 </html>
 
-<style>
+<script type="text/javascript">
+    // remove list on not focus
+    $(document).on('click', function (e) {
+        if ($(e.target).closest("#search-list").length === 0) {
+            $("#search-list").empty();
+        }
+    });
 
-</style>
+    $('.search-books').on('keyup', function (e) {
+        if($(this).val().length > 0)
+        {
+            $value = $(this).val();
+            if (e.key === 'Enter' || e.keyCode === 13) {
+                window.location.href = '/books?search=' + $value;
+            }
+
+            $.get("{{route('search')}}", {'search': $value}, function (data) {
+                $('#search-list').html(data);
+            });
+
+            return;
+        }
+        else
+        {
+            $('#search-list').empty();
+        }
+    });
+
+    $('.search-books-category').on('keyup', function (e) {
+        if($(this).val().length > 0)
+        {
+            $value = $(this).val();
+            if (e.key === 'Enter' || e.keyCode === 13) {
+                window.location.href = '/books?search=' + $value + '&category=' + $('#category_search').val();
+            }
+
+            $.get("{{route('search-category')}}", {'search': $value, 'category': $('#category_search').val()}, function (data) {
+                $('#search-list').html(data);
+            });
+
+            return;
+        }
+        else
+        {
+            $('#search-list').empty();
+        }
+    });
+</script>

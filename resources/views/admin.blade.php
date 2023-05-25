@@ -6,7 +6,6 @@
 
 {{-- link styles --}}
 <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 {{-- link script --}}
 <script src="{{ asset('js/admin.js') }}"></script>
 
@@ -25,20 +24,24 @@
         }else{
             changeTable();
         }">Test Boards</a> --}}
-    <a href="#" onclick="changeMain(1)">Statistics</a>
-    <a href="#" onclick="changeMain(2)">Books</a>
-    <a href="#" onclick="changeMain(3)">Authors</a>
-    <a href="#" onclick="changeMain(4)">Suggestions</a>
-    <a href="#" onclick="changeMain(5)">Users</a>
-    <a href="#" onclick="changeMain(6)">Categories</a>
-    <a href="#" onclick="changeMain(7)">Reviews</a>
-    <a href="#" onclick="changeMain(8)">Newsletter Subscriptors</a>
-    <a href="#" onclick="changeMain(9)">Settings</a>
+    <a href="#" onclick="changeMain(1)">{{__('admin.menu.statistics')}}</a>
+    <a href="#" onclick="changeMain(2)">{{__('admin.menu.books')}}</a>
+    <a href="#" onclick="changeMain(3)">{{__('admin.menu.authors')}}</a>
+    <a href="#" onclick="changeMain(4)">{{__('admin.menu.suggestions')}}</a>
+    <a href="#" onclick="changeMain(5)">{{__('admin.menu.users')}}</a>
+    <a href="#" onclick="changeMain(6)">{{__('admin.menu.categories')}}</a>
+    <a href="#" onclick="changeMain(7)">{{__('admin.menu.reviews')}}</a>
+    <a href="#" onclick="changeMain(8)">{{__('admin.menu.newsletter')}}</a>
+    <a href="/smart-ad-manager" target="_blank">{{__('admin.ads')}}</a>
+    <a href="#" onclick="changeMain(9)">{{__('admin.menu.settings')}}</a>
 </div>
 
 <div id="responsive-sidenav" class="responsive-sidenav">
     <div class="dropdown">
-        <button class="dropbtn" onclick="togglePagesLinks()">Pages</button>
+        <button class="dropbtn" onclick="togglePagesLinks()">
+            {{-- {{__('admin.pages')}} --}}
+            <i class="fa fa-pagelines"></i>
+        </button>
         <div hidden class="dropdown-content">
             {{-- <a href="#" onclick="
                 if ($('#test-main').hidden){
@@ -46,15 +49,16 @@
                 }else{
                     changeTable();
                 }">Test Boards</a> --}}
-            <a href="#" onclick="changeMain(1)">Statistics</a>
-            <a href="#" onclick="changeMain(2)">Books</a>
-            <a href="#" onclick="changeMain(3)">Authors</a>
-            <a href="#" onclick="changeMain(4)">Suggestions</a>
-            <a href="#" onclick="changeMain(5)">Users</a>
-            <a href="#" onclick="changeMain(6)">Categories</a>
-            <a href="#" onclick="changeMain(7)">Reviews</a>
-            <a href="#" onclick="changeMain(8)">Newsletter Subscriptors</a>
-            <a href="#" onclick="changeMain(9)">Settings</a>
+            <a href="#" onclick="changeMain(1)">{{__('admin.menu.statistics')}}</a>
+            <a href="#" onclick="changeMain(2)">{{__('admin.menu.books')}}</a>
+            <a href="#" onclick="changeMain(3)">{{__('admin.menu.authors')}}</a>
+            <a href="#" onclick="changeMain(4)">{{__('admin.menu.suggestions')}}</a>
+            <a href="#" onclick="changeMain(5)">{{__('admin.menu.users')}}</a>
+            <a href="#" onclick="changeMain(6)">{{__('admin.menu.categories')}}</a>
+            <a href="#" onclick="changeMain(7)">{{__('admin.menu.reviews')}}</a>
+            <a href="#" onclick="changeMain(8)">{{__('admin.menu.newsletter')}}</a>
+            <a href="/smart-ad-manager" target="_blank">{{__('admin.ads')}}</a>
+            <a href="#" onclick="changeMain(9)">{{__('admin.menu.settings')}}</a>
         </div>
     </div>
 </div>
@@ -168,9 +172,8 @@
 </div>
 
 <div class="main" name="statistics" hidden>
-    <h2>Statistics</h2>
+    <h2>{{__('admin.menu.statistics')}}</h2>
 
-    {{-- not available for now with cool style--}}
     <div class="alert alert-warning" role="alert" style="max-width: 500px; margin-right: auto;">
         <h4 class="alert-heading">This feature is not available for now!</h4>
         <p>Sorry for the inconvenience, we are working on it.</p>
@@ -183,7 +186,7 @@
 </div>
 
 <div class="main" name="books">
-    <h2>Books Admin Panel</h2>
+    <h2>{{__('admin.menu.books')}}</h2>
 
     {{-- create book button --}}
     <div class="general-manage">
@@ -194,7 +197,7 @@
             <i class="fa fa-filter"></i>
         </div>
         <div class="filter-zone">
-            <label for="books_filter_by" class="filter-label">FILTER BY:</label>
+            <label for="books_filter_by" class="filter-label">{{__('admin.filter_by')}}</label>
             <select name="books_filter_by" id="books_filter_by"
                 onchange="showSelects(this.value);
                 ">
@@ -305,7 +308,7 @@
                 @endforeach
             
             @endif
-            <th scope="col">Manage</th>
+            <th scope="col">{{__('admin.manage')}}</th>
           </tr>
         </thead>
         <tbody>
@@ -417,7 +420,7 @@
 
 
 <div class="main" name="authors" hidden>
-    <h2>Authors Admin Panel</h2>
+    <h2>{{ __('admin.menu.authors') }}</h2>
 
     {{-- create book button --}}
     <div class="general-manage">
@@ -427,7 +430,7 @@
             <i class="fa fa-filter"></i>
         </div>
         <div class="filter-zone">
-            <label for="authors_filter_by" class="filter-label">FILTER BY:</label>
+            <label for="authors_filter_by" class="filter-label">{{__('admin.filter_by')}}</label>
             <select name="authors_filter_by" id="authors_filter_by">
                 @foreach ($authors_attributes as $key => $value)
                     @if ($key == 'image')
@@ -512,7 +515,7 @@
                 @endforeach
             
             @endif
-            <th scope="col">Manage</th>
+            <th scope="col">{{__('admin.manage')}}</th>
           </tr>
         </thead>
         <tbody>
@@ -586,7 +589,7 @@
 </div>
 
 <div class="main" name="suggestions" hidden>
-    <h2>Suggestions Admin Panel</h2>
+    <h2>{{__('admin.menu.suggestions')}}</h2>
 
     <div class="general-manage">
         {{-- create book button --}}
@@ -680,7 +683,7 @@
                 @endforeach
             
             @endif
-            <th scope="col">Manage</th>
+            <th scope="col">{{__('admin.manage')}}</th>
           </tr>
         </thead>
         <tbody>
@@ -751,7 +754,7 @@
 </div>
 
 <div class="main" name="users" hidden>
-    <h2>Users Admin Panel</h2>
+    <h2>{{__('admin.menu.users')}}</h2>
 
     <div class="general-manage">
         {{-- create book button --}}
@@ -761,7 +764,7 @@
             <i class="fa fa-filter"></i>
         </div>
         <div class="filter-zone">
-            <label for="users_filter_by" class="filter-label">FILTER BY:</label>
+            <label for="users_filter_by" class="filter-label">{{__('admin.filter_by')}}</label>
             <select name="users_filter_by" id="users_filter_by"
                 onchange="showSelectsUsers(this.value);
                 ">
@@ -860,7 +863,7 @@
                 @endforeach
             
             @endif
-            <th scope="col">Manage</th>
+            <th scope="col">{{__('admin.manage')}}</th>
           </tr>
         </thead>
         <tbody>
@@ -902,7 +905,7 @@
                             if (this.classList.contains('fa-lock')) {
                                 this.classList.remove('fa-lock');
                                 this.classList.add('fa-unlock');
-                                alert('User is not admin. Trolled XD');
+                                // alert('User is not admin. Trolled XD');
                             } else {
                                 this.classList.remove('fa-unlock');
                                 this.classList.add('fa-lock');
@@ -945,7 +948,7 @@
 
 
 <div class="main" name="categories" hidden>
-    <h2>Categories Admin Panel</h2>
+    <h2>{{__('admin.menu.categories')}}</h2>
 
     <div class="general-manage">
         {{-- create book button --}}
@@ -1054,7 +1057,7 @@
                 @endforeach
             
             @endif
-            <th scope="col">Manage</th>
+            <th scope="col">{{__('admin.manage')}}</th>
           </tr>
         </thead>
         <tbody>
@@ -1112,7 +1115,7 @@
 </div>
 
 <div class="main" name="reviews" hidden>
-    <h2>Reviews Admin Panel</h2>
+    <h2>{{__('admin.menu.reviews')}}</h2>
 
     {{-- create book button --}}
     {{-- <a id="create_button" type="button" class="button btn-primary" href="{{ route('404') }}" ><i class="fa fa-plus"></i> {{ __('admin.create') }}</a>  --}}
@@ -1122,7 +1125,7 @@
             <i class="fa fa-filter"></i>
         </div>
         <div class="filter-zone">
-            <label for="reviews_filter_by" class="filter-label">FILTER BY:</label>
+            <label for="reviews_filter_by" class="filter-label">{{__('admin.filter_by')}}</label>
             <select name="reviews_filter_by" id="reviews_filter_by">
                 @foreach ($reviews_attributes as $key => $value)
                     @if ($key == 'image')
@@ -1206,7 +1209,7 @@
                 @endforeach
             
             @endif
-            <th scope="col">Manage</th>
+            <th scope="col">{{__('admin.manage')}}</th>
           </tr>
         </thead>
         <tbody>
@@ -1278,23 +1281,175 @@
         "> of {{ $reviews->lastPage() }}</p>
 </div>
 
-<div class="main" name="newsletter-subsciptors" hidden>
-    <h2>Newsletter Subsciptors Admin Panel</h2>
+<div class="main" name="newsletter" id="abc" hidden>
+    <h2>{{__('admin.menu.newsletter')}}</h2>
 
     {{-- no available for now --}}
-    <div class="alert alert-warning" role="alert" style="max-width: 500px; margin-right: auto;">
+    {{-- <div class="alert alert-warning" role="alert" style="max-width: 500px; margin-right: auto;">
         <h4 class="alert-heading">No available for now!</h4>
         <p>Sorry for the inconvenience, we are working on it.</p>
         <hr>
         <p class="mb-0">If you have any suggestion, please contact us.</p>
 
         <a href="{{ route('contactus') }}" class="btn btn-primary">Contact us</a>
+    </div> --}}
+
+    <div class="panels-holder">
+        <div class="panel-title active" id="nws">
+            <a href="#" class="" id="newsletter-btn" 
+                onclick="showNewsletterPanel(0)"
+                ><h3>{{__('admin.newsletter.subscribers')}}</h3></a>
+        
+        </div>
+        <div class="panel-title"id="sndm">
+            <a href="#" class="" id="send-mail-btn" 
+                onclick="showNewsletterPanel(1)"
+                ><h3>{{__('admin.newsletter.send')}}</h3></a>
+        </div>
     </div>
+    <div class="content-holder">
+        <div class="panel-content" id="newsletter-panel" hidden>
+            <table class="table table-striped table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    @php 
+                        $i = 1;
+                    @endphp
+                    @if (count($subscribers) > 0)
+                        @foreach ($subscribers[0]->getAttributes() as $key => $value)
+                            @if ($key == 'id') 
+                                @continue
+                            @endif
+                            <th scope="col">
+                                {{-- if ends with _id erase _id --}}
+                                @if (substr($key, -3) == '_id')
+                                    {{substr($key, 0, -3);}}
+                                @else
+                                    {{$key}}
+                                @endif
+                                <a type="button" class="fa fa-sort btn-order" 
+                                    href="{{ route('admin', ['page_num' => 8, 'order_subscribers' => $key]) }}"></a>
+                                
+                                @php
+                                    $i++;
+                                @endphp
+                            </th>
+                        @endforeach
+                    
+                    @endif
+                    {{-- <th scope="col">Manage</th> --}}
+                  </tr>
+                </thead>
+                <tbody>
+                    @if (count($subscribers) <= 0)
+                        {{-- no books message with cool bootstrap style --}}
+                        <tr>
+                            <td colspan="100%">
+                                <div class="alert alert-danger" role="alert">
+                                    <h4 class="alert-heading">No subscribers found!</h4>
+                                    <p>There are no subscribers in the database.</p>
+                                    <hr>
+                                    <p class="mb-0">You can subscribe in home page.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    @endif
+                    
+                    @foreach ($subscribers as $subscriber)
+                        <tr>
+                            <td scope="row">{{ $subscriber->id }}</td>
+                            <td class="my-row">
+                                {{-- email --}}
+                                <label id="label{{ $subscriber->id }}" class="">{{ $subscriber->email }}</label>
+                            </td>
+                            {{-- <td>
+                                <div style="display: flex">
+                                    <button type="button" class="label-cell btn btn-primary" onclick="editMode({{ $subscriber->id }})"><i class="fa fa-edit"></i></button>
+                                    <a class="label-cell btn btn-danger" onclick="return confirm('{{ __('admin.confirm') }}')" 
+                                        href="{{route('subscriber.delete', $subscriber->id)}}"><i class="fa fa-trash"></i></a>
+                                </div>
+                            </td> --}}
+                        </form>
+                        </tr>
+                    @endforeach
+                  
+                </tbody>
+            </table>
+            {{ $subscribers->appends(array('page_num' => 8, ))->links() }}
+            <p class="pagination_text">Page <input type="text" id="page-num-newsletter" value="{{ $subscribers->currentPage() }}" 
+                onchange="
+                window.location.href = '{{ route('admin') }}?page_num=8&subscribers=' + this.value;
+                "> of {{ $subscribers->lastPage() }}</p>
+
+        </div>
+        <div class="panel-content" id="send-mail-panel">
+            @if ($errors->any())
+                <ul class="validation-errors">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+                </ul>
+            @endif
+            <form action="{{ route('newsletter.send') }}" method="POST"> 
+                @csrf
+                <label for="subject">{{__('admin.newsletter.subject')}}</label>
+                <input type="text" name="subject" id="subject" class="form-control" required>
+                <div class="options">
+                    <label for="body" style="margin-right: 30px">{{__('admin.newsletter.body')}}</label>
+                    <input type="checkbox" class="html-checkbox" onclick="showHtmlTemplates()" name="html" id="html" value="1">
+                    <label for="html" style="margin-left: 0.3em;">{{__('admin.newsletter.templates')}}</label>
+                    <select hidden class="html-select" id="HtmlTemplate" class="form-control" name="template"
+                        onchange="setHtmlTemplate(this.value)">
+                        <option value="" selected disabled>{{__('admin.newsletter.select_template')}}</option>
+                        @foreach ($html_templates as $template)
+                            <option value="{{ $template }}">{{ $template }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <textarea  name="body" id="body" cols="30" rows="10" class="form-control" required></textarea>
+                <button type="submit" id="send-mail-btn" class="btn btn-primary"
+                    onclick="
+                        if ($('#html').is(':unchecked')) {
+                            $('#HtmlTemplate').val('default');
+                        }
+                    "><i class="fa fa-paper-plane"></i>{{__('admin.newsletter.send_btn')}}</button>
+
+            </form>
+        </div>
+    </div>
+
+    {{-- <div class="panels-holder">
+        <div class="panel">
+            <div class="panel-title">
+                <h3>Newsletter Subscribers</h3>
+            </div>
+            <div class="panel-content" hidden>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-title">
+                <h3>Send mail</h3>
+            </div>
+            <div class="panel-content">
+                <form action="" method="POST"> 
+                    @csrf
+                    <label for="subject">Subject</label>
+                    <input type="text" name="subject" id="subject" class="form-control" required>
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" cols="30" rows="10" class="form-control" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send</button>
+    
+                </form>
+            </div>
+        </div>
+    </div> --}}
     
 </div>
 
 <div class="main" name="settings" hidden>
-    <h2>Settings Panel</h2>
+    <h2>{{__('admin.menu.settings')}}</h2>
     <p>Here you can change the settings of the website</p>
     {{-- no settings available for now message with cool style--}}
     <div class="alert alert-warning" role="alert" style="max-width: 500px; margin-right: auto;">

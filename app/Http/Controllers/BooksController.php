@@ -36,7 +36,7 @@ class BooksController extends Controller
 
     public function list()
     {
-        $PER_PAGE = 21;
+        $PER_PAGE = 20;
 
         $filters = [];
 
@@ -95,7 +95,7 @@ class BooksController extends Controller
         $image = $book->image;
         $book->delete();
         // delete image
-        File::delete(storage_path('app/images/books/'.$image));
+        File::delete(storage_path('app/public/books/'.$image));
         // delete file
         File::delete(storage_path('app/book_files/'.$book->file));
         return redirect()->back()->withInput($request->page_num);
@@ -125,12 +125,12 @@ class BooksController extends Controller
 
         if ($request->hasFile('image')) {
             // delete old image
-            File::delete(storage_path('app/images/books/'.$book->image));
+            File::delete(storage_path('app/public/books/'.$book->image));
 
             // save new image
             $image = $request->image;
             $imageName = time().$image->getClientOriginalName();
-            $image->move(storage_path('app/images/books'), $imageName);
+            $image->move(storage_path('app/public/books'), $imageName);
             $book->image = $imageName;
         }
 
@@ -202,7 +202,7 @@ class BooksController extends Controller
             // save new image
             $image = $request->image;
             $imageName = time().$image->getClientOriginalName();
-            $image->move(storage_path('app/images/books'), $imageName);
+            $image->move(storage_path('app/public/books'), $imageName);
             $book->image = $imageName;
         }
 

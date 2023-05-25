@@ -6,12 +6,12 @@
 {{-- es la ruta post definida en web.php y que se ejecuta en el controlador --}}
 {{-- por ejemplo: route('books.store') --}}
 {{-- tiene que ser una ruta post, esta de ejemplo es get, por lo que no hace nada --}}
-@section('form-action', route('login.perform'))
+@section('form-action', route('login'))
 
 {{-- margin guidelines:
 22% -> para formularios grandes (default)
 30% -> para formularios pequeños, como el de login --}}
-@section('margin', "30%")
+@section('margin', "20%")
 
 
 @section('fields')
@@ -29,21 +29,46 @@
         }
     </style>
 
-
-    <div class="form-group row">
-        <label for="username" class="col-sm-2 col-form-label">Username</label>
-        <div class="col-sm-10">
-            <input autofocus type="text" name="username" id="username" class="form-control" value="{{ old('username') }}" required>
-        </div>    
+    <div class="form-group row"> 
+        <label for="username" class="col-sm-2 col-form-label">{{ __('login.menu.name') }}</label>
+            <div class="col-sm-10">
+                <input type="text" name="username" id="username" class="form-control @error('username') 
+                is-invalid @enderror" value="{{ old('username') }}" required autocomplete="username" 
+                autofocus>
+                @error('username')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div> 
     </div>
     <div class="form-group row">
-        <label for="password" class="col-sm-2 col-form-label">Password</label>
+        <label for="password" class="col-sm-2 col-form-label">{{ __('login.menu.password') }}</label>
         <div class="col-sm-10">
-            <input type="password" name="password" id="password" class="form-control" value="{{ old('password') }}" required>
+            <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" autocomplete="current-password">
             <i class="fa fa-eye-slash" id="togglePassword" onmousedown="seePassword()" onmouseup="hidePassword()" onmouseout="hidePassword()"></i>
-        </div>    
+        </div>
+        @error('password')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror 
     </div>
 
+    <div class="row mb-0">
+        <div class="col-md-8 offset-md-4">
+            {{--<button type="submit" class="btn btn-primary">
+                {{ __('login.button.login') }}
+            </button>--}}
+
+            @if (Route::has('password.request'))
+                <a class="btn btn-link" href="{{ route('password.request') }}">
+                    {{ __('login.button.forgot') }}
+                </a>
+            @endif
+        </div>
+    </div>
 
     <script type="text/javascript">
         function seePassword() {
@@ -59,5 +84,17 @@
             document.getElementById('submit').disabled = false;
         });        
     </script>
-                
+     
+    {{-- Error messages --}}
+    @if ($errors->any())
+        <ul class="validation-errors">
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    @endif
+
 @endsection
+
+
+

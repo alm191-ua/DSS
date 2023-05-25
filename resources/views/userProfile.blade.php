@@ -7,6 +7,10 @@
 
 <style>
 
+    .my-content {
+        min-height: 25em;
+    }
+
     .kode-content {
         padding-top: 0px;
     }
@@ -34,6 +38,16 @@
         
         display: inline-flex;
     }
+
+    #shelf-name {
+        border-color: rgb(153, 132, 132);
+    }
+
+    #shelf-name:focus {
+        border-color: rgb(17, 17, 17);
+        box-shadow: 0 0 0 0.2rem rgb(215, 190, 190);
+    }
+
     #shelf-name_button {
         margin: 5px;
         padding: 5px;
@@ -82,6 +96,44 @@
 
         display: inline-block;        
     }
+
+    .my-book {
+        /* width: 100px;
+        height: 150px; */
+        margin: 5px;
+        border: 1px solid #0e0c0c;
+        display: inline-block;
+    }
+
+    .book-delete {
+        position: absolute;
+        top: 10%;
+        left: 55%;
+        transform: translate(-80%, -50%);
+        /* make it transparent */
+        /* opacity: 0;
+        transition: opacity 0.3s ease-in-out; */
+    }
+
+    .author_name {
+        color : #5b5555;
+    }
+
+    .btn-danger {
+        border-color: #e0d7d5;
+    }
+
+    .btn-danger:hover {
+        border-color: #e0d7d5;
+    }
+
+    /* .my-book:hover {
+        margin: 5px;
+        border: 1px solid #0e0c0c;
+        display: inline-block;
+        opacity: 0.5;
+    } */
+
 </style>
 
 <div class="my-content">
@@ -89,12 +141,14 @@
         <!--SIDEBAR START-->
         <div class="sidebar">
             <div class="widget widget-list">
-                <h2>My Account</h2>
-                <img style="border-radius: 50%; border: 1px solid black;" src="{{ asset('storage/users/' . Auth::user()->image) }}" alt="user image" width="100" height="100">
-                <span>Username: {{ Auth::user()->username ?? 'Guest' }}</span>
+                <h2>{{__('profile.my_account')}}</h2>
+                <img style="border-radius: 50%; border: 1px solid black;" src="{{ asset('storage/users/' . Auth::user()->image) }}" alt="user image" width="100" height="100"
+                    onerror="this.src = '{{ asset('storage/users/default_user.png') }}';"    
+                >
+                <span>{{__('profile.username')}}: {{ Auth::user()->username ?? 'Guest' }}</span>
                 <span>Email: {{ Auth::user()->email ?? 'Guest email' }}</span>
                 <!-- Button to edit user profile -->
-                <a href="{{ route('user-edit.show', Auth::user()->id ?? 0) }}" class="btn btn-primary">Edit Profile</a>
+                <a href="{{ route('user-edit.show', Auth::user()->id ?? 0) }}" class="btn btn-primary">{{__('profile.edit_profile')}}</a>
                 {{-- <a href="{{ route('user.softdelete', Auth::user()->id ?? 0) }}" onclick="confirm({{__('admin.confirm')}})" class="btn btn-primary">Delete User</a> --}}
             </div>
         </div>
@@ -107,10 +161,19 @@
         <form action="{{route('bookshelf.store')}}" method="POST">
             @csrf
             <div class="form-shelves">
+                <label hidden for="shelf-name">{{__('profile.add_shelf')}}</label>
                 <input type="text" name="name" id="shelf-name">
-                <button type="submit" class="btn" id="shelf-add_button">Add Shelf</button>            
+                <label hidden for="shelf-name_button">{{__('profile.add_shelf')}}</label>
+                <button type="submit" class="btn" id="shelf-add_button">{{__('profile.add_shelf')}}</button>            
             </div>
-        </form>       
+        </form>     
+        
+        @if (count($bookshelves) === 0)
+            <div class="alert alert-warning" role="alert">
+                <strong>{{__('profile.no_shelves_1')}}</strong> {{__('profile.no_shelves_2')}}
+            </div>
+
+        @endif
 
         @foreach ($bookshelves as $bookshelf)
             <form action="{{route('bookshelf.delete', $bookshelf->id)}}" method="POST">
@@ -125,25 +188,39 @@
                         @if ($bookshelf->books->count() <= 0)
                             {{-- no books message with cool bootstrap style --}}
                             <div class="alert alert-warning" role="alert">
-                                <strong>Oh snap!</strong> You have no books in this shelf.
+                                <strong>{{__('profile.no_books_1')}}</strong> {{__('profile.no_books_2')}}
                             </div>
                         @else    
                             @foreach ($bookshelf->books as $book)
-                            <div class="col-6 col-md-2">
-                                {{-- <div class="books-listing-3"> --}}
-                                    <div class="kode-thumb">
+                                <div class="col-6 col-md-2"
+                                    {{-- onmouseover="show_delete_button({{ $bookshelf->id }}, {{ $book->id }})", 
+                                    onmouseout="hide_delete_button({{ $bookshelf->id }}, {{ $book->id }})" --}}
+                                    >
+                                    
+                                    <div class="kode-thumb my-book">
                                         <a href="{{ route('book', $book->id) }}"><img src="{{ asset('storage/books/' . $book->image) }}" 
                                             onerror="this.src = '{{ asset('images/default.png') }}';" alt="book image" width="75" height="100"></a>
+                                    </div>
+                                    <div class="kode-text">
+                                        {{-- <p class="price">$80.75<span>90.75$</span></p> --}}
+                                        <p style="font-size: 20px; color:black;"
+                                            title="{{ $book->title }}"
+                                        >{{ substr($book->title, 0, 15) }}{{ strlen($book->title) > 15 ? '...' : '' }}</p>
+                                        <div class="kode-caption">
+                                            <a href="{{ route('author', $book->author->id) }}" class="author_name">{{ $book->author->name }}</a>
+                                            {{-- <p>{{ $book->author->name }}</p> --}}
+                                            {{-- <a href="{{ route('books-list', ['category' => $book->category->tag]) }}">{{ $book->category->tag }}</a> --}}
                                         </div>
-                                        <div class="kode-text">
-                                            {{-- <p class="price">$80.75<span>90.75$</span></p> --}}
-                                            <p style="font-size: 20px; color:black;">{{ substr($book->title, 0, 15) }}{{ strlen($book->title) > 15 ? '...' : '' }}</p>
-                                            <div class="kode-caption">
-                                                <p>{{ $book->author->name }}</p>
-                                                {{-- <a href="{{ route('books-list', ['category' => $book->category->tag]) }}">{{ $book->category->tag }}</a> --}}
-                                            </div>
-                                        </div>
-                                    {{-- </div> --}}
+                                    </div>
+                                    <div class="book-delete" id="book-delete_{{ $bookshelf->id }}_{{ $book->id }}">
+                                        {{-- <button type="button" class="btn btn-danger" id="shelf-delete_button"
+                                            onclick="remove_book({{ $bookshelf->id }}, {{ $book->id }})"
+                                        >Delete</button> --}}
+                                        <a href="{{ route('bookshelf.remove_book', ['bookshelf_id' => $bookshelf->id, 'book_id' => $book->id]) }}" 
+                                            class="btn btn-danger" onclick="return confirm('Are you sure you want to remove this book from this shelf?')"
+                                            ><i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             @endforeach
                         @endif
@@ -186,6 +263,16 @@
             addCruz(bloques[i]);
         }
     });
+
+    function show_delete_button(bookshelf_id, book_id) {
+        let delete_button = $('#book-delete_' + bookshelf_id + '_' + book_id);
+        delete_button.show();
+    }
+
+    function hide_delete_button(bookshelf_id, book_id) {
+        let delete_button = $('#book-delete_' + bookshelf_id + '_' + book_id);
+        delete_button.hide();
+    }
 
 </script>
 

@@ -46,7 +46,7 @@ class UsersTableSeeder extends Seeder
         $user2->username = 'admin';
         $user2->is_admin = true;
         $user2->email = 'admin@localhost';
-        $user2->password = Hash::make('password');
+        $user2->password = Hash::make('Password1');
         $user2->save();
 
         User::factory()->count(10)->create();  

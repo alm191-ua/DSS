@@ -1,3 +1,5 @@
+{{-- NO SE USA --}}
+
 @extends('layouts.form')
 
 @section('title', 'Register')
@@ -6,7 +8,7 @@
 {{-- es la ruta post definida en web.php y que se ejecuta en el controlador --}}
 {{-- por ejemplo: route('books.store') --}}
 {{-- tiene que ser una ruta post, esta de ejemplo es get, por lo que no hace nada --}}
-@section('form-action', route('register.perform'))
+@section('form-action', route('register'))
 
 {{-- margin guidelines:
 22% -> para formularios grandes (default)
@@ -35,47 +37,50 @@
 
     <div class="form-group custom-row">  
         <div class="custom-col">
-            <label for="name" class="col-sm-2 col-form-label">First Name</label>
+            <label for="username" class="col-sm-2 col-form-label">{{ __('Name') }}</label>
             <div class="col-sm-10">
-                <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
+                <input type="text" name="username" id="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                @error('username')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
         </div>
-        <div class="custom-col">
-            <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
-            <div class="col-sm-10">
-                <input type="text" name="last_name" id="last_name" class="form-control" value="{{ old('last_name') }}">
-            </div>
-        </div>
-    </div>
-    <div class="form-group custom-row">  
-        <div class="custom-col">
-                <label for="username" class="col-sm-2 col-form-label">Username</label>
-                <div class="col-sm-10">
-                    <input type="text" name="username" id="username" class="form-control" value="{{ old('username') }}" required>
-                </div>
-            </div>
         
         <div class="custom-col">
-            <label for="email" class="col-sm-2 col-form-label">Email Address</label>
-            <div class="col-sm-10">
-                <input type="text" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
+            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+            <div class="col-md-6">
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
         </div>
     </div>
     <div class="form-group row">
-        <label for="password" class="col-sm-2 col-form-label">Choose Password</label>
+        <label for="password" class="col-sm-2 col-form-label">{{ __('Password') }}</label>
         <div class="col-sm-10">
-            <input type="password" name="password" id="password" class="form-control" value="{{ old('password') }}" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+            <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" autocomplete="new-password">
             <i class="fa fa-eye-slash" id="togglePassword" onmousedown="seePassword()" onmouseup="hidePassword()" onmouseout="hidePassword()"></i>
         </div>
         <div class="col-sm-10">
             <progress id="progress-bar" value="0" max="100"></progress>
-        </div>        
+        </div> 
+        @error('password')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror       
     </div>
     <div class="form-group row">
-        <label for="password_confirmation" class="col-sm-2 col-form-label">Confirm Password</label>
+        <label for="password_confirmation" class="col-sm-2 col-form-label">{{ __('Confirm Password') }}</label>
         <div class="col-sm-10">
-            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
+            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required autocomplete="new-password">
             <i class="fa fa-eye-slash" id="toggleConfirmPassword" onmousedown="seePassword()" onmouseup="hidePassword()" onmouseout="hidePassword()" ></i>
         </div>
     </div>
